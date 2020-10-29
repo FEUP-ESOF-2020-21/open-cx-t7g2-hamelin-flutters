@@ -128,7 +128,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 top: 30.0,
               ),
               child: TextField(
-                cursorWidth: 10,
                 selectionWidthStyle: BoxWidthStyle.max,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(
@@ -136,6 +135,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     left: 10.0,
                   ),
                   hintText: "Username",
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                    borderSide: BorderSide(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       5,
@@ -156,7 +164,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 top: 10.0,
               ),
               child: TextField(
-                cursorWidth: 10,
                 selectionWidthStyle: BoxWidthStyle.max,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(
@@ -164,6 +171,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     left: 10.0,
                   ),
                   hintText: "Password",
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                    borderSide: BorderSide(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       5,
