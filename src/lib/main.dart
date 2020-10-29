@@ -136,7 +136,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     left: 10.0,
                   ),
                   hintText: "Username",
-                  border: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                    borderSide: BorderSide(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -156,27 +164,58 @@ class _MyHomePageState extends State<MyHomePage> {
                     left: 10.0,
                   ),
                   hintText: "Password",
-                  border: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                    borderSide: BorderSide(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
             ),
             Container(
-                alignment: Alignment.topLeft,
-                height: 60,
-                width: MediaQuery.of(context).size.width - 60,
-                margin: EdgeInsets.only(
-                  top: 10.0,
+              alignment: Alignment.topLeft,
+              height: 90,
+              width: MediaQuery.of(context).size.width - 60,
+              margin: EdgeInsets.only(
+                top: 10.0,
+              ),
+              child: ElevatedButton(
+                child: Text("Login"),
+                onPressed: () {},
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                    Size(MediaQuery.of(context).size.width - 60, 50),
+                  ),
                 ),
-                child: ElevatedButton(
-                    child: Text("Login"),
-                    onPressed: () {},
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.black),
-                        foregroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        minimumSize: MaterialStateProperty.all<Size>(
-                            Size(MediaQuery.of(context).size.width - 60, 50)))))
+              ),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.black,
+              thickness: 1.5,
+              indent: 50,
+              endIndent: 50,
+            ),
+            Container(
+              child: FlatButton(
+                onPressed: () {},
+                child: Text(
+                  "Don't have an account? Click Here!",
+                  style: TextStyle(
+                    //fontFamily: for another font,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
