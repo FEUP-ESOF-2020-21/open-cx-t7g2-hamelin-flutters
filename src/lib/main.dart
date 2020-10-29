@@ -1,3 +1,4 @@
+//import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -108,6 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.only(
+                top: 20,
                 left: 30.0,
               ),
               child: Text(
@@ -120,13 +122,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               alignment: Alignment.topLeft,
-              height: 150,
-              width: 300,
+              height: 60,
+              width: MediaQuery.of(context).size.width - 60,
               margin: EdgeInsets.only(
                 top: 30.0,
               ),
               child: TextField(
-                cursorWidth: 10,
                 selectionWidthStyle: BoxWidthStyle.max,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.only(
@@ -134,10 +135,103 @@ class _MyHomePageState extends State<MyHomePage> {
                     left: 10.0,
                   ),
                   hintText: "Username",
-                  border: OutlineInputBorder(),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                    borderSide: BorderSide(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                    borderSide: BorderSide(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
-            )
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              height: 60,
+              width: MediaQuery.of(context).size.width - 60,
+              margin: EdgeInsets.only(
+                top: 10.0,
+              ),
+              child: TextField(
+                selectionWidthStyle: BoxWidthStyle.max,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    top: 10.0,
+                    left: 10.0,
+                  ),
+                  hintText: "Password",
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                    borderSide: BorderSide(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      5,
+                    ),
+                    borderSide: BorderSide(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              height: 90,
+              width: MediaQuery.of(context).size.width - 60,
+              margin: EdgeInsets.only(
+                top: 10.0,
+              ),
+              child: ElevatedButton(
+                child: Text("Login"),
+                onPressed: () {},
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                    Size(MediaQuery.of(context).size.width - 60, 50),
+                  ),
+                ),
+              ),
+            ),
+            Divider(
+              height: 1,
+              color: Colors.black,
+              thickness: 1.5,
+              indent: 50,
+              endIndent: 50,
+            ),
+            Container(
+              child: FlatButton(
+                onPressed: () {},
+                child: Text(
+                  "Don't have an account? Click Here!",
+                  style: TextStyle(
+                    //fontFamily: for another font,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
