@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -103,6 +105,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: _incrementCounter,
               ),
             ),
+            Container(
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.only(
+                left: 30.0,
+              ),
+              child: Text(
+                "Login",
+                textScaleFactor: 2.5,
+                style: TextStyle(
+                    //fontFamily: for another font,
+                    ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              height: 150,
+              width: 300,
+              margin: EdgeInsets.only(
+                top: 30.0,
+              ),
+              child: TextField(
+                cursorWidth: 10,
+                selectionWidthStyle: BoxWidthStyle.max,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    top: 10.0,
+                    left: 10.0,
+                  ),
+                  hintText: "Username",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            )
           ],
         ),
       ),
