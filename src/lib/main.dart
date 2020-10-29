@@ -1,3 +1,4 @@
+//import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -108,6 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.only(
+                top: 20,
                 left: 30.0,
               ),
               child: Text(
@@ -120,8 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Container(
               alignment: Alignment.topLeft,
-              height: 150,
-              width: 300,
+              height: 60,
+              width: MediaQuery.of(context).size.width - 60,
               margin: EdgeInsets.only(
                 top: 30.0,
               ),
@@ -137,7 +139,44 @@ class _MyHomePageState extends State<MyHomePage> {
                   border: OutlineInputBorder(),
                 ),
               ),
-            )
+            ),
+            Container(
+              alignment: Alignment.topLeft,
+              height: 60,
+              width: MediaQuery.of(context).size.width - 60,
+              margin: EdgeInsets.only(
+                top: 10.0,
+              ),
+              child: TextField(
+                cursorWidth: 10,
+                selectionWidthStyle: BoxWidthStyle.max,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(
+                    top: 10.0,
+                    left: 10.0,
+                  ),
+                  hintText: "Password",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            Container(
+                alignment: Alignment.topLeft,
+                height: 60,
+                width: MediaQuery.of(context).size.width - 60,
+                margin: EdgeInsets.only(
+                  top: 10.0,
+                ),
+                child: ElevatedButton(
+                    child: Text("Login"),
+                    onPressed: () {},
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                        minimumSize: MaterialStateProperty.all<Size>(
+                            Size(MediaQuery.of(context).size.width - 60, 50)))))
           ],
         ),
       ),
