@@ -77,7 +77,6 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             Container(
                 alignment: Alignment.topLeft,
-                height: 540,
                 margin: EdgeInsets.only(
                   top: 60,
                   left: 30.0,
@@ -85,36 +84,34 @@ class MyHomePage extends StatelessWidget {
                 child: Text(this.title,
                     textScaleFactor: 2.5,
                     style: GoogleFonts.lora(fontWeight: FontWeight.w600))),
+            Spacer(),
             Container(
-              alignment: Alignment.topLeft,
               height: 60,
               width: MediaQuery.of(context).size.width - 60,
-              margin: EdgeInsets.only(
-                top: 10.0,
-              ),
-              child: ElevatedButton(
-                child: Text("Login"),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.black),
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.white),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                    Size(MediaQuery.of(context).size.width - 60, 50),
+              margin: EdgeInsets.only(bottom: 20.0),
+              child: Positioned(
+                bottom: 0,
+                child: ElevatedButton(
+                  child: Text("Login"),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    minimumSize: MaterialStateProperty.all<Size>(
+                      Size(MediaQuery.of(context).size.width - 60, 50),
+                    ),
                   ),
                 ),
               ),
             ),
             Container(
-              alignment: Alignment.topLeft,
               height: 60,
               width: MediaQuery.of(context).size.width - 60,
-              margin: EdgeInsets.only(
-                top: 10.0,
-              ),
+              margin: EdgeInsets.only(bottom: 30.0),
               child: ElevatedButton(
                 child: Text("Register"),
                 onPressed: () {
