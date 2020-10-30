@@ -1,9 +1,12 @@
-import 'package:confnect/routes/pages.dart';
+import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/view/Page.dart';
+
+import '../AppRouter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  WelcomeScreen({Key key}) : super(key: key);
+class WelcomeScreen extends StatelessPage {
+  WelcomeScreen(Controller controller, {Key key}) : super(controller, key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -48,7 +51,7 @@ class WelcomeScreen extends StatelessWidget {
                   top: 60,
                   left: 30.0,
                 ),
-                child: Text('Confnect',
+                child: Text(super.getController().getModel().getAppName(),
                     textScaleFactor: 2.5,
                     style: GoogleFonts.lora(fontWeight: FontWeight.w600))),
             Spacer(),
@@ -56,21 +59,18 @@ class WelcomeScreen extends StatelessWidget {
               height: 60,
               width: MediaQuery.of(context).size.width - 60,
               margin: EdgeInsets.only(bottom: 20.0),
-              child: Positioned(
-                bottom: 0,
-                child: ElevatedButton(
-                  child: Text("Login"),
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.LOGIN_PAGE);
-                  },
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.black),
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    minimumSize: MaterialStateProperty.all<Size>(
-                      Size(MediaQuery.of(context).size.width - 60, 50),
-                    ),
+              child: ElevatedButton(
+                child: Text("Login"),
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRouter.LOGIN);
+                },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.black),
+                  foregroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                    Size(MediaQuery.of(context).size.width - 60, 50),
                   ),
                 ),
               ),
@@ -82,7 +82,7 @@ class WelcomeScreen extends StatelessWidget {
               child: ElevatedButton(
                 child: Text("Register"),
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.REGISTER_PAGE);
+                  Navigator.pushNamed(context, AppRouter.REGISTER);
                 },
                 style: ButtonStyle(
                   backgroundColor:

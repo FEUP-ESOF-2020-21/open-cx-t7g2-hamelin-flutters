@@ -1,17 +1,19 @@
 import 'dart:ui';
 
-import 'package:confnect/routes/pages.dart';
+import '../AppRouter.dart';
+import '../Page.dart';
+import '../../controller/Controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+class Login extends StatefulPage {
+  Login(Controller controller, {Key key}) : super(controller, key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -163,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               child: FlatButton(
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, AppRoutes.REGISTER_PAGE);
+                  Navigator.popAndPushNamed(context, AppRouter.REGISTER);
                 },
                 child: Text(
                   "Don't have an account? Click Here!",
