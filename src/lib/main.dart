@@ -2,7 +2,6 @@
 
 import 'package:confnect/routes/pages.dart';
 import 'package:confnect/views/LoginPage.dart';
-import 'package:confnect/views/MyHomePage.dart';
 import 'package:confnect/views/WelcomeScreen.dart';
 import 'package:confnect/views/RegisterPage.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Confnect',
-      //home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: WelcomeScreen(),
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
       routes: {
-        AppRoutes.HOME: (_) => WelcomeScreen(),
         AppRoutes.LOGIN_PAGE: (_) => LoginPage(),
         AppRoutes.REGISTER_PAGE: (_) => RegisterPage(),
       },

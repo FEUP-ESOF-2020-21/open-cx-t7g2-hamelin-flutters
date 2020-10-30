@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:confnect/routes/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -162,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               child: FlatButton(
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, '/register');
+                  Navigator.popAndPushNamed(context, AppRoutes.REGISTER_PAGE);
                 },
                 child: Text(
                   "Don't have an account? Click Here!",
