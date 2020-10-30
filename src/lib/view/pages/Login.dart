@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
               FormTextField('Username'),
             ),
             FormFieldContainer(
-              FormTextField('Password'),
+              FormTextField('Password', obscureText: true),
             ),
             FormFieldContainer(SquareButton('Login', () {}),
                 margin: EdgeInsets.only(bottom: 30)),

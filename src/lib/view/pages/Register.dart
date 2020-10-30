@@ -52,7 +52,7 @@ class _RegisterState extends State<Register> {
               FormTextField('Username'),
             ),
             FormFieldContainer(
-              FormTextField('Password'),
+              FormTextField('Password', obscureText: true),
               margin: EdgeInsets.only(
                 bottom: 30,
               ),
