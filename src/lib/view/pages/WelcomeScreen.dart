@@ -3,10 +3,10 @@ import 'package:confnect/model/AppModel.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/widgets/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
+import 'package:confnect/view/widgets/PageTitle.dart';
 
 import '../AppRouter.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatelessPage {
   WelcomeScreen(Controller controller, {Key key}) : super(controller, key: key);
@@ -28,15 +28,7 @@ class WelcomeScreen extends StatelessPage {
       body: Center(
         child: Column(
           children: <Widget>[
-            Container(
-                alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(
-                  top: 60,
-                  left: 30.0,
-                ),
-                child: Text(model.getAppName(),
-                    textScaleFactor: 2.5,
-                    style: GoogleFonts.lora(fontWeight: FontWeight.w600))),
+            PageTitle(model.getAppName()),
             Spacer(),
             FormFieldContainer(
               SquareButton('Login', () {

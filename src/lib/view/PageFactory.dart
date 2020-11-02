@@ -1,22 +1,22 @@
 import 'package:confnect/view/pages/WelcomeScreen.dart';
-
 import '../controller/Controller.dart';
 import './pages/Register.dart';
 import './pages/Login.dart';
+import 'package:flutter/material.dart';
 
 class PageFactory {
   Controller controller;
   PageFactory(this.controller);
 
-  getWelcomeScreen() {
+  Widget getWelcomeScreen() {
     return WelcomeScreen(controller);
   }
 
-  getLoginPage() {
+  Widget getLoginPage() {
     return Login(controller);
   }
 
-  getRegisterPage() {
+  Widget getRegisterPage() {
     return Register(controller);
   }
 }
