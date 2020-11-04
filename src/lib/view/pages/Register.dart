@@ -19,6 +19,10 @@ class Register extends StatefulPage {
 }
 
 class _RegisterState extends State<Register> {
+  final fullNameController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,13 +39,13 @@ class _RegisterState extends State<Register> {
               ),
             ),
             FormFieldContainer(
-              FormTextField('Full Name'),
+              FormTextField('Full Name', fullNameController),
             ),
             FormFieldContainer(
-              FormTextField('Username'),
+              FormTextField('Username', usernameController),
             ),
             FormFieldContainer(
-              FormTextField('Password', obscureText: true),
+              FormTextField('Password', passwordController, obscureText: true),
               margin: EdgeInsets.only(
                 bottom: 30,
               ),

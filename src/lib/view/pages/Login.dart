@@ -15,10 +15,15 @@ class Login extends StatefulPage {
   Login(Controller controller, {Key key}) : super(controller, key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _LoginState createState() => _LoginState(getController());
 }
 
 class _LoginState extends State<Login> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final Controller _controller;
+  _LoginState(this._controller);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +40,40 @@ class _LoginState extends State<Login> {
               ),
             ),
             FormFieldContainer(
-              FormTextField('Username'),
+              FormTextField('Username', usernameController),
             ),
             FormFieldContainer(
-              FormTextField('Password', obscureText: true),
+              FormTextField('Password', passwordController, obscureText: true),
             ),
-            FormFieldContainer(SquareButton('Login', () {}),
+            FormFieldContainer(
+                SquareButton('Login', () {
+                  String username = usernameController.text,
+                      password = passwordController.text;
+                  if (_controller.getDatabase().login(username, password)) {
+                    Navigator.popAndPushNamed(
+                        context, AppRouter.USER_START_PAGE);
+                  } else {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        // return object of type Dialog
+                        return AlertDialog(
+                          title: new Text("Wrong credentials"),
+                          content: new Text("Feels bad man"),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            new FlatButton(
+                              child: new Text("Close"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                }),
                 margin: EdgeInsets.only(bottom: 30)),
             StandardDivider(),
             TextOnlyButton(
