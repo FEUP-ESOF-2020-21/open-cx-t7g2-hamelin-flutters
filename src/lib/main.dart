@@ -1,25 +1,32 @@
 //import 'dart:html';
 
-import 'package:confnect/routes/pages.dart';
-import 'package:confnect/views/LoginPage.dart';
-import 'package:confnect/views/WelcomeScreen.dart';
-import 'package:confnect/views/RegisterPage.dart';
+import 'package:confnect/view/AppRouter.dart';
+import 'package:confnect/view/PageFactory.dart';
 import 'package:flutter/material.dart';
+import './model/AppModel.dart';
+import './controller/Controller.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  AppModel model = AppModel("Confnect");
+  Controller controller = Controller(model);
+  controller.startApp(Confnect(PageFactory(controller)));
+}
 
-class MyApp extends StatelessWidget {
+class Confnect extends StatelessWidget {
+  final PageFactory pageFactory;
+  Confnect(this.pageFactory);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Confnect',
-      home: WelcomeScreen(),
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
+      home: pageFactory.getWelcomeScreen(),
       routes: {
-        AppRoutes.LOGIN_PAGE: (_) => LoginPage(),
-        AppRoutes.REGISTER_PAGE: (_) => RegisterPage(),
+        AppRouter.LOGIN: (_) => pageFactory.getLoginPage(),
+        AppRouter.REGISTER: (_) => pageFactory.getRegisterPage(),
       },
     );
   }
