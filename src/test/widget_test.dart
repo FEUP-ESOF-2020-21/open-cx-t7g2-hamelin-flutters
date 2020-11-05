@@ -6,9 +6,8 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/model/AppModel.dart';
+import 'package:confnect/controller/database/MockAdapter.dart';
 import 'package:confnect/view/PageFactory.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:confnect/main.dart';
@@ -16,7 +15,7 @@ import 'package:confnect/main.dart';
 void main() {
   testWidgets('Title is being displayed', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    PageFactory pageFactory = PageFactory(Controller(AppModel('Test')));
+    PageFactory pageFactory = PageFactory(Controller(MockAdapter()));
     await tester.pumpWidget(Confnect(pageFactory));
 
     // Verify that our counter starts at 0.

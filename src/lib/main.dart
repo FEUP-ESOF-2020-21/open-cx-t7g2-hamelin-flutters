@@ -1,14 +1,13 @@
 //import 'dart:html';
 
+import 'package:confnect/controller/database/MockAdapter.dart';
 import 'package:confnect/view/AppRouter.dart';
 import 'package:confnect/view/PageFactory.dart';
 import 'package:flutter/material.dart';
-import './model/AppModel.dart';
 import './controller/Controller.dart';
 
 void main() {
-  AppModel model = AppModel("Confnect");
-  Controller controller = Controller(model);
+  Controller controller = Controller(MockAdapter());
   controller.startApp(Confnect(PageFactory(controller)));
 }
 
@@ -23,10 +22,11 @@ class Confnect extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: pageFactory.getWelcomeScreen(),
+      home: pageFactory.createWelcomeScreen(),
       routes: {
-        AppRouter.LOGIN: (_) => pageFactory.getLoginPage(),
-        AppRouter.REGISTER: (_) => pageFactory.getRegisterPage(),
+        AppRouter.LOGIN: (_) => pageFactory.createLoginPage(),
+        AppRouter.REGISTER: (_) => pageFactory.createRegisterPage(),
+        AppRouter.USER_START_PAGE: (_) => pageFactory.createUserStartPage(),
       },
     );
   }

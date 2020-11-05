@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import '../model/AppModel.dart';
+import './database/Database.dart';
 
 class Controller {
-  AppModel _appModel;
-  Controller(this._appModel);
+  Database _database;
+
+  Controller(this._database);
 
   void startApp(StatelessWidget app) {
     runApp(app);
   }
 
-  AppModel getModel() => _appModel;
+  Database getDatabase() => _database;
 }

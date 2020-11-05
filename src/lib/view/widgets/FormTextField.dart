@@ -2,21 +2,23 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class FormTextField extends StatelessWidget {
-  final String fieldText;
+  final String _fieldText;
   final bool obscureText;
-  FormTextField(this.fieldText, {this.obscureText = false});
+  final TextEditingController _controller;
+  FormTextField(this._fieldText, this._controller, {this.obscureText = false});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       obscureText: this.obscureText,
+      controller: this._controller,
       selectionWidthStyle: BoxWidthStyle.max,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(
           top: 10.0,
           left: 10.0,
         ),
-        hintText: this.fieldText,
+        hintText: this._fieldText,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(
             5,

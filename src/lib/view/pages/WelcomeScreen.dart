@@ -1,9 +1,9 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/model/AppModel.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/widgets/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:confnect/view/widgets/PageTitle.dart';
+import '../../controller/database/Database.dart';
 
 import '../AppRouter.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +22,13 @@ class WelcomeScreen extends StatelessPage {
 
   @override
   Widget build(BuildContext context) {
-    AppModel model = super.getController().getModel();
+    Database db = super.getController().getDatabase();
 
     return Scaffold(
       body: Center(
         child: Column(
           children: <Widget>[
-            PageTitle(model.getAppName()),
+            PageTitle(db.getAppName()),
             Spacer(),
             FormFieldContainer(
               SquareButton('Login', () {
