@@ -2,6 +2,8 @@ import './Database.dart';
 import '../../model/User.dart';
 
 class MockAdapter implements Database {
+  List<User> users = [];
+
   String getAppName() {
     return "Confnect";
   }
@@ -15,10 +17,24 @@ class MockAdapter implements Database {
     return res;
   }
 
+  int register(String fullname, String username, String password) {
+    if (fullname.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
+      for (var user in users) {
+        if (user.getUsername() == username) {
+          print("Return");
+          return 2;
+        }
+      }
+
+      users.add(User(username, password));
+      print("Register success");
+      return 1;
+    }
+    print("Register failed");
+    return 0;
+  }
+
   List<User> getUsers() {
-    return [
-      User("rafaavc", "password"),
-      User("test", "password"),
-    ];
+    return users;
   }
 }
