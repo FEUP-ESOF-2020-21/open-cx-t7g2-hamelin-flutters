@@ -22,7 +22,8 @@ class Confnect extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: pageFactory.createWelcomeScreen(),
+      //home: pageFactory.createWelcomeScreen(),
+      home: pageFactory.createMainPage(),
       routes: {
         AppRouter.LOGIN: (_) => pageFactory.createLoginPage(),
         AppRouter.REGISTER: (_) => pageFactory.createRegisterPage(),

@@ -1,3 +1,4 @@
+import 'package:confnect/view/pages/MyHomePage.dart';
 import 'package:confnect/view/pages/WelcomeScreen.dart';
 import '../controller/Controller.dart';
 import './pages/Register.dart';
@@ -23,5 +24,9 @@ class PageFactory {
 
   Widget createUserStartPage() {
     return UserStartPage(controller);
+  }
+
+  Widget createMainPage() {
+    return MyHomePage(controller);
   }
 }
