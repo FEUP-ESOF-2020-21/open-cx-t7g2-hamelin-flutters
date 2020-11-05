@@ -62,7 +62,7 @@ class _RegisterState extends State<Register> {
                         .getDatabase()
                         .register(fullname, username, password) ==
                     1) {
-                  Navigator.popAndPushNamed(context, AppRouter.WELCOME_PAGE);
+                  Navigator.popAndPushNamed(context, AppRouter.USER_START_PAGE);
                 } else {
                   //empty values
                   if (_controller
