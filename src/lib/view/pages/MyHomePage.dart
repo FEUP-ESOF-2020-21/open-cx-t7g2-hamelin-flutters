@@ -28,9 +28,11 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+
+      body: ForumList(),
+      /*body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
@@ -45,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ),
+      ),*/
       floatingActionButton: FloatingActionButton(
         onPressed: null,
         tooltip: 'Increment',

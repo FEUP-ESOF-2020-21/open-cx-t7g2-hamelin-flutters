@@ -8,7 +8,10 @@ class ForumList extends StatelessWidget {
   Widget build(BuildContext context) {
     //final Users users = Provider.of(context);
     return ListView(
-      children: [ForumTile(MockAdapter.getForums()[0])],
+      children: [
+        ForumTile(MockAdapter.getForums()[0]),
+        ForumTile(MockAdapter.getForums()[1])
+      ],
     );
   }
 }
