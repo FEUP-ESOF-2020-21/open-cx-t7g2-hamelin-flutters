@@ -1,5 +1,5 @@
 import 'package:confnect/controller/database/MockAdapter.dart';
-import 'package:confnect/view/widgets/Forum/ForumTile.dart';
+import './ForumTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

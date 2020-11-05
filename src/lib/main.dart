@@ -23,11 +23,10 @@ class Confnect extends StatelessWidget {
         primaryColor: Colors.white,
       ),
       //home: pageFactory.createWelcomeScreen(),
-      home: pageFactory.createMainPage(),
+      home: pageFactory.createHomePage(),
       routes: {
         AppRouter.LOGIN: (_) => pageFactory.createLoginPage(),
         AppRouter.REGISTER: (_) => pageFactory.createRegisterPage(),
-        AppRouter.USER_START_PAGE: (_) => pageFactory.createUserStartPage(),
       },
     );
   }

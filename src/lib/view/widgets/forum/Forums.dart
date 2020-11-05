@@ -1,10 +1,8 @@
-import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/view/Page.dart';
-import 'package:confnect/view/widgets/Forum/ForumList.dart';
+import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulPage {
-  MyHomePage(Controller controller, {Key key}) : super(controller, key: key);
+class Forums extends StatefulWidget {
+  Forums({Key key}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -15,22 +13,17 @@ class MyHomePage extends StatefulPage {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title = "OI";
+  final String title = "Forums";
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _ForumsState createState() => _ForumsState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ForumsState extends State<Forums> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-
-      body: ForumList(),
-      /*body: Center(
+    return ForumList();
+    /*body: Center(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -48,11 +41,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),*/
-      floatingActionButton: FloatingActionButton(
+    /*floatingActionButton: FloatingActionButton(
         onPressed: null,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    );*/
   }
 }
