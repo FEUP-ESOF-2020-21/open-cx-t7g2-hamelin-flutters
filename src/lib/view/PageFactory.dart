@@ -1,17 +1,14 @@
-import 'package:confnect/view/pages/WelcomeScreen.dart';
+import 'package:confnect/view/pages/HomePage.dart';
+import 'package:confnect/view/pages/MyHomePage%20copy.dart';
 import '../controller/Controller.dart';
 import './pages/Register.dart';
 import './pages/Login.dart';
-import './pages/UserStartPage.dart';
+import './pages/UserSection.dart';
 import 'package:flutter/material.dart';
 
 class PageFactory {
   Controller controller;
   PageFactory(this.controller);
-
-  Widget createWelcomeScreen() {
-    return WelcomeScreen(controller);
-  }
 
   Widget createLoginPage() {
     return Login(controller);
@@ -21,7 +18,11 @@ class PageFactory {
     return Register(controller);
   }
 
-  Widget createUserStartPage() {
-    return UserStartPage(controller);
+  Widget createHomePage() {
+    return HomePage(controller);
+  }
+
+  Widget createTestPage() {
+    return UserSection(controller);
   }
 }

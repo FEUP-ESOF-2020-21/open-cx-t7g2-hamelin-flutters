@@ -62,7 +62,8 @@ class _RegisterState extends State<Register> {
                         .getDatabase()
                         .register(fullname, username, password) ==
                     1) {
-                  Navigator.popAndPushNamed(context, AppRouter.USER_START_PAGE);
+                  Navigator.popUntil(
+                      context, ModalRoute.withName(Navigator.defaultRouteName));
                 } else {
                   //empty values
                   if (_controller
