@@ -18,7 +18,7 @@ class ForumTile extends StatelessWidget {
       child: Icon(Icons.person),
     );
 
-    return Center(
+    /*return Center(
       child: Container(
         color: Colors.white,
         width: MediaQuery.of(context).size.width * 0.9,
@@ -74,13 +74,12 @@ class ForumTile extends StatelessWidget {
           ],
         ),
       ),
-    );
+    );*/
 
-    /*return ListTile(
+    return ListTile(
       leading: avatar,
       title: Text(forum.getTitle()),
       subtitle: Text("Comments"),
-      
       trailing: Container(
         width: 100,
         child: Row(
@@ -88,12 +87,13 @@ class ForumTile extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.edit),
               color: Colors.orange,
-              onPressed: () {
+              onPressed: () {},
+              /*onPressed: () {
                 Navigator.of(context).pushNamed(
                   AppRoutes.USER_FORM,
                   arguments: user,
                 );
-              },
+              },*/
             ),
             IconButton(
               icon: Icon(Icons.delete),
@@ -103,6 +103,6 @@ class ForumTile extends StatelessWidget {
           ],
         ),
       ),
-    );*/
+    );
   }
 }

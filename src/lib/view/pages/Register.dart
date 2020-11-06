@@ -15,13 +15,15 @@ class Register extends StatefulPage {
   Register(Controller controller, {Key key}) : super(controller, key: key);
 
   @override
-  _RegisterState createState() => _RegisterState();
+  _RegisterState createState() => _RegisterState(getController());
 }
 
 class _RegisterState extends State<Register> {
   final fullNameController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final Controller _controller;
+  _RegisterState(this._controller);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,69 @@ class _RegisterState extends State<Register> {
               ),
             ),
             FormFieldContainer(
-              SquareButton('Register', () {}),
+              SquareButton('Register', () {
+                String fullname = fullNameController.text,
+                    username = usernameController.text,
+                    password = passwordController.text;
+                if (_controller
+                        .getDatabase()
+                        .register(fullname, username, password) ==
+                    1) {
+                  Navigator.popUntil(
+                      context, ModalRoute.withName(Navigator.defaultRouteName));
+                } else {
+                  //empty values
+                  if (_controller
+                          .getDatabase()
+                          .register(fullname, username, password) ==
+                      0) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        // return object of type Dialog
+                        return AlertDialog(
+                          title: new Text("Register error"),
+                          content: new Text("You must fill in all fields!"),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            new FlatButton(
+                              child: new Text("Close"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                  //username already exists
+                  else if (_controller
+                          .getDatabase()
+                          .register(fullname, username, password) ==
+                      2) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        // return object of type Dialog
+                        return AlertDialog(
+                          title: new Text("Register error"),
+                          content: new Text("Username already exists!"),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            new FlatButton(
+                              child: new Text("Close"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                }
+              }),
             ),
             StandardDivider(),
             TextOnlyButton(
