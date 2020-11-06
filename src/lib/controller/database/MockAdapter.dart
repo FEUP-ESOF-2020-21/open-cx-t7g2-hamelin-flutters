@@ -1,8 +1,17 @@
+import 'package:confnect/model/Forum.dart';
+
 import './Database.dart';
 import '../../model/User.dart';
 
 class MockAdapter implements Database {
-  List<User> users = [];
+  static List<User> _users = [
+    User("test", "123"),
+  ];
+
+  static List<Forum> _forums = [
+    Forum(_users[0], "Flutter master", "lorem ipsum"),
+    Forum(_users[0], "password", "zaszaszazsa"),
+  ];
 
   String getAppName() {
     return "Confnect";
@@ -19,14 +28,14 @@ class MockAdapter implements Database {
 
   int register(String fullname, String username, String password) {
     if (fullname.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
-      for (var user in users) {
+      for (var user in _users) {
         if (user.getUsername() == username) {
           print("Return");
           return 2;
         }
       }
 
-      users.add(User(username, password));
+      _users.add(User(username, password));
       print("Register success");
       return 1;
     }
@@ -35,6 +44,10 @@ class MockAdapter implements Database {
   }
 
   List<User> getUsers() {
-    return users;
+    return _users;
+  }
+
+  static List<Forum> getForums() {
+    return _forums;
   }
 }

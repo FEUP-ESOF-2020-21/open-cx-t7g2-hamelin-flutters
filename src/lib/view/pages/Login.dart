@@ -51,8 +51,9 @@ class _LoginState extends State<Login> {
                   String username = usernameController.text,
                       password = passwordController.text;
                   if (_controller.getDatabase().login(username, password)) {
-                    Navigator.popAndPushNamed(
-                        context, AppRouter.USER_START_PAGE);
+                    _controller.setLoggedInUserName(username);
+                    Navigator.popUntil(context,
+                        ModalRoute.withName(Navigator.defaultRouteName));
                   } else {
                     showDialog(
                       context: context,
