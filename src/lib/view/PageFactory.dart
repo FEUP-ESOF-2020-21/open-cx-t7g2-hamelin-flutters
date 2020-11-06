@@ -1,4 +1,5 @@
 import 'package:confnect/view/pages/HomePage.dart';
+import 'package:confnect/view/pages/MyHomePage%20copy.dart';
 import '../controller/Controller.dart';
 import './pages/Register.dart';
 import './pages/Login.dart';
@@ -19,5 +20,9 @@ class PageFactory {
 
   Widget createHomePage() {
     return HomePage(controller);
+  }
+
+  Widget createTestPage() {
+    return UserSection(controller);
   }
 }

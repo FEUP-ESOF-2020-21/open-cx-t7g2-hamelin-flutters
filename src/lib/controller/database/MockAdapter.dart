@@ -28,7 +28,7 @@ class MockAdapter implements Database {
 
   static List<Forum> getForums() {
     return [
-      Forum(users[0], "Flutter master", "lorem ipsum"),
+      Forum(users[0], "Flutter master", "lorem iaçjdh cihertvcyoachpeh psum"),
       Forum(users[1], "password", "zaszaszazsa"),
     ];
   }
