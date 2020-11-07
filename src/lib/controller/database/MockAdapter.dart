@@ -13,8 +13,10 @@ class MockAdapter implements Database {
   ];
 
   static List<Forum> _forums = [
-    Forum(_users[0], "Data science", "lorem ipsum"),
-    Forum(_users[1], "Mobile Development", "zaszaszazsa"),
+    Forum(_users[0], "Data science",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
+    Forum(_users[1], "Mobile Development",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
   ];
 
   static List<Post> _posts = [
