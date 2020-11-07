@@ -1,3 +1,4 @@
+import 'package:confnect/view/style/DescriptionTextWidget.dart';
 import 'package:flutter/material.dart';
 
 class TextSectionPost extends StatelessWidget {
@@ -18,7 +19,7 @@ class TextSectionPost extends StatelessWidget {
             style: Theme.of(context).textTheme.headline6,
           ),
         ),
-        Text(_description)
+        DescriptionTextWidget(text: _description)
       ],
     );
   }

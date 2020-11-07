@@ -21,7 +21,7 @@ class MockAdapter implements Database {
     Post(_users[0], "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra"),
     Post(_users[1], "It deserves a 20!",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra le"),
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le"),
     Post(_users[0], "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
   ];
