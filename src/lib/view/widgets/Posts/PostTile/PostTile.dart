@@ -32,7 +32,7 @@ class PostTile extends StatelessWidget {
                 child: Column(
                   children: [
                     TextSectionPost(_post.getTitle(), _post.getDescription()),
-                    VoteComment()
+                    VoteComment(_post),
                   ],
                 ),
               ),

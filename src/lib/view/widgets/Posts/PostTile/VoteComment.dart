@@ -1,12 +1,51 @@
+import 'package:confnect/model/Post.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class VoteComment extends StatefulWidget {
+  final Post post;
+
+  VoteComment(this.post);
   @override
   _VoteCommentState createState() => _VoteCommentState();
 }
 
 class _VoteCommentState extends State<VoteComment> {
+  bool liked = false;
+  bool disliked = false;
+
+  _presedLike() {
+    setState(() {
+      if (liked) {
+        liked = false;
+        widget.post.decrementLike();
+      } else {
+        liked = true;
+        widget.post.incrementLike();
+        if (disliked) {
+          disliked = false;
+          widget.post.decrementDislike();
+        }
+      }
+    });
+  }
+
+  _presedDisLike() {
+    setState(() {
+      if (disliked) {
+        disliked = false;
+        widget.post.decrementDislike();
+      } else {
+        disliked = true;
+        widget.post.incrementDislike();
+        if (liked) {
+          liked = false;
+          widget.post.decrementLike();
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,22 +56,21 @@ class _VoteCommentState extends State<VoteComment> {
           FittedBox(
             child: IconButton(
                 icon: Icon(Icons.thumb_up),
-                color: Colors.grey,
-                onPressed: () {}),
+                color: liked ? Colors.blue : Colors.grey,
+                onPressed: () => _presedLike()),
           ),
           Text(
-            "12",
+            widget.post.getNumberLikes().toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
           FittedBox(
             child: IconButton(
-              icon: Icon(Icons.thumb_down),
-              color: Colors.grey,
-              onPressed: () {},
-            ),
+                icon: Icon(Icons.thumb_down),
+                color: disliked ? Colors.blue : Colors.grey,
+                onPressed: () => _presedDisLike()),
           ),
           Text(
-            "12",
+            widget.post.getNumberDislikes().toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
           FittedBox(

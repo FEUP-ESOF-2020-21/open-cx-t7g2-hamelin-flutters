@@ -28,4 +28,20 @@ class Post {
   int getNumberDislikes() {
     return _numberDislikes;
   }
+
+  incrementLike() {
+    _numberLikes++;
+  }
+
+  decrementLike() {
+    _numberLikes--;
+  }
+
+  incrementDislike() {
+    _numberDislikes++;
+  }
+
+  decrementDislike() {
+    _numberDislikes--;
+  }
 }
