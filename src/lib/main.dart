@@ -3,6 +3,7 @@
 import 'package:confnect/controller/database/MockAdapter.dart';
 import 'package:confnect/view/AppRouter.dart';
 import 'package:confnect/view/PageFactory.dart';
+import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 import './controller/Controller.dart';
 
@@ -20,8 +21,11 @@ class Confnect extends StatelessWidget {
     return MaterialApp(
       title: 'Confnect',
       theme: ThemeData(
-        primaryColor: Colors.white,
-      ),
+          primaryColor: Colors.white,
+          textTheme: TextTheme(
+            headline6: TitleTextStyle,
+            bodyText1: BodyTextStyle,
+          )),
       //home: pageFactory.createWelcomeScreen(),
       home: pageFactory.createTestPage(),
       routes: {

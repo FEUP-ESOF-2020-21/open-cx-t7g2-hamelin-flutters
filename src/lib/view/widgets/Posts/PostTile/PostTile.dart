@@ -1,25 +1,27 @@
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/view/widgets/Posts/PostTile/TextSectionPost.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/VoteComment.dart';
 import 'package:confnect/view/widgets/User/avatar.dart';
 import 'package:flutter/material.dart';
 
 class PostTile extends StatelessWidget {
-  final Post post; // = new Post("Ademar", "Ensinando flutter", "lorem ipsum");
+  final Post _post; // = new Post("Ademar", "Ensinando flutter", "lorem ipsum");
 
-  const PostTile(this.post);
+  const PostTile(this._post);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Card(
+      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Container(
-        color: Colors.white,
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Flexible(
               flex: 1,
               child: Container(
-                child: AvatarImg(post.getAuthor()),
+                child: AvatarImg(_post.getAuthor()),
                 padding: EdgeInsets.all(10.0),
               ),
             ),
@@ -29,19 +31,7 @@ class PostTile extends StatelessWidget {
                 //padding: EdgeInsets.all(2.0),
                 child: Column(
                   children: [
-                    Container(
-                      //padding: EdgeInsets.all((5.0)),
-                      child: Text(
-                        post.getTitle(),
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      post.getDescription(),
-                    ),
+                    TextSectionPost(_post.getTitle(), _post.getDescription()),
                     VoteComment()
                   ],
                 ),
