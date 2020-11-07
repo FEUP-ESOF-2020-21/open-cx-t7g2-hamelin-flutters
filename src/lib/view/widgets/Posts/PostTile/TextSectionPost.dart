@@ -1,4 +1,3 @@
-import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
 class TextSectionPost extends StatelessWidget {

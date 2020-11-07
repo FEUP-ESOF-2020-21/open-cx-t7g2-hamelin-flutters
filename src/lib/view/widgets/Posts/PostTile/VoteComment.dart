@@ -9,30 +9,45 @@ class VoteComment extends StatefulWidget {
 class _VoteCommentState extends State<VoteComment> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Container(
-          child: Row(
-            children: [
-              IconButton(
-                  icon: Icon(Icons.thumb_up),
-                  color: Colors.grey,
-                  onPressed: () {}),
-              IconButton(
-                icon: Icon(Icons.thumb_down),
+    return Container(
+      height: 30,
+      child: Row(
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          FittedBox(
+            child: IconButton(
+                icon: Icon(Icons.thumb_up),
                 color: Colors.grey,
-                onPressed: () {},
-              ),
-            ],
+                onPressed: () {}),
           ),
-        ),
-        IconButton(
-          icon: Icon(Icons.comment),
-          color: Colors.grey,
-          onPressed: () {},
-        ),
-      ],
+          Text(
+            "12",
+            style: TextStyle(color: Colors.grey, fontSize: 12),
+          ),
+          FittedBox(
+            child: IconButton(
+              icon: Icon(Icons.thumb_down),
+              color: Colors.grey,
+              onPressed: () {},
+            ),
+          ),
+          Text(
+            "12",
+            style: TextStyle(color: Colors.grey, fontSize: 12),
+          ),
+          FittedBox(
+            child: IconButton(
+              icon: Icon(Icons.comment),
+              color: Colors.grey,
+              onPressed: () {},
+            ),
+          ),
+          Text(
+            "4",
+            style: TextStyle(color: Colors.grey, fontSize: 12),
+          ),
+        ],
+      ),
     );
   }
 }

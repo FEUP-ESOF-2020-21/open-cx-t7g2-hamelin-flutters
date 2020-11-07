@@ -14,11 +14,25 @@ class UserSection extends StatefulPage {
 class _UserSectionState extends State<UserSection> {
   int _selectedIndex = 0;
 
-  static final List<Widget> _options = [
+  static final List<Widget> _pageBodies = [
     ForumList(),
     Text("Search..."),
     Text("Profile..."),
     PostList(),
+  ];
+  static final List<Widget> _pageAppBars = [
+    AppBar(
+      title: Text("Forums"),
+    ),
+    AppBar(
+      title: Text("Search"),
+    ),
+    AppBar(
+      title: Text("Profile"),
+    ),
+    AppBar(
+      title: Text("Data Science"),
+    ),
   ];
 
   void _onItemTapped(int idx) {
@@ -30,8 +44,8 @@ class _UserSectionState extends State<UserSection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: _UserSectionState._options[this._selectedIndex],
+      appBar: _UserSectionState._pageAppBars[this._selectedIndex],
+      body: _UserSectionState._pageBodies[this._selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[

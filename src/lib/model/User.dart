@@ -1,8 +1,9 @@
 class User {
+  final int id;
   final String _username;
   final String _password;
   String _avatarUrl;
-  User(this._username, this._password, [this._avatarUrl]);
+  User(this.id, this._username, this._password, [this._avatarUrl]);
 
   String getUsername() {
     return _username;
