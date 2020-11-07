@@ -1,7 +1,8 @@
 class User {
   final String _username;
   final String _password;
-  User(this._username, this._password);
+  String _avatarUrl;
+  User(this._username, this._password, [this._avatarUrl]);
 
   String getUsername() {
     return _username;
@@ -9,6 +10,14 @@ class User {
 
   String getPassword() {
     return _password;
+  }
+
+  String getAvatarUrl() {
+    return _avatarUrl;
+  }
+
+  void setAvatarUrl(String avatarUrl) {
+    this._avatarUrl = avatarUrl;
   }
 
   static bool auth(User user1, User user2) {

@@ -6,7 +6,8 @@ import '../../model/User.dart';
 
 class MockAdapter implements Database {
   static List<User> _users = [
-    User("test", "123"),
+    User("test", "123",
+        "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
   ];
 
   static List<Forum> _forums = [
