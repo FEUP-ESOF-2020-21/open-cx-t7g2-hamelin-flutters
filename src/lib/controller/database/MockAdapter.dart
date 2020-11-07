@@ -18,7 +18,10 @@ class MockAdapter implements Database {
   static List<Post> _posts = [
     Post(_users[0], "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra"),
-    Post(_users[0], "password", "zaszaszazsa"),
+    Post(_users[0], "It deserves a 20!",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra le"),
+    Post(_users[0], "Welcome!",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
   ];
 
   String getAppName() {

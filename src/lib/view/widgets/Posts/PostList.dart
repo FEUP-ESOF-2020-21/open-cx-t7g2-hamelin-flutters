@@ -7,11 +7,10 @@ class PostList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final Users users = Provider.of(context);
-    return ListView(
-      children: [
-        PostTile(MockAdapter.getPosts()[0]),
-        PostTile(MockAdapter.getPosts()[1])
-      ],
-    );
+    return ListView(children: posts());
+  }
+
+  List<PostTile> posts() {
+    return MockAdapter.getPosts().map((post) => PostTile(post)).toList();
   }
 }

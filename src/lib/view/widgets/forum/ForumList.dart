@@ -7,11 +7,10 @@ class ForumList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final Users users = Provider.of(context);
-    return ListView(
-      children: [
-        ForumTile(MockAdapter.getForums()[0]),
-        ForumTile(MockAdapter.getForums()[1])
-      ],
-    );
+    return ListView(children: forums());
+  }
+
+  List<ForumTile> forums() {
+    return MockAdapter.getForums().map((forum) => ForumTile(forum)).toList();
   }
 }
