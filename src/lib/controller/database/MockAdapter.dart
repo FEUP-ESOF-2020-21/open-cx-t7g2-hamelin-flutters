@@ -1,4 +1,5 @@
 import 'package:confnect/model/Forum.dart';
+import 'package:confnect/model/Post.dart';
 
 import './Database.dart';
 import '../../model/User.dart';
@@ -11,6 +12,11 @@ class MockAdapter implements Database {
   static List<Forum> _forums = [
     Forum(_users[0], "Flutter master", "lorem ipsum"),
     Forum(_users[0], "password", "zaszaszazsa"),
+  ];
+
+  static List<Post> _posts = [
+    Post(_users[0], "Flutter master", "lorem ipsum"),
+    Post(_users[0], "password", "zaszaszazsa"),
   ];
 
   String getAppName() {
@@ -49,5 +55,9 @@ class MockAdapter implements Database {
 
   static List<Forum> getForums() {
     return _forums;
+  }
+
+  static List<Post> getPosts() {
+    return _posts;
   }
 }

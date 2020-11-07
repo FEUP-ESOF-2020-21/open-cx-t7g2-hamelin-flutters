@@ -1,7 +1,8 @@
+import 'package:confnect/view/widgets/Posts/PostList.dart';
+import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
 import '../../controller/Controller.dart';
-import '../widgets/forum/Forums.dart';
 
 class UserSection extends StatefulPage {
   UserSection(Controller controller, {Key key}) : super(controller, key: key);
@@ -14,9 +15,10 @@ class _UserSectionState extends State<UserSection> {
   int _selectedIndex = 0;
 
   static final List<Widget> _options = [
-    Forums(),
+    ForumList(),
     Text("Search..."),
     Text("Profile..."),
+    PostList(),
   ];
 
   void _onItemTapped(int idx) {
@@ -31,6 +33,7 @@ class _UserSectionState extends State<UserSection> {
       appBar: AppBar(),
       body: _UserSectionState._options[this._selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.forum),
@@ -43,6 +46,10 @@ class _UserSectionState extends State<UserSection> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'Discussions',
           ),
         ],
         currentIndex: this._selectedIndex,
