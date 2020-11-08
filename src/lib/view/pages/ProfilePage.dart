@@ -1,3 +1,4 @@
+import 'package:confnect/view/widgets/User/ProfileForumList.dart';
 import 'package:flutter/material.dart';
 //https://github.com/rajayogan/flutter-profilescreen/blob/master/lib/main.dart
 
@@ -70,6 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     )),
                 SizedBox(height: 25.0),
+                ProfileForumList(),
               ],
             ))
       ],
