@@ -1,16 +1,31 @@
 import 'package:confnect/model/Forum.dart';
+import 'package:confnect/model/Post.dart';
 
 import './Database.dart';
 import '../../model/User.dart';
 
 class MockAdapter implements Database {
   static List<User> _users = [
-    User("test", "123"),
+    User(0, "test", "123",
+        "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
+    User(1, "trump", "1",
+        "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg"),
   ];
 
   static List<Forum> _forums = [
-    Forum(_users[0], "Flutter master", "lorem ipsum"),
-    Forum(_users[0], "password", "zaszaszazsa"),
+    Forum(_users[0], "Data science",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
+    Forum(_users[1], "Mobile Development",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
+  ];
+
+  static List<Post> _posts = [
+    Post(_users[0], "Flutter master",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra"),
+    Post(_users[1], "It deserves a 20!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le"),
+    Post(_users[0], "Welcome!",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
   ];
 
   String getAppName() {
@@ -20,13 +35,16 @@ class MockAdapter implements Database {
   bool login(String username, String password) {
     List<User> users = this.getUsers();
     bool res = false;
+    int id = 0;
     users.forEach((element) {
-      if (User.auth(element, new User(username, password))) res = true;
+      id++;
+      if (User.auth(element, new User(id, username, password))) res = true;
     });
     return res;
   }
 
   int register(String fullname, String username, String password) {
+    int id = _users.length;
     if (fullname.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
       for (var user in _users) {
         if (user.getUsername() == username) {
@@ -35,7 +53,7 @@ class MockAdapter implements Database {
         }
       }
 
-      _users.add(User(username, password));
+      _users.add(User(id, username, password));
       print("Register success");
       return 1;
     }
@@ -49,5 +67,9 @@ class MockAdapter implements Database {
 
   static List<Forum> getForums() {
     return _forums;
+  }
+
+  static List<Post> getPosts() {
+    return _posts;
   }
 }
