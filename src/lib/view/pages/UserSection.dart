@@ -1,4 +1,5 @@
 import 'package:confnect/view/widgets/LogoutButton.dart';
+import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,8 @@ class _UserSectionState extends State<UserSection> {
 
   static final List<Widget> _pageBodies = [
     ForumList(),
-    Text("Search..."),
-    Text("Profile..."),
+    Text("Coming soon..."),
+    ProfilePage(),
     PostList(),
   ];
   static List<Widget> _pageAppBars = [];
