@@ -62,8 +62,28 @@ class _RegisterState extends State<Register> {
                         .getDatabase()
                         .register(fullname, username, password) ==
                     1) {
+                  _controller.setLoggedInUserName(username);
                   Navigator.popUntil(
                       context, ModalRoute.withName(Navigator.defaultRouteName));
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      // return object of type Dialog
+                      return AlertDialog(
+                        title: new Text("Register"),
+                        content: new Text("You've been registered!"),
+                        actions: <Widget>[
+                          // usually buttons at the bottom of the dialog
+                          new FlatButton(
+                            child: new Text("Close"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 } else {
                   //empty values
                   if (_controller
