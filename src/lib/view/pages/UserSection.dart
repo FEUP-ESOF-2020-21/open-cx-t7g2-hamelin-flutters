@@ -1,3 +1,4 @@
+import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,13 @@ class UserSection extends StatefulPage {
   UserSection(Controller controller, {Key key}) : super(controller, key: key);
 
   @override
-  _UserSectionState createState() => _UserSectionState();
+  _UserSectionState createState() => _UserSectionState(getController());
 }
 
 class _UserSectionState extends State<UserSection> {
   int _selectedIndex = 0;
+  final Controller _controller;
+  _UserSectionState(this._controller);
 
   static final List<Widget> _pageBodies = [
     ForumList(),
@@ -20,20 +23,7 @@ class _UserSectionState extends State<UserSection> {
     Text("Profile..."),
     PostList(),
   ];
-  static final List<Widget> _pageAppBars = [
-    AppBar(
-      title: Text("Forums"),
-    ),
-    AppBar(
-      title: Text("Search"),
-    ),
-    AppBar(
-      title: Text("Profile"),
-    ),
-    AppBar(
-      title: Text("Data Science"),
-    ),
-  ];
+  static List<Widget> _pageAppBars = [];
 
   void _onItemTapped(int idx) {
     setState(() {
@@ -41,8 +31,30 @@ class _UserSectionState extends State<UserSection> {
     });
   }
 
+  List<Widget> _initAppBars(List<Widget> action) {
+    return [
+      AppBar(
+        title: Text("Forums"),
+        actions: action,
+      ),
+      AppBar(
+        title: Text("Search"),
+        actions: action,
+      ),
+      AppBar(
+        title: Text("Profile"),
+        actions: action,
+      ),
+      AppBar(
+        title: Text("Data Science"),
+        actions: action,
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
+    _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this._selectedIndex],
       body: _UserSectionState._pageBodies[this._selectedIndex],
