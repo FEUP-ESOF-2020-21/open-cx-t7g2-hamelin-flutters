@@ -433,7 +433,7 @@ As an administrator, I want to be able to generate codes for hosts and attendees
 
 ### Product increment #1
 
-For this iteration we implemented the [login](#Story-2), [register](#Story-1) and [forum list](#Story-3) pages. Release [v0.1](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.1).
+Changelogs for the first increments can be found here: [v0.1](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.1).
 
 
 ---
