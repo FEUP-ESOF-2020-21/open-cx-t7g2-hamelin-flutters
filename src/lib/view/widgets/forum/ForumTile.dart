@@ -1,6 +1,4 @@
 import 'package:confnect/model/Forum.dart';
-import 'package:confnect/view/style/DescriptionTextWidget.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/TextSectionPost.dart';
 
 import 'package:confnect/view/widgets/User/avatar.dart';
 import 'package:flutter/material.dart';

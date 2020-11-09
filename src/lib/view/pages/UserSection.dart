@@ -1,5 +1,7 @@
+import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/ForumList.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
 import '../../controller/Controller.dart';
@@ -16,8 +18,8 @@ class _UserSectionState extends State<UserSection> {
 
   static final List<Widget> _pageBodies = [
     ForumList(),
-    Text("Search..."),
-    Text("Profile..."),
+    SearchBar(onSearch: null, onItemFound: null),
+    ProfilePage(),
     PostList(),
   ];
   static final List<Widget> _pageAppBars = [
