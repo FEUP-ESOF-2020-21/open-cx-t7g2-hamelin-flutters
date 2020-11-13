@@ -3,8 +3,10 @@ import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
+
 import '../Page.dart';
 import '../../controller/Controller.dart';
+import '../widgets/createPost.dart';
 
 class UserSection extends StatefulPage {
   UserSection(Controller controller, {Key key}) : super(controller, key: key);
@@ -15,8 +17,9 @@ class UserSection extends StatefulPage {
 
 class _UserSectionState extends State<UserSection> {
   int _selectedIndex = 0;
+  bool _addingPost = false;
   final Controller _controller;
-  _UserSectionState(this._controller);
+  _UserSectionState(this._controller, [this._addingPost = false]);
 
   static final List<Widget> _pageBodies = [
     ForumList(),
@@ -26,10 +29,15 @@ class _UserSectionState extends State<UserSection> {
   ];
   static List<Widget> _pageAppBars = [];
 
-  FloatingActionButton _addButton() {
-    if (this._selectedIndex == 3) {
+  Widget _addButton() {
+    if (this._selectedIndex == 3 && !_addingPost) {
       return FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          setState(() {
+            this._selectedIndex = this._selectedIndex;
+            this._addingPost = true;
+          });
+        },
         elevation: 0,
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
@@ -44,9 +52,32 @@ class _UserSectionState extends State<UserSection> {
     }
   }
 
+  Widget _getBody() {
+    print(this._addingPost);
+    if (this._addingPost) {
+      return Column(
+        children: <Widget>[
+          Container(
+            height: 300,
+            child: _UserSectionState._pageBodies[this._selectedIndex],
+          ),
+          Divider(
+            indent: 10,
+            endIndent: 10,
+            thickness: 3,
+            color: Colors.black,
+          ),
+          CreatePostInput(),
+        ],
+      );
+    }
+    return _UserSectionState._pageBodies[this._selectedIndex];
+  }
+
   void _onItemTapped(int idx) {
     setState(() {
       this._selectedIndex = idx;
+      this._addingPost = false;
     });
   }
 
@@ -75,8 +106,9 @@ class _UserSectionState extends State<UserSection> {
   Widget build(BuildContext context) {
     _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: _UserSectionState._pageAppBars[this._selectedIndex],
-      body: _UserSectionState._pageBodies[this._selectedIndex],
+      body: this._getBody(),
       floatingActionButton: _addButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
