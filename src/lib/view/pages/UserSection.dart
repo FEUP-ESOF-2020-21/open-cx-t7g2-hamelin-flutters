@@ -26,6 +26,24 @@ class _UserSectionState extends State<UserSection> {
   ];
   static List<Widget> _pageAppBars = [];
 
+  FloatingActionButton _addButton() {
+    if (this._selectedIndex == 3) {
+      return FloatingActionButton(
+        onPressed: null,
+        elevation: 0,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
+        child: Icon(
+          Icons.add_comment_outlined,
+          size: 30,
+          color: Color.fromARGB(255, 0, 0, 0),
+        ),
+      );
+    } else {
+      return null;
+    }
+  }
+
   void _onItemTapped(int idx) {
     setState(() {
       this._selectedIndex = idx;
@@ -59,6 +77,8 @@ class _UserSectionState extends State<UserSection> {
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this._selectedIndex],
       body: _UserSectionState._pageBodies[this._selectedIndex],
+      floatingActionButton: _addButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
