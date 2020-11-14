@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../Page.dart';
 import '../../controller/Controller.dart';
-import '../widgets/createPost.dart';
+import '../widgets/CreatePost.dart';
 
 class UserSection extends StatefulPage {
   UserSection(Controller controller, {Key key}) : super(controller, key: key);
@@ -34,7 +34,7 @@ class _UserSectionState extends State<UserSection> {
       return FloatingActionButton(
         onPressed: () {
           setState(() {
-            this._selectedIndex = this._selectedIndex;
+            //this._selectedIndex = this._selectedIndex;
             this._addingPost = true;
           });
         },
@@ -43,6 +43,22 @@ class _UserSectionState extends State<UserSection> {
         hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
         child: Icon(
           Icons.add_comment_outlined,
+          size: 30,
+          color: Color.fromARGB(255, 0, 0, 0),
+        ),
+      );
+    } else if (this._selectedIndex == 3 && _addingPost) {
+      return FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            this._addingPost = false;
+          });
+        },
+        elevation: 0,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
+        child: Icon(
+          Icons.arrow_downward_outlined,
           size: 30,
           color: Color.fromARGB(255, 0, 0, 0),
         ),
