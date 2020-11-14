@@ -17,9 +17,8 @@ class UserSection extends StatefulPage {
 
 class _UserSectionState extends State<UserSection> {
   int _selectedIndex = 0;
-  bool _addingPost = false;
   final Controller _controller;
-  _UserSectionState(this._controller, [this._addingPost = false]);
+  _UserSectionState(this._controller);
 
   static final List<Widget> _pageBodies = [
     ForumList(),
@@ -30,12 +29,12 @@ class _UserSectionState extends State<UserSection> {
   static List<Widget> _pageAppBars = [];
 
   Widget _addButton() {
-    if (this._selectedIndex == 3 && !_addingPost) {
+    if (this._selectedIndex == 3 && !this._controller.isAddingPost()) {
       return FloatingActionButton(
         onPressed: () {
           setState(() {
             //this._selectedIndex = this._selectedIndex;
-            this._addingPost = true;
+            this._controller.setAddingPost(true);
           });
         },
         elevation: 0,
@@ -47,11 +46,11 @@ class _UserSectionState extends State<UserSection> {
           color: Color.fromARGB(255, 0, 0, 0),
         ),
       );
-    } else if (this._selectedIndex == 3 && _addingPost) {
+    } else if (this._selectedIndex == 3 && this._controller.isAddingPost()) {
       return FloatingActionButton(
         onPressed: () {
           setState(() {
-            this._addingPost = false;
+            this._controller.setAddingPost(false);
           });
         },
         elevation: 0,
@@ -69,8 +68,8 @@ class _UserSectionState extends State<UserSection> {
   }
 
   Widget _getBody() {
-    print(this._addingPost);
-    if (this._addingPost) {
+    print(this._controller.isAddingPost());
+    if (this._controller.isAddingPost()) {
       return Column(
         children: <Widget>[
           Container(
@@ -83,7 +82,7 @@ class _UserSectionState extends State<UserSection> {
             thickness: 3,
             color: Colors.black,
           ),
-          CreatePostInput(),
+          CreatePostInput(this._controller),
         ],
       );
     }
@@ -93,7 +92,7 @@ class _UserSectionState extends State<UserSection> {
   void _onItemTapped(int idx) {
     setState(() {
       this._selectedIndex = idx;
-      this._addingPost = false;
+      this._controller.setAddingPost(false);
     });
   }
 

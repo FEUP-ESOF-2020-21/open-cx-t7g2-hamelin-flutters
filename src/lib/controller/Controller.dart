@@ -5,6 +5,7 @@ class Controller {
   Database _database;
   String _loggedInUserName;
   Function _onSessionChange;
+  bool _addingPost = false;
 
   Controller(this._database);
 
@@ -17,9 +18,23 @@ class Controller {
     if (_onSessionChange != null) _onSessionChange();
   }
 
+  void setAddingPost(bool _addingPost) => this._addingPost = _addingPost;
+
+  bool isAddingPost() => this._addingPost;
+
   String getLoggedInUserName() => this._loggedInUserName;
 
   void setOnSessionChange(Function fn) => this._onSessionChange = fn;
 
   Database getDatabase() => _database;
+
+  bool createPost(String title, String text) {
+    //TODO add notification messages
+    if (title == "")
+      return false;
+    else if (text == "") return false;
+    _database.addPost(_loggedInUserName, title, text);
+    print("Post created");
+    return true;
+  }
 }

@@ -63,6 +63,11 @@ class MockAdapter implements Database {
     return 0;
   }
 
+  void addPost(String username, String title, String text) {
+    for (var user in _users)
+      if (user.getUsername() == username) _posts.add(Post(user, title, text));
+  }
+
   List<User> getUsers() {
     return _users;
   }
