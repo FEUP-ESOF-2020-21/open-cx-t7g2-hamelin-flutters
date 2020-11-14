@@ -74,7 +74,7 @@ class _UserSectionState extends State<UserSection> {
       return Column(
         children: <Widget>[
           Container(
-            height: 300,
+            height: 190,
             child: _UserSectionState._pageBodies[this._selectedIndex],
           ),
           Divider(
