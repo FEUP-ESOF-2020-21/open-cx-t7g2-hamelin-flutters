@@ -15,10 +15,6 @@ class _CommentListState extends State<CommentList> {
     return widget._comments.map((comment) => CommentTile(comment)).toList();
   }
 
-  /*@override
-  Widget build(BuildContext context) {
-    return ListView(children: comments());
-  }*/
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

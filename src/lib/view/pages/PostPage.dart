@@ -2,7 +2,6 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/widgets/Posts/Comments/CommentList.dart';
-import 'package:confnect/view/widgets/Posts/Comments/CommentTile.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostContent.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -21,7 +20,7 @@ class _PostPageState extends State<PostPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Post"),
+        title: Text(widget._post.getTitle()),
       ),
       body: Container(
         decoration: BoxDecoration(),

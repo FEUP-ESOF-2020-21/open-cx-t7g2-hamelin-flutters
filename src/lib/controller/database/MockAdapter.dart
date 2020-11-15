@@ -1,4 +1,5 @@
 import 'package:confnect/model/Comment.dart';
+import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/Post.dart';
 
@@ -20,8 +21,16 @@ class MockAdapter implements Database {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
   ];
   static List<Comment> _comments = [
-    Comment(_users[0], new DateTime.now(), "Melhor comentário de sempre"),
-    Comment(_users[1], new DateTime.now(), "Pior comentário de sempre"),
+    Comment(
+        _users[0],
+        new Date(new DateTime.now().subtract(Duration(minutes: 10))),
+        "Melhor comentário de sempre"),
+    Comment(
+        _users[1],
+        new Date(new DateTime.now().subtract(Duration(minutes: 5))),
+        "Pior comentário de sempre"),
+    Comment(_users[1], new Date(new DateTime.now()),
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh."),
   ];
 
   static List<Post> _posts = [

@@ -1,9 +1,11 @@
 import 'package:confnect/model/User.dart';
 
+import 'Date.dart';
+
 class Comment {
   final User _author;
   final String _description;
-  final DateTime _date;
+  final Date _date;
   int _numberLikes = 0;
   int _numberDislikes = 0;
 
@@ -13,7 +15,7 @@ class Comment {
     return _author;
   }
 
-  DateTime getDate() {
+  Date getDate() {
     return _date;
   }
 
