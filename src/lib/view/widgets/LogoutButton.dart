@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../controller/Controller.dart';
-import '../AppRouter.dart';
 
 class LogoutButton extends StatelessWidget {
   final Controller _controller;

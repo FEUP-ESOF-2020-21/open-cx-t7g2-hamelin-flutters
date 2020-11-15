@@ -1,30 +1,24 @@
-import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/User.dart';
 
-class Post {
+class Comment {
   final User _author;
-  final String _title;
   final String _description;
-  List<Comment> _comments;
+  final DateTime _date;
   int _numberLikes = 0;
   int _numberDislikes = 0;
 
-  Post(this._author, this._title, this._description, [this._comments]);
+  Comment(this._author, this._date, this._description);
 
   User getAuthor() {
     return _author;
   }
 
-  String getTitle() {
-    return _title;
+  DateTime getDate() {
+    return _date;
   }
 
   String getDescription() {
     return _description;
-  }
-
-  List<Comment> getComments() {
-    return _comments;
   }
 
   int getNumberLikes() {

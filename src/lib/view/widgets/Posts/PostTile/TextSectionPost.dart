@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class TextSectionPost extends StatelessWidget {
   final String _title;
   final String _description;
-  TextSectionPost(this._title, this._description);
+  final bool _showMore;
+  TextSectionPost(this._title, this._description, this._showMore);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,9 @@ class TextSectionPost extends StatelessWidget {
             style: Theme.of(context).textTheme.headline6,
           ),
         ),
-        DescriptionTextWidget(text: _description)
+        (_showMore
+            ? DescriptionTextWidget(text: _description)
+            : Text(_description)),
       ],
     );
   }

@@ -1,5 +1,4 @@
 import 'package:confnect/view/pages/HomePage.dart';
-import 'package:confnect/view/pages/PostPage.dart';
 import '../controller/Controller.dart';
 import './pages/Register.dart';
 import './pages/Login.dart';
@@ -24,9 +23,5 @@ class PageFactory {
 
   Widget createUserPage() {
     return UserSection(controller);
-  }
-
-  Widget createPostPage() {
-    return PostPage(controller);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/Post.dart';
 
@@ -18,14 +19,24 @@ class MockAdapter implements Database {
     Forum(_users[1], "Mobile Development",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
   ];
+  static List<Comment> _comments = [
+    Comment(_users[0], new DateTime.now(), "Melhor comentário de sempre"),
+    Comment(_users[1], new DateTime.now(), "Pior comentário de sempre"),
+  ];
 
   static List<Post> _posts = [
-    Post(_users[0], "Flutter master",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra"),
-    Post(_users[1], "It deserves a 20!",
-        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le"),
+    Post(
+        _users[0],
+        "Flutter master",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
+        _comments),
+    Post(
+        _users[1],
+        "It deserves a 20!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        _comments),
     Post(_users[0], "Welcome!",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
+        "Lorem ipsum dolor sit amet, consectetur adipiscing eli", _comments),
   ];
 
   String getAppName() {
