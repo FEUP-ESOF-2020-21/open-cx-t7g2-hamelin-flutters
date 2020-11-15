@@ -24,21 +24,30 @@ class CreatePostInput extends StatelessWidget {
             textController,
             maxLines: 15,
           ),
-          height: 200,
+          height: 190,
           margin: EdgeInsets.only(top: 0, bottom: 20)),
       FormFieldContainer(
         SquareButton('Submit', () {
           String title = titleController.text, text = textController.text;
-          this
-              ._controller
-              .setAddingPost(!this._controller.createPost(title, text));
-
-          //might need improvement
-          Navigator.push(
-              context,
-              new MaterialPageRoute(
-                  builder: (context) =>
-                      new UserSection(this._controller, index: 3)));
+          if (this._controller.createPost(title, text)) {
+            this._controller.setAddingPost(false);
+            Navigator.pop(context);
+            Navigator.push(
+                context,
+                new MaterialPageRoute(
+                    builder: (context) => new UserSection(
+                          this._controller,
+                          index: 3,
+                        )));
+          } else {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Error adding post.'),
+                duration: Duration(seconds: 2),
+              ),
+            );
+            this._controller.setAddingPost(true);
+          }
         }),
       )
     ]);

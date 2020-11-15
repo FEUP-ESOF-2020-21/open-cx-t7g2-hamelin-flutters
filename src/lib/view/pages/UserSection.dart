@@ -36,7 +36,6 @@ class _UserSectionState extends State<UserSection> {
       return FloatingActionButton(
         onPressed: () {
           setState(() {
-            //this._selectedIndex = this._selectedIndex;
             this._controller.setAddingPost(true);
           });
         },
@@ -71,7 +70,6 @@ class _UserSectionState extends State<UserSection> {
   }
 
   Widget _getBody() {
-    print(this._controller.isAddingPost());
     if (this._controller.isAddingPost()) {
       return Column(
         children: <Widget>[
@@ -128,7 +126,7 @@ class _UserSectionState extends State<UserSection> {
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
       body: this._getBody(),
       floatingActionButton: _addButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
