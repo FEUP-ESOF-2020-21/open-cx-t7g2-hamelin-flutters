@@ -18,12 +18,15 @@ class _UserSectionState extends State<UserSection> {
   final Controller _controller;
   _UserSectionState(this._controller);
 
-  static final List<Widget> _pageBodies = [
-    ForumList(),
-    Text("Coming soon..."),
-    ProfilePage(),
-    PostList(),
-  ];
+  List<Widget> _pageBodies() {
+    return [
+      ForumList(),
+      Text("Coming soon..."),
+      ProfilePage(),
+      PostList(this._controller),
+    ];
+  }
+
   static List<Widget> _pageAppBars = [];
 
   void _onItemTapped(int idx) {
@@ -58,7 +61,7 @@ class _UserSectionState extends State<UserSection> {
     _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this._selectedIndex],
-      body: _UserSectionState._pageBodies[this._selectedIndex],
+      body: _pageBodies()[this._selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[

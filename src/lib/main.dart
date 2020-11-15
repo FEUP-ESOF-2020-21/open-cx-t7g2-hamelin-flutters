@@ -26,8 +26,7 @@ class Confnect extends StatelessWidget {
             headline6: TitleTextStyle,
             bodyText1: BodyTextStyle,
           )),
-      home: pageFactory.createHomePage(),
-      //home: pageFactory.createTestPage(),
+      home: pageFactory.createUserPage(),
       routes: {
         AppRouter.LOGIN: (_) => pageFactory.createLoginPage(),
         AppRouter.REGISTER: (_) => pageFactory.createRegisterPage(),
