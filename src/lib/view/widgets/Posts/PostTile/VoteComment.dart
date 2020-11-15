@@ -81,7 +81,7 @@ class _VoteCommentState extends State<VoteComment> {
             ),
           ),
           Text(
-            "4",
+            widget.post.getComments().length.toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ],
