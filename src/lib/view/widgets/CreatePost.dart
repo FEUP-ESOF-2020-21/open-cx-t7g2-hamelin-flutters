@@ -28,12 +28,17 @@ class CreatePostInput extends StatelessWidget {
           margin: EdgeInsets.only(top: 0, bottom: 20)),
       FormFieldContainer(
         SquareButton('Submit', () {
-          //add content
           String title = titleController.text, text = textController.text;
           this
               ._controller
               .setAddingPost(!this._controller.createPost(title, text));
-          print(this._controller.isAddingPost());
+
+          //might need improvement
+          Navigator.push(
+              context,
+              new MaterialPageRoute(
+                  builder: (context) =>
+                      new UserSection(this._controller, index: 3)));
         }),
       )
     ]);

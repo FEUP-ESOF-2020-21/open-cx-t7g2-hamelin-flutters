@@ -9,16 +9,19 @@ import '../../controller/Controller.dart';
 import '../widgets/CreatePost.dart';
 
 class UserSection extends StatefulPage {
-  UserSection(Controller controller, {Key key}) : super(controller, key: key);
+  final int index;
+  UserSection(Controller controller, {this.index = 0, Key key})
+      : super(controller, key: key);
 
   @override
-  _UserSectionState createState() => _UserSectionState(getController());
+  _UserSectionState createState() =>
+      _UserSectionState(getController(), selectedIndex: this.index);
 }
 
 class _UserSectionState extends State<UserSection> {
-  int _selectedIndex = 0;
+  int selectedIndex = 0;
   final Controller _controller;
-  _UserSectionState(this._controller);
+  _UserSectionState(this._controller, {this.selectedIndex = 0});
 
   static final List<Widget> _pageBodies = [
     ForumList(),
@@ -29,7 +32,7 @@ class _UserSectionState extends State<UserSection> {
   static List<Widget> _pageAppBars = [];
 
   Widget _addButton() {
-    if (this._selectedIndex == 3 && !this._controller.isAddingPost()) {
+    if (this.selectedIndex == 3 && !this._controller.isAddingPost()) {
       return FloatingActionButton(
         onPressed: () {
           setState(() {
@@ -46,7 +49,7 @@ class _UserSectionState extends State<UserSection> {
           color: Color.fromARGB(255, 0, 0, 0),
         ),
       );
-    } else if (this._selectedIndex == 3 && this._controller.isAddingPost()) {
+    } else if (this.selectedIndex == 3 && this._controller.isAddingPost()) {
       return FloatingActionButton(
         onPressed: () {
           setState(() {
@@ -74,7 +77,7 @@ class _UserSectionState extends State<UserSection> {
         children: <Widget>[
           Container(
             height: 190,
-            child: _UserSectionState._pageBodies[this._selectedIndex],
+            child: _UserSectionState._pageBodies[this.selectedIndex],
           ),
           Divider(
             indent: 10,
@@ -86,12 +89,12 @@ class _UserSectionState extends State<UserSection> {
         ],
       );
     }
-    return _UserSectionState._pageBodies[this._selectedIndex];
+    return _UserSectionState._pageBodies[this.selectedIndex];
   }
 
   void _onItemTapped(int idx) {
     setState(() {
-      this._selectedIndex = idx;
+      this.selectedIndex = idx;
       this._controller.setAddingPost(false);
     });
   }
@@ -122,7 +125,7 @@ class _UserSectionState extends State<UserSection> {
     _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: _UserSectionState._pageAppBars[this._selectedIndex],
+      appBar: _UserSectionState._pageAppBars[this.selectedIndex],
       body: this._getBody(),
       floatingActionButton: _addButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -146,7 +149,7 @@ class _UserSectionState extends State<UserSection> {
             label: 'Discussions',
           ),
         ],
-        currentIndex: this._selectedIndex,
+        currentIndex: this.selectedIndex,
         selectedItemColor: Colors.blue[800],
         onTap: this._onItemTapped,
       ),
