@@ -15,10 +15,16 @@ class MockAdapter implements Database {
   ];
 
   static List<Forum> _forums = [
-    Forum(_users[0], "Data science",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
-    Forum(_users[1], "Mobile Development",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
+    Forum(
+      "Data science",
+      "This is the best forum about Data Science you'll ever encounter!",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.learningtree.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fdatasci.jpg&f=1&nofb=1",
+    ),
+    Forum(
+      "Mobile Development",
+      "We are all Hamelin Flutters here.",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fckab.b-cdn.net%2Fwp-content%2Fuploads%2F2019%2F07%2FMobile-App-Development-Frameworks.png&f=1&nofb=1",
+    ),
   ];
   static List<Comment> _comments = [
     Comment(

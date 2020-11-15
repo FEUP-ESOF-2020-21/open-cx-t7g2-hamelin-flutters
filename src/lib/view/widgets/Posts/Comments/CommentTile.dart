@@ -1,6 +1,6 @@
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/view/widgets/Posts/Comments/CommentHeader.dart';
-import 'package:confnect/view/widgets/User/avatar.dart';
+import 'package:confnect/view/widgets/User/AvatarImg.dart';
 import 'package:flutter/material.dart';
 
 class CommentTile extends StatefulWidget {

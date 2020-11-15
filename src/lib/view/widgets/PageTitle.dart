@@ -1,3 +1,4 @@
+import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,8 +16,7 @@ class PageTitle extends StatelessWidget {
                 left: 30.0,
               )
             : this.margin,
-        child: Text(this.text,
-            textScaleFactor: 2.5,
-            style: GoogleFonts.lora(fontWeight: FontWeight.w600)));
+        child:
+            Text(this.text, textScaleFactor: 1.5, style: pageTitleTextStyle));
   }
 }

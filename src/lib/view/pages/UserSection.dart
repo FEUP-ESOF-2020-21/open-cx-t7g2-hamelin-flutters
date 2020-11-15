@@ -1,3 +1,4 @@
+import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
@@ -38,19 +39,31 @@ class _UserSectionState extends State<UserSection> {
   List<Widget> _initAppBars(List<Widget> action) {
     return [
       AppBar(
-        title: Text("Forums"),
+        title: Text(
+          "Forums",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Search"),
+        title: Text(
+          "Search",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Profile"),
+        title: Text(
+          "Profile",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Data Science"),
+        title: Text(
+          "Data Science",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
     ];
