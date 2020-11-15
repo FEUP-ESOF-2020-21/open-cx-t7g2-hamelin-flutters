@@ -29,7 +29,7 @@ class _PostContentState extends State<PostContent> {
         Flexible(
           flex: 5,
           child: Container(
-            //padding: EdgeInsets.all(2.0),
+            //padding: EdgeInsets.all(10.0),
             child: Column(
               children: [
                 TextSectionPost(widget._post.getTitle(),
