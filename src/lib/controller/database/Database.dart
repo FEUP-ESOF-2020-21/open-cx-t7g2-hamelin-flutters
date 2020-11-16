@@ -17,4 +17,5 @@ abstract class Database {
   List<Post> getForumPosts(int forumId);
   bool login(String username, String password);
   int register(String fullname, String username, String password);
+  User getUser(String username);
 }

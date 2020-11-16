@@ -109,6 +109,10 @@ class MockAdapter implements Database {
     return 0;
   }
 
+  User getUser(String username) {
+    return _users.firstWhere((element) => element.getUsername() == username);
+  }
+
   List<Tag> getTags() => _tags;
 
   List<Talk> getTalks() => _talks;
