@@ -1,8 +1,12 @@
+import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
 
-class Forums extends StatefulWidget {
-  Forums({Key key}) : super(key: key);
+import '../../Page.dart';
+
+class Forums extends StatefulPage {
+  Forums(Controller controller, {Key key}) : super(controller, key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -16,13 +20,25 @@ class Forums extends StatefulWidget {
   final String title = "Forums";
 
   @override
-  _ForumsState createState() => _ForumsState();
+  _ForumsState createState() => _ForumsState(super.getController());
 }
 
 class _ForumsState extends State<Forums> {
+  Controller _controller;
+  int _currentForumId = -1;
+  _ForumsState(this._controller);
+
+  void _viewForum(int forumId) {
+    setState(() {
+      _currentForumId = forumId;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ForumList();
+    if (this._currentForumId != -1)
+      return PostList(this._controller, this._currentForumId, _viewForum);
+    return ForumList(_controller, _viewForum);
     /*body: Center(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
