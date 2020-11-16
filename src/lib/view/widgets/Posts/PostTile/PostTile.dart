@@ -21,8 +21,8 @@ class PostTile extends StatelessWidget {
     }
 
     return Card(
-      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(onTap: _postPage, child: PostContent(_post, true)),
     );
   }

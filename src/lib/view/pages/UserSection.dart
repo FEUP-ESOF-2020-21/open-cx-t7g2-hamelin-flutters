@@ -2,7 +2,7 @@ import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
-import 'package:confnect/view/widgets/forum/ForumList.dart';
+import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
 import '../../controller/Controller.dart';
@@ -21,10 +21,12 @@ class _UserSectionState extends State<UserSection> {
 
   List<Widget> _pageBodies() {
     return [
-      ForumList(),
+      Forums(this._controller),
       Text("Coming soon..."),
       ProfilePage(),
-      PostList(this._controller),
+      PostList(this._controller, 0, () {
+        print("mock function :(");
+      }),
     ];
   }
 

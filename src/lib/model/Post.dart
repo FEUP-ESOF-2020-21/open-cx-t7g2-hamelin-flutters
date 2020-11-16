@@ -3,13 +3,14 @@ import 'package:confnect/model/User.dart';
 
 class Post {
   final User _author;
-  final String _title;
-  final String _description;
+  final String _title, _description;
   List<Comment> _comments;
-  int _numberLikes = 0;
-  int _numberDislikes = 0;
+  int _numberLikes = 0, _numberDislikes = 0, _forumId;
 
-  Post(this._author, this._title, this._description, [this._comments]);
+  Post(this._forumId, this._author, this._title, this._description,
+      [this._comments]);
+
+  int getForumId() => _forumId;
 
   User getAuthor() {
     return _author;

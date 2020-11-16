@@ -16,11 +16,13 @@ class MockAdapter implements Database {
 
   static List<Forum> _forums = [
     Forum(
+      0,
       "Data science",
       "This is the best forum about Data Science you'll ever encounter!",
       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.learningtree.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fdatasci.jpg&f=1&nofb=1",
     ),
     Forum(
+      1,
       "Mobile Development",
       "We are all Hamelin Flutters here.",
       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fckab.b-cdn.net%2Fwp-content%2Fuploads%2F2019%2F07%2FMobile-App-Development-Frameworks.png&f=1&nofb=1",
@@ -41,16 +43,18 @@ class MockAdapter implements Database {
 
   static List<Post> _posts = [
     Post(
+        0,
         _users[0],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
         _comments),
     Post(
+        0,
         _users[1],
         "It deserves a 20!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         _comments),
-    Post(_users[0], "Welcome!",
+    Post(1, _users[0], "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli", _comments),
   ];
 
@@ -91,11 +95,15 @@ class MockAdapter implements Database {
     return _users;
   }
 
-  static List<Forum> getForums() {
+  List<Forum> getForums() {
     return _forums;
   }
 
-  static List<Post> getPosts() {
-    return _posts;
+  Forum getForum(int id) {
+    return _forums.firstWhere((element) => element.getId() == id);
+  }
+
+  List<Post> getForumPosts(int forumId) {
+    return _posts.where((element) => element.getForumId() == forumId).toList();
   }
 }
