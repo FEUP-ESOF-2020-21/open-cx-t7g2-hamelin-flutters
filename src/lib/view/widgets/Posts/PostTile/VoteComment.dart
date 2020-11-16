@@ -14,7 +14,7 @@ class _VoteCommentState extends State<VoteComment> {
   bool liked = false;
   bool disliked = false;
 
-  _presedLike() {
+  _pressedLike() {
     setState(() {
       if (liked) {
         liked = false;
@@ -30,7 +30,7 @@ class _VoteCommentState extends State<VoteComment> {
     });
   }
 
-  _presedDisLike() {
+  _pressedDisLike() {
     setState(() {
       if (disliked) {
         disliked = false;
@@ -57,7 +57,7 @@ class _VoteCommentState extends State<VoteComment> {
             child: IconButton(
                 icon: Icon(Icons.thumb_up),
                 color: liked ? Colors.blue : Colors.grey,
-                onPressed: () => _presedLike()),
+                onPressed: () => _pressedLike()),
           ),
           Text(
             widget.post.getNumberLikes().toString(),
@@ -67,7 +67,7 @@ class _VoteCommentState extends State<VoteComment> {
             child: IconButton(
                 icon: Icon(Icons.thumb_down),
                 color: disliked ? Colors.blue : Colors.grey,
-                onPressed: () => _presedDisLike()),
+                onPressed: () => _pressedDisLike()),
           ),
           Text(
             widget.post.getNumberDislikes().toString(),
@@ -81,7 +81,7 @@ class _VoteCommentState extends State<VoteComment> {
             ),
           ),
           Text(
-            "4",
+            widget.post.getComments().length.toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ],

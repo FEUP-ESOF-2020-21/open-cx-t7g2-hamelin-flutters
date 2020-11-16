@@ -23,6 +23,7 @@ environment:
 dependencies:
   google_fonts: ^1.1.1
   flappy_search_bar: 1.4.1
+  timeago: ^2.0.28 
   flutter:
     sdk: flutter
 

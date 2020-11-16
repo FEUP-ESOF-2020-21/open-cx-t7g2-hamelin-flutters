@@ -1,7 +1,8 @@
+import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
-import 'package:confnect/view/widgets/forum/ForumList.dart';
+import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
 
 import '../Page.dart';
@@ -23,7 +24,17 @@ class _UserSectionState extends State<UserSection> {
   final Controller _controller;
   _UserSectionState(this._controller, {this.selectedIndex = 0});
 
-  static List<Widget> _pageBodies = [];
+  List<Widget> _pageBodies() {
+    return [
+      Forums(this._controller),
+      Text("Coming soon..."),
+      ProfilePage(),
+      PostList(this._controller, 0, () {
+        print("mock function :(");
+      }),
+    ];
+  }
+
   static List<Widget> _pageAppBars = [];
 
   Widget _addButton() {
@@ -74,41 +85,42 @@ class _UserSectionState extends State<UserSection> {
   List<Widget> _initAppBars(List<Widget> action) {
     return [
       AppBar(
-        title: Text("Forums"),
+        title: Text(
+          "Forums",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Search"),
+        title: Text(
+          "Search",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Profile"),
+        title: Text(
+          "Profile",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Data Science"),
+        title: Text(
+          "Data Science",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
-    ];
-  }
-
-  List<Widget> _initPageBodies() {
-    return [
-      ForumList(),
-      Text("Coming soon..."),
-      ProfilePage(),
-      PostList(controller: this._controller),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
     _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
-    _pageBodies = _initPageBodies();
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
-      body: _UserSectionState._pageBodies[this.selectedIndex],
+      body: _pageBodies()[this.selectedIndex],
       floatingActionButton: _addButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
