@@ -1,17 +1,13 @@
-import 'package:confnect/model/User.dart';
-
 class Forum {
-  final User _author;
-  final String _title;
-  final String _description;
-  Forum(this._author, this._title, this._description);
-
-  User getAuthor() {
-    return _author;
-  }
+  final String _title, _description, _imageURL;
+  Forum(this._title, this._description, this._imageURL);
 
   String getTitle() {
     return _title;
+  }
+
+  String getImageURL() {
+    return _imageURL;
   }
 
   String getDescription() {

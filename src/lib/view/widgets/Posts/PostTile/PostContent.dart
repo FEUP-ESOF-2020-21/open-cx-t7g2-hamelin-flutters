@@ -1,5 +1,5 @@
 import 'package:confnect/model/Post.dart';
-import 'package:confnect/view/widgets/User/avatar.dart';
+import 'package:confnect/view/widgets/User/AvatarImg.dart';
 import 'package:flutter/material.dart';
 
 import 'TextSectionPost.dart';
