@@ -2,16 +2,20 @@ import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/Tag.dart';
+import 'package:confnect/model/Talk.dart';
 
 import './Database.dart';
 import '../../model/User.dart';
 
 class MockAdapter implements Database {
   static List<User> _users = [
-    User(0, "test", "123",
+    User(0, UserRole.ADMIN, "test", "123",
         "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
-    User(1, "trump", "1",
+    User(1, UserRole.ATTENDEE, "trump", "1",
         "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg"),
+    User(2, UserRole.HOST, "fanatic", "1",
+        "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg"),
   ];
 
   static List<Forum> _forums = [
@@ -58,6 +62,22 @@ class MockAdapter implements Database {
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli", _comments),
   ];
 
+  static List<Tag> _tags = [
+    Tag(0, "AI"),
+    Tag(1, "Robotics"),
+    Tag(2, "Conspiracy Theories"),
+  ];
+
+  static List<Talk> _talks = [
+    Talk(
+      "The rise of robots",
+      "In this talk, we'll discuss the rise of robots and what it means for our survival",
+      2,
+      "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
+      [0, 1, 2],
+    ),
+  ];
+
   String getAppName() {
     return "Confnect";
   }
@@ -65,10 +85,8 @@ class MockAdapter implements Database {
   bool login(String username, String password) {
     List<User> users = this.getUsers();
     bool res = false;
-    int id = 0;
     users.forEach((element) {
-      id++;
-      if (User.auth(element, new User(id, username, password))) res = true;
+      if (element.auth(username, password)) res = true;
     });
     return res;
   }
@@ -83,13 +101,17 @@ class MockAdapter implements Database {
         }
       }
 
-      _users.add(User(id, username, password));
+      _users.add(User(id, UserRole.ATTENDEE, username, password));
       print("Register success");
       return 1;
     }
     print("Register failed");
     return 0;
   }
+
+  List<Tag> getTags() => _tags;
+
+  List<Talk> getTalks() => _talks;
 
   List<User> getUsers() {
     return _users;

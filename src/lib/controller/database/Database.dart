@@ -3,6 +3,12 @@ import 'package:confnect/model/Post.dart';
 
 import '../../model/User.dart';
 
+class UserRole {
+  static const ADMIN = 'admin';
+  static const HOST = 'host';
+  static const ATTENDEE = 'attendee';
+}
+
 abstract class Database {
   String getAppName();
   List<User> getUsers();
