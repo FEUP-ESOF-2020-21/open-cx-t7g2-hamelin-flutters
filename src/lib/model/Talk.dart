@@ -1,14 +1,17 @@
+import 'package:confnect/model/Tag.dart';
+import 'package:confnect/model/User.dart';
+
 class Talk {
   final String _title, _description, _imageURL;
-  final int _speakerId;
-  final List<int> _tags;
+  final User _speaker;
+  final List<Tag> _tags;
 
-  Talk(this._title, this._description, this._speakerId, this._imageURL,
+  Talk(this._title, this._description, this._speaker, this._imageURL,
       this._tags);
 
   String getTitle() => _title;
   String getDescription() => _description;
   String getImageURL() => _imageURL;
-  int getSpeakerId() => _speakerId;
-  List<int> getTags() => _tags;
+  User getSpeaker() => _speaker;
+  List<Tag> getTags() => _tags;
 }

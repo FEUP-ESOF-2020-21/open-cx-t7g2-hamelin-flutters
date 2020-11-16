@@ -1,5 +1,7 @@
 import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/Tag.dart';
+import 'package:confnect/model/Talk.dart';
 
 import '../../model/User.dart';
 
@@ -18,4 +20,6 @@ abstract class Database {
   bool login(String username, String password);
   int register(String fullname, String username, String password);
   User getUser(String username);
+  List<Tag> getTags();
+  List<Talk> getTalks();
 }

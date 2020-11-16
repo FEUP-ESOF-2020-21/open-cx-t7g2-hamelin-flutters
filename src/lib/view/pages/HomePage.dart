@@ -1,10 +1,10 @@
 import 'package:confnect/controller/database/Database.dart';
+import 'package:confnect/view/pages/AdminSection.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
 import '../../controller/Controller.dart';
 import './WelcomeScreen.dart';
 import './UserSection.dart';
-import 'admin/AdminSection.dart';
 
 class HomePage extends StatefulPage {
   HomePage(Controller controller, {Key key}) : super(controller, key: key);

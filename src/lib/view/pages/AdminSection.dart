@@ -2,8 +2,8 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:flutter/material.dart';
-import '../../Page.dart';
-import 'AdminTalks.dart';
+import '../Page.dart';
+import '../widgets/admin/talks/AdminTalks.dart';
 
 class AdminSection extends StatefulPage {
   AdminSection(Controller controller, {Key key}) : super(controller, key: key);
@@ -23,6 +23,15 @@ class _AdminSectionState extends State<AdminSection> {
       Text("Coming soon..."),
     ];
   }
+
+  static List<Function> _floatingActionButtonActions = [
+    () {
+      print("ADD_TALK!");
+    },
+    () {
+      print("CREATE_REGISTRY_CODE!");
+    },
+  ];
 
   static List<Widget> _pageAppBars = [];
 
@@ -57,6 +66,11 @@ class _AdminSectionState extends State<AdminSection> {
     return Scaffold(
       appBar: _AdminSectionState._pageAppBars[this._selectedIndex],
       body: _pageBodies()[this._selectedIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: _floatingActionButtonActions[this._selectedIndex],
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue[800],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[

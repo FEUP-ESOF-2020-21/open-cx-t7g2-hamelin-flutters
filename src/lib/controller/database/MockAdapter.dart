@@ -47,19 +47,26 @@ class MockAdapter implements Database {
 
   static List<Post> _posts = [
     Post(
-        0,
-        _users[0],
-        "Flutter master",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
-        _comments),
+      0,
+      _users[0],
+      "Flutter master",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
+      _comments,
+    ),
     Post(
-        0,
-        _users[1],
-        "It deserves a 20!",
-        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        _comments),
-    Post(1, _users[0], "Welcome!",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing eli", _comments),
+      0,
+      _users[1],
+      "It deserves a 20!",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      _comments,
+    ),
+    Post(
+      1,
+      _users[0],
+      "Welcome!",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+      _comments,
+    ),
   ];
 
   static List<Tag> _tags = [
@@ -72,9 +79,9 @@ class MockAdapter implements Database {
     Talk(
       "The rise of robots",
       "In this talk, we'll discuss the rise of robots and what it means for our survival",
-      2,
+      _users[2],
       "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
-      [0, 1, 2],
+      [_tags[0], _tags[1], _tags[2]],
     ),
   ];
 
