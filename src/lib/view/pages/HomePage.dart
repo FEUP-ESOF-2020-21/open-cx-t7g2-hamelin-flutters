@@ -1,5 +1,5 @@
 import 'package:confnect/controller/database/Database.dart';
-import 'package:confnect/view/pages/AdminSection.dart';
+import 'package:confnect/view/pages/admin/AdminSection.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
 import '../../controller/Controller.dart';

@@ -10,11 +10,11 @@ import '../../model/User.dart';
 
 class MockAdapter implements Database {
   static List<User> _users = [
-    User(0, UserRole.ADMIN, "test", "123",
+    User(0, UserRole.ADMIN, "Test User", "test", "123",
         "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
-    User(1, UserRole.ATTENDEE, "trump", "1",
+    User(1, UserRole.ATTENDEE, "Donald Trump", "trump", "1",
         "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg"),
-    User(2, UserRole.HOST, "fanatic", "1",
+    User(2, UserRole.HOST, "Lew Lee", "fanatic", "1",
         "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg"),
   ];
 
@@ -108,7 +108,7 @@ class MockAdapter implements Database {
         }
       }
 
-      _users.add(User(id, UserRole.ATTENDEE, username, password));
+      _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
       print("Register success");
       return 1;
     }

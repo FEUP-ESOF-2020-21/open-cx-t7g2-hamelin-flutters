@@ -1,9 +1,10 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/view/pages/admin/AddTalk.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:flutter/material.dart';
-import '../Page.dart';
-import '../widgets/admin/talks/AdminTalks.dart';
+import '../../Page.dart';
+import '../../widgets/admin/talks/AdminTalks.dart';
 
 class AdminSection extends StatefulPage {
   AdminSection(Controller controller, {Key key}) : super(controller, key: key);
@@ -20,20 +21,26 @@ class _AdminSectionState extends State<AdminSection> {
   List<Widget> _pageBodies() {
     return [
       AdminTalks(this._controller),
-      Text("Coming soon..."),
+      Container(
+        child: Text("Coming soon..."),
+        margin: EdgeInsets.all(10),
+      ),
     ];
   }
 
-  static List<Function> _floatingActionButtonActions = [
-    () {
-      print("ADD_TALK!");
-    },
-    () {
-      print("CREATE_REGISTRY_CODE!");
-    },
-  ];
-
-  static List<Widget> _pageAppBars = [];
+  List<Function> _initFABActions(BuildContext context) {
+    return [
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AddTalk(_controller)),
+        );
+      },
+      () {
+        print("CREATE_REGISTRY_CODE!");
+      },
+    ];
+  }
 
   void _onItemTapped(int idx) {
     setState(() {
@@ -62,9 +69,10 @@ class _AdminSectionState extends State<AdminSection> {
 
   @override
   Widget build(BuildContext context) {
-    _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
+    var _floatingActionButtonActions = _initFABActions(context);
+    var _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
     return Scaffold(
-      appBar: _AdminSectionState._pageAppBars[this._selectedIndex],
+      appBar: _pageAppBars[this._selectedIndex],
       body: _pageBodies()[this._selectedIndex],
       floatingActionButton: FloatingActionButton(
         onPressed: _floatingActionButtonActions[this._selectedIndex],

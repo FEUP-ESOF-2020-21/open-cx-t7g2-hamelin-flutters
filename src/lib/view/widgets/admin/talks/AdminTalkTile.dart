@@ -57,7 +57,7 @@ class AdminTalkTile extends StatelessPage {
                         children: [
                           Expanded(
                             child: Text(
-                              _talk.getSpeaker().getUsername(),
+                              "by " + _talk.getSpeaker().getFullName(),
                               style: talkSpeakerTextStyle,
                             ),
                           ),

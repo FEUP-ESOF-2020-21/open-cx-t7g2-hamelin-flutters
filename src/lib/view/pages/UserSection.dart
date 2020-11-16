@@ -22,7 +22,10 @@ class _UserSectionState extends State<UserSection> {
   List<Widget> _pageBodies() {
     return [
       Forums(this._controller),
-      Text("Coming soon..."),
+      Container(
+        child: Text("Coming soon..."),
+        margin: EdgeInsets.all(10),
+      ),
       ProfilePage(),
       PostList(this._controller, 0, () {
         print("mock function :(");

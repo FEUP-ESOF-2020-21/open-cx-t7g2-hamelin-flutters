@@ -1,12 +1,15 @@
 class User {
   final int id;
-  final String _username, _password, _role;
+  final String _fullname, _username, _password, _role;
   String _avatarUrl;
-  User(this.id, this._role, this._username, this._password, [this._avatarUrl]);
+  User(this.id, this._role, this._fullname, this._username, this._password,
+      [this._avatarUrl]);
 
   String getUsername() {
     return _username;
   }
+
+  String getFullName() => _fullname;
 
   String getRole() => _role;
 
