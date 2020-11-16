@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../Page.dart';
 import '../../controller/Controller.dart';
-import '../widgets/CreatePost.dart';
+import '../widgets/Posts/CreatePost.dart';
 
 class UserSection extends StatefulPage {
   final int index;
@@ -23,12 +23,7 @@ class _UserSectionState extends State<UserSection> {
   final Controller _controller;
   _UserSectionState(this._controller, {this.selectedIndex = 0});
 
-  static final List<Widget> _pageBodies = [
-    ForumList(),
-    Text("Coming soon..."),
-    ProfilePage(),
-    PostList(),
-  ];
+  static List<Widget> _pageBodies = [];
   static List<Widget> _pageAppBars = [];
 
   Widget _addButton() {
@@ -69,27 +64,6 @@ class _UserSectionState extends State<UserSection> {
     }
   }
 
-  Widget _getBody() {
-    if (this._controller.isAddingPost()) {
-      return Column(
-        children: <Widget>[
-          Container(
-            height: 190,
-            child: _UserSectionState._pageBodies[this.selectedIndex],
-          ),
-          Divider(
-            indent: 10,
-            endIndent: 10,
-            thickness: 3,
-            color: Colors.black,
-          ),
-          CreatePostInput(this._controller),
-        ],
-      );
-    }
-    return _UserSectionState._pageBodies[this.selectedIndex];
-  }
-
   void _onItemTapped(int idx) {
     setState(() {
       this.selectedIndex = idx;
@@ -118,13 +92,23 @@ class _UserSectionState extends State<UserSection> {
     ];
   }
 
+  List<Widget> _initPageBodies() {
+    return [
+      ForumList(),
+      Text("Coming soon..."),
+      ProfilePage(),
+      PostList(controller: this._controller),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
+    _pageBodies = _initPageBodies();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
-      body: this._getBody(),
+      body: _UserSectionState._pageBodies[this.selectedIndex],
       floatingActionButton: _addButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
