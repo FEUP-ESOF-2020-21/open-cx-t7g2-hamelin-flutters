@@ -1,63 +1,64 @@
 import 'package:confnect/model/Forum.dart';
-
-import 'package:confnect/view/widgets/User/avatar.dart';
+import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
 class ForumTile extends StatelessWidget {
   final Forum
       _forum; // = new Forum("Ademar", "Ensinando flutter", "lorem ipsum");
-
-  const ForumTile(this._forum);
+  final Function _viewForum;
+  const ForumTile(this._forum, this._viewForum);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey,
-                  border: Border.all(
-                    color: Colors.grey,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              padding: EdgeInsets.all(20),
-              //color: Colors.grey,
-              child: Center(
-                child: Text(
-                  _forum.getTitle(),
-                  style: Theme.of(context).textTheme.headline6,
-                ),
+      margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: InkWell(
+        onTap: () {
+          _viewForum(
+              _forum.getId()); // this will push the forum page on the navigator
+        },
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(_forum.getImageURL()),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.6),
+                BlendMode.srcOver,
               ),
             ),
-            Row(
-              //mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    child: AvatarImg(_forum.getAuthor()),
-                    padding: EdgeInsets.all(10.0),
-                  ),
-                ),
-                Flexible(
-                  flex: 5,
-                  child: Container(
-                    padding: EdgeInsets.all(5.0),
-                    child: Column(
-                      children: [
-                        Text(_forum.getDescription()),
-                      ],
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          child: Column(
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      _forum.getTitle(),
+                      style: forumTitleStyle,
                     ),
                   ),
-                )
-              ],
-            ),
-          ],
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      child: Text(
+                        _forum.getDescription(),
+                        style: forumTextStyle,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
