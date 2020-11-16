@@ -28,7 +28,10 @@ class _PostPageState extends State<PostPage> {
         child: Column(
           children: [
             Container(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: PostContent(widget._post, false)),
             Divider(),
             Expanded(child: CommentList(widget._post.getComments())),
