@@ -25,4 +25,6 @@ abstract class Database {
   bool existsUser(String username);
   bool hasRole(String username, String role);
   void addTalk(String title, String description, String speaker, String image);
+  Tag createTag(String name);
+  void addTag(Tag tag);
 }

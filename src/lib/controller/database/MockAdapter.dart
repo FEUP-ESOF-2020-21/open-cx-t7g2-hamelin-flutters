@@ -120,6 +120,14 @@ class MockAdapter implements Database {
     _talks.add(Talk(title, description, getUser(speaker), image, []));
   }
 
+  Tag createTag(String name) {
+    return Tag(_tags.length, name);
+  }
+
+  void addTag(Tag tag) {
+    _tags.add(tag);
+  }
+
   User getUser(String username) {
     return _users.firstWhere(
       (element) => element.getUsername() == username,

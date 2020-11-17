@@ -1,4 +1,6 @@
-class Tag {
+import 'package:flutter_tagging/flutter_tagging.dart';
+
+class Tag extends Taggable {
   final String _name;
   final int _id;
 
@@ -6,4 +8,8 @@ class Tag {
 
   String getName() => _name;
   int getId() => _id;
+
+  @override
+  // TODO: implement props
+  List<String> get props => [_name];
 }
