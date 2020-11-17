@@ -116,8 +116,28 @@ class MockAdapter implements Database {
     return 0;
   }
 
-  void addTalk(String title, String description, String speaker, String image) {
-    _talks.add(Talk(title, description, getUser(speaker), image, []));
+  void createTalkForum(Talk talk) {
+    _forums.add(Forum(_forums.length, talk.getTitle(), talk.getDescription(),
+        talk.getImageURL()));
+  }
+
+  void createTagForum(Tag tag) {
+    //TODO
+    print("Create talk tag forum!");
+  }
+
+  void addTalk(String title, String description, String speaker, String image,
+      List<Tag> tags) {
+    tags.forEach((tag) {
+      if (!_tags.contains(tag)) {
+        _tags.add(tag);
+        createTagForum(tag);
+        print('''Added tag "${tag.getName()}" in db''');
+      }
+    });
+    Talk talk = Talk(title, description, getUser(speaker), image, tags);
+    _talks.add(talk);
+    createTalkForum(talk);
   }
 
   Tag createTag(String name) {

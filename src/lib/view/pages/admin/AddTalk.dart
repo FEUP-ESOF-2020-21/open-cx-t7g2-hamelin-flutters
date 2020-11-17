@@ -93,12 +93,6 @@ class _AddTalkState extends State<AddTalk> {
           print("additionCallback, value: " + value);
           return db.createTag(value);
         },
-        onAdded: (tag) {
-          // api calls here, triggered when add to tag button is pressed
-          print("onAdded, tag: " + tag.getName());
-          // won't add tag to db here, only will add tags to db when the talk is effectively created
-          return tag;
-        },
         configureSuggestion: (tag) {
           return SuggestionConfiguration(
             title: Text(tag == null ? "No tag found" : tag.getName()),
@@ -233,7 +227,7 @@ class _AddTalkState extends State<AddTalk> {
                                 speakerUsernameController.text,
                             talkImageURL = talkImageURLController.text;
                         db.addTalk(talkTitle, talkDescription,
-                            talkSpeakerUsername, talkImageURL);
+                            talkSpeakerUsername, talkImageURL, _selectedTags);
                         Navigator.pop(context);
                       }
                     },
