@@ -33,7 +33,6 @@ class _ForumsState extends State<Forums> {
 
   void _viewForum(int forumId) {
     this._controller.setCurrentForumId(forumId);
-    print(forumId);
     if (forumId == -1) {
       this._changeState(0);
     } else {
