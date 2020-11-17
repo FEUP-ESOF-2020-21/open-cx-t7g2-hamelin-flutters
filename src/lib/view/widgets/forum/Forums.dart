@@ -39,29 +39,5 @@ class _ForumsState extends State<Forums> {
     if (this._currentForumId != -1)
       return PostList(this._controller, this._currentForumId, _viewForum);
     return ForumList(_controller, _viewForum);
-    /*body: Center(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              "ZAS",
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Container(
-              child: ForumList(),
-              //color: Colors.cyan,
-            ),
-          ],
-        ),
-      ),*/
-    /*floatingActionButton: FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );*/
   }
 }
