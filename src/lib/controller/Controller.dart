@@ -28,12 +28,12 @@ class Controller {
 
   Database getDatabase() => _database;
 
-  bool createPost(String title, String text) {
+  bool createPost(int forumId, String title, String text) {
     //TODO add notification messages
     if (title == "")
       return false;
     else if (text == "") return false;
-    _database.addPost(_loggedInUserName, title, text);
+    _database.addPost(forumId, _loggedInUserName, title, text);
     print("Post created");
     return true;
   }

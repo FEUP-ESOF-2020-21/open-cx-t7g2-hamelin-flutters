@@ -237,10 +237,10 @@ class MockAdapter implements Database {
     return 0;
   }
 
-  void addPost(String username, String title, String text) {
+  void addPost(int forumId, String username, String title, String text) {
     for (var user in _users)
       if (user.getUsername() == username)
-        _posts.add(Post(1, user, title, text, List<Comment>()));
+        _posts.add(Post(forumId, user, title, text, List<Comment>()));
   }
 
   List<User> getUsers() {

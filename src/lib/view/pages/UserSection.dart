@@ -38,7 +38,7 @@ class _UserSectionState extends State<UserSection> {
   static List<Widget> _pageAppBars = [];
 
   Widget _addButton() {
-    if (this.selectedIndex == 3 && !this._controller.isAddingPost()) {
+    if (this.selectedIndex == 0 && !this._controller.isAddingPost()) {
       return FloatingActionButton(
         onPressed: () {
           setState(() {
@@ -54,7 +54,7 @@ class _UserSectionState extends State<UserSection> {
           color: Color.fromARGB(255, 0, 0, 0),
         ),
       );
-    } else if (this.selectedIndex == 3 && this._controller.isAddingPost()) {
+    } else if (this.selectedIndex == 0 && this._controller.isAddingPost()) {
       return FloatingActionButton(
         onPressed: () {
           setState(() {

@@ -55,7 +55,7 @@ class PostList extends StatelessPage {
             thickness: 3,
             color: Colors.black,
           ),
-          CreatePostInput(super.getController()),
+          CreatePostInput(super.getController(), this._forumId),
         ],
       );
     } else {

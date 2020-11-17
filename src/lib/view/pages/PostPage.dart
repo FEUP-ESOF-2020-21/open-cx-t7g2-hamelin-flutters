@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PostPage extends StatefulPage {
-  Post _post;
+  final Post _post;
   PostPage(Controller controller, this._post, {Key key})
       : super(controller, key: key);
   @override

@@ -10,7 +10,8 @@ class CreatePostInput extends StatelessWidget {
   final titleController = TextEditingController();
   final textController = TextEditingController();
   final Controller _controller;
-  CreatePostInput(this._controller);
+  final int _forumId;
+  CreatePostInput(this._controller, this._forumId);
 
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
@@ -29,7 +30,7 @@ class CreatePostInput extends StatelessWidget {
       FormFieldContainer(
         SquareButton('Submit', () {
           String title = titleController.text, text = textController.text;
-          if (this._controller.createPost(title, text)) {
+          if (this._controller.createPost(this._forumId, title, text)) {
             this._controller.setAddingPost(false);
             Navigator.pop(context);
             Navigator.push(
@@ -37,7 +38,7 @@ class CreatePostInput extends StatelessWidget {
                 new MaterialPageRoute(
                     builder: (context) => new UserSection(
                           this._controller,
-                          index: 3,
+                          index: 0,
                         )));
           } else {
             Scaffold.of(context).showSnackBar(
