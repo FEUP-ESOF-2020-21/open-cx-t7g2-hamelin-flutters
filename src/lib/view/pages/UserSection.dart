@@ -81,6 +81,10 @@ class _UserSectionState extends State<UserSection> {
   void _onItemTapped(int idx) {
     setState(() {
       this.selectedIndex = idx;
+      this._controller.setCurrentForumId(-1);
+      if (this._controller.isAddingPost()) {
+        this._controller.changeAddingPost();
+      }
     });
   }
 

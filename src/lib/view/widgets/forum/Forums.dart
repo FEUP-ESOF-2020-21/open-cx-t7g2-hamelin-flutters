@@ -36,7 +36,6 @@ class _ForumsState extends State<Forums> {
   void _viewForum(int forumId) {
     setState(() {
       this._controller.setCurrentForumId(forumId);
-      this._controller.changeAddingPost();
       this._refreshState();
     });
   }
