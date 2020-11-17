@@ -23,3 +23,4 @@ packages
 pubspec.lock
 .flutter-plugins
 .flutter-plugins-dependencies
+../.vscode
