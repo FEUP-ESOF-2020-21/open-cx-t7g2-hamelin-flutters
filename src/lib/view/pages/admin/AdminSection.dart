@@ -28,12 +28,19 @@ class _AdminSectionState extends State<AdminSection> {
     ];
   }
 
+  // Forces rerender of widget
+  void _onTalkAdded() {
+    setState(() {});
+  }
+
   List<Function> _initFABActions(BuildContext context) {
+    // FAB = FloatingActionButton
     return [
       () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AddTalk(_controller)),
+          MaterialPageRoute(
+              builder: (context) => AddTalk(_controller, _onTalkAdded)),
         );
       },
       () {

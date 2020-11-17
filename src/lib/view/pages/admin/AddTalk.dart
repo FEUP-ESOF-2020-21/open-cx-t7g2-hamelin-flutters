@@ -12,16 +12,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tagging/flutter_tagging.dart';
 
 class AddTalk extends StatefulPage {
-  AddTalk(Controller controller, {Key key}) : super(controller, key: key);
+  final Function _onTalkAdded;
+  AddTalk(Controller controller, this._onTalkAdded, {Key key})
+      : super(controller, key: key);
 
   @override
   State<AddTalk> createState() {
-    return _AddTalkState(super.getController());
+    return _AddTalkState(super.getController(), _onTalkAdded);
   }
 }
 
 class _AddTalkState extends State<AddTalk> {
   final Controller _controller;
+  final Function _onTalkAdded;
 
   final talkTitleController = TextEditingController();
   final talkDescriptionController = TextEditingController();
@@ -44,7 +47,7 @@ class _AddTalkState extends State<AddTalk> {
     super.dispose();
   }
 
-  _AddTalkState(this._controller);
+  _AddTalkState(this._controller, this._onTalkAdded);
 
   List<Tag> getTags(String value) {
     print("getTags");
@@ -228,6 +231,7 @@ class _AddTalkState extends State<AddTalk> {
                             talkImageURL = talkImageURLController.text;
                         db.addTalk(talkTitle, talkDescription,
                             talkSpeakerUsername, talkImageURL, _selectedTags);
+                        _onTalkAdded();
                         Navigator.pop(context);
                       }
                     },
