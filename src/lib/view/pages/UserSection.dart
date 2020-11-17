@@ -28,7 +28,7 @@ class _UserSectionState extends State<UserSection> {
       Forums(this._controller, _changeState),
       Text("Coming soon..."),
       ProfilePage(),
-      PostList(this._controller, 0, _changeState),
+      PostList(this._controller, _changeState),
     ];
   }
 

@@ -9,18 +9,19 @@ import 'package:confnect/view/widgets/Posts/CreatePost.dart';
 import '../../Page.dart';
 
 class PostList extends StatefulPage {
-  final int _forumId;
   final Function _changeState;
-  PostList(Controller controller, this._forumId, this._changeState, {Key key})
+  PostList(Controller controller, this._changeState, {Key key})
       : super(controller, key: key);
   @override
-  _PostListState createState() => _PostListState(super.getController());
+  _PostListState createState() =>
+      _PostListState(super.getController(), this._changeState);
 }
 
 //class PostList extends StatelessPage {
 class _PostListState extends State<PostList> {
   Controller _controller;
-  _PostListState(this._controller);
+  Function _changeState;
+  _PostListState(this._controller, this._changeState);
 
   int iconNum = 1;
 
@@ -43,8 +44,10 @@ class _PostListState extends State<PostList> {
               flex: 1,
             ),
             Flexible(
-              child: PageTitle(db.getForum(widget._forumId).getTitle(),
-                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0), scaleFactor: 0.9),
+              child: PageTitle(
+                  db.getForum(this._controller.getCurrentForumId()).getTitle(),
+                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  scaleFactor: 0.9),
               flex: 7,
             ),
           ],
@@ -65,7 +68,11 @@ class _PostListState extends State<PostList> {
             thickness: 3,
             color: Colors.black,
           ),
-          CreatePostInput(this._controller, widget._forumId),
+          CreatePostInput(
+            this._controller,
+            this._controller.getCurrentForumId(),
+            this._changeState,
+          ),
         ],
       );
     } else {
@@ -78,7 +85,7 @@ class _PostListState extends State<PostList> {
   List<PostTile> posts() {
     Database db = this._controller.getDatabase();
     return db
-        .getForumPosts(widget._forumId)
+        .getForumPosts(this._controller.getCurrentForumId())
         .map((post) => PostTile(post, this._controller))
         .toList();
   }
