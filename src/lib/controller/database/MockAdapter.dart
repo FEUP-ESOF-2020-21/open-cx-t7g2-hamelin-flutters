@@ -116,8 +116,26 @@ class MockAdapter implements Database {
     return 0;
   }
 
+  void addTalk(String title, String description, String speaker, String image) {
+    _talks.add(Talk(title, description, getUser(speaker), image, []));
+  }
+
   User getUser(String username) {
-    return _users.firstWhere((element) => element.getUsername() == username);
+    return _users.firstWhere(
+      (element) => element.getUsername() == username,
+      orElse: () => null,
+    );
+  }
+
+  bool existsUser(String username) {
+    return getUser(username) != null;
+  }
+
+  bool hasRole(String username, String role) {
+    User user = getUser(username);
+    if (user == null) return false;
+    if (user.getRole() == role) return true;
+    return false;
   }
 
   List<Tag> getTags() => _tags;

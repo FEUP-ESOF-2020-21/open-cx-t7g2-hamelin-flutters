@@ -22,4 +22,7 @@ abstract class Database {
   User getUser(String username);
   List<Tag> getTags();
   List<Talk> getTalks();
+  bool existsUser(String username);
+  bool hasRole(String username, String role);
+  void addTalk(String title, String description, String speaker, String image);
 }
