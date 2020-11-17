@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import '../../Page.dart';
 
 class Forums extends StatefulPage {
-  Function changeState;
-  Forums(Controller controller, this.changeState, {Key key})
-      : super(controller, key: key);
+  Forums(Controller controller, {Key key}) : super(controller, key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -22,26 +20,24 @@ class Forums extends StatefulPage {
   final String title = "Forums";
 
   @override
-  _ForumsState createState() =>
-      _ForumsState(super.getController(), this.changeState);
+  _ForumsState createState() => _ForumsState(super.getController());
 }
 
 class _ForumsState extends State<Forums> {
   Controller _controller;
-  Function _changeState;
-  _ForumsState(this._controller, this._changeState);
+  int _currentForumId = -1;
+  _ForumsState(this._controller);
 
   void _viewForum(int forumId) {
-    this._controller.setCurrentForumId(forumId);
-    if (forumId == -1) {
-      this._changeState(0);
-    } else {
-      this._changeState(3);
-    }
+    setState(() {
+      _currentForumId = forumId;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (this._currentForumId != -1)
+      return PostList(this._controller, this._currentForumId, _viewForum);
     return ForumList(_controller, _viewForum);
   }
 }

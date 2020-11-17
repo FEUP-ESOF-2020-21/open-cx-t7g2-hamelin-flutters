@@ -10,8 +10,8 @@ import '../../Page.dart';
 
 class PostList extends StatefulPage {
   final int _forumId;
-  final Function _changeState;
-  PostList(Controller controller, this._forumId, this._changeState, {Key key})
+  final Function _viewForum;
+  PostList(Controller controller, this._forumId, this._viewForum, {Key key})
       : super(controller, key: key);
   @override
   _PostListState createState() => _PostListState(super.getController());
@@ -23,6 +23,40 @@ class _PostListState extends State<PostList> {
   _PostListState(this._controller);
 
   int iconNum = 1;
+  Icon icon = Icon(
+    Icons.add_comment_outlined,
+    size: 30,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
+  Widget _addButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        setState(() {
+          this._controller.changeAddingPost();
+          if (iconNum == 0) {
+            icon = Icon(
+              Icons.add_comment_outlined,
+              size: 30,
+              color: Color.fromARGB(255, 0, 0, 0),
+            );
+            iconNum = 1;
+          } else if (iconNum == 1) {
+            icon = Icon(
+              Icons.arrow_downward_outlined,
+              size: 30,
+              color: Color.fromARGB(255, 0, 0, 0),
+            );
+            iconNum = 0;
+          }
+        });
+      },
+      elevation: 10,
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
+      child: icon,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +70,7 @@ class _PostListState extends State<PostList> {
             Flexible(
               child: GoBackButton(
                 fn: () {
-                  widget._changeState(0);
+                  widget._viewForum(-1);
                 },
                 margin: EdgeInsets.zero,
               ),
@@ -66,11 +100,13 @@ class _PostListState extends State<PostList> {
             color: Colors.black,
           ),
           CreatePostInput(this._controller, widget._forumId),
+          this._addButton()
         ],
       );
     } else {
       return Column(children: [
         Expanded(child: ListView(children: ret)),
+        this._addButton()
       ]);
     }
   }
