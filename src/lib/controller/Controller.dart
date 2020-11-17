@@ -18,7 +18,7 @@ class Controller {
     if (_onSessionChange != null) _onSessionChange();
   }
 
-  void setAddingPost(bool _addingPost) => this._addingPost = _addingPost;
+  void changeAddingPost() => this._addingPost = !this._addingPost;
 
   bool isAddingPost() => this._addingPost;
 

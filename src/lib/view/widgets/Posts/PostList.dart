@@ -8,16 +8,60 @@ import 'package:flutter/material.dart';
 import 'package:confnect/view/widgets/Posts/CreatePost.dart';
 import '../../Page.dart';
 
-class PostList extends StatelessPage {
+class PostList extends StatefulPage {
   final int _forumId;
   final Function _viewForum;
   PostList(Controller controller, this._forumId, this._viewForum, {Key key})
       : super(controller, key: key);
+  @override
+  _PostListState createState() => _PostListState(super.getController());
+}
+
+//class PostList extends StatelessPage {
+class _PostListState extends State<PostList> {
+  Controller _controller;
+  _PostListState(this._controller);
+
+  int iconNum = 1;
+  Icon icon = Icon(
+    Icons.add_comment_outlined,
+    size: 30,
+    color: Color.fromARGB(255, 0, 0, 0),
+  );
+
+  Widget _addButton() {
+    return FloatingActionButton(
+      onPressed: () {
+        setState(() {
+          this._controller.changeAddingPost();
+          if (iconNum == 0) {
+            icon = Icon(
+              Icons.add_comment_outlined,
+              size: 30,
+              color: Color.fromARGB(255, 0, 0, 0),
+            );
+            iconNum = 1;
+          } else if (iconNum == 1) {
+            icon = Icon(
+              Icons.arrow_downward_outlined,
+              size: 30,
+              color: Color.fromARGB(255, 0, 0, 0),
+            );
+            iconNum = 0;
+          }
+        });
+      },
+      elevation: 10,
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
+      child: icon,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     //final Users users = Provider.of(context);
-    Database db = super.getController().getDatabase();
+    Database db = this._controller.getDatabase();
     List<Widget> ret = [
       Container(
         margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -26,14 +70,14 @@ class PostList extends StatelessPage {
             Flexible(
               child: GoBackButton(
                 fn: () {
-                  _viewForum(-1);
+                  widget._viewForum(-1);
                 },
                 margin: EdgeInsets.zero,
               ),
               flex: 1,
             ),
             Flexible(
-              child: PageTitle(db.getForum(_forumId).getTitle(),
+              child: PageTitle(db.getForum(widget._forumId).getTitle(),
                   margin: EdgeInsets.fromLTRB(10, 0, 0, 0), scaleFactor: 0.9),
               flex: 7,
             ),
@@ -42,7 +86,7 @@ class PostList extends StatelessPage {
       ),
     ];
     ret.addAll(posts());
-    if (super.getController().isAddingPost()) {
+    if (this._controller.isAddingPost()) {
       return Column(
         children: <Widget>[
           Container(
@@ -55,19 +99,23 @@ class PostList extends StatelessPage {
             thickness: 3,
             color: Colors.black,
           ),
-          CreatePostInput(super.getController(), this._forumId),
+          CreatePostInput(this._controller, widget._forumId),
+          this._addButton()
         ],
       );
     } else {
-      return ListView(children: ret);
+      return Column(children: [
+        Expanded(child: ListView(children: ret)),
+        this._addButton()
+      ]);
     }
   }
 
   List<PostTile> posts() {
-    Database db = super.getController().getDatabase();
+    Database db = this._controller.getDatabase();
     return db
-        .getForumPosts(_forumId)
-        .map((post) => PostTile(post, super.getController()))
+        .getForumPosts(widget._forumId)
+        .map((post) => PostTile(post, this._controller))
         .toList();
   }
 }

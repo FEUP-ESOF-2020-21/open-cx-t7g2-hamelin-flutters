@@ -31,7 +31,7 @@ class CreatePostInput extends StatelessWidget {
         SquareButton('Submit', () {
           String title = titleController.text, text = textController.text;
           if (this._controller.createPost(this._forumId, title, text)) {
-            this._controller.setAddingPost(false);
+            this._controller.changeAddingPost();
             Navigator.pop(context);
             Navigator.push(
                 context,
@@ -47,7 +47,7 @@ class CreatePostInput extends StatelessWidget {
                 duration: Duration(seconds: 2),
               ),
             );
-            this._controller.setAddingPost(true);
+            //this._controller.setAddingPost(true);
           }
         }),
       )

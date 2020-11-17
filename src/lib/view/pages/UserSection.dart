@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import '../Page.dart';
 import '../../controller/Controller.dart';
-import '../widgets/Posts/CreatePost.dart';
 
 class UserSection extends StatefulPage {
   final int index;
@@ -37,48 +36,10 @@ class _UserSectionState extends State<UserSection> {
 
   static List<Widget> _pageAppBars = [];
 
-  Widget _addButton() {
-    if (this.selectedIndex == 0 && !this._controller.isAddingPost()) {
-      return FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            this._controller.setAddingPost(true);
-          });
-        },
-        elevation: 0,
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
-        child: Icon(
-          Icons.add_comment_outlined,
-          size: 30,
-          color: Color.fromARGB(255, 0, 0, 0),
-        ),
-      );
-    } else if (this.selectedIndex == 0 && this._controller.isAddingPost()) {
-      return FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            this._controller.setAddingPost(false);
-          });
-        },
-        elevation: 0,
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
-        hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
-        child: Icon(
-          Icons.arrow_downward_outlined,
-          size: 30,
-          color: Color.fromARGB(255, 0, 0, 0),
-        ),
-      );
-    } else {
-      return null;
-    }
-  }
-
   void _onItemTapped(int idx) {
     setState(() {
       this.selectedIndex = idx;
-      this._controller.setAddingPost(false);
+      this._controller.changeAddingPost();
     });
   }
 
@@ -121,8 +82,6 @@ class _UserSectionState extends State<UserSection> {
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
       body: _pageBodies()[this.selectedIndex],
-      floatingActionButton: _addButton(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
