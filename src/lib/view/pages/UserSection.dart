@@ -25,21 +25,61 @@ class _UserSectionState extends State<UserSection> {
 
   List<Widget> _pageBodies() {
     return [
-      Forums(this._controller),
+      Forums(this._controller, _changeState),
       Text("Coming soon..."),
       ProfilePage(),
-      PostList(this._controller, 0, () {
-        print("mock function :(");
-      }),
+      PostList(this._controller, 0, _changeState),
     ];
+  }
+
+  void _changeState(index) {
+    this.selectedIndex = index;
+    setState(() {});
   }
 
   static List<Widget> _pageAppBars = [];
 
+  FloatingActionButton _addButon() {
+    if (this.selectedIndex == 3) {
+      if (this._controller.isAddingPost()) {
+        return FloatingActionButton(
+          onPressed: () {
+            this._controller.changeAddingPost();
+            setState(() {
+              this._controller;
+              this.selectedIndex;
+            });
+          },
+          child: Icon(
+            Icons.arrow_downward_outlined,
+            size: 30,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
+          elevation: 10,
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        );
+      } else {
+        return FloatingActionButton(
+          onPressed: () {
+            this._controller.changeAddingPost();
+            setState(() {});
+          },
+          child: Icon(
+            Icons.add_comment_outlined,
+            size: 30,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
+          elevation: 10,
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        );
+      }
+    }
+    return null;
+  }
+
   void _onItemTapped(int idx) {
     setState(() {
       this.selectedIndex = idx;
-      this._controller.changeAddingPost();
     });
   }
 
@@ -82,6 +122,8 @@ class _UserSectionState extends State<UserSection> {
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
       body: _pageBodies()[this.selectedIndex],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: _addButon(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[

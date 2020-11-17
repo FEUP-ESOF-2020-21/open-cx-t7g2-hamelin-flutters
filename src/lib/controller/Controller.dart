@@ -6,6 +6,7 @@ class Controller {
   String _loggedInUserName;
   Function _onSessionChange;
   bool _addingPost = false;
+  int _currentForumId = 0;
 
   Controller(this._database);
 
@@ -16,6 +17,11 @@ class Controller {
   void setLoggedInUserName(String username) {
     this._loggedInUserName = username;
     if (_onSessionChange != null) _onSessionChange();
+  }
+
+  int getCurrentForumId() => this._currentForumId;
+  void setCurrentForumId(currentForumId) {
+    this._currentForumId = currentForumId;
   }
 
   void changeAddingPost() => this._addingPost = !this._addingPost;
