@@ -108,7 +108,7 @@ class _UserSectionState extends State<UserSection> {
       ),
       AppBar(
         title: Text(
-          "Discussions",
+          "Data Science",
           style: pageTitleTextStyle,
         ),
         actions: action,
