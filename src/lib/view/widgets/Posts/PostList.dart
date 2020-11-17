@@ -9,9 +9,8 @@ import 'package:confnect/view/widgets/Posts/CreatePost.dart';
 import '../../Page.dart';
 
 class PostList extends StatefulPage {
-  final int _forumId;
   final Function _viewForum;
-  PostList(Controller controller, this._forumId, this._viewForum, {Key key})
+  PostList(Controller controller, this._viewForum, {Key key})
       : super(controller, key: key);
   @override
   _PostListState createState() => _PostListState(super.getController());
@@ -28,35 +27,6 @@ class _PostListState extends State<PostList> {
     size: 30,
     color: Color.fromARGB(255, 0, 0, 0),
   );
-
-  Widget _addButton() {
-    return FloatingActionButton(
-      onPressed: () {
-        setState(() {
-          this._controller.changeAddingPost();
-          if (iconNum == 0) {
-            icon = Icon(
-              Icons.add_comment_outlined,
-              size: 30,
-              color: Color.fromARGB(255, 0, 0, 0),
-            );
-            iconNum = 1;
-          } else if (iconNum == 1) {
-            icon = Icon(
-              Icons.arrow_downward_outlined,
-              size: 30,
-              color: Color.fromARGB(255, 0, 0, 0),
-            );
-            iconNum = 0;
-          }
-        });
-      },
-      elevation: 10,
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
-      child: icon,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +47,10 @@ class _PostListState extends State<PostList> {
               flex: 1,
             ),
             Flexible(
-              child: PageTitle(db.getForum(widget._forumId).getTitle(),
-                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0), scaleFactor: 0.9),
+              child: PageTitle(
+                  db.getForum(this._controller.getCurrentForumId()).getTitle(),
+                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  scaleFactor: 0.9),
               flex: 7,
             ),
           ],
@@ -90,7 +62,7 @@ class _PostListState extends State<PostList> {
       return Column(
         children: <Widget>[
           Container(
-            height: 190,
+            height: MediaQuery.of(context).size.height * 2 / 7,
             child: ListView(children: posts()),
           ),
           Divider(
@@ -99,14 +71,13 @@ class _PostListState extends State<PostList> {
             thickness: 3,
             color: Colors.black,
           ),
-          CreatePostInput(this._controller, widget._forumId),
-          this._addButton()
+          CreatePostInput(
+              this._controller, this._controller.getCurrentForumId()),
         ],
       );
     } else {
       return Column(children: [
         Expanded(child: ListView(children: ret)),
-        this._addButton()
       ]);
     }
   }
@@ -114,7 +85,7 @@ class _PostListState extends State<PostList> {
   List<PostTile> posts() {
     Database db = this._controller.getDatabase();
     return db
-        .getForumPosts(widget._forumId)
+        .getForumPosts(this._controller.getCurrentForumId())
         .map((post) => PostTile(post, this._controller))
         .toList();
   }

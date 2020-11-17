@@ -25,7 +25,7 @@ class CreatePostInput extends StatelessWidget {
             textController,
             maxLines: 15,
           ),
-          height: 190,
+          height: MediaQuery.of(context).size.height / 4,
           margin: EdgeInsets.only(top: 0, bottom: 20)),
       FormFieldContainer(
         SquareButton('Submit', () {

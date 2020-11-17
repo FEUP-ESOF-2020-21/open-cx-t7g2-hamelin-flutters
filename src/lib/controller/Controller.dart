@@ -6,11 +6,17 @@ class Controller {
   String _loggedInUserName;
   Function _onSessionChange;
   bool _addingPost = false;
+  int currentForumId = -1;
 
   Controller(this._database);
 
   void startApp(StatelessWidget app) {
     runApp(app);
+  }
+
+  int getCurrentForumId() => this.currentForumId;
+  void setCurrentForumId(forumId) {
+    this.currentForumId = forumId;
   }
 
   void setLoggedInUserName(String username) {
