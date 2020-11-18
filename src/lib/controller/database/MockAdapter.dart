@@ -2,24 +2,28 @@ import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/Tag.dart';
+import 'package:confnect/model/Talk.dart';
 
 import './Database.dart';
 import '../../model/User.dart';
 
 class MockAdapter implements Database {
   static List<User> _users = [
-    User(0, "test", "123",
+    User(0, UserRole.ADMIN, "Test User", "test", "123",
         "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
-    User(1, "trump", "1",
+    User(1, UserRole.ATTENDEE, "Donald Trump", "trump", "1",
         "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg"),
-    User(2, "Obama", "1",
+    User(2, UserRole.ATTENDEE, "Obama", "obama", "1",
         "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg"),
-    User(3, "QUIM", "1",
+    User(3, UserRole.ATTENDEE, "QUIM", "quim", "1",
         "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U="),
-    User(4, "Souto", "1",
+    User(4, UserRole.ATTENDEE, "Souto", "souto", "1",
         "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172"),
-    User(5, "Augusto Souza", "1",
+    User(5, UserRole.ATTENDEE, "Augusto Souza", "aas", "1",
         "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg"),
+    User(6, UserRole.HOST, "Lew Lee", "fanatic", "1",
+        "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg"),
   ];
 
   static List<Forum> _forums = [
@@ -49,7 +53,7 @@ class MockAdapter implements Database {
     ),
     Forum(
       5,
-      "Competetive Programming",
+      "Competitive Programming",
       "Some fancy slogan.",
       "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20191004160106/How-to-Prepare-for-Competitive-Programming.png",
     ),
@@ -68,7 +72,7 @@ class MockAdapter implements Database {
   ];
   static List<Comment> _comments = [
     Comment(
-        _users[0],
+        _users[2],
         new Date(new DateTime.now().subtract(Duration(minutes: 10))),
         "Melhor comentário de sempre"),
     Comment(
@@ -93,11 +97,12 @@ class MockAdapter implements Database {
 
   static List<Post> _posts = [
     Post(
-        0,
-        _users[0],
-        "Flutter master",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
-        _comments),
+      0,
+      _users[3],
+      "Flutter master",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
+      _comments,
+    ),
     Post(
         0,
         _users[1],
@@ -204,6 +209,22 @@ class MockAdapter implements Database {
         _comments),
   ];
 
+  static List<Tag> _tags = [
+    Tag(0, "AI"),
+    Tag(1, "Robotics"),
+    Tag(2, "Conspiracy Theories"),
+  ];
+
+  static List<Talk> _talks = [
+    Talk(
+      "The rise of robots",
+      "In this talk, we'll discuss the rise of robots and what it means for our survival as a species.",
+      _users[6],
+      "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
+      [_tags[0], _tags[1], _tags[2]],
+    ),
+  ];
+
   String getAppName() {
     return "Confnect";
   }
@@ -211,10 +232,8 @@ class MockAdapter implements Database {
   bool login(String username, String password) {
     List<User> users = this.getUsers();
     bool res = false;
-    int id = 0;
     users.forEach((element) {
-      id++;
-      if (User.auth(element, new User(id, username, password))) res = true;
+      if (element.auth(username, password)) res = true;
     });
     return res;
   }
@@ -229,13 +248,67 @@ class MockAdapter implements Database {
         }
       }
 
-      _users.add(User(id, username, password));
+      _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
       print("Register success");
       return 1;
     }
     print("Register failed");
     return 0;
   }
+
+  void createTalkForum(Talk talk) {
+    _forums.add(Forum(_forums.length, talk.getTitle(), talk.getDescription(),
+        talk.getImageURL()));
+  }
+
+  void createTagForum(Tag tag) {
+    //TODO
+    print("Create talk tag forum!");
+  }
+
+  void addTalk(String title, String description, String speaker, String image,
+      List<Tag> tags) {
+    tags.forEach((tag) {
+      if (!_tags.contains(tag)) {
+        _tags.add(tag);
+        createTagForum(tag);
+        print('''Added tag "${tag.getName()}" in db''');
+      }
+    });
+    Talk talk = Talk(title, description, getUser(speaker), image, tags);
+    _talks.add(talk);
+    createTalkForum(talk);
+  }
+
+  Tag createTag(String name) {
+    return Tag(_tags.length, name);
+  }
+
+  void addTag(Tag tag) {
+    _tags.add(tag);
+  }
+
+  User getUser(String username) {
+    return _users.firstWhere(
+      (element) => element.getUsername() == username,
+      orElse: () => null,
+    );
+  }
+
+  bool existsUser(String username) {
+    return getUser(username) != null;
+  }
+
+  bool hasRole(String username, String role) {
+    User user = getUser(username);
+    if (user == null) return false;
+    if (user.getRole() == role) return true;
+    return false;
+  }
+
+  List<Tag> getTags() => _tags;
+
+  List<Talk> getTalks() => _talks;
 
   List<User> getUsers() {
     return _users;

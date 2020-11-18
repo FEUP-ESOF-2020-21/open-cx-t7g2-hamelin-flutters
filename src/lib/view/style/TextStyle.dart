@@ -57,3 +57,11 @@ var bodyTextStyle2 = GoogleFonts.openSans(
     color: Colors.black,
   ),
 );
+
+var talkSpeakerTextStyle = GoogleFonts.openSans(
+  textStyle: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: BodyTextSize2,
+    color: Colors.white,
+  ),
+);

@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 class FormTextField extends StatelessWidget {
   final String _fieldText;
   final bool obscureText;
+  final Function validator;
   final TextEditingController _controller;
-  FormTextField(this._fieldText, this._controller, {this.obscureText = false});
+  FormTextField(this._fieldText, this._controller,
+      {this.obscureText = false, this.validator});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       obscureText: this.obscureText,
       controller: this._controller,
-      selectionWidthStyle: BoxWidthStyle.max,
+      validator: this.validator,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(
           top: 10.0,
