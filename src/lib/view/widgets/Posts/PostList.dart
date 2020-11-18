@@ -65,7 +65,7 @@ class _PostListState extends State<PostList> {
     ];
     ret.addAll(posts());
     if (this._controller.isAddingPost()) {
-      return Column(
+      return ListView(
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 2 / 7,
@@ -82,9 +82,7 @@ class _PostListState extends State<PostList> {
         ],
       );
     } else {
-      return Column(children: [
-        Expanded(child: ListView(children: ret)),
-      ]);
+      return ListView(children: ret);
     }
   }
 

@@ -1,5 +1,4 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/view/pages/UserSection.dart';
 import 'package:confnect/view/widgets/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
