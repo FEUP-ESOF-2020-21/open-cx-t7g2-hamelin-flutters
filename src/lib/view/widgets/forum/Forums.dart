@@ -43,7 +43,7 @@ class _ForumsState extends State<Forums> {
   @override
   Widget build(BuildContext context) {
     if (this._controller.getCurrentForumId() != -1)
-      return PostList(this._controller, _viewForum);
+      return PostList(this._controller, _viewForum, this._refreshState);
     return ForumList(_controller, _viewForum);
   }
 }

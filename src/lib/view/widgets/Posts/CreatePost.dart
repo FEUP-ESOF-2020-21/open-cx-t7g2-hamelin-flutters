@@ -11,7 +11,8 @@ class CreatePostInput extends StatelessWidget {
   final textController = TextEditingController();
   final Controller _controller;
   final int _forumId;
-  CreatePostInput(this._controller, this._forumId);
+  final Function _refreshState;
+  CreatePostInput(this._controller, this._forumId, this._refreshState);
 
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
@@ -32,14 +33,7 @@ class CreatePostInput extends StatelessWidget {
           String title = titleController.text, text = textController.text;
           if (this._controller.createPost(this._forumId, title, text)) {
             this._controller.changeAddingPost();
-            Navigator.pop(context);
-            Navigator.push(
-                context,
-                new MaterialPageRoute(
-                    builder: (context) => new UserSection(
-                          this._controller,
-                          index: 0,
-                        )));
+            this._refreshState();
           } else {
             Scaffold.of(context).showSnackBar(
               SnackBar(

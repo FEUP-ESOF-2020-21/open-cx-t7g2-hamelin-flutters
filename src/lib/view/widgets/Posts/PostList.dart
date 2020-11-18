@@ -10,16 +10,20 @@ import '../../Page.dart';
 
 class PostList extends StatefulPage {
   final Function _viewForum;
-  PostList(Controller controller, this._viewForum, {Key key})
+  final Function _refreshState;
+  PostList(Controller controller, this._viewForum, this._refreshState,
+      {Key key})
       : super(controller, key: key);
   @override
-  _PostListState createState() => _PostListState(super.getController());
+  _PostListState createState() =>
+      _PostListState(super.getController(), this._refreshState);
 }
 
 //class PostList extends StatelessPage {
 class _PostListState extends State<PostList> {
   Controller _controller;
-  _PostListState(this._controller);
+  Function _refreshState;
+  _PostListState(this._controller, this._refreshState);
 
   int iconNum = 1;
   Icon icon = Icon(
@@ -73,8 +77,8 @@ class _PostListState extends State<PostList> {
             thickness: 3,
             color: Colors.black,
           ),
-          CreatePostInput(
-              this._controller, this._controller.getCurrentForumId()),
+          CreatePostInput(this._controller,
+              this._controller.getCurrentForumId(), this._refreshState)
         ],
       );
     } else {
