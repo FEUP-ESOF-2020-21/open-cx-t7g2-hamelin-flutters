@@ -25,7 +25,10 @@ class _UserSectionState extends State<UserSection> {
   List<Widget> _pageBodies() {
     return [
       Forums(this._controller, _refreshState),
-      Text("Coming soon..."),
+      Container(
+        child: Text("Coming soon..."),
+        margin: EdgeInsets.all(10),
+      ),
       ProfilePage(),
       ProfilePage()
     ];

@@ -4,18 +4,19 @@ import 'package:flutter/material.dart';
 class FormTextField extends StatelessWidget {
   final String _fieldText;
   final bool obscureText;
+  final Function validator;
   final int maxLines;
   final TextEditingController _controller;
   FormTextField(this._fieldText, this._controller,
-      {this.obscureText = false, this.maxLines = 1});
+      {this.obscureText = false, this.validator, this.maxLines = 1});
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      maxLines: this.maxLines,
+    return TextFormField(
       obscureText: this.obscureText,
       controller: this._controller,
-      selectionWidthStyle: BoxWidthStyle.max,
+      validator: this.validator,
+      maxLines: this.maxLines,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.only(
           top: 20.0,

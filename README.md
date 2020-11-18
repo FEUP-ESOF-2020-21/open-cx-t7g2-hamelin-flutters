@@ -353,7 +353,20 @@ As a talk host, I want to be able to remove inappropriate questions / wrong answ
 
 #### Story N
 
+***SEPARAR NAS 3!!***
+
 As an administrator, I want to be able to add, remove and edit talks to the conference so that the app is more organized.
+##### Value and Effort
+    - Value: Must have
+    - Effort: M
+##### Acceptance Tests
+```gherkin=
+    TODO
+```
+
+#### Story N
+
+As an administrator, I want to be able to see the list of talks that we have, so that I have a global view of our app.
 ##### Value and Effort
     - Value: Must have
     - Effort: M
