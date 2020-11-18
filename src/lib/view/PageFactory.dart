@@ -21,7 +21,7 @@ class PageFactory {
     return HomePage(controller);
   }
 
-  Widget createTestPage() {
+  Widget createUserPage() {
     return UserSection(controller);
   }
 }

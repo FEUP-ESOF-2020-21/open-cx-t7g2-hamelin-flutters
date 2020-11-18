@@ -23,11 +23,11 @@ class Confnect extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Colors.white,
           textTheme: TextTheme(
-            headline6: TitleTextStyle,
-            bodyText1: BodyTextStyle,
+            headline6: titleTextStyle,
+            bodyText1: bodyTextStyle1,
+            bodyText2: bodyTextStyle2,
           )),
       home: pageFactory.createHomePage(),
-      //home: pageFactory.createTestPage(),
       routes: {
         AppRouter.LOGIN: (_) => pageFactory.createLoginPage(),
         AppRouter.REGISTER: (_) => pageFactory.createRegisterPage(),

@@ -79,10 +79,10 @@ class _LoginState extends State<Login> {
                 margin: EdgeInsets.only(bottom: 30)),
             StandardDivider(),
             TextOnlyButton(
-              "Don't have an account? Click Here!",
               () {
                 Navigator.popAndPushNamed(context, AppRouter.REGISTER);
               },
+              text: "Don't have an account? Click Here!",
             ),
           ],
         ),

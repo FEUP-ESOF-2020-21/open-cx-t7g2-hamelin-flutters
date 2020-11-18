@@ -1,7 +1,8 @@
+import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
-import 'package:confnect/view/widgets/forum/ForumList.dart';
+import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
 import '../../controller/Controller.dart';
@@ -18,12 +19,20 @@ class _UserSectionState extends State<UserSection> {
   final Controller _controller;
   _UserSectionState(this._controller);
 
-  static final List<Widget> _pageBodies = [
-    ForumList(),
-    Text("Coming soon..."),
-    ProfilePage(),
-    PostList(),
-  ];
+  List<Widget> _pageBodies() {
+    return [
+      Forums(this._controller),
+      Container(
+        child: Text("Coming soon..."),
+        margin: EdgeInsets.all(10),
+      ),
+      ProfilePage(),
+      PostList(this._controller, 0, () {
+        print("mock function :(");
+      }),
+    ];
+  }
+
   static List<Widget> _pageAppBars = [];
 
   void _onItemTapped(int idx) {
@@ -35,19 +44,31 @@ class _UserSectionState extends State<UserSection> {
   List<Widget> _initAppBars(List<Widget> action) {
     return [
       AppBar(
-        title: Text("Forums"),
+        title: Text(
+          "Forums",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Search"),
+        title: Text(
+          "Search",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Profile"),
+        title: Text(
+          "Profile",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Data Science"),
+        title: Text(
+          "Data Science",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
     ];
@@ -58,7 +79,7 @@ class _UserSectionState extends State<UserSection> {
     _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this._selectedIndex],
-      body: _UserSectionState._pageBodies[this._selectedIndex],
+      body: _pageBodies()[this._selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[

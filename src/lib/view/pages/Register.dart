@@ -140,10 +140,10 @@ class _RegisterState extends State<Register> {
             ),
             StandardDivider(),
             TextOnlyButton(
-              "Already have an account? Click Here!",
               () {
                 Navigator.popAndPushNamed(context, AppRouter.LOGIN);
               },
+              text: "Already have an account? Click Here!",
             ),
           ],
         ),
