@@ -20,7 +20,7 @@ class _AdminSectionState extends State<AdminSection> {
 
   List<Widget> _pageBodies() {
     return [
-      AdminTalks(this._controller),
+      AdminTalks(this._controller, _refreshState),
       Container(
         child: Text("Coming soon..."),
         margin: EdgeInsets.all(10),
@@ -29,7 +29,7 @@ class _AdminSectionState extends State<AdminSection> {
   }
 
   // Forces rerender of widget
-  void _onTalkAdded() {
+  void _refreshState() {
     setState(() {});
   }
 
@@ -40,7 +40,7 @@ class _AdminSectionState extends State<AdminSection> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => AddTalk(_controller, _onTalkAdded)),
+              builder: (context) => AddTalk(_controller, _refreshState)),
         );
       },
       () {
