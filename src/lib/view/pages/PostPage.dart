@@ -39,22 +39,29 @@ class _PostPageState extends State<PostPage> {
       appBar: AppBar(
         title: Text(widget._post.getTitle()),
       ),
-      body: Container(
-        decoration: BoxDecoration(),
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: PostContent(widget._post, false)),
-            Divider(),
-            Expanded(child: CommentList(widget._post.getComments())),
-            _AddCommentComposer(),
-          ],
-        )
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(),
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 70),
+            child: ListView(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: PostContent(widget._post, false)),
+                Divider(),
+                CommentList(widget._post.getComments()),
+              ],
+            )
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _AddCommentComposer(),
+          )
+        ],
       ),
     );
   }
@@ -63,7 +70,18 @@ class _PostPageState extends State<PostPage> {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).accentColor),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         child: Row(
           children: [
             Flexible(
