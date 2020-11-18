@@ -256,6 +256,12 @@ class MockAdapter implements Database {
     return 0;
   }
 
+  void addPost(int forumId, String username, String title, String text) {
+    for (var user in _users)
+      if (user.getUsername() == username)
+        _posts.add(Post(forumId, user, title, text, List<Comment>()));
+  }
+
   void createTalkForum(Talk talk) {
     _forums.add(Forum(_forums.length, talk.getTitle(), talk.getDescription(),
         talk.getImageURL()));

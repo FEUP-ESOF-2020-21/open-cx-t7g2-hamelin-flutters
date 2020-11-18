@@ -33,6 +33,9 @@ class _RegisterState extends State<Register> {
         child: Column(
           children: <Widget>[
             GoBackButton(),
+            Spacer(
+              flex: 1,
+            ),
             PageTitle(
               "Register",
               margin: EdgeInsets.only(
@@ -144,6 +147,9 @@ class _RegisterState extends State<Register> {
                 Navigator.popAndPushNamed(context, AppRouter.LOGIN);
               },
               text: "Already have an account? Click Here!",
+            ),
+            Spacer(
+              flex: 2,
             ),
           ],
         ),
