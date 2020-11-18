@@ -41,6 +41,8 @@ class _PostListState extends State<PostList> {
               child: GoBackButton(
                 fn: () {
                   widget._viewForum(-1);
+                  if (this._controller.isAddingPost())
+                    this._controller.changeAddingPost();
                 },
                 margin: EdgeInsets.zero,
               ),
@@ -63,7 +65,7 @@ class _PostListState extends State<PostList> {
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 2 / 7,
-            child: ListView(children: posts()),
+            child: ListView(children: ret),
           ),
           Divider(
             indent: 10,

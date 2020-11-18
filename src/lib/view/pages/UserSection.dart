@@ -1,7 +1,6 @@
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
-import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +27,7 @@ class _UserSectionState extends State<UserSection> {
       Forums(this._controller, _refreshState),
       Text("Coming soon..."),
       ProfilePage(),
-      PostList(this._controller, () {
-        print("mock function :(");
-      }),
+      ProfilePage()
     ];
   }
 
@@ -74,6 +71,7 @@ class _UserSectionState extends State<UserSection> {
         );
       }
     }
+    return null;
   }
 
   static List<Widget> _pageAppBars = [];
@@ -113,11 +111,11 @@ class _UserSectionState extends State<UserSection> {
       ),
       AppBar(
         title: Text(
-          "Data Science",
+          "Place holder",
           style: pageTitleTextStyle,
         ),
         actions: action,
-      ),
+      )
     ];
   }
 
@@ -145,9 +143,9 @@ class _UserSectionState extends State<UserSection> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Discussions',
-          ),
+            icon: Icon(Icons.place),
+            label: 'Place Holder',
+          )
         ],
         currentIndex: this.selectedIndex,
         selectedItemColor: Colors.blue[800],
