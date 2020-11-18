@@ -29,4 +29,5 @@ abstract class Database {
       List<Tag> tags);
   Tag createTag(String name);
   void addTag(Tag tag);
+  void deleteTalk(Talk talk);
 }

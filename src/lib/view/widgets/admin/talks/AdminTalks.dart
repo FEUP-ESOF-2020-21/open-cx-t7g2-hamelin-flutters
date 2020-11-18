@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import '../talks/AdminTalkTile.dart';
 
 class AdminTalks extends StatelessPage {
-  AdminTalks(Controller controller, {Key key}) : super(controller, key: key);
+  Function _refreshState;
+  AdminTalks(Controller controller, this._refreshState, {Key key})
+      : super(controller, key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class AdminTalks extends StatelessPage {
     Database db = super.getController().getDatabase();
     return db
         .getTalks()
-        .map((e) => AdminTalkTile(super.getController(), e))
+        .map((e) => AdminTalkTile(super.getController(), _refreshState, e))
         .toList();
   }
 }
