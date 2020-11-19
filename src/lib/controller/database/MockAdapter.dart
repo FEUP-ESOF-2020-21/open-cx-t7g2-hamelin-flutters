@@ -1,31 +1,253 @@
+import 'package:confnect/model/Comment.dart';
+import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/Tag.dart';
+import 'package:confnect/model/Talk.dart';
 
 import './Database.dart';
 import '../../model/User.dart';
 
 class MockAdapter implements Database {
   static List<User> _users = [
-    User(0, "test", "123",
+    User(0, UserRole.ADMIN, "Test User", "test", "123",
         "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
-    User(1, "trump", "1",
+    User(1, UserRole.ATTENDEE, "Donald Trump", "trump", "1",
         "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg"),
+    User(2, UserRole.ATTENDEE, "Obama", "obama", "1",
+        "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg"),
+    User(3, UserRole.ATTENDEE, "QUIM", "quim", "1",
+        "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U="),
+    User(4, UserRole.ATTENDEE, "Souto", "souto", "1",
+        "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172"),
+    User(5, UserRole.ATTENDEE, "Augusto Souza", "aas", "1",
+        "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg"),
+    User(6, UserRole.HOST, "Lew Lee", "fanatic", "1",
+        "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg"),
   ];
 
   static List<Forum> _forums = [
-    Forum(_users[0], "Data science",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
-    Forum(_users[1], "Mobile Development",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh. Phasellus diam metus, efficitur non placerat vel, tempus ac ex. Phasellus tempor metus eget purus congue, ultricies imperdiet leo facilisis. Sed quis tempor ante. Nulla luctus dui vel volutpat posuere."),
+    Forum(
+      0,
+      "Data science",
+      "This is the best forum about Data Science you'll ever encounter!",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.learningtree.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fdatasci.jpg&f=1&nofb=1",
+    ),
+    Forum(
+      1,
+      "Mobile Development",
+      "We are all Hamelin Flutters here.",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fckab.b-cdn.net%2Fwp-content%2Fuploads%2F2019%2F07%2FMobile-App-Development-Frameworks.png&f=1&nofb=1",
+    ),
+    Forum(
+      2,
+      "Blockchain",
+      "Some fancy slogan.",
+      "https://i0.wp.com/www.cienciaedados.com/wp-content/uploads/2018/01/Big-Data-e-as-Oportunidades-com-Blockchain.jpg?fit=765%2C457",
+    ),
+    Forum(
+      3,
+      "Internet of Things",
+      "Some fancy slogan.",
+      "https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/gao-assesses-iot-cybersecurity-other-risks-showcase_image-6-a-9926.jpg",
+    ),
+    Forum(
+      5,
+      "Competitive Programming",
+      "Some fancy slogan.",
+      "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20191004160106/How-to-Prepare-for-Competitive-Programming.png",
+    ),
+    Forum(
+      5,
+      "Capture the Flag",
+      "Some fancy slogan.",
+      "https://embeddedworldhome.files.wordpress.com/2019/05/icons_ctf_1.png?w=1250",
+    ),
+    Forum(
+      6,
+      "Machine Learning",
+      "Some fancy slogan.",
+      "https://dvlsystems.com/wp-content/uploads/2020/08/machine_learning.jpg",
+    ),
+  ];
+  static List<Comment> _comments = [
+    Comment(
+        _users[2],
+        new Date(new DateTime.now().subtract(Duration(minutes: 10))),
+        "Melhor comentário de sempre"),
+    Comment(
+        _users[1],
+        new Date(new DateTime.now().subtract(Duration(minutes: 5))),
+        "Pior comentário de sempre"),
+    Comment(
+        _users[2],
+        new Date(new DateTime.now().subtract(Duration(minutes: 5))),
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sagittis orci non eros mattis pretium. Fusce et felis et sem efficitur ullamcorper consequat id lacus."),
+    Comment(
+        _users[3],
+        new Date(new DateTime.now().subtract(Duration(minutes: 5))),
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sagittis orci non eros mattis pretium. Fusce et felis et sem efficitur ullamcorper consequat id lacus."),
+    Comment(
+        _users[4],
+        new Date(new DateTime.now().subtract(Duration(minutes: 5))),
+        "Pior comentário de sempre"),
+    Comment(_users[5], new Date(new DateTime.now()),
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh."),
   ];
 
   static List<Post> _posts = [
-    Post(_users[0], "Flutter master",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra"),
-    Post(_users[1], "It deserves a 20!",
-        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le"),
-    Post(_users[0], "Welcome!",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
+    Post(
+      0,
+      _users[3],
+      "Flutter master",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      [_comments[0], _comments[1]],
+    ),
+    Post(
+      0,
+      _users[1],
+      "It deserves a 20!",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      [_comments[2]],
+    ),
+    Post(
+      0,
+      _users[2],
+      "Welcome!",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      [_comments[3], _comments[4]],
+    ),
+    Post(
+      0,
+      _users[3],
+      "Make America Great Again!",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      [_comments[5]],
+    ),
+    Post(
+        0,
+        _users[4],
+        "Confnect is the greatest!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        0,
+        _users[5],
+        "Moustache Competition",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        1,
+        _users[1],
+        "Flutter master",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        1,
+        _users[2],
+        "It deserves a 21!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        1,
+        _users[3],
+        "Welcome!",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        1,
+        _users[4],
+        "Make America Great Again!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        1,
+        _users[5],
+        "Confnect is the greatest!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        1,
+        _users[1],
+        "Moustache Competition",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        2,
+        _users[2],
+        "Flutter master",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        2,
+        _users[3],
+        "It deserves a 22!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        2,
+        _users[4],
+        "Welcome!",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        3,
+        _users[5],
+        "Flutter master",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        3,
+        _users[1],
+        "It deserves a 23!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        3,
+        _users[2],
+        "Welcome!",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+        3,
+        _users[3],
+        "Make America Great Again!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+      4,
+      _users[4],
+      "Confnect is the greatest!",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+    ),
+    Post(
+        4,
+        _users[5],
+        "Moustache Competition",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+  ];
+
+  static List<Tag> _tags = [
+    Tag(0, "AI"),
+    Tag(1, "Robotics"),
+    Tag(2, "Conspiracy Theories"),
+  ];
+
+  static List<Talk> _talks = [
+    Talk(
+      0,
+      "The rise of robots",
+      "In this talk, we'll discuss the rise of robots and what it means for our survival as a species.",
+      _users[6],
+      "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
+      [_tags[0], _tags[1], _tags[2]],
+    ),
   ];
 
   String getAppName() {
@@ -35,10 +257,8 @@ class MockAdapter implements Database {
   bool login(String username, String password) {
     List<User> users = this.getUsers();
     bool res = false;
-    int id = 0;
     users.forEach((element) {
-      id++;
-      if (User.auth(element, new User(id, username, password))) res = true;
+      if (element.auth(username, password)) res = true;
     });
     return res;
   }
@@ -53,7 +273,7 @@ class MockAdapter implements Database {
         }
       }
 
-      _users.add(User(id, username, password));
+      _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
       print("Register success");
       return 1;
     }
@@ -61,15 +281,85 @@ class MockAdapter implements Database {
     return 0;
   }
 
+  void addPost(
+      int forumId, String username, String title, String text, Date date) {
+    for (var user in _users)
+      if (user.getUsername() == username)
+        _posts.add(Post(forumId, user, title, text, date, List<Comment>()));
+  }
+
+  void createTalkForum(Talk talk) {
+    _forums.add(Forum(_forums.length, talk.getTitle(), talk.getDescription(),
+        talk.getImageURL()));
+  }
+
+  void createTagForum(Tag tag) {
+    //TODO
+    print("Create talk tag forum!");
+  }
+
+  void addTalk(String title, String description, String speaker, String image,
+      List<Tag> tags) {
+    tags.forEach((tag) {
+      if (!_tags.contains(tag)) {
+        _tags.add(tag);
+        createTagForum(tag);
+        print('''Added tag "${tag.getName()}" in db''');
+      }
+    });
+    Talk talk =
+        Talk(_talks.length, title, description, getUser(speaker), image, tags);
+    _talks.add(talk);
+    createTalkForum(talk);
+  }
+
+  void deleteTalk(Talk talk) {
+    _talks.remove(talk);
+  }
+
+  Tag createTag(String name) {
+    return Tag(_tags.length, name);
+  }
+
+  void addTag(Tag tag) {
+    _tags.add(tag);
+  }
+
+  User getUser(String username) {
+    return _users.firstWhere(
+      (element) => element.getUsername() == username,
+      orElse: () => null,
+    );
+  }
+
+  bool existsUser(String username) {
+    return getUser(username) != null;
+  }
+
+  bool hasRole(String username, String role) {
+    User user = getUser(username);
+    if (user == null) return false;
+    if (user.getRole() == role) return true;
+    return false;
+  }
+
+  List<Tag> getTags() => _tags;
+
+  List<Talk> getTalks() => _talks;
+
   List<User> getUsers() {
     return _users;
   }
 
-  static List<Forum> getForums() {
+  List<Forum> getForums() {
     return _forums;
   }
 
-  static List<Post> getPosts() {
-    return _posts;
+  Forum getForum(int id) {
+    return _forums.firstWhere((element) => element.getId() == id);
+  }
+
+  List<Post> getForumPosts(int forumId) {
+    return _posts.where((element) => element.getForumId() == forumId).toList();
   }
 }
