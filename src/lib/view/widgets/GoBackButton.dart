@@ -8,9 +8,7 @@ class GoBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.topLeft,
-      margin: margin == null
-          ? EdgeInsets.only(top: 50.0, left: 15.0, bottom: 100)
-          : margin,
+      margin: margin == null ? EdgeInsets.only(top: 50.0, left: 15.0) : margin,
       child: IconButton(
         icon: Icon(Icons.keyboard_return),
         onPressed: this.fn == null

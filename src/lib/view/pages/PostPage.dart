@@ -42,21 +42,20 @@ class _PostPageState extends State<PostPage> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(),
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 70),
-            child: ListView(
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: PostContent(widget._post, false)),
-                Divider(),
-                CommentList(widget._post.getComments()),
-              ],
-            )
-          ),
+              decoration: BoxDecoration(),
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 70),
+              child: ListView(
+                children: [
+                  Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: PostContent(widget._post, false)),
+                  Divider(),
+                  CommentList(widget._post.getComments()),
+                ],
+              )),
           Align(
             alignment: Alignment.bottomCenter,
             child: _AddCommentComposer(),
@@ -88,8 +87,8 @@ class _PostPageState extends State<PostPage> {
               child: TextField(
                 controller: _textController,
                 onSubmitted: _handleSubmitted,
-                decoration: InputDecoration.collapsed(
-                    hintText: 'Send a message'),
+                decoration:
+                    InputDecoration.collapsed(hintText: 'Send a message'),
               ),
             ),
             Container(

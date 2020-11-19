@@ -1,26 +1,32 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Talk.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../Page.dart';
 
 class AdminTalkTile extends StatelessPage {
   final Talk _talk;
-  AdminTalkTile(Controller controller, this._talk, {Key key})
+  final Function _refreshState;
+  AdminTalkTile(Controller controller, this._refreshState, this._talk,
+      {Key key})
       : super(controller, key: key);
+
+  void _editTalk(Talk talk) {
+    print("Edit talk!");
+    _refreshState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    Database db = super.getController().getDatabase();
     return Card(
       margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: () {
-          print("Edit talk!");
-          //_editTalk(
-          //_talk.getId()); // this will push the forum page on the navigator
+          _editTalk(_talk); // this will push the forum page on the navigator
         },
         child: Container(
           padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
@@ -87,7 +93,7 @@ class AdminTalkTile extends StatelessPage {
                         icon: Icon(Icons.edit),
                         color: Colors.white,
                         onPressed: () {
-                          print("Edit talk");
+                          _editTalk(_talk);
                         },
                       ),
                       IconButton(
@@ -110,7 +116,8 @@ class AdminTalkTile extends StatelessPage {
                                   new FlatButton(
                                     child: new Text("Yes"),
                                     onPressed: () {
-                                      print("Delete talk!");
+                                      db.deleteTalk(_talk);
+                                      _refreshState();
                                       Navigator.of(context).pop();
                                     },
                                   ),

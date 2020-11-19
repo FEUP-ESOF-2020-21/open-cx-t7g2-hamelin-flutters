@@ -18,7 +18,7 @@ class _CommentListState extends State<CommentList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      primary: false,
+        primary: false,
         shrinkWrap: true,
         itemCount: widget._comments.length,
         itemBuilder: (BuildContext ctxt, int index) {

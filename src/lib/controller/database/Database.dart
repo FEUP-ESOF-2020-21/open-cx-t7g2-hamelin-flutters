@@ -19,6 +19,7 @@ abstract class Database {
   List<Post> getForumPosts(int forumId);
   bool login(String username, String password);
   int register(String fullname, String username, String password);
+  void addPost(int forumId, String username, String title, String text);
   User getUser(String username);
   List<Tag> getTags();
   List<Talk> getTalks();
@@ -28,4 +29,5 @@ abstract class Database {
       List<Tag> tags);
   Tag createTag(String name);
   void addTag(Tag tag);
+  void deleteTalk(Talk talk);
 }

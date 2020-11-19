@@ -18,9 +18,6 @@ class ForumList extends StatelessPage {
   List<dynamic> forums() {
     Database db = super.getController().getDatabase();
 
-    return db
-        .getForums()
-        .map((forum) => ForumTile(forum, _viewForum))
-        .toList();
+    return db.getForums().map((forum) => ForumTile(forum, _viewForum)).toList();
   }
 }

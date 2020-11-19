@@ -13,6 +13,7 @@ class LogoutButton extends StatelessWidget {
         ),
         onPressed: () {
           _controller.setLoggedInUserName(null);
+          _controller.setCurrentForumId(-1);
           Navigator.popUntil(
               context, ModalRoute.withName(Navigator.defaultRouteName));
         });

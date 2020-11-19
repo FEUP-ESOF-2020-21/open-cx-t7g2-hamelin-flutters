@@ -217,6 +217,7 @@ class MockAdapter implements Database {
 
   static List<Talk> _talks = [
     Talk(
+      0,
       "The rise of robots",
       "In this talk, we'll discuss the rise of robots and what it means for our survival as a species.",
       _users[6],
@@ -256,6 +257,12 @@ class MockAdapter implements Database {
     return 0;
   }
 
+  void addPost(int forumId, String username, String title, String text) {
+    for (var user in _users)
+      if (user.getUsername() == username)
+        _posts.add(Post(forumId, user, title, text, List<Comment>()));
+  }
+
   void createTalkForum(Talk talk) {
     _forums.add(Forum(_forums.length, talk.getTitle(), talk.getDescription(),
         talk.getImageURL()));
@@ -275,9 +282,14 @@ class MockAdapter implements Database {
         print('''Added tag "${tag.getName()}" in db''');
       }
     });
-    Talk talk = Talk(title, description, getUser(speaker), image, tags);
+    Talk talk =
+        Talk(_talks.length, title, description, getUser(speaker), image, tags);
     _talks.add(talk);
     createTalkForum(talk);
+  }
+
+  void deleteTalk(Talk talk) {
+    _talks.remove(talk);
   }
 
   Tag createTag(String name) {
