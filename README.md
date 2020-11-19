@@ -315,6 +315,32 @@ Scenario: Adding a talk
     Then An error message appears
 ```
 
+#### Set Talk's Topics / Themes
+
+As an administrator, I want to be able define a given talk's topics/themes, so that we can have a clear separation of interests.
+##### Value and Effort
+    - Value: Must have
+    - Effort: M
+##### Acceptance Tests
+```gherkin
+Scenario: The add talk page is opened
+    Given There exists the tag "AI" in the database
+    When An administrator clicks on "tags" field
+    And Selects the tag "AI"
+    Then That tag is added to the talk
+    
+Scenario: The add talk page is opened
+    Given There are no tags in the database
+    When An administrator clicks on the "tags" field
+    And Starts typing a new tag name
+    Then a "Add new tag" button appears
+    
+Scenario: The administrator starts typing on the "tags" and an "add new tag" button shows up on the screen
+    Given There are not tags in the database
+    When An administrator clicks on the "add new tag button"
+    Then A new tag with the name that the administrator typed exists in the database
+```
+
 #### See Complete Posts and it's Answers
 
 As a conference attendee, I want to be able to see a complete post, so that I can see its answers and better participate in the discussion.
@@ -435,17 +461,6 @@ As a talk host, I want to be able to remove inappropriate questions / wrong answ
 ##### Value and Effort
     - Value: Must have.
     - Effort: S
-##### Acceptance Tests
-```gherkin
-    TODO
-```
-
-#### Set Talk's Topics / Themes
-
-As an administrator, I want to be able define a given talk's topics/themes, so that we can have a clear separation of interests.
-##### Value and Effort
-    - Value: Must have
-    - Effort: M
 ##### Acceptance Tests
 ```gherkin
     TODO
