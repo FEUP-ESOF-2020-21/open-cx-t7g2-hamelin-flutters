@@ -3,6 +3,7 @@ import 'package:confnect/view/widgets/Posts/Comments/CommentTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CommentList extends StatefulWidget {
   List<Comment> _comments;
   CommentList(this._comments);

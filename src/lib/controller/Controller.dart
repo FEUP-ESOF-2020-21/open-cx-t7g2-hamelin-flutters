@@ -1,3 +1,4 @@
+import 'package:confnect/model/Date.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
 
@@ -34,12 +35,12 @@ class Controller {
 
   Database getDatabase() => _database;
 
-  bool createPost(int forumId, String title, String text) {
+  bool createPost(int forumId, String title, String text, Date date) {
     //TODO add notification messages
     if (title == "")
       return false;
     else if (text == "") return false;
-    _database.addPost(forumId, _loggedInUserName, title, text);
+    _database.addPost(forumId, _loggedInUserName, title, text, date);
     print("Post created");
     return true;
   }

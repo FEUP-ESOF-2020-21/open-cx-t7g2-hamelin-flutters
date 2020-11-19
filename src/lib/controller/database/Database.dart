@@ -1,3 +1,4 @@
+import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
@@ -19,7 +20,8 @@ abstract class Database {
   List<Post> getForumPosts(int forumId);
   bool login(String username, String password);
   int register(String fullname, String username, String password);
-  void addPost(int forumId, String username, String title, String text);
+  void addPost(
+      int forumId, String username, String title, String text, Date date);
   User getUser(String username);
   List<Tag> getTags();
   List<Talk> getTalks();

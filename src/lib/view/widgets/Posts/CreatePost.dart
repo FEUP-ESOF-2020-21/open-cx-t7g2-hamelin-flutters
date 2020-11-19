@@ -1,4 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/model/Date.dart';
 import 'package:confnect/view/widgets/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
@@ -30,7 +31,8 @@ class CreatePostInput extends StatelessWidget {
       FormFieldContainer(
         SquareButton('Submit', () {
           String title = titleController.text, text = textController.text;
-          if (this._controller.createPost(this._forumId, title, text)) {
+          if (this._controller.createPost(
+              this._forumId, title, text, new Date(new DateTime.now()))) {
             this._controller.changeAddingPost();
             this._refreshState();
           } else {
