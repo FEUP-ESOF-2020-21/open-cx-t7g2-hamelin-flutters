@@ -18,6 +18,8 @@ class _CommentListState extends State<CommentList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        primary: false,
+        shrinkWrap: true,
         itemCount: widget._comments.length,
         itemBuilder: (BuildContext ctxt, int index) {
           return new CommentTile(widget._comments[index]);

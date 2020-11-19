@@ -28,6 +28,11 @@ class Post {
     return _comments;
   }
 
+  addComment(author, date, description) {
+    Comment c = new Comment(author, date, description);
+    _comments.add(c);
+  }
+
   int getNumberLikes() {
     return _numberLikes;
   }
