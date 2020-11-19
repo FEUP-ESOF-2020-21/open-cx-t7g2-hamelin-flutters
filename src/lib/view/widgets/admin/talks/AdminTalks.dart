@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../talks/AdminTalkTile.dart';
 
+// ignore: must_be_immutable
 class AdminTalks extends StatelessPage {
   Function _refreshState;
   AdminTalks(Controller controller, this._refreshState, {Key key})

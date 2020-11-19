@@ -7,7 +7,6 @@ import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
-import 'package:confnect/view/widgets/TextOnlyButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tagging/flutter_tagging.dart';
 

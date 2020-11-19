@@ -35,5 +35,6 @@ class _HomePageState extends State<HomePage> {
       else if (userRole == UserRole.ADMIN)
         return AdminSection(this._controller);
     }
+    return WelcomeScreen(this._controller);
   }
 }

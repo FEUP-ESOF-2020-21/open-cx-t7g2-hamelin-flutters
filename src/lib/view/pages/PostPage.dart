@@ -1,15 +1,15 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/widgets/Posts/Comments/CommentList.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostContent.dart';
+import 'package:confnect/view/widgets/Posts/PostTile/PostTextVote.dart';
 import '../../model/User.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class PostPage extends StatefulPage {
   Post _post;
   Controller _controller;
@@ -47,25 +47,25 @@ class _PostPageState extends State<PostPage> {
               child: ListView(
                 children: [
                   Container(
-                      decoration: BoxDecoration(
+                      /*decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: PostContent(widget._post, false)),
+                      ),*/
+                      child: PostTextVote(widget._post)),
                   Divider(),
                   CommentList(widget._post.getComments()),
                 ],
               )),
           Align(
             alignment: Alignment.bottomCenter,
-            child: _AddCommentComposer(),
+            child: _addCommentComposer(),
           )
         ],
       ),
     );
   }
 
-  Widget _AddCommentComposer() {
+  Widget _addCommentComposer() {
     return IconTheme(
       data: IconThemeData(color: Theme.of(context).accentColor),
       child: Container(
@@ -81,23 +81,26 @@ class _PostPageState extends State<PostPage> {
             ),
           ],
         ),
-        child: Row(
-          children: [
-            Flexible(
-              child: TextField(
-                controller: _textController,
-                onSubmitted: _handleSubmitted,
-                decoration:
-                    InputDecoration.collapsed(hintText: 'Send a message'),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Row(
+            children: [
+              Flexible(
+                child: TextField(
+                  controller: _textController,
+                  onSubmitted: _handleSubmitted,
+                  decoration:
+                      InputDecoration.collapsed(hintText: 'Send a message'),
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: () => _handleSubmitted(_textController.text)),
-            ),
-          ],
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: IconButton(
+                    icon: Icon(Icons.send),
+                    onPressed: () => _handleSubmitted(_textController.text)),
+              ),
+            ],
+          ),
         ),
       ),
     );

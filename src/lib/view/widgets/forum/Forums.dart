@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../Page.dart';
 
+// ignore: must_be_immutable
 class Forums extends StatefulPage {
   Function refreshState;
   Forums(Controller controller, this.refreshState, {Key key})

@@ -2,6 +2,7 @@ import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/User.dart';
 
 class Talk {
+  // ignore: unused_field
   final int _id;
   final String _title, _description, _imageURL;
   final User _speaker;
