@@ -138,6 +138,8 @@ Our goal is to connect conference goers, helping them discuss and talk beyond th
 
 ### User stories
 
+![User story map](docs/userStoryMap.png)
+
 #### Login Screen
 
 As someone who is envolved in the conference, I want to be able to register in the app, so that I can use it.
@@ -526,8 +528,21 @@ As an administrator, I want to be able to generate codes for hosts and attendees
 
 ### Product increment #1
 
-For this iteration we implemented the [login](#Story-2), [register](#Story-1) and [forum list](#Story-3) pages. Release [v0.1](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.1).
+For this iteration we implemented the [login](#login-screen), [register](#register-screen) and [forum list](#list-forums) pages. <br/>Release: [v0.1](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.1).
 
+### Product increment #2
+
+For this iteration we implemented:
+- [List forum posts](#list-forums-posts)
+- [List talks](#list-talks)
+- [Add talks](#add-talks)
+- [Set talk's topics/themes](#set-talks-topics--themes)
+- [Create posts in forums](#create-posts-in-forums)
+- [Remove talks](#remove-talks)
+- [See complete post and its answers](#see-complete-posts-and-its-answers)
+- [Answer posts / Questions](#answer-posts--questions)
+
+Release: [v0.2](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.2).
 
 ---
 ## Test
