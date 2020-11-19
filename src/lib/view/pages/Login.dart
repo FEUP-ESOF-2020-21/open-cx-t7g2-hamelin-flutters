@@ -32,10 +32,12 @@ class _LoginState extends State<Login> {
         child: Column(
           children: <Widget>[
             GoBackButton(),
+            Spacer(
+              flex: 1,
+            ),
             PageTitle(
               "Login",
               margin: EdgeInsets.only(
-                top: 20,
                 left: 30.0,
                 bottom: 30,
               ),
@@ -79,10 +81,13 @@ class _LoginState extends State<Login> {
                 margin: EdgeInsets.only(bottom: 30)),
             StandardDivider(),
             TextOnlyButton(
-              "Don't have an account? Click Here!",
               () {
                 Navigator.popAndPushNamed(context, AppRouter.REGISTER);
               },
+              text: "Don't have an account? Click Here!",
+            ),
+            Spacer(
+              flex: 2,
             ),
           ],
         ),

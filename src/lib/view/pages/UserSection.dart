@@ -1,55 +1,124 @@
+import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
-import 'package:confnect/view/widgets/Posts/PostList.dart';
-import 'package:confnect/view/widgets/forum/ForumList.dart';
+import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
+
 import '../Page.dart';
 import '../../controller/Controller.dart';
 
 class UserSection extends StatefulPage {
-  UserSection(Controller controller, {Key key}) : super(controller, key: key);
+  final int index;
+  UserSection(Controller controller, {this.index = 0, Key key})
+      : super(controller, key: key);
 
   @override
-  _UserSectionState createState() => _UserSectionState(getController());
+  _UserSectionState createState() =>
+      _UserSectionState(getController(), selectedIndex: this.index);
 }
 
 class _UserSectionState extends State<UserSection> {
-  int _selectedIndex = 0;
+  int selectedIndex = 0;
   final Controller _controller;
-  _UserSectionState(this._controller);
+  _UserSectionState(this._controller, {this.selectedIndex = 0});
 
-  static final List<Widget> _pageBodies = [
-    ForumList(),
-    Text("Coming soon..."),
-    ProfilePage(),
-    PostList(),
-  ];
+  List<Widget> _pageBodies() {
+    return [
+      Forums(this._controller, _refreshState),
+      Container(
+        child: Text("Coming soon..."),
+        margin: EdgeInsets.all(10),
+      ),
+      ProfilePage(),
+      ProfilePage()
+    ];
+  }
+
+  void _refreshState() {
+    setState(() {});
+  }
+
+  Widget _addButton() {
+    if (this.selectedIndex == 0 && this._controller.getCurrentForumId() != -1) {
+      if (this._controller.isAddingPost()) {
+        return FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              this._controller.changeAddingPost();
+            });
+          },
+          elevation: 10,
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
+          child: Icon(
+            Icons.arrow_downward_outlined,
+            size: 30,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
+        );
+      } else {
+        return FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              this._controller.changeAddingPost();
+            });
+          },
+          elevation: 10,
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          hoverColor: Color.fromARGB(200, 100, 100, 100), //Todo: Fix this color
+          child: Icon(
+            Icons.add_comment_outlined,
+            size: 30,
+            color: Color.fromARGB(255, 0, 0, 0),
+          ),
+        );
+      }
+    }
+    return null;
+  }
+
   static List<Widget> _pageAppBars = [];
 
   void _onItemTapped(int idx) {
     setState(() {
-      this._selectedIndex = idx;
+      this.selectedIndex = idx;
+      this._controller.setCurrentForumId(-1);
+      if (this._controller.isAddingPost()) {
+        this._controller.changeAddingPost();
+      }
     });
   }
 
   List<Widget> _initAppBars(List<Widget> action) {
     return [
       AppBar(
-        title: Text("Forums"),
+        title: Text(
+          "Forums",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Search"),
+        title: Text(
+          "Search",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Profile"),
+        title: Text(
+          "Profile",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
       ),
       AppBar(
-        title: Text("Data Science"),
+        title: Text(
+          "Place holder",
+          style: pageTitleTextStyle,
+        ),
         actions: action,
-      ),
+      )
     ];
   }
 
@@ -57,8 +126,10 @@ class _UserSectionState extends State<UserSection> {
   Widget build(BuildContext context) {
     _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
     return Scaffold(
-      appBar: _UserSectionState._pageAppBars[this._selectedIndex],
-      body: _UserSectionState._pageBodies[this._selectedIndex],
+      appBar: _UserSectionState._pageAppBars[this.selectedIndex],
+      body: _pageBodies()[this.selectedIndex],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: _addButton(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -75,11 +146,11 @@ class _UserSectionState extends State<UserSection> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Discussions',
-          ),
+            icon: Icon(Icons.place),
+            label: 'Place Holder',
+          )
         ],
-        currentIndex: this._selectedIndex,
+        currentIndex: this.selectedIndex,
         selectedItemColor: Colors.blue[800],
         onTap: this._onItemTapped,
       ),
