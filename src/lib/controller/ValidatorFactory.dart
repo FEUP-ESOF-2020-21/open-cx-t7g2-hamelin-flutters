@@ -7,12 +7,16 @@ class ValidatorFactory {
     String Function(String value) f = (value) {
       if (fieldRequired && value.length == 0) {
         return fieldName + " can not be empty";
-      } else if (lowerLimit != -1 && value.toString().length < lowerLimit) {
+      } else if (fieldRequired &&
+          lowerLimit != -1 &&
+          value.toString().length < lowerLimit) {
         return fieldName +
             " may not have less than " +
             lowerLimit.toString() +
             " characters";
-      } else if (upperLimit != -1 && value.toString().length > upperLimit) {
+      } else if (fieldRequired &&
+          upperLimit != -1 &&
+          value.toString().length > upperLimit) {
         return fieldName +
             " may not have more than " +
             upperLimit.toString() +
