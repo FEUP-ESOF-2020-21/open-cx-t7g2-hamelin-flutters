@@ -14,6 +14,8 @@ class HorizontalForumList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(scrollDirection: Axis.horizontal, children: forums());
+    return Container(
+        height: 150,
+        child: ListView(scrollDirection: Axis.horizontal, children: forums()));
   }
 }
