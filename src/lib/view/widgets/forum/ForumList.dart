@@ -11,7 +11,6 @@ class ForumList extends StatelessPage {
       : super(controller, key: key);
   @override
   Widget build(BuildContext context) {
-    //final Users users = Provider.of(context);
     return ListView(children: forums());
   }
 

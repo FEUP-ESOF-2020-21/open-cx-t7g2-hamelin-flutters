@@ -6,13 +6,9 @@ import 'package:flutter/material.dart';
 class UserSectionController {
   static List<Widget> initAppBars(List<Widget> action, Controller controller) {
     return [
-      AppBar(
-        title: Text(
-          "Forums",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      ),
+      PreferredSize(
+          preferredSize: Size.fromHeight(100.0),
+          child: MainAppBar(controller, action)),
       AppBar(
         title: Text(
           "Search",
@@ -27,9 +23,13 @@ class UserSectionController {
         ),
         actions: action,
       ),
-      PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: MainAppBar(controller, action)),
+      AppBar(
+        title: Text(
+          "Forums",
+          style: pageTitleTextStyle,
+        ),
+        actions: action,
+      ),
     ];
   }
 }

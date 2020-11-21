@@ -46,12 +46,7 @@ class _PostPageState extends State<PostPage> {
               padding: EdgeInsets.fromLTRB(20, 20, 20, 70),
               child: ListView(
                 children: [
-                  Container(
-                      /*decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),*/
-                      child: PostTextVote(widget._post)),
+                  PostTextVote(widget._post),
                   Divider(),
                   CommentList(widget._post.getComments()),
                 ],

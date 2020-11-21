@@ -26,13 +26,13 @@ class _UserSectionState extends State<UserSection> {
 
   List<Widget> _pageBodies() {
     return [
-      Forums(this._controller, _refreshState),
+      MainPage(_controller),
       Container(
         child: Text("Coming soon..."),
         margin: EdgeInsets.all(10),
       ),
       ProfilePage(),
-      MainPage(_controller),
+      Forums(this._controller, _refreshState),
     ];
   }
 
@@ -104,8 +104,8 @@ class _UserSectionState extends State<UserSection> {
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.forum),
-            label: 'Forums',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
@@ -116,9 +116,9 @@ class _UserSectionState extends State<UserSection> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          )
+            icon: Icon(Icons.forum),
+            label: 'Forums',
+          ),
         ],
         currentIndex: this.selectedIndex,
         selectedItemColor: Colors.blue[800],

@@ -1,5 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
+import 'package:confnect/view/pages/PostsPage.dart';
+import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/ForumTileMain.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +11,10 @@ class HorizontalForumList extends StatelessWidget {
   HorizontalForumList(this._controller);
   List<dynamic> forums() {
     Database db = _controller.getDatabase();
-    return db.getForums().map((forum) => ForumTileMain(forum)).toList();
+    return db
+        .getForums()
+        .map((forum) => ForumTileMain(forum, _controller))
+        .toList();
   }
 
   @override

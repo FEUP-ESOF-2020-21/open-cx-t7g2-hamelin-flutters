@@ -1,9 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/model/Forum.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/style/TextStyle.dart';
-import 'package:confnect/view/widgets/Posts/PostList.dart';
-import 'package:confnect/view/widgets/forum/ForumTileMain.dart';
+import 'package:confnect/view/widgets/Posts/PostListMain.dart';
 import 'package:confnect/view/widgets/forum/HorizontalForumList.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +38,7 @@ class _MainPageState extends State<MainPage> {
               textAlign: TextAlign.left,
             ),
           ),
-          //Expanded(child: PostList(widget._controller)),
+          Expanded(child: PostListMain(widget._controller)),
         ],
       ),
     );
