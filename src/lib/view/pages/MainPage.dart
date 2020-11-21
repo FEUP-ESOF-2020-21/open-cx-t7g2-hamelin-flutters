@@ -1,6 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/widgets/Posts/PostList.dart';
+import 'package:confnect/view/widgets/forum/HorizontalForumList.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -16,7 +17,10 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [],
+      children: [
+        Text("ZAS"),
+        //HorizontalForumList(widget._controller), //TODO RAFA MUDAR AQUI
+      ],
     );
   }
 }

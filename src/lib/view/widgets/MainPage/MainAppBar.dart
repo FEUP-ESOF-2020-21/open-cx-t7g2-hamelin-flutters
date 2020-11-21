@@ -14,7 +14,7 @@ class MainAppBar extends StatelessWidget {
       );
     else
       return Text(
-        "Hi," + _controller.getLoggedInUserName(),
+        "Hi," + _controller.getLoggedInFullName(),
         style: mainpageTitleTextStyle,
       );
   }

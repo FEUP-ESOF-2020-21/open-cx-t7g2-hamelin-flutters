@@ -116,8 +116,8 @@ class _UserSectionState extends State<UserSection> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.place),
-            label: 'Place Holder',
+            icon: Icon(Icons.home),
+            label: 'Home',
           )
         ],
         currentIndex: this.selectedIndex,
