@@ -34,8 +34,12 @@ class PostTileMain extends StatelessWidget {
             onTap: _postPage,
             child: Column(
               children: [
-                UserTimeHeaderForum(_post.getAuthor(), _post.getDate(), 20,
-                    _controller.getDatabase().getForum(_post.getForumId())),
+                UserTimeHeaderForum(
+                    _post.getAuthor(),
+                    _post.getDate(),
+                    20,
+                    _controller.getDatabase().getForum(_post.getForumId()),
+                    _controller),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                   child: Text(_post.getDescription()),

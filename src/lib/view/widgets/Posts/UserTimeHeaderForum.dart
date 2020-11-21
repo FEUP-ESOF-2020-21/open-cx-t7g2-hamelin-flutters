@@ -1,6 +1,8 @@
+import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/User.dart';
+import 'package:confnect/view/pages/ForumPage.dart';
 import 'package:confnect/view/widgets/User/AvatarImg.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +12,10 @@ class UserTimeHeaderForum extends StatefulWidget {
   Date _date;
   double _height;
   Forum _forum;
+  Controller _controller;
 
-  UserTimeHeaderForum(this._user, this._date, this._height, this._forum);
+  UserTimeHeaderForum(
+      this._user, this._date, this._height, this._forum, this._controller);
   @override
   _UserTimeHeaderForumState createState() => _UserTimeHeaderForumState();
 }
@@ -36,9 +40,17 @@ class _UserTimeHeaderForumState extends State<UserTimeHeaderForum> {
                 ],
               ),
               Icon(Icons.arrow_right),
-              Text(
-                widget._forum.getTitle(),
-                overflow: TextOverflow.visible,
+              InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ForumPage(widget._controller, widget._forum)),
+                ),
+                child: Text(
+                  widget._forum.getTitle(),
+                  overflow: TextOverflow.visible,
+                ),
               )
             ],
           ),
