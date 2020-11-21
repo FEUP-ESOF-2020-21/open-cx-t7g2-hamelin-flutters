@@ -1,3 +1,5 @@
+import 'package:confnect/controller/UserSectionController.dart';
+import 'package:confnect/view/pages/MainPage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
@@ -30,7 +32,7 @@ class _UserSectionState extends State<UserSection> {
         margin: EdgeInsets.all(10),
       ),
       ProfilePage(),
-      ProfilePage()
+      MainPage(_controller),
     ];
   }
 
@@ -89,42 +91,10 @@ class _UserSectionState extends State<UserSection> {
     });
   }
 
-  List<Widget> _initAppBars(List<Widget> action) {
-    return [
-      AppBar(
-        title: Text(
-          "Forums",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      ),
-      AppBar(
-        title: Text(
-          "Search",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      ),
-      AppBar(
-        title: Text(
-          "Profile",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      ),
-      AppBar(
-        title: Text(
-          "Place holder",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      )
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
-    _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
+    _pageAppBars = UserSectionController.initAppBars(
+        <Widget>[LogoutButton(_controller)], _controller);
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
       body: _pageBodies()[this.selectedIndex],
