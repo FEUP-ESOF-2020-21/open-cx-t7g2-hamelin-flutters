@@ -21,7 +21,7 @@ class AdminTalkTile extends StatelessPage {
           builder: (context) => EditTalk(_controller, _refreshState, talk)),
     );
   }
-
+  
   @override
   Widget build(BuildContext context) {
     Database db = super.getController().getDatabase();
@@ -33,7 +33,7 @@ class AdminTalkTile extends StatelessPage {
           _editTalk(
             context,
             _talk,
-          ); // this will push the forum page on the navigator
+          );
         },
         child: Container(
           padding: EdgeInsets.fromLTRB(20, 20, 0, 20),

@@ -83,6 +83,7 @@ class _EditTalkState extends State<EditTalk> {
         },
       );
     } else if (_formKey.currentState.validate()) {
+      // TODO: set minimum requirements
       String talkTitle = (talkTitleController.text == "")
               ? _talk.getTitle()
               : talkTitleController.text,
@@ -176,7 +177,7 @@ class _EditTalkState extends State<EditTalk> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Add Talk",
+          "Edit Talk",
           style: pageTitleTextStyle,
         ),
       ),
