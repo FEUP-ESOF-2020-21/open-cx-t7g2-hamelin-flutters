@@ -55,11 +55,15 @@ class _RegisterState extends State<Register> {
                       validator: ValidatorFactory.getValidator('Full name',
                           fieldRequired: true)),
                 ),
-                FormFieldContainer(
-                  FormTextField('Username', usernameController,
-                      validator: ValidatorFactory.getValidator('Full name',
-                          fieldRequired: true)),
-                ),
+                FormFieldContainer(FormTextField('Username', usernameController,
+                    validator: ValidatorFactory.getValidator('Full name',
+                        fieldRequired: true, extender: (value) {
+                      if (db.existsUser(value)) {
+                        return "User with username " +
+                            value.toString() +
+                            " already exists!";
+                      }
+                    }))),
                 FormFieldContainer(
                   FormTextField('Password', passwordController,
                       obscureText: true,
@@ -69,82 +73,17 @@ class _RegisterState extends State<Register> {
                     bottom: 30,
                   ),
                 ),
-                FormFieldContainer(
-                  SquareButton('Register', () {
+                FormFieldContainer(SquareButton('Register', () {
+                  if (_formKey.currentState.validate()) {
                     String fullname = fullNameController.text,
                         username = usernameController.text,
                         password = passwordController.text;
-                    if (db.register(fullname, username, password) == 1) {
-                      _controller.setLoggedInUserName(username);
-                      Navigator.popUntil(context,
-                          ModalRoute.withName(Navigator.defaultRouteName));
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          // return object of type Dialog
-                          return AlertDialog(
-                            title: new Text("Register"),
-                            content: new Text("You've been registered!"),
-                            actions: <Widget>[
-                              // usually buttons at the bottom of the dialog
-                              new FlatButton(
-                                child: new Text("Close"),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    } else {
-                      //empty values
-                      if (db.register(fullname, username, password) == 0) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            // return object of type Dialog
-                            return AlertDialog(
-                              title: new Text("Register error"),
-                              content: new Text("You must fill in all fields!"),
-                              actions: <Widget>[
-                                // usually buttons at the bottom of the dialog
-                                new FlatButton(
-                                  child: new Text("Close"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                      //username already exists
-                      else if (db.register(fullname, username, password) == 2) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            // return object of type Dialog
-                            return AlertDialog(
-                              title: new Text("Register error"),
-                              content: new Text("Username already exists!"),
-                              actions: <Widget>[
-                                // usually buttons at the bottom of the dialog
-                                new FlatButton(
-                                  child: new Text("Close"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    }
-                  }),
-                )
+                    //userImageURL = talkImageURLController.text;
+                    db.register(fullname, username, password);
+                    //_onTalkAdded();
+                    Navigator.pop(context);
+                  }
+                })),
               ],
             ),
           ),

@@ -19,7 +19,7 @@ abstract class Database {
   Forum getForum(int id);
   List<Post> getForumPosts(int forumId);
   bool login(String username, String password);
-  int register(String fullname, String username, String password);
+  void register(String fullname, String username, String password);
   void addPost(
       int forumId, String username, String title, String text, Date date);
   User getUser(String username);

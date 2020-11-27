@@ -263,19 +263,9 @@ class MockAdapter implements Database {
     return res;
   }
 
-  int register(String fullname, String username, String password) {
+  void register(String fullname, String username, String password) {
     int id = _users.length;
-    if (fullname.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
-      for (var user in _users) {
-        if (user.getUsername() == username) {
-          return 2;
-        }
-      }
-
-      _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
-      return 1;
-    }
-    return 0;
+    _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
   }
 
   void addPost(
@@ -330,6 +320,7 @@ class MockAdapter implements Database {
   }
 
   bool existsUser(String username) {
+    print(getUser(username));
     return getUser(username) != null;
   }
 
