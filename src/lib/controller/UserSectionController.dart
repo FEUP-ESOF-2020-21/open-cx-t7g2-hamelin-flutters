@@ -4,11 +4,11 @@ import 'package:confnect/view/widgets/MainPage/MainAppBar.dart';
 import 'package:flutter/material.dart';
 
 class UserSectionController {
-  static List<Widget> initAppBars(List<Widget> action, Controller controller) {
+  static List<Widget> initAppBars(
+      List<Widget> action, Controller controller, Function refreshState) {
     return [
-      PreferredSize(
-          preferredSize: Size.fromHeight(100.0),
-          child: MainAppBar(controller, action)),
+      MainAppBar(controller, action, controller.getDatabase(), refreshState)
+          .getAppBar(),
       AppBar(
         title: Text(
           "Search",

@@ -8,13 +8,17 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class MainPage extends StatefulPage {
   Controller _controller;
-  MainPage(this._controller) : super(_controller);
+  Function _refreshState;
+  MainPage(this._controller, this._refreshState) : super(_controller);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _MainPageState createState() => _MainPageState(_refreshState);
 }
 
 class _MainPageState extends State<MainPage> {
+  Function _refreshState;
+  _MainPageState(this._refreshState);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +33,7 @@ class _MainPageState extends State<MainPage> {
               textAlign: TextAlign.left,
             ),
           ),
-          HorizontalForumList(widget._controller),
+          HorizontalForumList(widget._controller, this._refreshState),
           Padding(
             padding: const EdgeInsets.only(bottom: 10, top: 10),
             child: Text(

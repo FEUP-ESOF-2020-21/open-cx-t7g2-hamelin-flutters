@@ -3,6 +3,7 @@ import 'package:confnect/view/pages/MainPage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
+import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
 
@@ -25,15 +26,27 @@ class _UserSectionState extends State<UserSection> {
   _UserSectionState(this._controller, {this.selectedIndex = 0});
 
   List<Widget> _pageBodies() {
-    return [
-      MainPage(_controller),
-      Container(
-        child: Text("Coming soon..."),
-        margin: EdgeInsets.all(10),
-      ),
-      ProfilePage(),
-      Forums(this._controller, _refreshState),
-    ];
+    if (this._controller.currentForumId == -1) {
+      return [
+        MainPage(_controller, _refreshState),
+        Container(
+          child: Text("Coming soon..."),
+          margin: EdgeInsets.all(10),
+        ),
+        ProfilePage(),
+        Forums(this._controller, _refreshState),
+      ];
+    } else {
+      return [
+        PostList(_controller, this._controller.currentForumId),
+        Container(
+          child: Text("Coming soon..."),
+          margin: EdgeInsets.all(10),
+        ),
+        ProfilePage(),
+        Forums(this._controller, _refreshState),
+      ];
+    }
   }
 
   void _refreshState() {
@@ -41,7 +54,8 @@ class _UserSectionState extends State<UserSection> {
   }
 
   Widget _addButton() {
-    if (this.selectedIndex == 0 && this._controller.getCurrentForumId() != -1) {
+    if ((this.selectedIndex == 0 || this.selectedIndex == 3) &&
+        this._controller.getCurrentForumId() != -1) {
       if (this._controller.isAddingPost()) {
         return FloatingActionButton(
           onPressed: () {
@@ -94,7 +108,7 @@ class _UserSectionState extends State<UserSection> {
   @override
   Widget build(BuildContext context) {
     _pageAppBars = UserSectionController.initAppBars(
-        <Widget>[LogoutButton(_controller)], _controller);
+        <Widget>[LogoutButton(_controller)], _controller, _refreshState);
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
       body: _pageBodies()[this.selectedIndex],

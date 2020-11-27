@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 
 class HorizontalForumList extends StatelessWidget {
   final Controller _controller;
+  final Function _refreshState;
 
-  HorizontalForumList(this._controller);
+  HorizontalForumList(this._controller, this._refreshState);
   List<dynamic> forums() {
     Database db = _controller.getDatabase();
     return db
         .getForums()
-        .map((forum) => ForumTileMain(forum, _controller))
+        .map((forum) => ForumTileMain(forum, _controller, _refreshState))
         .toList();
   }
 
