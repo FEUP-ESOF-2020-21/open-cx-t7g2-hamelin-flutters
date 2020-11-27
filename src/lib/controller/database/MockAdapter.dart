@@ -268,16 +268,13 @@ class MockAdapter implements Database {
     if (fullname.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
       for (var user in _users) {
         if (user.getUsername() == username) {
-          print("Return");
           return 2;
         }
       }
 
       _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
-      print("Register success");
       return 1;
     }
-    print("Register failed");
     return 0;
   }
 
