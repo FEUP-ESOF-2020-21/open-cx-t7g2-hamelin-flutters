@@ -44,7 +44,7 @@ class _UserSectionState extends State<UserSection> {
           margin: EdgeInsets.all(10),
         ),
         ProfilePage(),
-        PostList(_controller, this._controller.currentForumId)
+        Forums(_controller, _refreshState),
       ];
     }
   }

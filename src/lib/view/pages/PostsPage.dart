@@ -36,34 +36,8 @@ class _PostsPageState extends State<PostsPage> {
   Widget build(BuildContext context) {
     //final Users users = Provider.of(context);
     Database db = this._controller.getDatabase();
-    List<Widget> ret = [
-      Container(
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-        child: Row(
-          children: [
-            Flexible(
-              child: GoBackButton(
-                fn: () {
-                  widget._viewForum(-1);
-                  if (this._controller.isAddingPost())
-                    this._controller.changeAddingPost();
-                },
-                margin: EdgeInsets.zero,
-              ),
-              flex: 1,
-            ),
-            Flexible(
-              child: PageTitle(
-                  db.getForum(this._controller.getCurrentForumId()).getTitle(),
-                  margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                  scaleFactor: 0.9),
-              flex: 7,
-            ),
-          ],
-        ),
-      ),
-    ];
-    ret.addAll(posts());
+    List<Widget> ret = posts();
+    //ret.addAll(posts());
     if (this._controller.isAddingPost()) {
       return ListView(
         children: <Widget>[
