@@ -1,5 +1,6 @@
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/widgets/Posts/UserTimeHeader.dart';
+import 'package:confnect/view/widgets/Posts/UserTimeMeetHeader.dart';
 import 'package:flutter/material.dart';
 
 import 'VoteComment.dart';
@@ -18,7 +19,8 @@ class _PostTextVoteState extends State<PostTextVote> {
       //padding: EdgeInsets.all(10.0),
       child: Column(
         children: [
-          UserTimeHeader(widget._post.getAuthor(), widget._post.getDate(), 20),
+          UserTimeMeetHeader(
+              widget._post.getAuthor(), widget._post.getDate(), 20),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
             child: Text(widget._post.getDescription()),

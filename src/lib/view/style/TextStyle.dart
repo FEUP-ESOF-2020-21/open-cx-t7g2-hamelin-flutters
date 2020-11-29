@@ -65,3 +65,11 @@ var talkSpeakerTextStyle = GoogleFonts.openSans(
     color: Colors.white,
   ),
 );
+
+var meetupButtonTextStyle = GoogleFonts.openSans(
+  textStyle: TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: BodyTextSize1,
+    color: Colors.white,
+  ),
+);
