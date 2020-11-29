@@ -35,7 +35,6 @@ class _PostsPageState extends State<PostsPage> {
   @override
   Widget build(BuildContext context) {
     //final Users users = Provider.of(context);
-    Database db = this._controller.getDatabase();
     List<Widget> ret = posts();
     //ret.addAll(posts());
     if (this._controller.isAddingPost()) {

@@ -38,7 +38,7 @@ class _UserSectionState extends State<UserSection> {
       ];
     } else {
       return [
-        PostList(_controller, this._controller.currentForumId),
+        Forums(_controller, _refreshState),
         Container(
           child: Text("Coming soon..."),
           margin: EdgeInsets.all(10),
