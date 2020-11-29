@@ -25,7 +25,12 @@ class UserSectionController {
       ),
       AppBar(
         title: Text(
-          "Forums",
+          controller.currentForumId == -1
+              ? 'Forums'
+              : controller
+                  .getDatabase()
+                  .getForum(controller.getCurrentForumId())
+                  .getTitle(),
           style: pageTitleTextStyle,
         ),
         actions: action,
