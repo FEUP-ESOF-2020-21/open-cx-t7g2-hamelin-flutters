@@ -12,8 +12,9 @@ import 'VoteComment.dart';
 class PostTileMain extends StatelessWidget {
   final Post _post; // = new Post("Ademar", "Ensinando flutter", "lorem ipsum");
   final Controller _controller;
+  final Function _refreshState;
 
-  const PostTileMain(this._post, this._controller);
+  const PostTileMain(this._post, this._controller, this._refreshState);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,8 @@ class PostTileMain extends StatelessWidget {
                     _post.getDate(),
                     20,
                     _controller.getDatabase().getForum(_post.getForumId()),
-                    _controller),
+                    _controller,
+                    _refreshState),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                   child: Text(_post.getDescription()),

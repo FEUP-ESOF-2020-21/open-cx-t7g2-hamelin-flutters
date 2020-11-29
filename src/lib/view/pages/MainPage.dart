@@ -42,7 +42,8 @@ class _MainPageState extends State<MainPage> {
               textAlign: TextAlign.left,
             ),
           ),
-          Expanded(child: PostListMain(widget._controller)),
+          Expanded(
+              child: PostListMain(widget._controller, widget._refreshState)),
         ],
       ),
     );

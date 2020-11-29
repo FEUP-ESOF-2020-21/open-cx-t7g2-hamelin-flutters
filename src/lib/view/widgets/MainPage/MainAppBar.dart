@@ -44,9 +44,12 @@ class MainAppBar {
       );
     } else {
       return AppBar(
-        title: Text(
-          db.getForum(this._controller.getCurrentForumId()).getTitle(),
-          style: pageTitleTextStyle,
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Text(
+            db.getForum(this._controller.getCurrentForumId()).getTitle(),
+            style: pageTitleTextStyle,
+          ),
         ),
         actions: _action,
         leading: new GoBackButton(

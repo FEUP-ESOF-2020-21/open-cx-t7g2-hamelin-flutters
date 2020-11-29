@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class PostListMain extends StatefulWidget {
   Controller _controller;
-  PostListMain(this._controller);
+  Function _refreshState;
+  PostListMain(this._controller, this._refreshState);
   @override
   _PostListMainState createState() => _PostListMainState();
 }
@@ -19,7 +20,8 @@ class _PostListMainState extends State<PostListMain> {
     return db
         .getPosts()
         //.getForumPosts(widget._controller.getCurrentForumId())
-        .map((post) => PostTileMain(post, widget._controller))
+        .map((post) =>
+            PostTileMain(post, widget._controller, widget._refreshState))
         .toList();
   }
 

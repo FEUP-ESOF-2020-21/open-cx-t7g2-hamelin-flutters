@@ -13,9 +13,10 @@ class UserTimeHeaderForum extends StatefulWidget {
   double _height;
   Forum _forum;
   Controller _controller;
+  Function _refreshState;
 
-  UserTimeHeaderForum(
-      this._user, this._date, this._height, this._forum, this._controller);
+  UserTimeHeaderForum(this._user, this._date, this._height, this._forum,
+      this._controller, this._refreshState);
   @override
   _UserTimeHeaderForumState createState() => _UserTimeHeaderForumState();
 }
@@ -41,12 +42,10 @@ class _UserTimeHeaderForumState extends State<UserTimeHeaderForum> {
               ),
               Icon(Icons.arrow_right),
               InkWell(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          ForumPage(widget._controller, widget._forum)),
-                ),
+                onTap: () {
+                  widget._controller.setCurrentForumId(widget._forum.getId());
+                  widget._refreshState();
+                },
                 child: Container(
                   width: 80,
                   child: SingleChildScrollView(

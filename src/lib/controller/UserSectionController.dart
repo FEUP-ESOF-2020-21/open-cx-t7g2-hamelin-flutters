@@ -25,14 +25,17 @@ class UserSectionController {
         actions: action,
       ),
       AppBar(
-        title: Text(
-          controller.currentForumId == -1
-              ? 'Forums'
-              : controller
-                  .getDatabase()
-                  .getForum(controller.getCurrentForumId())
-                  .getTitle(),
-          style: pageTitleTextStyle,
+        title: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Text(
+            controller.currentForumId == -1
+                ? 'Forums'
+                : controller
+                    .getDatabase()
+                    .getForum(controller.getCurrentForumId())
+                    .getTitle(),
+            style: pageTitleTextStyle,
+          ),
         ),
         actions: action,
         leading: controller.getCurrentForumId() == -1
