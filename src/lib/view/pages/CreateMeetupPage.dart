@@ -3,6 +3,7 @@ import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/Page.dart';
+import 'package:confnect/view/widgets/Meetup/MeetupInfo.dart';
 import 'package:flutter/material.dart';
 
 class CreateMeetupPage extends StatefulPage {
@@ -19,7 +20,7 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
     widget._post.createMeetup(
         new Date(new DateTime.now()),
         "Kitchen",
-        "Lorem Ipsum ",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
         widget._controller
             .getDatabase()
             .getUser(widget._controller.getLoggedInUserName()));
@@ -33,24 +34,7 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
       appBar: AppBar(
         title: Text("Create Meetup"),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.location_on),
-              Text(meetup.getLocation()),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(Icons.access_time),
-              Text(meetup.getDate().getFormmatedDate()),
-            ],
-          ),
-          Text(meetup.getDescription()),
-        ],
-      ),
+      body: MeetupInfo(meetup),
     );
   }
 }

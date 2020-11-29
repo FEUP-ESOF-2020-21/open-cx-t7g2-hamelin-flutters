@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 class AddComment extends StatefulWidget {
   Controller _controller;
   List<Comment> _comments;
-  PostPageState _postPage;
+  final void Function(User user, Date date, String text) onSubmitted;
 
-  AddComment(this._controller, this._comments, this._postPage);
+  AddComment(this._controller, this._comments, {this.onSubmitted});
   @override
   _AddCommentState createState() => _AddCommentState();
 }
@@ -24,9 +24,7 @@ class _AddCommentState extends State<AddComment> {
     String username = widget._controller.getLoggedInUserName();
     User user = widget._controller.getDatabase().getUser(username);
     Date date = new Date(DateTime.now());
-    widget._postPage.setState(() {
-      widget._comments.add(new Comment(user, date, text));
-    });
+    widget.onSubmitted(user, date, text);
     _textController.clear();
   }
 

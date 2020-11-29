@@ -1,4 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/widgets/Posts/Comments/AddComent.dart';
@@ -46,7 +47,14 @@ class PostPageState extends State<PostPage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: AddComment(
-                widget._controller, widget._post.getComments(), this),
+              widget._controller,
+              widget._post.getComments(),
+              onSubmitted: (user, date, text) {
+                setState(() {
+                  widget._post.getComments().add(new Comment(user, date, text));
+                });
+              },
+            ),
           )
         ],
       ),

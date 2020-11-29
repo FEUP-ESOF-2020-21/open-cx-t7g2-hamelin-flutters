@@ -1,4 +1,5 @@
 import 'package:confnect/model/Date.dart';
+import 'package:confnect/model/User.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
 
@@ -30,6 +31,10 @@ class Controller {
   bool isAddingPost() => this._addingPost;
 
   String getLoggedInUserName() => this._loggedInUserName;
+
+  User getLoggedInUser() {
+    return this._database.getUser(this._loggedInUserName);
+  }
 
   void setOnSessionChange(Function fn) => this._onSessionChange = fn;
 

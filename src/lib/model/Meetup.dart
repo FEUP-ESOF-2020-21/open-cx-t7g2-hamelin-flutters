@@ -1,3 +1,4 @@
+import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
@@ -35,11 +36,15 @@ class Meetup {
   }
 
   void addGoingUser(User user) {
-    _peopleGoing.add(user);
+    if (!_peopleGoing.contains(user)) _peopleGoing.add(user);
   }
 
   void removeGoingUser(User user) {
-    _peopleGoing.remove(user);
+    if (_peopleGoing.contains(user)) _peopleGoing.remove(user);
+  }
+
+  bool loggedUserIsGoing(User user) {
+    return _peopleGoing.contains(user);
   }
 
   int getNumberPeopleGoing() {
