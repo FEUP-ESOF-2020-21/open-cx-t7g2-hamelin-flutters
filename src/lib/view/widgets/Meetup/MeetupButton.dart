@@ -1,10 +1,10 @@
-import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MeetupButton extends StatefulWidget {
-  double _height;
+  final VoidCallback onButtonSelected;
 
-  MeetupButton(this._height);
+  MeetupButton({this.onButtonSelected});
   @override
   _MeetupButtonState createState() => _MeetupButtonState();
 }
@@ -21,7 +21,7 @@ class _MeetupButtonState extends State<MeetupButton> {
       textColor: Colors.white,
       splashColor: Colors.greenAccent,
       onPressed: () {
-        /*...*/
+        widget.onButtonSelected();
       },
       child: Row(
         children: [

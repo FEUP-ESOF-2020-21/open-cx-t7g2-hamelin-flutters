@@ -6,16 +6,18 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class UserTimeMeetHeader extends StatefulWidget {
-  final User _user;
+  User _user;
   Date _date;
   double _height;
+  final VoidCallback onMeetupSelected;
 
-  UserTimeMeetHeader(this._user, this._date, this._height);
+  UserTimeMeetHeader(this._user, this._date, this._height,
+      {this.onMeetupSelected});
   @override
-  _UserTimeMeetHeaderState createState() => _UserTimeMeetHeaderState();
+  UserTimeMeetHeaderState createState() => UserTimeMeetHeaderState();
 }
 
-class _UserTimeMeetHeaderState extends State<UserTimeMeetHeader> {
+class UserTimeMeetHeaderState extends State<UserTimeMeetHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +38,9 @@ class _UserTimeMeetHeaderState extends State<UserTimeMeetHeader> {
                 children: [
                   Container(
                       margin: EdgeInsets.only(right: 5),
-                      child: MeetupButton(widget._height)),
+                      child: MeetupButton(
+                        onButtonSelected: () => widget.onMeetupSelected(),
+                      )),
                   Text(widget._date.getMinutesSince()),
                 ],
               ))

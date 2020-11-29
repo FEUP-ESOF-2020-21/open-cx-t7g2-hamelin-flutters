@@ -1,4 +1,5 @@
 import 'package:confnect/model/Comment.dart';
+import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/User.dart';
 
 import 'Date.dart';
@@ -9,6 +10,8 @@ class Post {
   final Date _date;
   List<Comment> _comments;
   int _numberLikes = 0, _numberDislikes = 0, _forumId;
+  bool isMeetingUp = false;
+  Meetup _meetup;
 
   Post(this._forumId, this._author, this._title, this._description, this._date,
       [this._comments]);
@@ -62,5 +65,10 @@ class Post {
 
   decrementDislike() {
     _numberDislikes--;
+  }
+
+  void createMeetup(
+      Date date, String location, String description, User meetingCreator) {
+    _meetup = new Meetup(date, location, description, meetingCreator);
   }
 }
