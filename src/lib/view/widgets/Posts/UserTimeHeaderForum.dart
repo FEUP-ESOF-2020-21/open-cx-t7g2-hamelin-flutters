@@ -47,11 +47,17 @@ class _UserTimeHeaderForumState extends State<UserTimeHeaderForum> {
                       builder: (context) =>
                           ForumPage(widget._controller, widget._forum)),
                 ),
-                child: Text(
-                  widget._forum.getTitle(),
-                  overflow: TextOverflow.visible,
+                child: Container(
+                  width: 80,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Text(
+                      widget._forum.getTitle(),
+                      overflow: TextOverflow.visible,
+                    ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
           Container(
