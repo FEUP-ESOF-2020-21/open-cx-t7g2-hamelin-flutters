@@ -1,3 +1,4 @@
+import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
 
@@ -5,8 +6,9 @@ class Meetup {
   Date _date;
   String _location;
   String _description;
-  List<User> _peopleGoing;
+  List<User> _peopleGoing = [];
   User _meetingCreator;
+  List<Comment> _comments = [];
 
   Meetup(this._date, this._location, this._description, this._meetingCreator) {
     _peopleGoing.add(_meetingCreator);
@@ -18,6 +20,10 @@ class Meetup {
 
   Date getDate() {
     return _date;
+  }
+
+  List<Comment> getComments() {
+    return _comments;
   }
 
   void setDate(Date newDate) {

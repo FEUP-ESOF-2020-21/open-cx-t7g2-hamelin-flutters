@@ -1,7 +1,13 @@
+import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/model/Meetup.dart';
+import 'package:confnect/view/pages/MeetupPage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
 class MeetupBox extends StatefulWidget {
+  Controller _controller;
+  Meetup _meetup;
+  MeetupBox(this._controller, this._meetup);
   @override
   _MeetupBoxState createState() => _MeetupBoxState();
 }
@@ -32,7 +38,14 @@ class _MeetupBoxState extends State<MeetupBox> {
                 Padding(
                   padding: const EdgeInsets.only(right: 5),
                   child: FlatButton(
-                      onPressed: () => {},
+                      onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MeetupPage(
+                                      widget._controller, widget._meetup)),
+                            )
+                          },
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),

@@ -71,4 +71,8 @@ class Post {
       Date date, String location, String description, User meetingCreator) {
     _meetup = new Meetup(date, location, description, meetingCreator);
   }
+
+  Meetup getMeetup() {
+    return this._meetup;
+  }
 }

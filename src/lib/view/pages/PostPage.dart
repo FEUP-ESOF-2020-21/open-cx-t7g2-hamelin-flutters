@@ -38,14 +38,15 @@ class PostPageState extends State<PostPage> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
                       ),*/
-                      child: PostTextVote(widget._post)),
+                      child: PostTextVote(widget._post, widget._controller)),
                   Divider(),
                   CommentList(widget._post.getComments()),
                 ],
               )),
           Align(
             alignment: Alignment.bottomCenter,
-            child: AddComment(widget._controller, widget._post, this),
+            child: AddComment(
+                widget._controller, widget._post.getComments(), this),
           )
         ],
       ),

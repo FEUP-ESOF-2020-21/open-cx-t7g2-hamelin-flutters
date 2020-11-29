@@ -1,4 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/User.dart';
@@ -8,10 +9,10 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class AddComment extends StatefulWidget {
   Controller _controller;
-  Post _post;
+  List<Comment> _comments;
   PostPageState _postPage;
 
-  AddComment(this._controller, this._post, this._postPage);
+  AddComment(this._controller, this._comments, this._postPage);
   @override
   _AddCommentState createState() => _AddCommentState();
 }
@@ -21,10 +22,10 @@ class _AddCommentState extends State<AddComment> {
 
   void _handleSubmitted(String text) {
     String username = widget._controller.getLoggedInUserName();
-    User u = widget._controller.getDatabase().getUser(username);
-    Date d = new Date(DateTime.now());
+    User user = widget._controller.getDatabase().getUser(username);
+    Date date = new Date(DateTime.now());
     widget._postPage.setState(() {
-      widget._post.addComment(u, d, text);
+      widget._comments.add(new Comment(user, date, text));
     });
     _textController.clear();
   }
