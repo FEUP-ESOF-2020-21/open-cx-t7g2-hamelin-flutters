@@ -237,6 +237,7 @@ class MockAdapter implements Database {
     Tag(0, "AI"),
     Tag(1, "Robotics"),
     Tag(2, "Conspiracy Theories"),
+    Tag(3, "Quantum Computers"),
   ];
 
   static List<Talk> _talks = [
@@ -247,6 +248,14 @@ class MockAdapter implements Database {
       _users[6],
       "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
       [_tags[0], _tags[1], _tags[2]],
+    ),
+    Talk(
+      1,
+      "Qubits: Quantum bits",
+      "A talk about quantum computers, their origin, their current state, and predicitons for the future.",
+      _users[6],
+      "https://i0.wp.com/indusdictum.com/wp-content/uploads/2020/03/Indian-scientists-from-RRI-scientists-devise-test-for-fairness-of-qubits-in-quantum-computers.png",
+      [_tags[3]],
     ),
   ];
 
