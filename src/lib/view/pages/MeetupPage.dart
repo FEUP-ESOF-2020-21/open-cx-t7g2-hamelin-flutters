@@ -21,42 +21,33 @@ class _MeetupPageState extends State<MeetupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Meetup"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            MeetupInfo(widget._meetup),
-            Divider(),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: CommentList(widget._meetup.getComments()),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: AddComment(
-                      widget._controller,
-                      widget._meetup.getComments(),
-                      onSubmitted: (user, date, text) {
-                        setState(() {
-                          widget._meetup
-                              .getComments()
-                              .add(new Comment(user, date, text));
-                        });
-                      },
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
+        appBar: AppBar(
+          title: Text("Meetup"),
         ),
-      ),
-    );
+        body: Stack(children: [
+          Container(
+            child: ListView(
+              children: [
+                MeetupInfo(widget._meetup),
+                Divider(),
+                CommentList(widget._meetup.getComments()),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: AddComment(
+              widget._controller,
+              widget._meetup.getComments(),
+              onSubmitted: (user, date, text) {
+                setState(() {
+                  widget._meetup
+                      .getComments()
+                      .add(new Comment(user, date, text));
+                });
+              },
+            ),
+          )
+        ]));
   }
 }
