@@ -263,9 +263,14 @@ class MockAdapter implements Database {
     return res;
   }
 
-  void register(String fullname, String username, String password) {
+  void register(
+      String fullname, String username, String password, String profilePicUrl) {
+    if (profilePicUrl.length == 0)
+      profilePicUrl =
+          "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
-    _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
+    _users.add(User(
+        id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl));
   }
 
   void addPost(

@@ -23,6 +23,7 @@ class Register extends StatefulPage {
 class _RegisterState extends State<Register> {
   final fullNameController = TextEditingController();
   final usernameController = TextEditingController();
+  final profilePicController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final Controller _controller;
@@ -68,6 +69,10 @@ class _RegisterState extends State<Register> {
                           }
                         }))),
                     FormFieldContainer(
+                      FormTextField(
+                          'Profile picture URL', profilePicController),
+                    ),
+                    FormFieldContainer(
                       FormTextField('Password', passwordController,
                           obscureText: true,
                           validator: ValidatorFactory.getValidator('Full name',
@@ -80,9 +85,11 @@ class _RegisterState extends State<Register> {
                       if (_formKey.currentState.validate()) {
                         String fullname = fullNameController.text,
                             username = usernameController.text,
+                            profilePicURL = profilePicController.text,
                             password = passwordController.text;
                         //userImageURL = talkImageURLController.text;
-                        db.register(fullname, username, password);
+                        db.register(
+                            fullname, username, password, profilePicURL);
                         _controller.setLoggedInUserName(username);
                         Navigator.popUntil(context,
                             ModalRoute.withName(Navigator.defaultRouteName));
