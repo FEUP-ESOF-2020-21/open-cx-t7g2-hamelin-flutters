@@ -263,22 +263,14 @@ class MockAdapter implements Database {
     return res;
   }
 
-  int register(String fullname, String username, String password) {
+  void register(
+      String fullname, String username, String password, String profilePicUrl) {
+    if (profilePicUrl.length == 0)
+      profilePicUrl =
+          "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
-    if (fullname.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
-      for (var user in _users) {
-        if (user.getUsername() == username) {
-          print("Return");
-          return 2;
-        }
-      }
-
-      _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
-      print("Register success");
-      return 1;
-    }
-    print("Register failed");
-    return 0;
+    _users.add(User(
+        id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl));
   }
 
   void addPost(
@@ -333,6 +325,7 @@ class MockAdapter implements Database {
   }
 
   bool existsUser(String username) {
+    print(getUser(username));
     return getUser(username) != null;
   }
 
