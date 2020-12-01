@@ -56,11 +56,15 @@ class _RegisterState extends State<Register> {
                     FormFieldContainer(
                       FormTextField('Full Name', fullNameController,
                           validator: ValidatorFactory.getValidator('Full name',
-                              fieldRequired: true)),
+                              fieldRequired: true,
+                              lowerLimit: 5,
+                              upperLimit: 50)),
                     ),
                     FormFieldContainer(FormTextField(
                         'Username', usernameController,
-                        validator: ValidatorFactory.getValidator('Full name',
+                        validator: ValidatorFactory.getValidator('Username',
+                            lowerLimit: 5,
+                            upperLimit: 20,
                             fieldRequired: true, extender: (value) {
                           if (db.existsUser(value)) {
                             return "User with username " +
@@ -69,13 +73,16 @@ class _RegisterState extends State<Register> {
                           }
                         }))),
                     FormFieldContainer(
-                      FormTextField(
-                          'Profile picture URL', profilePicController),
+                      FormTextField('Profile picture URL', profilePicController,
+                          validator: ValidatorFactory.getValidator(
+                              'Profile picture URL',
+                              fieldRequired: false,
+                              upperLimit: 300)),
                     ),
                     FormFieldContainer(
                       FormTextField('Password', passwordController,
                           obscureText: true,
-                          validator: ValidatorFactory.getValidator('Full name',
+                          validator: ValidatorFactory.getValidator('Password',
                               fieldRequired: true)),
                       margin: EdgeInsets.only(
                         bottom: 30,
