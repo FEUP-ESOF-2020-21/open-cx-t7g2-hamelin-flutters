@@ -1,21 +1,43 @@
+import 'dart:async';
+
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/pages/CreateMeetupPage.dart';
+import 'package:confnect/view/pages/MeetupPage.dart';
 import 'package:confnect/view/widgets/Meetup/MeetupBox.dart';
 import 'package:confnect/view/widgets/Posts/UserTimeMeetHeader.dart';
 import 'package:flutter/material.dart';
 
 import 'VoteComment.dart';
 
+// ignore: must_be_immutable
 class PostTextVote extends StatefulWidget {
   Controller _controller;
-  final Post _post;
+  Post _post;
   PostTextVote(this._post, this._controller);
   @override
   _PostTextVoteState createState() => _PostTextVoteState();
 }
 
 class _PostTextVoteState extends State<PostTextVote> {
+  openCreateMeetupPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              CreateMeetupPage(widget._controller, widget._post)),
+    );
+  }
+
+  openMeetupPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              MeetupPage(widget._controller, widget._post.getMeetup())),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,13 +50,10 @@ class _PostTextVoteState extends State<PostTextVote> {
             if (!widget._post.isMeetingUp) {
               setState(() {
                 widget._post.isMeetingUp = true;
+                this.openCreateMeetupPage();
               });
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        CreateMeetupPage(widget._controller, widget._post)),
-              );
+            } else {
+              openMeetupPage();
             }
           }),
           Padding(

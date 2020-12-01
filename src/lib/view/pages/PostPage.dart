@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
@@ -21,6 +23,16 @@ class PostPage extends StatefulPage {
 }
 
 class PostPageState extends State<PostPage> {
+  var id;
+  void refreshData() {
+    id++;
+  }
+
+  FutureOr onGoBack(dynamic value) {
+    refreshData();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +46,7 @@ class PostPageState extends State<PostPage> {
               padding: EdgeInsets.fromLTRB(20, 20, 20, 70),
               child: ListView(
                 children: [
-                  Container(
-                      /*decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),*/
-                      child: PostTextVote(widget._post, widget._controller)),
+                  PostTextVote(widget._post, widget._controller),
                   Divider(),
                   CommentList(widget._post.getComments()),
                 ],

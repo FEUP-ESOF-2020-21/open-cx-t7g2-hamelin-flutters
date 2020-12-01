@@ -11,7 +11,12 @@ class Meetup {
   User _meetingCreator;
   List<Comment> _comments = [];
 
-  Meetup(this._date, this._location, this._description, this._meetingCreator) {
+  Meetup(
+    this._date,
+    this._location,
+    this._description,
+    this._meetingCreator,
+  ) {
     _peopleGoing.add(_meetingCreator);
   }
 

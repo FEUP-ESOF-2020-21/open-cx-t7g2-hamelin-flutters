@@ -1,6 +1,8 @@
 import 'package:confnect/model/Meetup.dart';
+import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MeetupInfo extends StatefulWidget {
   Meetup _meetup;
 
@@ -12,32 +14,59 @@ class MeetupInfo extends StatefulWidget {
 class _MeetupInfoState extends State<MeetupInfo> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Location",
+            style: titleTextStyle,
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Row(
             children: [
               Icon(Icons.location_on),
-              Text(widget._meetup.getLocation()),
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: Text(widget._meetup.getLocation()),
+              ),
             ],
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
+          SizedBox(
+            height: 16,
+          ),
+          Text(
+            "Time - Date",
+            style: titleTextStyle,
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Row(
             children: [
               Icon(Icons.access_time),
-              Text(widget._meetup.getDate().getFormmatedDate()),
+              Padding(
+                padding: const EdgeInsets.only(left: 2.0),
+                child: Text(widget._meetup.getDate().getFormmatedDate()),
+              ),
             ],
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(widget._meetup.getDescription()),
-        ),
-      ],
+          SizedBox(
+            height: 16,
+          ),
+          Text(
+            "Description",
+            style: titleTextStyle,
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text(widget._meetup.getDescription()),
+        ],
+      ),
     );
   }
 }

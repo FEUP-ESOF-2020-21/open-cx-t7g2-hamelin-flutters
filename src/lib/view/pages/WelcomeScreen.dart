@@ -1,6 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/Page.dart';
-import 'package:confnect/view/widgets/FormFieldContainer.dart';
+import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:confnect/view/widgets/PageTitle.dart';
 import '../../controller/database/Database.dart';

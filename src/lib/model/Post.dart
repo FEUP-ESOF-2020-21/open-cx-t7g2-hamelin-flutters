@@ -14,7 +14,7 @@ class Post {
   Meetup _meetup;
 
   Post(this._forumId, this._author, this._title, this._description, this._date,
-      [this._comments]);
+      [this._comments, this._meetup]);
 
   int getForumId() => _forumId;
 

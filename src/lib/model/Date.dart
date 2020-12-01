@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:intl/intl.dart';
 
@@ -18,6 +19,6 @@ class Date {
   }
 
   String getFormmatedDate() {
-    return DateFormat('yyyy-MM-dd – kk:mm').format(this._dateTime);
+    return DateFormat('kk:mm - dd/MM/yyyy').format(this._dateTime);
   }
 }

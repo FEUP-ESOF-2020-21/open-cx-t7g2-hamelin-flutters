@@ -70,6 +70,7 @@ class MockAdapter implements Database {
       "https://dvlsystems.com/wp-content/uploads/2020/08/machine_learning.jpg",
     ),
   ];
+
   static List<Comment> _comments = [
     Comment(
         _users[2],

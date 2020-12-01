@@ -57,32 +57,40 @@ class _MeetupBoxState extends State<MeetupBox> {
               ),
               Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5),
-                    child: FlatButton(
-                        onPressed: () => onPressedIn(),
-                        color: widget._meetup.loggedUserIsGoing(
-                                widget._controller.getLoggedInUser())
-                            ? Colors.greenAccent
-                            : Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.white)),
-                        child: Text("I'M IN!")),
+                  FlatButton(
+                      onPressed: () => onPressedIn(),
+                      color: widget._meetup.loggedUserIsGoing(
+                              widget._controller.getLoggedInUser())
+                          ? Colors.greenAccent
+                          : Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.white)),
+                      child: Text("I'M IN!")),
+                  SizedBox(
+                    width: 5,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: FlatButton(
-                        onPressed: () => onPressedOut(),
-                        color: !widget._meetup.loggedUserIsGoing(
-                                widget._controller.getLoggedInUser())
-                            ? Colors.greenAccent
-                            : Colors.white,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                            side: BorderSide(color: Colors.white)),
-                        child: Text("I'M OUT!")),
-                  )
+                  FlatButton(
+                      onPressed: () => onPressedOut(),
+                      color: !widget._meetup.loggedUserIsGoing(
+                              widget._controller.getLoggedInUser())
+                          ? Colors.greenAccent
+                          : Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.white)),
+                      child: Text("I'M OUT!")),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Flexible(
+                    child: Text(
+                      widget._meetup.getNumberPeopleGoing().toString() +
+                          " Going",
+                      style: meetupButtonTextStyle,
+                      overflow: TextOverflow.visible,
+                    ),
+                  ),
                 ],
               )
             ],
