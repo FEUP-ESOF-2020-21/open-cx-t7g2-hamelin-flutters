@@ -322,6 +322,16 @@ class MockAdapter implements Database {
     createTalkForum(talk);
   }
 
+  void editTalk(int talkId, String title, String description, String speaker,
+      String image, List<Tag> tags) {
+    Talk talk = _talks.firstWhere((talk) => talk.getId() == talkId);
+    talk.setTitle(title);
+    talk.setDescription(description);
+    talk.setSpeaker(getUser(speaker));
+    talk.setImageURL(image);
+    talk.setTags(tags);
+  }
+
   void deleteTalk(Talk talk) {
     _talks.remove(talk);
   }

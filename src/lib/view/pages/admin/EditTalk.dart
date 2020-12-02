@@ -96,9 +96,8 @@ class _EditTalkState extends State<EditTalk> {
           talkImageURL = (talkImageURLController.text == "")
               ? _talk.getImageURL()
               : talkImageURLController.text;
-      db.deleteTalk(_talk);
-      db.addTalk(talkTitle, talkDescription, talkSpeakerUsername, talkImageURL,
-          _selectedTags);
+      db.editTalk(_talk.getId(), talkTitle, talkDescription,
+          talkSpeakerUsername, talkImageURL, _selectedTags);
       _onTalkEdited();
       Navigator.pop(context);
     }
