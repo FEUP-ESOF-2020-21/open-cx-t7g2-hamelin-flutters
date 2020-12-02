@@ -1,3 +1,4 @@
+import 'package:confnect/view/pages/Search.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
@@ -25,10 +26,7 @@ class _UserSectionState extends State<UserSection> {
   List<Widget> _pageBodies() {
     return [
       Forums(this._controller, _refreshState),
-      Container(
-        child: Text("Coming soon..."),
-        margin: EdgeInsets.all(10),
-      ),
+      Search(this._controller),
       ProfilePage(),
       ProfilePage()
     ];

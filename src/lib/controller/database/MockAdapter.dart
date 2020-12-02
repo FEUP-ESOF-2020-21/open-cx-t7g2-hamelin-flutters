@@ -387,4 +387,8 @@ class MockAdapter implements Database {
   List<Post> getForumPosts(int forumId) {
     return _posts.where((element) => element.getForumId() == forumId).toList();
   }
+
+  List<Post> getPosts() {
+    return _posts;
+  }
 }
