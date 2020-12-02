@@ -9,7 +9,8 @@ import 'package:confnect/view/widgets/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:confnect/model/Talk.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tagging/flutter_tagging.dart';
+
+import 'TagManager.dart';
 
 class EditTalk extends StatefulPage {
   final Function _onTalkEdited;
@@ -50,16 +51,6 @@ class _EditTalkState extends State<EditTalk> {
 
   _EditTalkState(this._controller, this._onTalkEdited, this._talk);
 
-  List<Tag> getTags(String value) {
-    print("getTags");
-    Database db = _controller.getDatabase();
-    return db
-        .getTags()
-        .where(
-            (tag) => tag.getName().toLowerCase().contains(value.toLowerCase()))
-        .toList();
-  }
-
   void editTalk(BuildContext context, Database db) {
     if (_selectedTags.isEmpty) {
       showDialog(
@@ -96,78 +87,16 @@ class _EditTalkState extends State<EditTalk> {
           talkImageURL = (talkImageURLController.text == "")
               ? _talk.getImageURL()
               : talkImageURLController.text;
-      db.editTalk(_talk.getId(), talkTitle, talkDescription,
-          talkSpeakerUsername, talkImageURL, _selectedTags);
-      _onTalkEdited();
-      Navigator.pop(context);
-    }
-  }
 
-  Widget tagSelector() {
-    Database db = _controller.getDatabase();
-    return FormFieldContainer(
-      FlutterTagging<Tag>(
-        initialItems: _selectedTags,
-        enableImmediateSuggestion: true,
-        textFieldConfiguration: TextFieldConfiguration(
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                5,
-              ),
-              borderSide: BorderSide(
-                width: 3,
-                color: Colors.black,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                5,
-              ),
-              borderSide: BorderSide(
-                width: 3,
-                color: Colors.black,
-              ),
-            ),
-            hintText: 'Search Tags',
-            labelText: 'Tags',
-            labelStyle: TextStyle(color: Colors.black54),
-            contentPadding: EdgeInsets.all(10),
-          ),
-        ),
-        findSuggestions: getTags,
-        additionCallback: (value) {
-          print("additionCallback, value: " + value);
-          return db.createTag(value);
-        },
-        configureSuggestion: (tag) {
-          return SuggestionConfiguration(
-            title: Text(tag == null ? "No tag found" : tag.getName()),
-            additionWidget: Chip(
-              avatar: Icon(
-                Icons.add_circle,
-                color: Colors.white,
-              ),
-              label: Text('Add New Tag'),
-              labelStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-                fontWeight: FontWeight.w300,
-              ),
-              backgroundColor: Colors.blue[800],
-            ),
-          );
-        },
-        configureChip: (tag) {
-          return ChipConfiguration(
-            label: Text(tag.getName()),
-            backgroundColor: Colors.blue[800],
-            labelStyle: TextStyle(color: Colors.white),
-            deleteIconColor: Colors.white,
-          );
-        },
-      ),
-    );
+      Function onComplete = (newTags) {
+        db.editTalk(_talk.getId(), talkTitle, talkDescription,
+            talkSpeakerUsername, talkImageURL, _selectedTags);
+        _onTalkEdited();
+        Navigator.pop(context);
+      };
+
+      TagManager.getTagInfo(context, db, _selectedTags, onComplete);
+    }
   }
 
   @override
@@ -198,7 +127,7 @@ class _EditTalkState extends State<EditTalk> {
                   ),
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 20),
                 ),
-                tagSelector(),
+                TagManager.tagSelector(_controller, _selectedTags),
                 FormFieldContainer(
                   FormTextField(
                     _talk.getDescription(),

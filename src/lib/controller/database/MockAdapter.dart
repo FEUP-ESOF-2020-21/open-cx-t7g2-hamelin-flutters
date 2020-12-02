@@ -303,13 +303,17 @@ class MockAdapter implements Database {
     _forums.add(TagForum(_forums.length, tag));
   }
 
+  void addTag(Tag tag) {
+    _tags.add(tag);
+    createTagForum(tag);
+    print('''Added tag "${tag.getName()}" in db''');
+  }
+
   void addTalk(String title, String description, String speaker, String image,
       List<Tag> tags) {
     tags.forEach((tag) {
       if (!_tags.contains(tag)) {
-        _tags.add(tag);
-        createTagForum(tag);
-        print('''Added tag "${tag.getName()}" in db''');
+        addTag(tag);
       }
     });
     Talk talk =
@@ -324,6 +328,11 @@ class MockAdapter implements Database {
 
   void editTalk(int talkId, String title, String description, String speaker,
       String image, List<Tag> tags) {
+    tags.forEach((tag) {
+      if (!_tags.contains(tag)) {
+        addTag(tag);
+      }
+    });
     Talk talk = _talks.firstWhere((talk) => talk.getId() == talkId);
     talk.setTitle(title);
     talk.setDescription(description);
@@ -338,10 +347,6 @@ class MockAdapter implements Database {
 
   Tag createTag(String name) {
     return Tag(_tags.length, name, null, null);
-  }
-
-  void addTag(Tag tag) {
-    _tags.add(tag);
   }
 
   User getUser(String username) {
