@@ -1,5 +1,5 @@
 import 'package:confnect/model/Date.dart';
-import 'package:confnect/model/Forum.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
@@ -33,4 +33,5 @@ abstract class Database {
   Tag createTag(String name);
   void addTag(Tag tag);
   void deleteTalk(Talk talk);
+  bool isTagNew(Tag tag);
 }

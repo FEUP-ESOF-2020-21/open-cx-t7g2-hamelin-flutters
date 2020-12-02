@@ -46,6 +46,97 @@ class _AddTalkState extends State<AddTalk> {
     super.dispose();
   }
 
+  Future<void> getTagInfo(BuildContext context, Database db, List<Tag> tags,
+      Function onComplete) async {
+    Function isLastNew = (i) {
+      for (int j = i + 1; j < tags.length; j++) {
+        if (db.isTagNew(tags[j])) return false;
+      }
+      return true;
+    };
+
+    final List<Tag> invalidTags = List<Tag>();
+    for (int i = 0; i < tags.length; i++) {
+      final Tag tag = tags[i];
+      if (!db.isTagNew(tag)) continue;
+
+      invalidTags.add(tag);
+
+      final tagDescriptionController = TextEditingController();
+      final tagCoverImageController = TextEditingController();
+      final formKey = GlobalKey<FormState>();
+
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text(
+              "Add tag '" + tag.getName() + "'",
+              textScaleFactor: 1.3,
+            ),
+            content: Column(
+              children: [
+                Form(
+                  key: formKey,
+                  child: ListView(
+                    children: [
+                      FormFieldContainer(
+                        FormTextField(
+                          'Description',
+                          tagDescriptionController,
+                          validator: ValidatorFactory.getValidator(
+                            'Description',
+                            fieldRequired: true,
+                            lowerLimit: 10,
+                            upperLimit: 70,
+                          ),
+                        ),
+                        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      ),
+                      FormFieldContainer(
+                        FormTextField(
+                          'Cover Image URL',
+                          tagCoverImageController,
+                          validator: ValidatorFactory.getValidator(
+                            'Cover Image URL',
+                            fieldRequired: true,
+                            upperLimit: 300,
+                          ),
+                        ),
+                        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("Add"),
+                onPressed: () {
+                  if (formKey.currentState.validate()) {
+                    tag.setCoverImageURL(tagCoverImageController.text);
+                    tag.setDescription(tagDescriptionController.text);
+                    invalidTags.remove(tag);
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+            ],
+          );
+        },
+      );
+
+      if (isLastNew(i)) {
+        invalidTags.forEach((t) {
+          print("Removing invalid tag '" + t.getName() + "'");
+          tags.remove(t);
+        });
+        onComplete(tags);
+      }
+    }
+  }
+
   _AddTalkState(this._controller, this._onTalkAdded);
 
   List<Tag> getTags(String value) {
@@ -93,7 +184,9 @@ class _AddTalkState extends State<AddTalk> {
         findSuggestions: getTags,
         additionCallback: (value) {
           print("additionCallback, value: " + value);
-          return db.createTag(value);
+          return db.createTag(
+            value,
+          );
         },
         configureSuggestion: (tag) {
           return SuggestionConfiguration(
@@ -228,10 +321,15 @@ class _AddTalkState extends State<AddTalk> {
                             talkSpeakerUsername =
                                 speakerUsernameController.text,
                             talkImageURL = talkImageURLController.text;
-                        db.addTalk(talkTitle, talkDescription,
-                            talkSpeakerUsername, talkImageURL, _selectedTags);
-                        _onTalkAdded();
-                        Navigator.pop(context);
+
+                        Function onComplete = (newTags) {
+                          db.addTalk(talkTitle, talkDescription,
+                              talkSpeakerUsername, talkImageURL, newTags);
+                          _onTalkAdded();
+                          Navigator.pop(context);
+                        };
+
+                        getTagInfo(context, db, _selectedTags, onComplete);
                       }
                     },
                   ),
