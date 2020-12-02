@@ -13,12 +13,10 @@ class Tag extends Taggable {
   String getCoverImageURL() => _coverImageURL;
 
   void setDescription(String description) {
-    print("Tag " + _name + ", desc: " + description + "\n");
     this._description = description;
   }
 
   void setCoverImageURL(String coverImageURL) {
-    print("Tag " + _name + ", cover: " + coverImageURL + "\n");
     this._coverImageURL = coverImageURL;
   }
 

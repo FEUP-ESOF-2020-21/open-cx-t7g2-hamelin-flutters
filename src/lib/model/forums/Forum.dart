@@ -17,4 +17,6 @@ abstract class Forum {
   User getSpeaker() => null;
 
   List<Tag> getTags() => null;
+
+  List<String> getTagsNames() => null;
 }

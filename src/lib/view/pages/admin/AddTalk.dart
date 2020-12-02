@@ -48,13 +48,6 @@ class _AddTalkState extends State<AddTalk> {
 
   Future<void> getTagInfo(BuildContext context, Database db, List<Tag> tags,
       Function onComplete) async {
-    Function isLastNew = (i) {
-      for (int j = i + 1; j < tags.length; j++) {
-        if (db.isTagNew(tags[j])) return false;
-      }
-      return true;
-    };
-
     final List<Tag> invalidTags = List<Tag>();
     for (int i = 0; i < tags.length; i++) {
       final Tag tag = tags[i];
@@ -78,34 +71,36 @@ class _AddTalkState extends State<AddTalk> {
               children: [
                 Form(
                   key: formKey,
-                  child: ListView(
-                    children: [
-                      FormFieldContainer(
-                        FormTextField(
-                          'Description',
-                          tagDescriptionController,
-                          validator: ValidatorFactory.getValidator(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        FormFieldContainer(
+                          FormTextField(
                             'Description',
-                            fieldRequired: true,
-                            lowerLimit: 10,
-                            upperLimit: 70,
+                            tagDescriptionController,
+                            validator: ValidatorFactory.getValidator(
+                              'Description',
+                              fieldRequired: true,
+                              lowerLimit: 10,
+                              upperLimit: 70,
+                            ),
                           ),
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                         ),
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      ),
-                      FormFieldContainer(
-                        FormTextField(
-                          'Cover Image URL',
-                          tagCoverImageController,
-                          validator: ValidatorFactory.getValidator(
+                        FormFieldContainer(
+                          FormTextField(
                             'Cover Image URL',
-                            fieldRequired: true,
-                            upperLimit: 300,
+                            tagCoverImageController,
+                            validator: ValidatorFactory.getValidator(
+                              'Cover Image URL',
+                              fieldRequired: true,
+                              upperLimit: 300,
+                            ),
                           ),
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                         ),
-                        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -126,15 +121,13 @@ class _AddTalkState extends State<AddTalk> {
           );
         },
       );
-
-      if (isLastNew(i)) {
-        invalidTags.forEach((t) {
-          print("Removing invalid tag '" + t.getName() + "'");
-          tags.remove(t);
-        });
-        onComplete(tags);
-      }
     }
+
+    invalidTags.forEach((t) {
+      print("Removing invalid tag '" + t.getName() + "'");
+      tags.remove(t);
+    });
+    onComplete(tags);
   }
 
   _AddTalkState(this._controller, this._onTalkAdded);
