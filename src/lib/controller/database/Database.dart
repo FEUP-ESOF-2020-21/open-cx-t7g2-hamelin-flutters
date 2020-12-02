@@ -30,6 +30,8 @@ abstract class Database {
   bool hasRole(String username, String role);
   void addTalk(String title, String description, String speaker, String image,
       List<Tag> tags);
+  void editTalk(int talkId, String title, String description, String speaker,
+      String image, List<Tag> tags);
   Tag createTag(String name);
   void addTag(Tag tag);
   void deleteTalk(Talk talk);
