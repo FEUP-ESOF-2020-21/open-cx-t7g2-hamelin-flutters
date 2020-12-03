@@ -2,14 +2,15 @@ import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/User.dart';
 
 class Talk {
-  // ignore: unused_field
   int _id;
   String _title, _description, _imageURL;
   User _speaker;
-  List<Tag> _tags;
+  List<Tag> _tags = List<Tag>();
 
   Talk(this._id, this._title, this._description, this._speaker, this._imageURL,
-      this._tags);
+      _tagsIn) {
+    _tagsIn.forEach((t) => _tags.add(t));
+  }
 
   int getId() => _id;
   String getTitle() => _title;
