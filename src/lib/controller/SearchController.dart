@@ -33,15 +33,20 @@ class SearchController {
   List<User> searchUsers(String key) {
     List<User> users = _database.getUsers();
     Map<User, double> usersMap = {};
+    final invalidUsers = [];
     for (final user in users) {
       if (user.getRole() != UserRole.ATTENDEE &&
           user.getRole() != UserRole.HOST) {
-        users.remove(user);
+        invalidUsers.add(user);
         continue;
       }
       usersMap[user] = calculateResemblance(key, user.getUsername()) +
           calculateResemblance(key, user.getFullName());
     }
+
+    invalidUsers.forEach((element) {
+      users.remove(element);
+    });
 
     users.sort((User u1, User u2) {
       return usersMap[u2].compareTo(usersMap[u1]);

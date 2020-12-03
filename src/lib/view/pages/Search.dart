@@ -42,7 +42,7 @@ class _SearchState extends State<Search> {
           crossAxisSpacing: 0,
           mainAxisSpacing: 0,
           crossAxisCount: 2,
-          childAspectRatio: 1,
+          childAspectRatio: 0.8,
           physics:
               NeverScrollableScrollPhysics(), // to disable GridView's scrolling
           shrinkWrap: true, // You won't see infinite size error
