@@ -1,5 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/SearchResult.dart';
+import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
 import 'package:confnect/view/widgets/User/UserTile.dart';
@@ -82,8 +83,15 @@ class _SearchState extends State<Search> {
           children: result
               .getUsers()
               .sublist(0, 4)
-              .map((user) =>
-                  UserTile(user, () {})) /* TO FINISH WITH THE NEW POST PAGE */
+              .map((user) => UserTile(user, (userToSee) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfilePage(
+                              _controller, _viewForum,
+                              user: userToSee)),
+                    );
+                  })) /* TO FINISH WITH THE NEW POST PAGE */
               .toList(),
         ),
       ),
