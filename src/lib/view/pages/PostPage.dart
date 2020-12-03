@@ -50,7 +50,7 @@ class _PostPageState extends State<PostPage> {
                 children: [
                   PostTextVote(widget._post),
                   PinnedComment(widget._post, widget.host),
-                  Divider(),
+                  Divider(thickness: 2,),
                   CommentList(widget._post.getComments()),
                 ],
               )),

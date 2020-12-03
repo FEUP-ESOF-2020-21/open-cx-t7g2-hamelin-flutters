@@ -203,6 +203,22 @@ class MockAdapter implements Database {
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+      8,
+      _users[2],
+      "Welcome!",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      [_comments[3], _comments[4]],
+    ),
+    Post(
+      8,
+      _users[3],
+      "Make America Great Again!",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      [_comments[5]],
+    ),
   ];
 
   static List<Tag> _tags = [

@@ -27,10 +27,18 @@ class _PinnedCommentState extends State<PinnedComment> {
     return null;
   }
 
+  Comment getPinnedComment() {
+    if (widget._post.getPinnedComment() != null) {
+      return widget._post.getPinnedComment();
+    } else {
+      return olderHostComment();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget._host != null) {
-      Comment comment = olderHostComment();
+      Comment comment = getPinnedComment();
       if (comment == null)
         return Container();
       else
@@ -39,7 +47,15 @@ class _PinnedCommentState extends State<PinnedComment> {
             Divider(
               thickness: 2,
             ),
-            Text('Pinned Answer'),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Pinned Answer',
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+              ),
+            ),
             new CommentTile(comment),
           ],
         );
