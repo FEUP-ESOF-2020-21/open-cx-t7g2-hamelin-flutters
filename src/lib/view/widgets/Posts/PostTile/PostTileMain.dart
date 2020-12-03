@@ -1,8 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/pages/PostPage.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostTextVote.dart';
-import 'package:confnect/view/widgets/Posts/UserTimeHeader.dart';
 import 'package:confnect/view/widgets/Posts/UserTimeHeaderForum.dart';
 
 import 'package:flutter/material.dart';
