@@ -48,7 +48,7 @@ class _SearchState extends State<Search> {
           shrinkWrap: true, // You won't see infinite size error
           children: result
               .getForums()
-              .sublist(0, 3)
+              .sublist(0, 4)
               .map((forum) => ForumTile(forum, () {},
                   showTags: false, showDescription: false))
               .toList(),
@@ -74,7 +74,7 @@ class _SearchState extends State<Search> {
           shrinkWrap: true, // You won't see infinite size error
           children: result
               .getUsers()
-              .sublist(0, 3)
+              .sublist(0, 4)
               .map((user) =>
                   UserTile(user, () {})) /* TO FINISH WITH THE NEW POST PAGE */
               .toList(),

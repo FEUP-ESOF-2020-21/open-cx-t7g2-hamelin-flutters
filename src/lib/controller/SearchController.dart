@@ -54,7 +54,8 @@ class SearchController {
     Map<Post, double> postsMap = {};
     for (final post in posts) {
       postsMap[post] = calculateResemblance(key, post.getTitle()) +
-          calculateResemblance(key, post.getDescription());
+          0.7 * calculateResemblance(key, post.getDescription()) +
+          calculateResemblance(key, post.getAuthor().getFullName());
     }
 
     posts.sort((Post p1, Post p2) {
