@@ -3,6 +3,7 @@ import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/widgets/Posts/Comments/CommentList.dart';
+import 'package:confnect/view/widgets/Posts/Comments/PinnedComment.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostTextVote.dart';
 import '../../model/User.dart';
 
@@ -13,7 +14,8 @@ import 'package:flutter/material.dart';
 class PostPage extends StatefulPage {
   Post _post;
   Controller _controller;
-  PostPage(this._controller, this._post, {Key key})
+  User host;
+  PostPage(this._controller, this._post, {Key key, this.host})
       : super(_controller, key: key);
 
   @override
@@ -47,6 +49,7 @@ class _PostPageState extends State<PostPage> {
               child: ListView(
                 children: [
                   PostTextVote(widget._post),
+                  PinnedComment(widget._post, widget.host),
                   Divider(),
                   CommentList(widget._post.getComments()),
                 ],

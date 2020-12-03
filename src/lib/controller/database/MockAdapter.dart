@@ -75,7 +75,7 @@ class MockAdapter implements Database {
       "Flutter master",
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[0], _comments[1], _comments[6]],
+      [_comments[0], _comments[1]],
     ),
     Post(
       0,

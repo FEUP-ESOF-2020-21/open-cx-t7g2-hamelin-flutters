@@ -1,5 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
+import 'package:confnect/model/User.dart';
+import 'package:confnect/model/forums/TalkForum.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,9 +61,17 @@ class _PostsPageState extends State<PostsPage> {
 
   List<PostTile> posts() {
     Database db = this._controller.getDatabase();
+    User host = null;
+    if (db.getForum(this._controller.getCurrentForumId()) is TalkForum) {
+      host = db.getForum(this._controller.getCurrentForumId()).getSpeaker();
+    }
     return db
         .getForumPosts(this._controller.getCurrentForumId())
-        .map((post) => PostTile(post, this._controller))
+        .map((post) => PostTile(
+              post,
+              this._controller,
+              host: host,
+            ))
         .toList();
   }
 }
