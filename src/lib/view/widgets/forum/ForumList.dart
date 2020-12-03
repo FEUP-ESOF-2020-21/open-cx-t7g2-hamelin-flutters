@@ -11,13 +11,11 @@ class ForumList extends StatelessPage {
       : super(controller, key: key);
   @override
   Widget build(BuildContext context) {
-    //final Users users = Provider.of(context);
     return ListView(children: forums());
   }
 
   List<dynamic> forums() {
     Database db = super.getController().getDatabase();
-
     return db.getForums().map((forum) => ForumTile(forum, _viewForum)).toList();
   }
 }

@@ -1,3 +1,5 @@
+import 'package:confnect/controller/ValidatorFactory.dart';
+import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:confnect/view/widgets/PageTitle.dart';
@@ -21,11 +23,13 @@ class Login extends StatefulPage {
 class _LoginState extends State<Login> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   final Controller _controller;
   _LoginState(this._controller);
 
   @override
   Widget build(BuildContext context) {
+    Database db = _controller.getDatabase();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Center(
@@ -42,43 +46,56 @@ class _LoginState extends State<Login> {
                 bottom: 30,
               ),
             ),
-            FormFieldContainer(
-              FormTextField('Username', usernameController),
-            ),
-            FormFieldContainer(
-              FormTextField('Password', passwordController, obscureText: true),
-            ),
-            FormFieldContainer(
-                SquareButton('Login', () {
-                  String username = usernameController.text,
-                      password = passwordController.text;
-                  if (_controller.getDatabase().login(username, password)) {
-                    _controller.setLoggedInUserName(username);
-                    Navigator.popUntil(context,
-                        ModalRoute.withName(Navigator.defaultRouteName));
-                  } else {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        // return object of type Dialog
-                        return AlertDialog(
-                          title: new Text("Wrong credentials"),
-                          content: new Text("Feels bad man"),
-                          actions: <Widget>[
-                            // usually buttons at the bottom of the dialog
-                            new FlatButton(
-                              child: new Text("Close"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
+            Form(
+                key: _formKey,
+                child: Column(children: <Widget>[
+                  FormFieldContainer(
+                    FormTextField('Username', usernameController,
+                        validator: ValidatorFactory.getValidator('Username',
+                            fieldRequired: true)),
+                  ),
+                  FormFieldContainer(
+                    FormTextField('Password', passwordController,
+                        obscureText: true,
+                        validator: ValidatorFactory.getValidator('Password',
+                            fieldRequired: true)),
+                  ),
+                  FormFieldContainer(
+                      SquareButton('Login', () {
+                        String username = usernameController.text,
+                            password = passwordController.text;
+                        if (_formKey.currentState.validate()) {
+                          if (db.login(username, password)) {
+                            _controller.setLoggedInUserName(username);
+                            Navigator.popUntil(
+                                context,
+                                ModalRoute.withName(
+                                    Navigator.defaultRouteName));
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                // return object of type Dialog
+                                return AlertDialog(
+                                  title: new Text("Wrong credentials"),
+                                  content: new Text("Feels bad man"),
+                                  actions: <Widget>[
+                                    // usually buttons at the bottom of the dialog
+                                    new FlatButton(
+                                      child: new Text("Close"),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
                               },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
-                }),
-                margin: EdgeInsets.only(bottom: 30)),
+                            );
+                          }
+                        }
+                      }),
+                      margin: EdgeInsets.only(bottom: 30))
+                ])),
             StandardDivider(),
             TextOnlyButton(
               () {

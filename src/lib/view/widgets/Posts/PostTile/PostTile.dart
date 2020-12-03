@@ -16,7 +16,7 @@ class PostTile extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => PostPage(_controller, this._post)),
+            builder: (context) => PostPage(this._controller, this._post)),
       );
     }
 
