@@ -31,7 +31,7 @@ class _UserSectionState extends State<UserSection> {
           child: Text("Coming soon..."),
           margin: EdgeInsets.all(10),
         ),
-        ProfilePage(),
+        ProfilePage(this._controller, this._refreshState),
         Forums(this._controller, _refreshState),
       ];
     } else {
@@ -41,14 +41,16 @@ class _UserSectionState extends State<UserSection> {
           child: Text("Coming soon..."),
           margin: EdgeInsets.all(10),
         ),
-        ProfilePage(),
+        ProfilePage(this._controller, this._refreshState),
         Forums(_controller, _refreshState),
       ];
     }
   }
 
-  void _refreshState() {
-    setState(() {});
+  void _refreshState([int selectedIndex]) {
+    setState(() {
+      if (selectedIndex != null) this.selectedIndex = selectedIndex;
+    });
   }
 
   Widget _addButton() {

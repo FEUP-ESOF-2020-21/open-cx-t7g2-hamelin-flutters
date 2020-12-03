@@ -1,23 +1,33 @@
+import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../SquareButton.dart';
 
 class ProfileForumListTile extends StatelessWidget {
-  final String text;
+  final Forum _forum;
+  final Controller _controller;
+  final Function _refreshState;
   final double margin;
 
-  ProfileForumListTile(this.text, this.margin);
+  ProfileForumListTile(
+      this._forum, this._controller, this._refreshState, this.margin);
 
   @override
   Widget build(BuildContext context) {
-    //final Users users = Provider.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         SizedBox(height: this.margin),
-        SquareButton(this.text, () {
-        }),
+        SquareButton(
+          this._forum.getTitle(),
+          () {
+            this._controller.setCurrentForumId(this._forum.getId());
+            this._refreshState(
+                0); // this will push the forum page on the navigator
+          },
+        ),
       ],
     );
   }

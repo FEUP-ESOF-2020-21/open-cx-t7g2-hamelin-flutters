@@ -31,7 +31,8 @@ class AllForumList extends StatelessPage {
                 fontFamily: 'Montserrat'),
           ),
         ),
-        ListView(children: suggestedForums(),
+        ListView(
+            children: suggestedForums(),
             shrinkWrap: true,
             physics: ClampingScrollPhysics()),
         Container(
@@ -45,7 +46,8 @@ class AllForumList extends StatelessPage {
                 fontFamily: 'Montserrat'),
           ),
         ),
-        ListView(children: otherforums(),
+        ListView(
+            children: otherforums(),
             shrinkWrap: true,
             physics: ClampingScrollPhysics()),
       ],
@@ -55,8 +57,8 @@ class AllForumList extends StatelessPage {
   List<dynamic> otherforums() {
     Database db = super.getController().getDatabase();
 
-    List<Forum> difference = db.getForums().toSet().difference(
-        _suggestedForums.toSet()).toList();
+    List<Forum> difference =
+        db.getForums().toSet().difference(_suggestedForums.toSet()).toList();
 
     return difference.map((forum) => ForumTile(forum, _viewForum)).toList();
   }
@@ -65,8 +67,17 @@ class AllForumList extends StatelessPage {
     Database db = super.getController().getDatabase();
     String username = super.getController().getLoggedInUserName();
     User u = db.getUser(username);
-    List<Forum> _userForums = u.getForums();
+
+    List<Forum> _userForums =
+        u.getUserForunsIds().map((id) => db.getForum(id)).toList();
+    if (_userForums.length == 0) _userForums = u.getForums();
+
     List<Tag> _userTags = u.getTags();
+    if (_userTags.length == 0) {
+      _userForums.forEach((forum) {
+        _userTags.addAll(forum.getTags());
+      });
+    }
 
     print(_userForums);
     print(_userTags);
@@ -75,9 +86,7 @@ class AllForumList extends StatelessPage {
 
     db.getForums().forEach((forum) {
       for (int i = 0; i < _userTags.length; i++) {
-
-        if (forum.getTags() == null)
-          continue;
+        if (forum.getTags() == null) continue;
         print('FORUM TAGS : ' + forum.getTags().toString());
         if (forum.getTags().contains(_userTags[i])) {
           _suggestedForums.add(forum);
@@ -88,7 +97,8 @@ class AllForumList extends StatelessPage {
 
     print(_suggestedForums);
 
-    return _suggestedForums.map((forum) => ForumTile(forum, _viewForum))
+    return _suggestedForums
+        .map((forum) => ForumTile(forum, _viewForum))
         .toList();
   }
 }

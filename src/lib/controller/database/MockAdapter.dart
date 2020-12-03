@@ -16,8 +16,15 @@ class MockAdapter implements Database {
         "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
     User(1, UserRole.ATTENDEE, "Donald Trump", "trump", "1",
         "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg"),
-    User(2, UserRole.ATTENDEE, "Obama", "obama", "1",
-        "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg"),
+    User(
+        2,
+        UserRole.ATTENDEE,
+        "Obama",
+        "obama",
+        "1",
+        "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg",
+        "Obama bio baby!",
+        [0, 1]),
     User(3, UserRole.ATTENDEE, "QUIM", "quim", "1",
         "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U="),
     User(4, UserRole.ATTENDEE, "Souto", "souto", "1",
@@ -312,7 +319,7 @@ class MockAdapter implements Database {
 
     User user = new User(
         id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl);
-    user.addForum(_forums[0]);
+    //user.addForum(_forums[0]);
 
     _users.add(user);
   }

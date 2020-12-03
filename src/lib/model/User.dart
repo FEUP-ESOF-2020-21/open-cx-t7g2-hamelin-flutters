@@ -1,30 +1,43 @@
 import 'Tag.dart';
 import 'forums/Forum.dart';
-import 'forums/TagForum.dart';
 
 class User {
   final int id;
-  final String _fullname, _username, _password, _role;
-  String _avatarUrl;
+  String _fullname, _username, _avatarUrl, _bio;
+  final String _password, _role;
+  List<int> _userForunsIds;
   List<Forum> _forums = new List();
   List<Tag> _tags = new List();
-  User(this.id, this._role, this._fullname, this._username, this._password,
-      [this._avatarUrl]);
 
-  String getUsername() {
-    return _username;
-  }
+  User(this.id, this._role, this._fullname, this._username, this._password,
+      [this._avatarUrl, this._bio = "", this._userForunsIds = const []]);
+
+  String getUsername() => _username;
 
   String getFullName() => _fullname;
 
   String getRole() => _role;
 
-  String getAvatarUrl() {
-    return _avatarUrl;
-  }
+  String getAvatarUrl() => _avatarUrl;
+
+  String getBio() => _bio;
+
+  List<int> getUserForunsIds() => _userForunsIds;
 
   void setAvatarUrl(String avatarUrl) {
     this._avatarUrl = avatarUrl;
+  }
+
+  void setFullName(String fullname) {
+    this._fullname = fullname;
+  }
+
+  void setUserName(String username) {
+    this._username = username;
+  }
+
+  void setBio(String bio) {
+    this._bio = bio;
   }
 
   List<Forum> getForums() {
@@ -32,7 +45,7 @@ class User {
   }
 
   void addForum(Forum forum) {
-    if(!this._forums.contains(forum)) {
+    if (!this._forums.contains(forum)) {
       this._forums.add(forum);
       /*forum.getTags().forEach((tag) {
         !this._tags.contains(tag) ?? this._tags.add(tag);

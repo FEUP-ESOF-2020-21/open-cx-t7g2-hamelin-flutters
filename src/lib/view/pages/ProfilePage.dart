@@ -1,99 +1,122 @@
-import 'package:confnect/view/widgets/User/ProfileForumList.dart';
+import 'package:confnect/model/User.dart';
+import 'package:confnect/view/pages/EditProfilePage.dart';
 import 'package:flutter/material.dart';
+
+import '../Page.dart';
+import '../../controller/Controller.dart';
+import 'admin/AddTalk.dart';
 //https://github.com/rajayogan/flutter-profilescreen/blob/master/lib/main.dart
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatefulPage {
+  final Function _refreshState;
+  ProfilePage(Controller controller, this._refreshState, {Key key})
+      : super(controller, key: key);
+
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _ProfilePageState createState() =>
+      _ProfilePageState(getController(), this._refreshState);
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final Controller _controller;
+  final Function _refreshState;
+
+  _ProfilePageState(this._controller, this._refreshState);
+
+  void _refreshProfileState() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    User _loggedInUser = _controller.getLoggedInUser();
+    List<Widget> profileForumList =
+        _controller.buildProfileForumList(_loggedInUser, this._refreshState);
+
     return Stack(
       children: <Widget>[
-        ClipPath(
-          child: Container(color: Colors.black.withOpacity(0.8)),
-          clipper: getClipper(),
-        ),
         Positioned(
-            width: 350.0,
-            top: MediaQuery.of(context).size.height / 5,
+            width: MediaQuery.of(context).size.width,
+            top: MediaQuery.of(context).size.height / 25,
             child: Column(
               children: <Widget>[
                 Container(
-                    width: 150.0,
-                    height: 150.0,
+                    width: MediaQuery.of(context).size.width / 3.0,
+                    height: MediaQuery.of(context).size.height / 6.0,
                     decoration: BoxDecoration(
-                        color: Colors.red,
                         image: DecorationImage(
-                            image: NetworkImage(
-                                'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'),
+                            image: NetworkImage(_loggedInUser.getAvatarUrl()),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.all(Radius.circular(75.0)),
                         boxShadow: [
                           BoxShadow(blurRadius: 7.0, color: Colors.black)
                         ])),
-                SizedBox(height: 40.0),
-                Text(
-                  'Tom Cruise',
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat'),
-                ),
-                SizedBox(height: 15.0),
-                Text(
-                  'Subscribe guys',
-                  style: TextStyle(
-                      fontSize: 17.0,
-                      fontStyle: FontStyle.italic,
-                      fontFamily: 'Montserrat'),
-                ),
-                SizedBox(height: 25.0),
+                SizedBox(height: MediaQuery.of(context).size.height / 35.0),
+                Text(_loggedInUser.getFullName(),
+                    style:
+                        TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold)),
+                SizedBox(height: MediaQuery.of(context).size.height / 40.0),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    child: Center(
+                        child: Text(_loggedInUser.getBio(),
+                            style: TextStyle(fontSize: 17.0)))),
+                SizedBox(height: MediaQuery.of(context).size.height / 35.0),
                 Container(
-                    height: 30.0,
-                    width: 95.0,
+                    height: MediaQuery.of(context).size.height / 31.0,
+                    width: MediaQuery.of(context).size.width / 4.0,
                     child: Material(
                       borderRadius: BorderRadius.circular(20.0),
                       shadowColor: Colors.greenAccent,
                       color: Colors.green,
                       elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Center(
-                          child: Text(
-                            'Edit Name',
-                            style: TextStyle(
-                                color: Colors.white, fontFamily: 'Montserrat'),
-                          ),
+                      child: OutlineButton(
+                        child: Text(
+                          "Edit profile",
+                          style: TextStyle(fontSize: 12.5, color: Colors.white),
                         ),
+                        highlightedBorderColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfilePage(
+                                    _controller, _refreshProfileState)),
+                          );
+                        },
                       ),
                     )),
-                SizedBox(height: 25.0),
-                ProfileForumList(),
+                SizedBox(height: MediaQuery.of(context).size.height / 25.0),
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text('Forums',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold))
+                ]),
+                SizedBox(height: MediaQuery.of(context).size.height / 30.0),
+                if (profileForumList.length != 0)
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: profileForumList)
+                else
+                  Column(
+                    children: [
+                      Icon(
+                        IconData(59828, fontFamily: 'MaterialIcons'),
+                        color: Colors.black,
+                        size: 50.0,
+                      ),
+                      Text(
+                        "No foruns found...",
+                        style: TextStyle(fontSize: 20.0, color: Colors.black),
+                      )
+                    ],
+                  )
               ],
             ))
       ],
     );
-  }
-}
-
-// ignore: camel_case_types
-class getClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = new Path();
-
-    path.lineTo(0.0, size.height / 1.9);
-    path.lineTo(size.width + 125, 0.0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
-    return true;
   }
 }
