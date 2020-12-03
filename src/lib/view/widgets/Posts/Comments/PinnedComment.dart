@@ -47,19 +47,15 @@ class _PinnedCommentState extends State<PinnedComment> {
             Divider(
               thickness: 2,
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Pinned Answer:',
-                style: TextStyle(
-                  fontSize: 15,
-                ),
-              ),
-            ),
             new CommentTile(
               comment,
               fontSize: 15,
               imageHeight: 30,
+              backgroundColor: Colors.yellow[50],
+              beforeImage: Icon(
+                Icons.push_pin,
+                color: Colors.grey,
+              ),
             ),
           ],
         );

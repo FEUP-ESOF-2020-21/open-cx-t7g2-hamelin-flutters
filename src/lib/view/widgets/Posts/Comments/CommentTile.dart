@@ -6,8 +6,14 @@ class CommentTile extends StatefulWidget {
   final Comment _comment;
   final double fontSize;
   final double imageHeight;
+  final Color backgroundColor;
+  final Widget beforeImage;
 
-  CommentTile(this._comment, {this.fontSize = 13, this.imageHeight = 20});
+  CommentTile(this._comment,
+      {this.fontSize = 13,
+      this.imageHeight = 20,
+      this.backgroundColor = Colors.white,
+      this.beforeImage});
   @override
   _CommentTileState createState() => _CommentTileState();
 }
@@ -16,6 +22,7 @@ class _CommentTileState extends State<CommentTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: widget.backgroundColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -27,6 +34,7 @@ class _CommentTileState extends State<CommentTile> {
               widget._comment.getDate(),
               widget.imageHeight,
               fontSize: widget.fontSize,
+              beforeImage: widget.beforeImage,
             ),
             Container(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 0),

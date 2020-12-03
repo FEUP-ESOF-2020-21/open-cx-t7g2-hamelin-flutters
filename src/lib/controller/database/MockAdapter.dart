@@ -87,7 +87,8 @@ class MockAdapter implements Database {
       "It deserves a 20!",
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[2]],
+      [_comments[2], _comments[3]],
+      _comments[3],
     ),
     Post(
       0,

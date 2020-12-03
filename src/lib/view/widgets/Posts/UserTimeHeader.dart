@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class UserTimeHeader extends StatefulWidget {
   final User _user;
-  Date _date;
-  double _height;
-  double fontSize;
+  final Date _date;
+  final double _height;
+  final double fontSize;
+  final Widget beforeImage;
 
-  UserTimeHeader(this._user, this._date, this._height, {this.fontSize = 13});
+  UserTimeHeader(this._user, this._date, this._height,
+      {this.fontSize = 13, this.beforeImage});
   @override
   _UserTimeHeaderState createState() => _UserTimeHeaderState();
 }
@@ -18,6 +20,8 @@ class UserTimeHeader extends StatefulWidget {
 class _UserTimeHeaderState extends State<UserTimeHeader> {
   @override
   Widget build(BuildContext context) {
+    Widget beforeImage =
+        widget.beforeImage == null ? Container() : widget.beforeImage;
     return Container(
       height: widget._height,
       child: Row(
@@ -26,6 +30,7 @@ class _UserTimeHeaderState extends State<UserTimeHeader> {
         children: [
           Row(
             children: [
+              beforeImage,
               AvatarImg(widget._user),
               Text(
                 widget._user.getFullName(),
