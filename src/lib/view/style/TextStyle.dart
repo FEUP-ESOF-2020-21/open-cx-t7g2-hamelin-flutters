@@ -25,6 +25,13 @@ var pageTitleTextStyle = GoogleFonts.lora(
     color: Colors.black,
   ),
 );
+var mainpageTitleTextStyle = GoogleFonts.lora(
+  textStyle: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: EvenLargerTextSize,
+    color: Colors.white,
+  ),
+);
 
 var forumTitleStyle = GoogleFonts.lora(
   textStyle: TextStyle(
