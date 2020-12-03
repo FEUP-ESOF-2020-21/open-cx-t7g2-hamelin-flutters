@@ -29,7 +29,7 @@ class _UserSectionState extends State<UserSection> {
       this._controller.currentForumId == -1
           ? MainPage(_controller, _refreshState)
           : Forums(_controller, _refreshState),
-      Search(this._controller),
+      Search(this._controller, _viewForum),
       ProfilePage(),
       Forums(this._controller, _refreshState),
     ];
@@ -37,6 +37,13 @@ class _UserSectionState extends State<UserSection> {
 
   void _refreshState() {
     setState(() {});
+  }
+
+  void _viewForum(int forumId) {
+    this.setState(() {
+      this._controller.setCurrentForumId(forumId);
+      selectedIndex = 3;
+    });
   }
 
   Widget _addButton() {

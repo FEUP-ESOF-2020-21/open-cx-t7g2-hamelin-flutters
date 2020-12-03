@@ -7,17 +7,24 @@ import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:flutter/material.dart';
 
 import '../Page.dart';
+import 'PostsPage.dart';
 
 class Search extends StatefulPage {
-  Search(Controller controller, {Key key}) : super(controller, key: key);
+  final Function _viewForum;
+  Search(Controller controller, this._viewForum, {Key key})
+      : super(controller, key: key);
 
-  _SearchState createState() => _SearchState(super.getController());
+  _SearchState createState() => _SearchState(
+        super.getController(),
+        this._viewForum,
+      );
 }
 
 class _SearchState extends State<Search> {
   final Controller _controller;
+  final Function _viewForum;
   String _searchTerm = "";
-  _SearchState(this._controller);
+  _SearchState(this._controller, this._viewForum);
 
   void _onSearchTermChange(String value) {
     setState(() {
@@ -49,7 +56,7 @@ class _SearchState extends State<Search> {
           children: result
               .getForums()
               .sublist(0, 4)
-              .map((forum) => ForumTile(forum, () {},
+              .map((forum) => ForumTile(forum, _viewForum,
                   showTags: false, showDescription: false))
               .toList(),
         ),
