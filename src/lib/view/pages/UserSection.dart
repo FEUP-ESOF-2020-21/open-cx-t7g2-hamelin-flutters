@@ -30,13 +30,15 @@ class _UserSectionState extends State<UserSection> {
           ? MainPage(_controller, _refreshState)
           : Forums(_controller, _refreshState),
       Search(this._controller, _viewForum),
-      ProfilePage(),
+      ProfilePage(this._controller, _viewForum),
       Forums(this._controller, _refreshState),
     ];
   }
 
-  void _refreshState() {
-    setState(() {});
+  void _refreshState([int selectedIndex]) {
+    setState(() {
+      if (selectedIndex != null) this.selectedIndex = selectedIndex;
+    });
   }
 
   void _viewForum(int forumId) {
