@@ -195,12 +195,11 @@ class MockAdapter implements Database {
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
     Post(
-      4,
-      _users[4],
-      "Confnect is the greatest!",
-      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-    ),
+        4,
+        _users[4],
+        "Confnect is the greatest!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
     Post(
         4,
         _users[5],
@@ -292,8 +291,12 @@ class MockAdapter implements Database {
       profilePicUrl =
           "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
-    _users.add(User(
-        id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl));
+
+    User user = new User(
+        id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl);
+    //user.addForum(_forums[0]);
+
+    _users.add(user);
   }
 
   void addPost(
@@ -394,5 +397,9 @@ class MockAdapter implements Database {
 
   List<Post> getForumPosts(int forumId) {
     return _posts.where((element) => element.getForumId() == forumId).toList();
+  }
+
+  List<Post> getPosts() {
+    return _posts;
   }
 }

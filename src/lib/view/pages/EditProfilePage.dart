@@ -28,6 +28,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final fullNameController = TextEditingController();
   final usernameController = TextEditingController();
   final profilePicURL = TextEditingController();
+  final descriptionController = TextEditingController();
 
   _EditProfilePageState(this._controller, this._refreshProfileState);
 
@@ -81,6 +82,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
                 FormFieldContainer(
                   FormTextField(
+                    'New profile description',
+                    descriptionController,
+                    validator: ValidatorFactory.getValidator(
+                        'profile description',
+                        fieldRequired: false,
+                        upperLimit: 300),
+                  ),
+                ),
+                FormFieldContainer(
+                  FormTextField(
                     'New profile image URL',
                     profilePicURL,
                     validator: ValidatorFactory.getValidator('image url',
@@ -93,6 +104,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         _loggedInUser,
                         fullNameController.text,
                         usernameController.text,
+                        descriptionController.text,
                         profilePicURL.text);
                     _refreshProfileState();
                     Navigator.pop(context);

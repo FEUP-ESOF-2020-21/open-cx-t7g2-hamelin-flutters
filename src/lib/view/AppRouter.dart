@@ -4,4 +4,5 @@ class AppRouter {
   static const REGISTER = '/user-register';
   static const MAIN_PAGE = '/user-main-page';
   static const POST_PAGE = '/post-page';
+  static const POSTS_PAGE = '/posts-page';
 }

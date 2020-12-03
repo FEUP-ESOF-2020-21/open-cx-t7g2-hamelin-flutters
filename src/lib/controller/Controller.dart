@@ -38,6 +38,9 @@ class Controller {
 
   String getLoggedInUserName() => this._loggedInUserName;
 
+  String getLoggedInFullName() =>
+      this.getDatabase().getUser(this._loggedInUserName).getFullName();
+
   void setOnSessionChange(Function fn) => this._onSessionChange = fn;
 
   Database getDatabase() => _database;
@@ -60,11 +63,13 @@ class Controller {
         .toList();
   }
 
-  void updateUser(
-      User user, String fullname, String username, String profilePicURL) {
+  void updateUser(User user, String fullname, String username,
+      String description, String profilePicURL) {
     if (fullname.length != 0) user.setFullName(fullname);
 
     if (username.length != 0) user.setUserName(fullname);
+
+    if (description.length != 0) user.setBio(description);
 
     if (profilePicURL.length != 0) user.setAvatarUrl(profilePicURL);
   }
