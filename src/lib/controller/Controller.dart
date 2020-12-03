@@ -59,4 +59,13 @@ class Controller {
             ProfileForumListTile(_database.getForum(e), this, refreshState, 10))
         .toList();
   }
+
+  void updateUser(
+      User user, String fullname, String username, String profilePicURL) {
+    if (fullname.length != 0) user.setFullName(fullname);
+
+    if (username.length != 0) user.setUserName(fullname);
+
+    if (profilePicURL.length != 0) user.setAvatarUrl(profilePicURL);
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:confnect/controller/ValidatorFactory.dart';
+import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/FormFieldContainer.dart';
@@ -21,18 +22,19 @@ class EditProfilePage extends StatefulPage {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final Controller _controller;
-  final Function _refreshState;
+  final Function _refreshProfileState;
   final _formKey = GlobalKey<FormState>();
 
   final fullNameController = TextEditingController();
   final usernameController = TextEditingController();
   final profilePicURL = TextEditingController();
 
-  _EditProfilePageState(this._controller, this._refreshState);
+  _EditProfilePageState(this._controller, this._refreshProfileState);
 
   @override
   Widget build(BuildContext context) {
     User _loggedInUser = _controller.getLoggedInUser();
+    Database db = _controller.getDatabase();
 
     return Scaffold(
       appBar: AppBar(
@@ -49,12 +51,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
               children: [
                 FormFieldContainer(
                   FormTextField(
-                    'New fullname',
+                    'Current fullname: ' + _loggedInUser.getFullName(),
                     fullNameController,
                     validator: ValidatorFactory.getValidator(
                       'fullname',
                       fieldRequired: false,
-                      lowerLimit: 10,
+                      lowerLimit: 5,
                       upperLimit: 50,
                     ),
                   ),
@@ -62,14 +64,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
                 FormFieldContainer(
                   FormTextField(
-                    'New username',
+                    'Current username: ' + _loggedInUser.getUsername(),
                     usernameController,
-                    validator: ValidatorFactory.getValidator(
-                      'username',
-                      fieldRequired: false,
-                      lowerLimit: 20,
-                      upperLimit: 75,
-                    ),
+                    validator: ValidatorFactory.getValidator('username',
+                        fieldRequired: false,
+                        lowerLimit: 5,
+                        upperLimit: 20, extender: (value) {
+                      if (db.existsUser(value) &&
+                          value != _loggedInUser.getUsername()) {
+                        return "User with username " +
+                            value.toString() +
+                            " already exists!";
+                      }
+                    }),
                   ),
                 ),
                 FormFieldContainer(
@@ -77,11 +84,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     'New profile image URL',
                     profilePicURL,
                     validator: ValidatorFactory.getValidator('image url',
-                        fieldRequired: false),
+                        fieldRequired: false, upperLimit: 300),
                   ),
                 ),
                 FormFieldContainer(
                   SquareButton('Confirm changes', () {
+                    _controller.updateUser(
+                        _loggedInUser,
+                        fullNameController.text,
+                        usernameController.text,
+                        profilePicURL.text);
+                    _refreshProfileState();
                     Navigator.pop(context);
                   }),
                 ),

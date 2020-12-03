@@ -1,8 +1,7 @@
 class User {
   final int id;
-  final String _fullname, _username, _password, _role;
-  String _avatarUrl;
-  String _bio;
+  String _fullname, _username, _avatarUrl, _bio;
+  final String _password, _role;
   List<int> _userForunsIds;
 
   User(this.id, this._role, this._fullname, this._username, this._password,
@@ -22,6 +21,14 @@ class User {
 
   void setAvatarUrl(String avatarUrl) {
     this._avatarUrl = avatarUrl;
+  }
+
+  void setFullName(String fullname) {
+    this._fullname = fullname;
+  }
+
+  void setUserName(String username) {
+    this._username = username;
   }
 
   bool auth(String username, String password) {
