@@ -368,7 +368,7 @@ Scenario: The administrator starts typing on the "tags" and an "add new tag" but
     Then A new tag with the name that the administrator typed exists in the database
 ```
 
-#### See Complete Posts and it's Answers
+#### See Complete Post and it's Answers
 
 <img src="docs/mockups/postPageMeetup.png" width="300" style="border: 1px solid grey" />
 
@@ -493,6 +493,8 @@ Scenario: In the Meetup page, adding a comment
 
 #### Edit a Physical Meeting
 
+<img src="docs/mockups/editMeetup.png" width="300" style="border: 1px solid grey" />
+
 As a conference attendee, interested in participating in a meetup, I want to be able to edit the meetup I created, so that I can accommodate any request by the other attendees.
 
 ##### Value and Effort
@@ -515,6 +517,8 @@ Scenario: Editing the meetup
 
 #### Cancel a Physical Meeting
 
+<img src="docs/mockups/cancelMeetup.png" width="300" style="border: 1px solid grey" />
+
 As a conference attendee, I want to be able to comment on a meetup that was unsuccessful, so that the post page is consistent.
 
 ##### Value and Effort
@@ -536,14 +540,19 @@ Scenario: In the Post page
 
 #### Search Page
 
-As an app user, I want to search for a specific forum, post or user, so that I can easily find what I'm looking for
+<img src="docs/mockups/searchPage.png" width="300" style="border: 1px solid grey" />
+
+As an app user, I want to search for a specific forum, post or user, so that I can easily find what I'm looking for.
 
 ##### Value and Effort
     - Value: Must have
     - Effort: M 
 ##### Acceptance Tests
 ```gherkin
-    TODO
+Scenario: In the Search page
+    Given There exists many forums, users and posts
+    When I write something in the "search field"
+    Then The forums, users and posts that resemble what I wrote the most show up
 ```
 
 
@@ -558,11 +567,27 @@ As a conference attendee, I want to easily find topics that interest me, so that
     TODO
 ```
 
-#### Pin Answered Questions
 
-As a talk host, I want to be able to pin answered questions so that the question forum is organized and it is easy to find the answers to answered questions.
+#### Main Page
+
+<img src="docs/mockups/mainPage.png" width="300" style="border: 1px solid grey" />
+
+As an attendee, I want to have a page that shows me the posts and forums that really matter to me, so that I can have a positive experience with the app.
 ##### Value and Effort
-    - Value: Could have
+    - Value: Must have
+    - Effort: M
+##### Acceptance Tests
+
+```gherkin
+    TODO
+```
+
+
+#### Generate Forums From Talks
+*Note: this is made automatically whenever a talk is added, so there is no mockup*<br/>
+As an administrator, I want the forums to be generated based on the talks and the talks' themes so that we can have organized forums, one for each theme/interest and one for each talk (for questions).
+##### Value and Effort
+    - Value: Must have
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
@@ -580,11 +605,11 @@ As a talk host, I want to be able to remove inappropriate questions / wrong answ
     TODO
 ```
 
-#### Generate Forums From Talks
-*Note: this is made automatically whenever a talk is added, so there is no mockup*
-As an administrator, I want the forums to be generated based on the talks and the talks' themes so that we can have organized forums, one for each theme/interest and one for each talk (for questions).
+#### Pin Answered Questions
+
+As a talk host, I want to be able to pin answered questions so that the question forum is organized and it is easy to find the answers to answered questions.
 ##### Value and Effort
-    - Value: Must have
+    - Value: Could have
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
@@ -596,6 +621,18 @@ As an administrator, I want the forums to be generated based on the talks and th
 As an administrator, I want to be able to generate codes for hosts and attendees to insert when they register, so that we can control who we let in (only people who participate in the conference) and what permissions they have (attendee or host).
 ##### Value and Effort
     - Value: Could have
+    - Effort: M
+##### Acceptance Tests
+```gherkin
+    TODO
+```
+
+#### Multiple Conference Support
+
+As an administrator, I want to be able to reuse the app with other conferences, so that we take good value from the investment.
+
+##### Value and Effort
+    - Value: Could Have
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
