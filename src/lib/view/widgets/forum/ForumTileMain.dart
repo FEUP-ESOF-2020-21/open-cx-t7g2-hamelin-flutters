@@ -25,14 +25,19 @@ class ForumTileMain extends StatelessWidget {
               },
               child: Column(
                 children: [
-                  Container(
-                    height: 75,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          _forum.getImageURL(),
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10)),
+                    child: Container(
+                      height: 75,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            _forum.getImageURL(),
+                          ),
+                          fit: BoxFit.fill,
                         ),
-                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
