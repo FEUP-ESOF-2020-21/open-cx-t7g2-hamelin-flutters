@@ -1,6 +1,9 @@
+import 'package:confnect/controller/UserSectionController.dart';
+import 'package:confnect/view/pages/MainPage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
+import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
 
@@ -23,15 +26,27 @@ class _UserSectionState extends State<UserSection> {
   _UserSectionState(this._controller, {this.selectedIndex = 0});
 
   List<Widget> _pageBodies() {
-    return [
-      Forums(this._controller, _refreshState),
-      Container(
-        child: Text("Coming soon..."),
-        margin: EdgeInsets.all(10),
-      ),
-      ProfilePage(),
-      ProfilePage()
-    ];
+    if (this._controller.currentForumId == -1) {
+      return [
+        MainPage(_controller, _refreshState),
+        Container(
+          child: Text("Coming soon..."),
+          margin: EdgeInsets.all(10),
+        ),
+        ProfilePage(),
+        Forums(this._controller, _refreshState),
+      ];
+    } else {
+      return [
+        Forums(_controller, _refreshState),
+        Container(
+          child: Text("Coming soon..."),
+          margin: EdgeInsets.all(10),
+        ),
+        ProfilePage(),
+        Forums(_controller, _refreshState),
+      ];
+    }
   }
 
   void _refreshState() {
@@ -39,7 +54,8 @@ class _UserSectionState extends State<UserSection> {
   }
 
   Widget _addButton() {
-    if (this.selectedIndex == 0 && this._controller.getCurrentForumId() != -1) {
+    if ((this.selectedIndex == 0 || this.selectedIndex == 3) &&
+        this._controller.getCurrentForumId() != -1) {
       if (this._controller.isAddingPost()) {
         return FloatingActionButton(
           onPressed: () {
@@ -89,42 +105,10 @@ class _UserSectionState extends State<UserSection> {
     });
   }
 
-  List<Widget> _initAppBars(List<Widget> action) {
-    return [
-      AppBar(
-        title: Text(
-          "Forums",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      ),
-      AppBar(
-        title: Text(
-          "Search",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      ),
-      AppBar(
-        title: Text(
-          "Profile",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      ),
-      AppBar(
-        title: Text(
-          "Place holder",
-          style: pageTitleTextStyle,
-        ),
-        actions: action,
-      )
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
-    _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
+    _pageAppBars = UserSectionController.initAppBars(
+        <Widget>[LogoutButton(_controller)], _controller, _refreshState);
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
       body: _pageBodies()[this.selectedIndex],
@@ -134,8 +118,8 @@ class _UserSectionState extends State<UserSection> {
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.forum),
-            label: 'Forums',
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
@@ -146,9 +130,9 @@ class _UserSectionState extends State<UserSection> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.place),
-            label: 'Place Holder',
-          )
+            icon: Icon(Icons.forum),
+            label: 'Forums',
+          ),
         ],
         currentIndex: this.selectedIndex,
         selectedItemColor: Colors.blue[800],

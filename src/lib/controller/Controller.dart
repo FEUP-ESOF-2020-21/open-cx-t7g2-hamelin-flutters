@@ -31,6 +31,9 @@ class Controller {
 
   String getLoggedInUserName() => this._loggedInUserName;
 
+  String getLoggedInFullName() =>
+      this.getDatabase().getUser(this._loggedInUserName).getFullName();
+
   void setOnSessionChange(Function fn) => this._onSessionChange = fn;
 
   Database getDatabase() => _database;

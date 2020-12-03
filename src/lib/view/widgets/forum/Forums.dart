@@ -1,5 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/view/widgets/Posts/PostList.dart';
+import 'package:confnect/view/pages/PostsPage.dart';
 import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +44,7 @@ class _ForumsState extends State<Forums> {
   @override
   Widget build(BuildContext context) {
     if (this._controller.getCurrentForumId() != -1)
-      return PostList(this._controller, _viewForum, this._refreshState);
+      return PostsPage(this._controller, _viewForum, this._refreshState);
     return ForumList(_controller, _viewForum);
   }
 }
