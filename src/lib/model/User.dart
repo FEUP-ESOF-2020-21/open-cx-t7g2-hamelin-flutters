@@ -3,24 +3,22 @@ class User {
   final String _fullname, _username, _password, _role;
   String _avatarUrl;
   String _bio;
-  User(this.id, this._role, this._fullname, this._username, this._password,
-      [this._avatarUrl, this._bio = ""]);
+  List<int> _userForunsIds;
 
-  String getUsername() {
-    return _username;
-  }
+  User(this.id, this._role, this._fullname, this._username, this._password,
+      [this._avatarUrl, this._bio = "", this._userForunsIds = const []]);
+
+  String getUsername() => _username;
 
   String getFullName() => _fullname;
 
   String getRole() => _role;
 
-  String getAvatarUrl() {
-    return _avatarUrl;
-  }
+  String getAvatarUrl() => _avatarUrl;
 
-  String getBio() {
-    return _bio;
-  }
+  String getBio() => _bio;
+
+  List<int> getUserForunsIds() => _userForunsIds;
 
   void setAvatarUrl(String avatarUrl) {
     this._avatarUrl = avatarUrl;

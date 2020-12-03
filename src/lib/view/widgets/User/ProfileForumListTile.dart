@@ -11,13 +11,12 @@ class ProfileForumListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final Users users = Provider.of(context);
+    //TODO make clickable and redirect to forum page
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         SizedBox(height: this.margin),
-        SquareButton(this.text, () {
-        }),
+        SquareButton(this.text, () {}),
       ],
     );
   }

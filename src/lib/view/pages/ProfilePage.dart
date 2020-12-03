@@ -1,5 +1,4 @@
 import 'package:confnect/model/User.dart';
-import 'package:confnect/view/widgets/User/ProfileForumList.dart';
 import 'package:flutter/material.dart';
 
 import '../Page.dart';
@@ -24,10 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Stack(
       children: <Widget>[
-        /*ClipPath(
-          child: Container(color: Colors.black.withOpacity(0.8)),
-          clipper: getClipper(),
-        ),*/
         Positioned(
             width: MediaQuery.of(context).size.width,
             top: MediaQuery.of(context).size.height / 25,
@@ -74,30 +69,19 @@ class _ProfilePageState extends State<ProfilePage> {
                         onPressed: () {},
                       ),
                     )),
-                SizedBox(height: MediaQuery.of(context).size.height / 35.0),
-                ProfileForumList(),
+                SizedBox(height: MediaQuery.of(context).size.height / 25.0),
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Text('Forums',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold))
+                ]),
+                Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: _controller.buildProfileForumList(_loggedInUser))
               ],
             ))
       ],
     );
-  }
-}
-
-// ignore: camel_case_types
-class getClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = new Path();
-
-    path.lineTo(0.0, size.height / 1.9);
-    path.lineTo(size.width + 125, 0.0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
-    return true;
   }
 }

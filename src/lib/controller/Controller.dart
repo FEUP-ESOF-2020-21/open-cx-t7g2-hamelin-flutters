@@ -1,5 +1,7 @@
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
+import 'package:confnect/model/forums/Forum.dart';
+import 'package:confnect/view/widgets/User/ProfileForumListTile.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
 
@@ -48,5 +50,19 @@ class Controller {
     _database.addPost(forumId, _loggedInUserName, title, text, date);
     print("Post created");
     return true;
+  }
+
+  Forum getForumById(int id) {
+    for (Forum forum in _database.getForums()) {
+      if (forum.getId() == id) return forum;
+    }
+    return null;
+  }
+
+  List<Widget> buildProfileForumList(User user) {
+    return user
+        .getUserForunsIds()
+        .map((e) => ProfileForumListTile(getForumById(e).getTitle(), 10))
+        .toList();
   }
 }
