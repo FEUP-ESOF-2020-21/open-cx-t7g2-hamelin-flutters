@@ -1,8 +1,10 @@
 import 'package:confnect/model/User.dart';
+import 'package:confnect/view/pages/EditProfilePage.dart';
 import 'package:flutter/material.dart';
 
 import '../Page.dart';
 import '../../controller/Controller.dart';
+import 'admin/AddTalk.dart';
 //https://github.com/rajayogan/flutter-profilescreen/blob/master/lib/main.dart
 
 class ProfilePage extends StatefulPage {
@@ -20,6 +22,10 @@ class _ProfilePageState extends State<ProfilePage> {
   final Function _refreshState;
 
   _ProfilePageState(this._controller, this._refreshState);
+
+  void _refreshProfileState() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +78,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         highlightedBorderColor: Colors.green,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15)),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfilePage(
+                                    _controller, _refreshProfileState)),
+                          );
+                        },
                       ),
                     )),
                 SizedBox(height: MediaQuery.of(context).size.height / 25.0),
