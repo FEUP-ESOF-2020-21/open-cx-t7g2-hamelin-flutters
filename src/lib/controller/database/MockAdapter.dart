@@ -30,6 +30,7 @@ class MockAdapter implements Database {
 
   static List<Forum> _forums = [
     TalkForum(0, _talks[0]),
+    TalkForum(8, _talks[1]),
     TagForum(1, _tags[0]),
     TagForum(2, _tags[1]),
     TagForum(3, _tags[2]),
