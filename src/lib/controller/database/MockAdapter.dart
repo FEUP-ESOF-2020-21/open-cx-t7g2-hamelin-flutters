@@ -69,6 +69,14 @@ class MockAdapter implements Database {
         "Pior comentário de sempre"),
     Comment(_users[5], new Date(new DateTime.now()),
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh."),
+    Comment(
+        _users[6],
+        new Date(new DateTime.now().subtract(Duration(minutes: 3))),
+        "Comentário do host"),
+    Comment(
+        _users[2],
+        new Date(new DateTime.now().subtract(Duration(minutes: 1))),
+        "Comentário depois do comentário do host"),
   ];
 
   static List<Post> _posts = [
@@ -78,7 +86,7 @@ class MockAdapter implements Database {
       "Flutter master",
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[0], _comments[1]],
+      [_comments[0], _comments[1], _comments[6], _comments[7]],
     ),
     Post(
       0,
@@ -86,7 +94,8 @@ class MockAdapter implements Database {
       "It deserves a 20!",
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[2]],
+      [_comments[2], _comments[3]],
+      _comments[3],
     ),
     Post(
       0,
@@ -206,6 +215,22 @@ class MockAdapter implements Database {
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+    Post(
+      8,
+      _users[2],
+      "Welcome!",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      [_comments[3], _comments[4]],
+    ),
+    Post(
+      8,
+      _users[3],
+      "Make America Great Again!",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      [_comments[5]],
+    ),
   ];
 
   static List<Tag> _tags = [
