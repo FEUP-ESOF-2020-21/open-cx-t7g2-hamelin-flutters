@@ -6,20 +6,26 @@ import '../../controller/Controller.dart';
 //https://github.com/rajayogan/flutter-profilescreen/blob/master/lib/main.dart
 
 class ProfilePage extends StatefulPage {
-  ProfilePage(Controller controller, {Key key}) : super(controller, key: key);
+  final Function _refreshState;
+  ProfilePage(Controller controller, this._refreshState, {Key key})
+      : super(controller, key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState(getController());
+  _ProfilePageState createState() =>
+      _ProfilePageState(getController(), this._refreshState);
 }
 
 class _ProfilePageState extends State<ProfilePage> {
   final Controller _controller;
+  final Function _refreshState;
 
-  _ProfilePageState(this._controller);
+  _ProfilePageState(this._controller, this._refreshState);
 
   @override
   Widget build(BuildContext context) {
     User _loggedInUser = _controller.getLoggedInUser();
+    List<Widget> profileForumList =
+        _controller.buildProfileForumList(_loggedInUser, this._refreshState);
 
     return Stack(
       children: <Widget>[
@@ -76,9 +82,25 @@ class _ProfilePageState extends State<ProfilePage> {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.bold))
                 ]),
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: _controller.buildProfileForumList(_loggedInUser))
+                SizedBox(height: MediaQuery.of(context).size.height / 30.0),
+                if (profileForumList.length != 0)
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: profileForumList)
+                else
+                  Column(
+                    children: [
+                      Icon(
+                        IconData(59828, fontFamily: 'MaterialIcons'),
+                        color: Colors.black,
+                        size: 50.0,
+                      ),
+                      Text(
+                        "No foruns found...",
+                        style: TextStyle(fontSize: 20.0, color: Colors.black),
+                      )
+                    ],
+                  )
               ],
             ))
       ],

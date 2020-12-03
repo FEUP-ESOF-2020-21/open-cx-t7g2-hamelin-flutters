@@ -29,13 +29,15 @@ class _UserSectionState extends State<UserSection> {
         child: Text("Coming soon..."),
         margin: EdgeInsets.all(10),
       ),
-      ProfilePage(this._controller),
-      ProfilePage(this._controller)
+      ProfilePage(this._controller, this._refreshState),
+      ProfilePage(this._controller, this._refreshState)
     ];
   }
 
-  void _refreshState() {
-    setState(() {});
+  void _refreshState([int selectedIndex]) {
+    setState(() {
+      if (selectedIndex != null) this.selectedIndex = selectedIndex;
+    });
   }
 
   Widget _addButton() {

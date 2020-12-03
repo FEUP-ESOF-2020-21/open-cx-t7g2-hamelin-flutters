@@ -52,17 +52,11 @@ class Controller {
     return true;
   }
 
-  Forum getForumById(int id) {
-    for (Forum forum in _database.getForums()) {
-      if (forum.getId() == id) return forum;
-    }
-    return null;
-  }
-
-  List<Widget> buildProfileForumList(User user) {
+  List<Widget> buildProfileForumList(User user, Function refreshState) {
     return user
         .getUserForunsIds()
-        .map((e) => ProfileForumListTile(getForumById(e).getTitle(), 10))
+        .map((e) =>
+            ProfileForumListTile(_database.getForum(e), this, refreshState, 10))
         .toList();
   }
 }
