@@ -1,7 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostTextVote.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostTileMain.dart';
 import 'package:flutter/material.dart';
 

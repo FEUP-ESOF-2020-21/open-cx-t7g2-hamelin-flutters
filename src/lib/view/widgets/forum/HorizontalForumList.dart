@@ -1,7 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
-import 'package:confnect/view/pages/PostsPage.dart';
-import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/ForumTileMain.dart';
 import 'package:flutter/material.dart';
 

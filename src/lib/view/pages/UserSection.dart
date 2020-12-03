@@ -1,9 +1,7 @@
 import 'package:confnect/controller/UserSectionController.dart';
 import 'package:confnect/view/pages/MainPage.dart';
-import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
-import 'package:confnect/view/widgets/Posts/PostList.dart';
 import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
-import 'package:confnect/view/widgets/GoBackButton.dart';
-import 'package:confnect/view/widgets/PageTitle.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Date.dart';
-import 'package:confnect/model/Forum.dart';
 import 'package:confnect/model/User.dart';
-import 'package:confnect/view/pages/ForumPage.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/widgets/User/AvatarImg.dart';
 import 'package:flutter/material.dart';
 
