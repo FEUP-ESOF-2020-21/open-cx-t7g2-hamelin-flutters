@@ -50,13 +50,17 @@ class _PinnedCommentState extends State<PinnedComment> {
             Container(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Pinned Answer',
+                'Pinned Answer:',
                 style: TextStyle(
                   fontSize: 15,
                 ),
               ),
             ),
-            new CommentTile(comment),
+            new CommentTile(
+              comment,
+              fontSize: 15,
+              imageHeight: 30,
+            ),
           ],
         );
     } else {

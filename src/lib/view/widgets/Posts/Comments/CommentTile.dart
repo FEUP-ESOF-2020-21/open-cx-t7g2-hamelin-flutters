@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 
 class CommentTile extends StatefulWidget {
   final Comment _comment;
+  final double fontSize;
+  final double imageHeight;
 
-  CommentTile(this._comment);
+  CommentTile(this._comment, {this.fontSize = 13, this.imageHeight = 20});
   @override
   _CommentTileState createState() => _CommentTileState();
 }
@@ -21,10 +23,17 @@ class _CommentTileState extends State<CommentTile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             UserTimeHeader(
-                widget._comment.getAuthor(), widget._comment.getDate(), 20),
+              widget._comment.getAuthor(),
+              widget._comment.getDate(),
+              widget.imageHeight,
+              fontSize: widget.fontSize,
+            ),
             Container(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                child: Text(widget._comment.getDescription())),
+                child: Text(
+                  widget._comment.getDescription(),
+                  style: TextStyle(fontSize: widget.fontSize),
+                )),
           ],
         ),
       ),

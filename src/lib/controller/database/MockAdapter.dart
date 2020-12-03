@@ -64,8 +64,12 @@ class MockAdapter implements Database {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa feugiat, bibendum erat vitae, sollicitudin nibh."),
     Comment(
         _users[6],
-        new Date(new DateTime.now().subtract(Duration(minutes: 1))),
+        new Date(new DateTime.now().subtract(Duration(minutes: 3))),
         "Comentário do host"),
+    Comment(
+        _users[2],
+        new Date(new DateTime.now().subtract(Duration(minutes: 1))),
+        "Comentário depois do comentário do host"),
   ];
 
   static List<Post> _posts = [
@@ -75,7 +79,7 @@ class MockAdapter implements Database {
       "Flutter master",
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[0], _comments[1]],
+      [_comments[0], _comments[1], _comments[6], _comments[7]],
     ),
     Post(
       0,
@@ -305,7 +309,8 @@ class MockAdapter implements Database {
           "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
 
-    User user = new User(id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl);
+    User user = new User(
+        id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl);
     user.addForum(_forums[0]);
 
     _users.add(user);

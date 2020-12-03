@@ -8,8 +8,9 @@ class UserTimeHeader extends StatefulWidget {
   final User _user;
   Date _date;
   double _height;
+  double fontSize;
 
-  UserTimeHeader(this._user, this._date, this._height);
+  UserTimeHeader(this._user, this._date, this._height, {this.fontSize = 13});
   @override
   _UserTimeHeaderState createState() => _UserTimeHeaderState();
 }
@@ -26,7 +27,10 @@ class _UserTimeHeaderState extends State<UserTimeHeader> {
           Row(
             children: [
               AvatarImg(widget._user),
-              Text(widget._user.getFullName()),
+              Text(
+                widget._user.getFullName(),
+                style: TextStyle(fontSize: widget.fontSize),
+              ),
             ],
           ),
           Container(
