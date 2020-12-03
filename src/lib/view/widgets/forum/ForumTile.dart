@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 class ForumTile extends StatelessWidget {
   final Forum _forum;
   final Function _viewForum;
-  const ForumTile(this._forum, this._viewForum);
+  final bool showDescription, showTags;
+  const ForumTile(this._forum, this._viewForum,
+      {this.showDescription = true, this.showTags = true});
 
   @override
   Widget build(BuildContext context) {
@@ -62,15 +64,18 @@ class ForumTile extends StatelessWidget {
                           ],
                         ),
                         Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                child: Text(_forum.getTagsNames().join(', '),
-                                    style: talkSpeakerTextStyle),
-                              ),
-                            ),
-                          ],
+                          children: showTags
+                              ? [
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                      child: Text(
+                                          _forum.getTagsNames().join(', '),
+                                          style: talkSpeakerTextStyle),
+                                    ),
+                                  ),
+                                ]
+                              : [],
                         ),
                       ]
                     : [
@@ -88,17 +93,19 @@ class ForumTile extends StatelessWidget {
                       ],
               ),
               Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      child: Text(
-                        _forum.getDescription(),
-                        style: forumTextStyle,
-                      ),
-                    ),
-                  ),
-                ],
+                children: showDescription
+                    ? [
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                            child: Text(
+                              _forum.getDescription(),
+                              style: forumTextStyle,
+                            ),
+                          ),
+                        ),
+                      ]
+                    : [],
               )
             ],
           ),

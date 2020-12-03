@@ -187,12 +187,11 @@ class MockAdapter implements Database {
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
     Post(
-      4,
-      _users[4],
-      "Confnect is the greatest!",
-      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-    ),
+        4,
+        _users[4],
+        "Confnect is the greatest!",
+        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
     Post(
         4,
         _users[5],

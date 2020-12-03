@@ -34,6 +34,11 @@ class SearchController {
     List<User> users = _database.getUsers();
     Map<User, double> usersMap = {};
     for (final user in users) {
+      if (user.getRole() != UserRole.ATTENDEE &&
+          user.getRole() != UserRole.HOST) {
+        users.remove(user);
+        continue;
+      }
       usersMap[user] = calculateResemblance(key, user.getUsername()) +
           calculateResemblance(key, user.getFullName());
     }
