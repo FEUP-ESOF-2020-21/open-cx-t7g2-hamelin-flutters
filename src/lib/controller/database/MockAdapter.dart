@@ -304,8 +304,11 @@ class MockAdapter implements Database {
       profilePicUrl =
           "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
-    _users.add(User(
-        id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl));
+
+    User user = new User(id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl);
+    user.addForum(_forums[0]);
+
+    _users.add(user);
   }
 
   void addPost(
