@@ -1,17 +1,21 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/widgets/forum/ForumTileMain.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalForumList extends StatelessWidget {
   final Controller _controller;
   final Function _refreshState;
+  List<Forum> forumsList;
 
-  HorizontalForumList(this._controller, this._refreshState);
+  HorizontalForumList(this._controller, this._refreshState, this.forumsList);
   List<dynamic> forums() {
-    Database db = _controller.getDatabase();
-    return db
-        .getForums()
+    if (this.forumsList.isEmpty) {
+      this.forumsList = _controller.getDatabase().getForums();
+    }
+    return this
+        .forumsList
         .map((forum) => ForumTileMain(forum, _controller, _refreshState))
         .toList();
   }

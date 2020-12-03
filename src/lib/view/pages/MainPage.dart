@@ -1,4 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/User.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/Posts/PostListMain.dart';
@@ -21,6 +24,11 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    User loggedInUser = widget._controller.getLoggedInUser();
+    List<Forum> forums =
+        widget._controller.getDatabase().getUserPopularForums(loggedInUser);
+    List<Post> posts =
+        widget._controller.getDatabase().getForumsPopularPosts(forums);
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
       child: Column(
@@ -28,22 +36,23 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Text(
-              "Top Communities",
+              "Your Most Popular Communities",
               style: titleTextStyle,
               textAlign: TextAlign.left,
             ),
           ),
-          HorizontalForumList(widget._controller, this._refreshState),
+          HorizontalForumList(widget._controller, this._refreshState, forums),
           Padding(
             padding: const EdgeInsets.only(bottom: 10, top: 10),
             child: Text(
-              "Trending Posts",
+              "Most Popular Posts in Your Communities",
               style: titleTextStyle,
               textAlign: TextAlign.left,
             ),
           ),
           Expanded(
-              child: PostListMain(widget._controller, widget._refreshState)),
+              child: PostListMain(
+                  widget._controller, widget._refreshState, posts)),
         ],
       ),
     );
