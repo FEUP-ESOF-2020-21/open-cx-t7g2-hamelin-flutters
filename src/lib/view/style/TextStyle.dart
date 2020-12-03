@@ -21,7 +21,7 @@ var titleTextStyle = GoogleFonts.lora(
 var pageTitleTextStyle = GoogleFonts.lora(
   textStyle: TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: EvenLargerTextSize,
+    fontSize: LargerTextSize,
     color: Colors.black,
   ),
 );

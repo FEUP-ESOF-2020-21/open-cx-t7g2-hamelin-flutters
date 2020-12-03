@@ -105,8 +105,8 @@ class _UserSectionState extends State<UserSection> {
 
   @override
   Widget build(BuildContext context) {
-    _pageAppBars = UserSectionController.initAppBars(
-        <Widget>[LogoutButton(_controller)], _controller, _refreshState);
+    _pageAppBars =
+        UserSectionController.initAppBars(_controller, _refreshState);
     return Scaffold(
       appBar: _UserSectionState._pageAppBars[this.selectedIndex],
       body: _pageBodies()[this.selectedIndex],
