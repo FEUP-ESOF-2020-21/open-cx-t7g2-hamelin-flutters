@@ -2,8 +2,9 @@ class User {
   final int id;
   final String _fullname, _username, _password, _role;
   String _avatarUrl;
+  String _bio;
   User(this.id, this._role, this._fullname, this._username, this._password,
-      [this._avatarUrl]);
+      [this._avatarUrl, this._bio = ""]);
 
   String getUsername() {
     return _username;
@@ -15,6 +16,10 @@ class User {
 
   String getAvatarUrl() {
     return _avatarUrl;
+  }
+
+  String getBio() {
+    return _bio;
   }
 
   void setAvatarUrl(String avatarUrl) {

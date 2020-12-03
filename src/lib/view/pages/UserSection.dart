@@ -29,8 +29,8 @@ class _UserSectionState extends State<UserSection> {
         child: Text("Coming soon..."),
         margin: EdgeInsets.all(10),
       ),
-      ProfilePage(),
-      ProfilePage()
+      ProfilePage(this._controller),
+      ProfilePage(this._controller)
     ];
   }
 
