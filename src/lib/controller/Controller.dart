@@ -1,18 +1,20 @@
 import 'package:confnect/model/Date.dart';
+import 'package:confnect/model/SearchResult.dart';
 import 'package:confnect/model/User.dart';
-import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/widgets/User/ProfileForumListTile.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
+import 'SearchController.dart';
 
 class Controller {
-  Database _database;
+  final Database _database;
+  final SearchController _searchController;
   String _loggedInUserName;
   Function _onSessionChange;
   bool _addingPost = false;
   int currentForumId = -1;
 
-  Controller(this._database);
+  Controller(this._database) : _searchController = SearchController(_database);
 
   void startApp(StatelessWidget app) {
     runApp(app);
@@ -26,6 +28,10 @@ class Controller {
   void setLoggedInUserName(String username) {
     this._loggedInUserName = username;
     if (_onSessionChange != null) _onSessionChange();
+  }
+
+  SearchResult search(String key) {
+    return _searchController.search(key);
   }
 
   User getLoggedInUser() {
