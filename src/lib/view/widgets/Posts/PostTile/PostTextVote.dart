@@ -25,7 +25,9 @@ class _PostTextVoteState extends State<PostTextVote> {
       context,
       MaterialPageRoute(
           builder: (context) =>
-              CreateMeetupPage(widget._controller, widget._post)),
+              CreateMeetupPage(widget._controller, widget._post, () {
+                setState(() {});
+              })),
     );
   }
 
@@ -47,11 +49,8 @@ class _PostTextVoteState extends State<PostTextVote> {
           UserTimeMeetHeader(
               widget._post.getAuthor(), widget._post.getDate(), 20,
               onMeetupSelected: () {
-            if (!widget._post.isMeetingUp) {
-              setState(() {
-                widget._post.isMeetingUp = true;
-                this.openCreateMeetupPage();
-              });
+            if (widget._post.getMeetup() == null) {
+              this.openCreateMeetupPage();
             } else {
               openMeetupPage();
             }
@@ -61,7 +60,7 @@ class _PostTextVoteState extends State<PostTextVote> {
             child: Text(widget._post.getDescription()),
           ),
           VoteComment(widget._post),
-          if (widget._post.isMeetingUp)
+          if (widget._post.getMeetup() != null)
             MeetupBox(widget._controller, widget._post.getMeetup()),
         ],
       ),

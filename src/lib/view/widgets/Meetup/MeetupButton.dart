@@ -19,7 +19,7 @@ class _MeetupButtonState extends State<MeetupButton> {
       ),
       color: Colors.green,
       textColor: Colors.white,
-      splashColor: Colors.greenAccent,
+      splashColor: Colors.green[900],
       onPressed: () {
         widget.onButtonSelected();
       },

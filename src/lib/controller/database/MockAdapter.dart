@@ -1,11 +1,13 @@
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
+import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
 import 'package:confnect/model/forums/TagForum.dart';
 import 'package:confnect/model/forums/TalkForum.dart';
+import 'package:flutter/material.dart';
 
 import './Database.dart';
 import '../../model/User.dart';
@@ -391,5 +393,13 @@ class MockAdapter implements Database {
 
   List<Post> getPosts() {
     return _posts;
+  }
+
+  Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
+      String description, User creator) {
+    DateTime newDate =
+        new DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    Meetup meetup = new Meetup(Date(newDate), location, description, creator);
+    post.setMeetup(meetup);
   }
 }

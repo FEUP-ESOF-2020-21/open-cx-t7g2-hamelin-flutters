@@ -10,11 +10,10 @@ class Post {
   final Date _date;
   List<Comment> _comments;
   int _numberLikes = 0, _numberDislikes = 0, _forumId;
-  bool isMeetingUp = false;
   Meetup _meetup;
 
   Post(this._forumId, this._author, this._title, this._description, this._date,
-      [this._comments, this._meetup]);
+      [this._comments, this._meetup = null]);
 
   int getForumId() => _forumId;
 
@@ -67,9 +66,8 @@ class Post {
     _numberDislikes--;
   }
 
-  void createMeetup(
-      Date date, String location, String description, User meetingCreator) {
-    _meetup = new Meetup(date, location, description, meetingCreator);
+  void setMeetup(Meetup meetup) {
+    this._meetup = meetup;
   }
 
   Meetup getMeetup() {

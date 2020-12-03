@@ -28,9 +28,8 @@ class _MeetupBoxState extends State<MeetupBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //margin: EdgeInsets.all(10),
-      height: 150,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       color: (Colors.green),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -52,7 +51,8 @@ class _MeetupBoxState extends State<MeetupBox> {
                 style: meetupButtonTitleStyle,
               ),
               Text(
-                "I'm enjoying the conversation, Let's Meetup!\nClick in this Box for more information.",
+                widget._meetup.getDescription() +
+                    "\nClick here for more information.",
                 style: meetupButtonTextStyle,
               ),
               Row(
@@ -61,7 +61,7 @@ class _MeetupBoxState extends State<MeetupBox> {
                       onPressed: () => onPressedIn(),
                       color: widget._meetup.loggedUserIsGoing(
                               widget._controller.getLoggedInUser())
-                          ? Colors.greenAccent
+                          ? Colors.green[200]
                           : Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
@@ -74,7 +74,7 @@ class _MeetupBoxState extends State<MeetupBox> {
                       onPressed: () => onPressedOut(),
                       color: !widget._meetup.loggedUserIsGoing(
                               widget._controller.getLoggedInUser())
-                          ? Colors.greenAccent
+                          ? Colors.green[200]
                           : Colors.white,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),

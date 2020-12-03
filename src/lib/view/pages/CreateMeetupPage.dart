@@ -1,5 +1,4 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/pages/MeetupPage.dart';
@@ -12,7 +11,9 @@ import 'package:flutter/material.dart';
 class CreateMeetupPage extends StatefulPage {
   Post _post;
   Controller _controller;
-  CreateMeetupPage(this._controller, this._post) : super(_controller);
+  final Function _refreshPostPage;
+  CreateMeetupPage(this._controller, this._post, this._refreshPostPage)
+      : super(_controller);
 
   @override
   _CreateMeetupPageState createState() => _CreateMeetupPageState();
@@ -23,28 +24,24 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
   final _descriptionController = TextEditingController();
 
   final _timeKey = GlobalKey<FormState>();
+
   void createMeetup(
       String location, DateTime date, TimeOfDay time, String description) {
-    setState(() {
-      date =
-          new DateTime(date.year, date.month, date.day, time.hour, time.minute);
-      widget._post.createMeetup(
-          new Date(date),
-          location,
-          description,
-          widget._controller
-              .getDatabase()
-              .getUser(widget._controller.getLoggedInUserName()));
-    });
+    widget._controller.getDatabase().createMeetup(
+        widget._post,
+        location,
+        date,
+        time,
+        description,
+        widget._controller
+            .getDatabase()
+            .getUser(widget._controller.getLoggedInUserName()));
   }
 
   @override
   Widget build(BuildContext context) {
     DateTime meetDate = new DateTime.now();
     TimeOfDay meetTime = new TimeOfDay.now();
-    //TODO Tirar este createMeetup quando a outra pagina atualizar
-    createMeetup("", meetDate, meetTime,
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra");
     return Scaffold(
         appBar: AppBar(
           title: Text("Create Meetup"),
@@ -94,7 +91,7 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                           widget._controller, widget._post.getMeetup())),
                 );
                 //Navigator.pop(context);
-                //this._controller.setAddingPost(true);
+                widget._refreshPostPage();
               }),
             ),
           ],
