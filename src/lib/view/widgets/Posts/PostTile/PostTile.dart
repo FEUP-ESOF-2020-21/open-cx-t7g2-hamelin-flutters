@@ -9,8 +9,10 @@ class PostTile extends StatelessWidget {
   final Post _post; // = new Post("Ademar", "Ensinando flutter", "lorem ipsum");
   final Controller _controller;
   final User host;
+  final bool showForum;
 
-  const PostTile(this._post, this._controller, {this.host});
+  const PostTile(this._post, this._controller,
+      {this.host, this.showForum = false});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,9 @@ class PostTile extends StatelessWidget {
     return Card(
       margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      child: InkWell(onTap: _postPage, child: PostContent(_post, true)),
+      child: InkWell(
+          onTap: _postPage,
+          child: PostContent(_controller, _post, true, showForum: showForum)),
     );
   }
 }

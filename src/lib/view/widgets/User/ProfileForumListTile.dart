@@ -23,9 +23,9 @@ class ProfileForumListTile extends StatelessWidget {
         SquareButton(
           this._forum.getTitle(),
           () {
-            this._controller.setCurrentForumId(this._forum.getId());
-            this._refreshState(
-                0); // this will push the forum page on the navigator
+            this._refreshState(this
+                ._forum
+                .getId()); // this will push the forum page on the navigator
           },
         ),
       ],

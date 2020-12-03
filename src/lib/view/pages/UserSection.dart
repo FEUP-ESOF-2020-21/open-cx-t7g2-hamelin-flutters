@@ -1,3 +1,4 @@
+import 'package:confnect/view/pages/Search.dart';
 import 'package:confnect/controller/UserSectionController.dart';
 import 'package:confnect/view/pages/MainPage.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
@@ -24,32 +25,26 @@ class _UserSectionState extends State<UserSection> {
   _UserSectionState(this._controller, {this.selectedIndex = 0});
 
   List<Widget> _pageBodies() {
-    if (this._controller.currentForumId == -1) {
-      return [
-        MainPage(_controller, _refreshState),
-        Container(
-          child: Text("Coming soon..."),
-          margin: EdgeInsets.all(10),
-        ),
-        ProfilePage(this._controller, this._refreshState),
-        Forums(this._controller, _refreshState),
-      ];
-    } else {
-      return [
-        Forums(_controller, _refreshState),
-        Container(
-          child: Text("Coming soon..."),
-          margin: EdgeInsets.all(10),
-        ),
-        ProfilePage(this._controller, this._refreshState),
-        Forums(_controller, _refreshState),
-      ];
-    }
+    return [
+      this._controller.currentForumId == -1
+          ? MainPage(_controller, _refreshState)
+          : Forums(_controller, _refreshState),
+      Search(this._controller, _viewForum),
+      ProfilePage(this._controller, _viewForum),
+      Forums(this._controller, _refreshState),
+    ];
   }
 
   void _refreshState([int selectedIndex]) {
     setState(() {
       if (selectedIndex != null) this.selectedIndex = selectedIndex;
+    });
+  }
+
+  void _viewForum(int forumId) {
+    this.setState(() {
+      this._controller.setCurrentForumId(forumId);
+      selectedIndex = 3;
     });
   }
 
