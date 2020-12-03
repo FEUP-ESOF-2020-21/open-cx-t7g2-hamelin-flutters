@@ -3,12 +3,12 @@ import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Tag.dart';
 import 'package:confnect/view/Page.dart';
+import 'package:confnect/view/pages/admin/TagManager.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tagging/flutter_tagging.dart';
 
 class AddTalk extends StatefulPage {
   final Function _onTalkAdded;
@@ -48,83 +48,6 @@ class _AddTalkState extends State<AddTalk> {
 
   _AddTalkState(this._controller, this._onTalkAdded);
 
-  List<Tag> getTags(String value) {
-    print("getTags");
-    Database db = _controller.getDatabase();
-    return db
-        .getTags()
-        .where(
-            (tag) => tag.getName().toLowerCase().contains(value.toLowerCase()))
-        .toList();
-  }
-
-  Widget tagSelector() {
-    Database db = _controller.getDatabase();
-    return FormFieldContainer(
-      FlutterTagging<Tag>(
-        initialItems: _selectedTags,
-        enableImmediateSuggestion: true,
-        textFieldConfiguration: TextFieldConfiguration(
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                5,
-              ),
-              borderSide: BorderSide(
-                width: 3,
-                color: Colors.black,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                5,
-              ),
-              borderSide: BorderSide(
-                width: 3,
-                color: Colors.black,
-              ),
-            ),
-            hintText: 'Search Tags',
-            labelText: 'Tags',
-            labelStyle: TextStyle(color: Colors.black54),
-            contentPadding: EdgeInsets.all(10),
-          ),
-        ),
-        findSuggestions: getTags,
-        additionCallback: (value) {
-          print("additionCallback, value: " + value);
-          return db.createTag(value);
-        },
-        configureSuggestion: (tag) {
-          return SuggestionConfiguration(
-            title: Text(tag == null ? "No tag found" : tag.getName()),
-            additionWidget: Chip(
-              avatar: Icon(
-                Icons.add_circle,
-                color: Colors.white,
-              ),
-              label: Text('Add New Tag'),
-              labelStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-                fontWeight: FontWeight.w300,
-              ),
-              backgroundColor: Colors.blue[800],
-            ),
-          );
-        },
-        configureChip: (tag) {
-          return ChipConfiguration(
-            label: Text(tag.getName()),
-            backgroundColor: Colors.blue[800],
-            labelStyle: TextStyle(color: Colors.white),
-            deleteIconColor: Colors.white,
-          );
-        },
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     Database db = _controller.getDatabase();
@@ -154,7 +77,7 @@ class _AddTalkState extends State<AddTalk> {
                   ),
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 20),
                 ),
-                tagSelector(),
+                TagManager.tagSelector(_controller, _selectedTags),
                 FormFieldContainer(
                   FormTextField(
                     'Talk Description',
@@ -228,10 +151,16 @@ class _AddTalkState extends State<AddTalk> {
                             talkSpeakerUsername =
                                 speakerUsernameController.text,
                             talkImageURL = talkImageURLController.text;
-                        db.addTalk(talkTitle, talkDescription,
-                            talkSpeakerUsername, talkImageURL, _selectedTags);
-                        _onTalkAdded();
-                        Navigator.pop(context);
+
+                        Function onComplete = (newTags) {
+                          db.addTalk(talkTitle, talkDescription,
+                              talkSpeakerUsername, talkImageURL, newTags);
+                          _onTalkAdded();
+                          Navigator.pop(context);
+                        };
+
+                        TagManager.getTagInfo(
+                            context, db, _selectedTags, onComplete);
                       }
                     },
                   ),

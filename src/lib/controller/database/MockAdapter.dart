@@ -1,9 +1,11 @@
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
-import 'package:confnect/model/Forum.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
+import 'package:confnect/model/forums/TagForum.dart';
+import 'package:confnect/model/forums/TalkForum.dart';
 
 import './Database.dart';
 import '../../model/User.dart';
@@ -20,55 +22,22 @@ class MockAdapter implements Database {
         "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U="),
     User(4, UserRole.ATTENDEE, "Souto", "souto", "1",
         "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172"),
-    User(5, UserRole.ATTENDEE, "Augusto Souza", "aas", "1",
+    User(5, UserRole.ATTENDEE, "Augusto Sousa", "aas", "1",
         "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg"),
     User(6, UserRole.HOST, "Lew Lee", "fanatic", "1",
         "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg"),
   ];
 
   static List<Forum> _forums = [
-    Forum(
-      0,
-      "Data science",
-      "This is the best forum about Data Science you'll ever encounter!",
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.learningtree.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fdatasci.jpg&f=1&nofb=1",
-    ),
-    Forum(
-      1,
-      "Mobile Development",
-      "We are all Hamelin Flutters here.",
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fckab.b-cdn.net%2Fwp-content%2Fuploads%2F2019%2F07%2FMobile-App-Development-Frameworks.png&f=1&nofb=1",
-    ),
-    Forum(
-      2,
-      "Blockchain",
-      "Some fancy slogan.",
-      "https://i0.wp.com/www.cienciaedados.com/wp-content/uploads/2018/01/Big-Data-e-as-Oportunidades-com-Blockchain.jpg?fit=765%2C457",
-    ),
-    Forum(
-      3,
-      "Internet of Things",
-      "Some fancy slogan.",
-      "https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/gao-assesses-iot-cybersecurity-other-risks-showcase_image-6-a-9926.jpg",
-    ),
-    Forum(
-      4,
-      "Competitive Programming",
-      "Some fancy slogan.",
-      "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20191004160106/How-to-Prepare-for-Competitive-Programming.png",
-    ),
-    Forum(
-      5,
-      "Capture the Flag",
-      "Some fancy slogan.",
-      "https://embeddedworldhome.files.wordpress.com/2019/05/icons_ctf_1.png?w=1250",
-    ),
-    Forum(
-      6,
-      "Machine Learning",
-      "Some fancy slogan.",
-      "https://dvlsystems.com/wp-content/uploads/2020/08/machine_learning.jpg",
-    ),
+    TalkForum(0, _talks[0]),
+    TalkForum(8, _talks[1]),
+    TagForum(1, _tags[0]),
+    TagForum(2, _tags[1]),
+    TagForum(3, _tags[2]),
+    TagForum(4, _tags[3]),
+    TagForum(5, _tags[4]),
+    TagForum(6, _tags[5]),
+    TagForum(7, _tags[6]),
   ];
   static List<Comment> _comments = [
     Comment(
@@ -233,9 +202,48 @@ class MockAdapter implements Database {
   ];
 
   static List<Tag> _tags = [
-    Tag(0, "AI"),
-    Tag(1, "Robotics"),
-    Tag(2, "Conspiracy Theories"),
+    Tag(
+      0,
+      "Data science",
+      "This is the best forum about Data Science you'll ever encounter!",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fblog.learningtree.com%2Fwp-content%2Fuploads%2F2018%2F07%2Fdatasci.jpg&f=1&nofb=1",
+    ),
+    Tag(
+      1,
+      "Mobile Development",
+      "We are all Hamelin Flutters here.",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fckab.b-cdn.net%2Fwp-content%2Fuploads%2F2019%2F07%2FMobile-App-Development-Frameworks.png&f=1&nofb=1",
+    ),
+    Tag(
+      2,
+      "Blockchain",
+      "Some fancy slogan.",
+      "https://i0.wp.com/www.cienciaedados.com/wp-content/uploads/2018/01/Big-Data-e-as-Oportunidades-com-Blockchain.jpg?fit=765%2C457",
+    ),
+    Tag(
+      3,
+      "Internet of Things",
+      "Some fancy slogan.",
+      "https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/gao-assesses-iot-cybersecurity-other-risks-showcase_image-6-a-9926.jpg",
+    ),
+    Tag(
+      5,
+      "Competitive Programming",
+      "Some fancy slogan.",
+      "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20191004160106/How-to-Prepare-for-Competitive-Programming.png",
+    ),
+    Tag(
+      5,
+      "Capture the Flag",
+      "Some fancy slogan.",
+      "https://embeddedworldhome.files.wordpress.com/2019/05/icons_ctf_1.png?w=1250",
+    ),
+    Tag(
+      6,
+      "Machine Learning",
+      "Some fancy slogan.",
+      "https://dvlsystems.com/wp-content/uploads/2020/08/machine_learning.jpg",
+    ),
   ];
 
   static List<Talk> _talks = [
@@ -246,6 +254,14 @@ class MockAdapter implements Database {
       _users[6],
       "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
       [_tags[0], _tags[1], _tags[2]],
+    ),
+    Talk(
+      1,
+      "Qubits: Quantum bits",
+      "A talk about quantum computers, their origin, their current state, and predicitons for the future.",
+      _users[6],
+      "https://i0.wp.com/indusdictum.com/wp-content/uploads/2020/03/Indian-scientists-from-RRI-scientists-devise-test-for-fairness-of-qubits-in-quantum-computers.png",
+      [_tags[3]],
     ),
   ];
 
@@ -262,22 +278,14 @@ class MockAdapter implements Database {
     return res;
   }
 
-  int register(String fullname, String username, String password) {
+  void register(
+      String fullname, String username, String password, String profilePicUrl) {
+    if (profilePicUrl.length == 0)
+      profilePicUrl =
+          "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
-    if (fullname.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
-      for (var user in _users) {
-        if (user.getUsername() == username) {
-          print("Return");
-          return 2;
-        }
-      }
-
-      _users.add(User(id, UserRole.ATTENDEE, fullname, username, password));
-      print("Register success");
-      return 1;
-    }
-    print("Register failed");
-    return 0;
+    _users.add(User(
+        id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl));
   }
 
   void addPost(
@@ -288,22 +296,24 @@ class MockAdapter implements Database {
   }
 
   void createTalkForum(Talk talk) {
-    _forums.add(Forum(_forums.length, talk.getTitle(), talk.getDescription(),
-        talk.getImageURL()));
+    _forums.add(TalkForum(_forums.length, talk));
   }
 
   void createTagForum(Tag tag) {
-    //TODO
-    print("Create talk tag forum!");
+    _forums.add(TagForum(_forums.length, tag));
+  }
+
+  void addTag(Tag tag) {
+    _tags.add(tag);
+    createTagForum(tag);
+    print('''Added tag "${tag.getName()}" in db''');
   }
 
   void addTalk(String title, String description, String speaker, String image,
       List<Tag> tags) {
     tags.forEach((tag) {
       if (!_tags.contains(tag)) {
-        _tags.add(tag);
-        createTagForum(tag);
-        print('''Added tag "${tag.getName()}" in db''');
+        addTag(tag);
       }
     });
     Talk talk =
@@ -312,16 +322,31 @@ class MockAdapter implements Database {
     createTalkForum(talk);
   }
 
+  bool isTagNew(Tag tag) {
+    return !_tags.contains(tag);
+  }
+
+  void editTalk(int talkId, String title, String description, String speaker,
+      String image, List<Tag> tags) {
+    tags.forEach((tag) {
+      if (!_tags.contains(tag)) {
+        addTag(tag);
+      }
+    });
+    Talk talk = _talks.firstWhere((talk) => talk.getId() == talkId);
+    talk.setTitle(title);
+    talk.setDescription(description);
+    talk.setSpeaker(getUser(speaker));
+    talk.setImageURL(image);
+    talk.setTags(tags);
+  }
+
   void deleteTalk(Talk talk) {
     _talks.remove(talk);
   }
 
   Tag createTag(String name) {
-    return Tag(_tags.length, name);
-  }
-
-  void addTag(Tag tag) {
-    _tags.add(tag);
+    return Tag(_tags.length, name, null, null);
   }
 
   User getUser(String username) {
@@ -332,6 +357,7 @@ class MockAdapter implements Database {
   }
 
   bool existsUser(String username) {
+    print(getUser(username));
     return getUser(username) != null;
   }
 
