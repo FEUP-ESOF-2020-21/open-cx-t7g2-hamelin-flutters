@@ -46,14 +46,21 @@ class _MeetupBoxState extends State<MeetupBox> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                "Meetup",
-                style: meetupButtonTitleStyle,
+              Container(
+                child: Text(
+                  "Meetup",
+                  style: meetupButtonTitleStyle,
+                  textScaleFactor: 1.1,
+                ),
+                margin: EdgeInsets.only(bottom: 5),
               ),
-              Text(
-                widget._meetup.getDescription() +
-                    "\nClick here for more information.",
-                style: meetupButtonTextStyle,
+              Container(
+                child: Text(
+                  widget._meetup.getDescription() +
+                      "\nClick here for more information.",
+                  style: meetupButtonTextStyle,
+                ),
+                margin: EdgeInsets.only(bottom: 20),
               ),
               Row(
                 children: [

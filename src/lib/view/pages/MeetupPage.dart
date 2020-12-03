@@ -21,36 +21,33 @@ class _MeetupPageState extends State<MeetupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Meetup"),
+      appBar: AppBar(
+        title: Text("Meetup"),
+      ),
+      body: Stack(children: [
+        Container(
+          padding: EdgeInsets.fromLTRB(10, 20, 10, 70),
+          child: ListView(
+            children: [
+              MeetupInfo(widget._meetup),
+              Divider(),
+              CommentList(widget._meetup.getComments()),
+            ],
+          ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Stack(children: [
-            Container(
-              child: ListView(
-                children: [
-                  MeetupInfo(widget._meetup),
-                  Divider(),
-                  CommentList(widget._meetup.getComments()),
-                ],
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: AddComment(
-                widget._controller,
-                widget._meetup.getComments(),
-                onSubmitted: (user, date, text) {
-                  setState(() {
-                    widget._meetup
-                        .getComments()
-                        .add(new Comment(user, date, text));
-                  });
-                },
-              ),
-            )
-          ]),
-        ));
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: AddComment(
+            widget._controller,
+            widget._meetup.getComments(),
+            onSubmitted: (user, date, text) {
+              setState(() {
+                widget._meetup.getComments().add(new Comment(user, date, text));
+              });
+            },
+          ),
+        )
+      ]),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Post.dart';
@@ -19,6 +20,7 @@ class AddComment extends StatefulWidget {
 
 class _AddCommentState extends State<AddComment> {
   final TextEditingController _textController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   void _handleSubmitted(String text) {
     String username = widget._controller.getLoggedInUserName();
@@ -47,23 +49,31 @@ class _AddCommentState extends State<AddComment> {
         ),
         child: Padding(
           padding: const EdgeInsets.only(left: 20),
-          child: Row(
-            children: [
-              Flexible(
-                child: TextField(
-                  controller: _textController,
-                  onSubmitted: _handleSubmitted,
-                  decoration:
-                      InputDecoration.collapsed(hintText: 'Send a message'),
+          child: Form(
+            key: _formKey,
+            child: Row(
+              children: [
+                Flexible(
+                  child: TextFormField(
+                    controller: _textController,
+                    validator: ValidatorFactory.getValidator('Message',
+                        fieldRequired: true),
+                    decoration:
+                        InputDecoration.collapsed(hintText: 'Send a message'),
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: IconButton(
-                    icon: Icon(Icons.send),
-                    onPressed: () => _handleSubmitted(_textController.text)),
-              ),
-            ],
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: IconButton(
+                      icon: Icon(Icons.send),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          _handleSubmitted(_textController.text);
+                        }
+                      }),
+                ),
+              ],
+            ),
           ),
         ),
       ),

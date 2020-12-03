@@ -1,4 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/pages/MeetupPage.dart';
@@ -22,6 +23,7 @@ class CreateMeetupPage extends StatefulPage {
 class _CreateMeetupPageState extends State<CreateMeetupPage> {
   final _locationController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   final _timeKey = GlobalKey<FormState>();
 
@@ -43,10 +45,12 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
     DateTime meetDate = new DateTime.now();
     TimeOfDay meetTime = new TimeOfDay.now();
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Create Meetup"),
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: Text("Create Meetup"),
+      ),
+      body: Form(
+        key: _formKey,
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
@@ -55,7 +59,12 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                   height: 20,
                 ),
                 FormFieldContainer(
-                  FormTextField("Location", _locationController),
+                  FormTextField(
+                    "Location",
+                    _locationController,
+                    validator: ValidatorFactory.getValidator('Location',
+                        fieldRequired: true, upperLimit: 50),
+                  ),
                   margin: EdgeInsets.all(10),
                 ),
                 FormFieldContainer(
@@ -73,6 +82,8 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                   FormTextField(
                     "Description",
                     _descriptionController,
+                    validator: ValidatorFactory.getValidator('Description',
+                        fieldRequired: true, upperLimit: 300),
                     maxLines: 5,
                   ),
                   margin: EdgeInsets.all(10),
@@ -83,18 +94,21 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
               SquareButton('Submit', () {
                 String location = _locationController.text;
                 String description = _descriptionController.text;
-                createMeetup(location, meetDate, meetTime, description);
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MeetupPage(
-                          widget._controller, widget._post.getMeetup())),
-                );
-                //Navigator.pop(context);
-                widget._refreshPostPage();
+                if (_formKey.currentState.validate()) {
+                  createMeetup(location, meetDate, meetTime, description);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MeetupPage(
+                            widget._controller, widget._post.getMeetup())),
+                  );
+                  widget._refreshPostPage();
+                }
               }),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
