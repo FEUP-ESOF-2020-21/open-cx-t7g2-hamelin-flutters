@@ -37,4 +37,6 @@ abstract class Database {
   void addTag(Tag tag);
   void deleteTalk(Talk talk);
   bool isTagNew(Tag tag);
+  List<Forum> getUserPopularForums(User user);
+  List<Post> getForumsPopularPosts(List<Forum> forums);
 }

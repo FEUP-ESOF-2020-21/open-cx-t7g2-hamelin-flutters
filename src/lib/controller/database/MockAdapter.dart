@@ -14,8 +14,16 @@ class MockAdapter implements Database {
   static List<User> _users = [
     User(0, UserRole.ADMIN, "Test User", "test", "123",
         "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
-    User(1, UserRole.ATTENDEE, "Donald Trump", "trump", "1",
-        "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg"),
+    User(
+      1,
+      UserRole.ATTENDEE,
+      "Donald Trump",
+      "trump",
+      "1",
+      "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
+      "Hello world!",
+      [1, 7, 2],
+    ),
     User(
         2,
         UserRole.ATTENDEE,
@@ -24,15 +32,47 @@ class MockAdapter implements Database {
         "1",
         "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg",
         "Obama bio baby!",
-        [0, 1]),
-    User(3, UserRole.ATTENDEE, "QUIM", "quim", "1",
-        "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U="),
-    User(4, UserRole.ATTENDEE, "Souto", "souto", "1",
-        "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172"),
-    User(5, UserRole.ATTENDEE, "Augusto Sousa", "aas", "1",
-        "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg"),
-    User(6, UserRole.HOST, "Lew Lee", "fanatic", "1",
-        "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg"),
+        [0, 1, 3]),
+    User(
+      3,
+      UserRole.ATTENDEE,
+      "QUIM",
+      "quim",
+      "1",
+      "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U=",
+      "Call me QUIM",
+      [2, 5, 6],
+    ),
+    User(
+      4,
+      UserRole.ATTENDEE,
+      "Souto",
+      "souto",
+      "1",
+      "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172",
+      "Souto, Souto Souto",
+      [6, 4, 7],
+    ),
+    User(
+      5,
+      UserRole.ATTENDEE,
+      "Augusto Sousa",
+      "aas",
+      "1",
+      "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg",
+      "AAS",
+      [6, 1, 0],
+    ),
+    User(
+      6,
+      UserRole.HOST,
+      "Lew Lee",
+      "fanatic",
+      "1",
+      "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg",
+      "Call me QUIM",
+      [1, 4, 8],
+    ),
   ];
 
   static List<Forum> _forums = [
@@ -426,5 +466,30 @@ class MockAdapter implements Database {
 
   List<Post> getPosts() {
     return _posts;
+  }
+
+  List<Forum> getUserPopularForums(User user) {
+    List<int> forumIds = user.getUserForunsIds();
+    List<Forum> ret = [];
+    forumIds.forEach((element) {
+      ret.add(getForum(element));
+    });
+    ret.sort((Forum f1, Forum f2) {
+      int f1NPosts = getForumPosts(f1.getId()).length;
+      int f2NPosts = getForumPosts(f2.getId()).length;
+      return f1NPosts.compareTo(f2NPosts);
+    });
+    return ret;
+  }
+
+  List<Post> getForumsPopularPosts(List<Forum> forums) {
+    List<Post> ret = [];
+    forums.forEach((element) {
+      ret.addAll(getForumPosts(element.getId()));
+    });
+    ret.sort((Post p1, Post p2) {
+      return p1.getNumberLikes().compareTo(p2.getNumberLikes());
+    });
+    return ret;
   }
 }
