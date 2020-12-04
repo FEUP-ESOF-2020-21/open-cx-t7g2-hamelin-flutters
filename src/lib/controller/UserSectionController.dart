@@ -26,16 +26,14 @@ class UserSectionController {
         actions: [LogoutButton(controller)],
       ),
       AppBar(
-        title: Expanded(
-          child: Text(
-            controller.currentForumId == -1
-                ? 'Forums'
-                : controller
-                    .getDatabase()
-                    .getForum(controller.getCurrentForumId())
-                    .getTitle(),
-            style: pageTitleTextStyle,
-          ),
+        title: Text(
+          controller.currentForumId == -1
+              ? 'Forums'
+              : controller
+                  .getDatabase()
+                  .getForum(controller.getCurrentForumId())
+                  .getTitle(),
+          style: pageTitleTextStyle,
         ),
         actions: [LogoutButton(controller)],
         leading: controller.getCurrentForumId() == -1
