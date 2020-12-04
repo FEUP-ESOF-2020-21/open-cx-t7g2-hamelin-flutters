@@ -36,6 +36,10 @@ class PostPageState extends State<PostPage> {
     setState(() {});
   }
 
+  void _refreshState() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +58,12 @@ class PostPageState extends State<PostPage> {
                   Divider(
                     thickness: 2,
                   ),
-                  CommentList(widget._post.getComments()),
+                  CommentList(
+                    widget._post.getComments(),
+                    controller: widget._controller,
+                    refreshState: _refreshState,
+                    post: widget._post,
+                  ),
                 ],
               )),
           Align(

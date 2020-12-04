@@ -10,9 +10,10 @@ class UserTimeHeader extends StatefulWidget {
   final double _height;
   final double fontSize;
   final Widget beforeImage;
+  final Widget beforeDate;
 
   UserTimeHeader(this._user, this._date, this._height,
-      {this.fontSize = 13, this.beforeImage});
+      {this.fontSize = 13, this.beforeImage, this.beforeDate});
   @override
   _UserTimeHeaderState createState() => _UserTimeHeaderState();
 }
@@ -22,6 +23,8 @@ class _UserTimeHeaderState extends State<UserTimeHeader> {
   Widget build(BuildContext context) {
     Widget beforeImage =
         widget.beforeImage == null ? Container() : widget.beforeImage;
+    Widget beforeDate =
+        widget.beforeDate == null ? Container() : widget.beforeDate;
     return Container(
       height: widget._height,
       child: Row(
@@ -39,8 +42,14 @@ class _UserTimeHeaderState extends State<UserTimeHeader> {
             ],
           ),
           Container(
-              padding: EdgeInsets.only(right: 10),
-              child: Text(widget._date.getMinutesSince()))
+            padding: EdgeInsets.only(right: 10),
+            child: Row(
+              children: [
+                beforeDate,
+                Text(widget._date.getMinutesSince()),
+              ],
+            ),
+          ),
         ],
       ),
     );
