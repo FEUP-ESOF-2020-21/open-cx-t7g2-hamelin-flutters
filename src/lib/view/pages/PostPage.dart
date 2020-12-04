@@ -73,7 +73,16 @@ class PostPageState extends State<PostPage> {
               widget._post.getComments(),
               onSubmitted: (user, date, text) {
                 setState(() {
-                  widget._post.getComments().add(new Comment(user, date, text));
+                  Comment comment = new Comment(user, date, text);
+                  widget._post.getComments().add(comment);
+                  if (widget._post.getPinnedComment() == null &&
+                      user ==
+                          widget._controller
+                              .getDatabase()
+                              .getForum(widget._post.getForumId())
+                              .getSpeaker()) {
+                    widget._post.pinComment(comment);
+                  }
                 });
               },
             ),

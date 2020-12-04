@@ -38,7 +38,9 @@ class _CommentListState extends State<CommentList> {
                         .getSpeaker()
                 ? InkWell(
                     child: Icon(
-                      Icons.push_pin,
+                      widget.post.getPinnedComment() == widget._comments[index]
+                          ? Icons.push_pin_outlined
+                          : Icons.push_pin,
                       size: 15,
                       color: Colors.grey,
                     ),

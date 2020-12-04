@@ -16,23 +16,10 @@ class PinnedComment extends StatefulWidget {
 }
 
 class _PinnedCommentState extends State<PinnedComment> {
-  Comment olderHostComment() {
-    List<Comment> _comments = widget._post.getComments();
-    for (int i = 0; i < _comments.length; i++) {
-      if (_comments[i].getAuthor().getUsername() ==
-          widget._host.getUsername()) {
-        return _comments[i];
-      }
-    }
-    return null;
-  }
-
   Comment getPinnedComment() {
-    if (widget._post.getPinnedComment() != null) {
-      return widget._post.getPinnedComment();
-    } else {
-      return olderHostComment();
-    }
+    return widget._post.getPinnedComment() == null
+        ? null
+        : widget._post.getPinnedComment();
   }
 
   @override
