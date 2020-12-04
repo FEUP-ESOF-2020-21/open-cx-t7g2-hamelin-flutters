@@ -3,8 +3,12 @@ import '../../controller/Controller.dart';
 
 class LogoutButton extends StatelessWidget {
   final Controller _controller;
-  final Color _color;
+  Color _color;
   LogoutButton(this._controller, [this._color]);
+  setColor(Color color) {
+    this._color = color;
+  }
+
   @override
   Widget build(BuildContext context) {
     return IconButton(

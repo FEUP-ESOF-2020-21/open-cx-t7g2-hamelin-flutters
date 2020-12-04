@@ -1,7 +1,7 @@
 import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/controller/database/Database.dart';
-import 'package:confnect/view/widgets/FormFieldContainer.dart';
-import 'package:confnect/view/widgets/FormTextField.dart';
+import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
+import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:confnect/view/widgets/PageTitle.dart';
 import 'package:confnect/view/widgets/GoBackButton.dart';

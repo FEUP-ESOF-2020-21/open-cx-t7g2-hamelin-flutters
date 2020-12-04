@@ -1,8 +1,10 @@
 import 'package:confnect/model/Date.dart';
+import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
+import 'package:flutter/material.dart';
 
 import '../../model/User.dart';
 
@@ -37,6 +39,8 @@ abstract class Database {
   void addTag(Tag tag);
   void deleteTalk(Talk talk);
   bool isTagNew(Tag tag);
+  Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
+      String description, User creator);
   List<Forum> getUserPopularForums(User user);
   List<Post> getForumsPopularPosts(List<Forum> forums);
 }

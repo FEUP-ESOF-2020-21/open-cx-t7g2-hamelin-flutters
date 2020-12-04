@@ -1,6 +1,6 @@
 import 'package:confnect/model/Date.dart';
-import 'package:confnect/model/SearchResult.dart';
 import 'package:confnect/model/User.dart';
+import 'package:confnect/model/SearchResult.dart';
 import 'package:confnect/view/widgets/User/ProfileForumListTile.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
@@ -35,7 +35,7 @@ class Controller {
   }
 
   User getLoggedInUser() {
-    return _database.getUser(_loggedInUserName);
+    return this._database.getUser(this._loggedInUserName);
   }
 
   void changeAddingPost() => this._addingPost = !this._addingPost;

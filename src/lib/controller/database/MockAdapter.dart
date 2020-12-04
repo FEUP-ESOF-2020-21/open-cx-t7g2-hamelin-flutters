@@ -1,11 +1,13 @@
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
+import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
 import 'package:confnect/model/forums/TagForum.dart';
 import 'package:confnect/model/forums/TalkForum.dart';
+import 'package:flutter/material.dart';
 
 import './Database.dart';
 import '../../model/User.dart';
@@ -86,6 +88,7 @@ class MockAdapter implements Database {
     TagForum(6, _tags[5]),
     TagForum(7, _tags[6]),
   ];
+
   static List<Comment> _comments = [
     Comment(
         _users[2],
@@ -126,7 +129,7 @@ class MockAdapter implements Database {
       "Flutter master",
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[0], _comments[1], _comments[6], _comments[7]],
+      comments: [_comments[0], _comments[1], _comments[6], _comments[7]],
     ),
     Post(
       0,
@@ -134,8 +137,8 @@ class MockAdapter implements Database {
       "It deserves a 20!",
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[2], _comments[3]],
-      _comments[3],
+      comments: [_comments[2], _comments[3]],
+      pinnedComment: _comments[3],
     ),
     Post(
       0,
@@ -143,7 +146,7 @@ class MockAdapter implements Database {
       "Welcome!",
       "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[3], _comments[4]],
+      comments: [_comments[3], _comments[4]],
     ),
     Post(
       0,
@@ -151,117 +154,134 @@ class MockAdapter implements Database {
       "Make America Great Again!",
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[5]],
+      comments: [_comments[5]],
     ),
     Post(
         0,
         _users[4],
         "Confnect is the greatest!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         0,
         _users[5],
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         1,
         _users[1],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         1,
         _users[2],
         "It deserves a 21!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         1,
         _users[3],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         1,
         _users[4],
         "Make America Great Again!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         1,
         _users[5],
         "Confnect is the greatest!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         1,
         _users[1],
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         2,
         _users[2],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         2,
         _users[3],
         "It deserves a 22!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         2,
         _users[4],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         3,
         _users[5],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         3,
         _users[1],
         "It deserves a 23!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         3,
         _users[2],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         3,
         _users[3],
         "Make America Great Again!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         4,
         _users[4],
         "Confnect is the greatest!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
         4,
         _users[5],
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))), []),
+        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+        comments: []),
     Post(
       8,
       _users[2],
       "Welcome!",
       "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[3], _comments[4]],
+      comments: [_comments[3], _comments[4]],
     ),
     Post(
       8,
@@ -269,7 +289,7 @@ class MockAdapter implements Database {
       "Make America Great Again!",
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-      [_comments[5]],
+      comments: [_comments[5]],
     ),
   ];
 
@@ -368,7 +388,8 @@ class MockAdapter implements Database {
       int forumId, String username, String title, String text, Date date) {
     for (var user in _users)
       if (user.getUsername() == username)
-        _posts.add(Post(forumId, user, title, text, date, List<Comment>()));
+        _posts.add(
+            Post(forumId, user, title, text, date, comments: List<Comment>()));
   }
 
   void createTalkForum(Talk talk) {
@@ -466,6 +487,14 @@ class MockAdapter implements Database {
 
   List<Post> getPosts() {
     return _posts;
+  }
+
+  Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
+      String description, User creator) {
+    DateTime newDate =
+        new DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    Meetup meetup = new Meetup(Date(newDate), location, description, creator);
+    post.setMeetup(meetup);
   }
 
   List<Forum> getUserPopularForums(User user) {

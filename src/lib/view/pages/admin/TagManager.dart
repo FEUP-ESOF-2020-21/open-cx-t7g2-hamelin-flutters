@@ -2,8 +2,8 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Tag.dart';
-import 'package:confnect/view/widgets/FormFieldContainer.dart';
-import 'package:confnect/view/widgets/FormTextField.dart';
+import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
+import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tagging/flutter_tagging.dart';
 

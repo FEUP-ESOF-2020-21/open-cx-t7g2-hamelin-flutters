@@ -5,8 +5,8 @@ import 'package:confnect/model/Tag.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/pages/admin/TagManager.dart';
 import 'package:confnect/view/style/TextStyle.dart';
-import 'package:confnect/view/widgets/FormFieldContainer.dart';
-import 'package:confnect/view/widgets/FormTextField.dart';
+import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
+import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:flutter/material.dart';
 

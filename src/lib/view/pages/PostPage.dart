@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/model/Date.dart';
+import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/User.dart';
 import 'package:confnect/view/Page.dart';
+import 'package:confnect/view/widgets/Posts/Comments/AddComent.dart';
 import 'package:confnect/view/widgets/Posts/Comments/CommentList.dart';
 import 'package:confnect/view/widgets/Posts/Comments/PinnedComment.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostTextVote.dart';
-import '../../model/User.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,20 +22,18 @@ class PostPage extends StatefulPage {
       : super(_controller, key: key);
 
   @override
-  _PostPageState createState() => _PostPageState();
+  PostPageState createState() => PostPageState();
 }
 
-class _PostPageState extends State<PostPage> {
-  final TextEditingController _textController = TextEditingController();
+class PostPageState extends State<PostPage> {
+  var id;
+  void refreshData() {
+    id++;
+  }
 
-  void _handleSubmitted(String text) {
-    String username = widget._controller.getLoggedInUserName();
-    User u = widget._controller.getDatabase().getUser(username);
-    Date d = new Date(DateTime.now());
-    setState(() {
-      widget._post.addComment(u, d, text);
-    });
-    _textController.clear();
+  FutureOr onGoBack(dynamic value) {
+    refreshData();
+    setState(() {});
   }
 
   @override
@@ -48,58 +49,27 @@ class _PostPageState extends State<PostPage> {
               padding: EdgeInsets.fromLTRB(20, 20, 20, 70),
               child: ListView(
                 children: [
-                  PostTextVote(widget._post),
+                  PostTextVote(widget._post, widget._controller),
                   PinnedComment(widget._post, widget.host),
-                  Divider(thickness: 2,),
+                  Divider(
+                    thickness: 2,
+                  ),
                   CommentList(widget._post.getComments()),
                 ],
               )),
           Align(
             alignment: Alignment.bottomCenter,
-            child: _addCommentComposer(),
+            child: AddComment(
+              widget._controller,
+              widget._post.getComments(),
+              onSubmitted: (user, date, text) {
+                setState(() {
+                  widget._post.getComments().add(new Comment(user, date, text));
+                });
+              },
+            ),
           )
         ],
-      ),
-    );
-  }
-
-  Widget _addCommentComposer() {
-    return IconTheme(
-      data: IconThemeData(color: Theme.of(context).accentColor),
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Row(
-            children: [
-              Flexible(
-                child: TextField(
-                  controller: _textController,
-                  onSubmitted: _handleSubmitted,
-                  decoration:
-                      InputDecoration.collapsed(hintText: 'Send a message'),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: IconButton(
-                    icon: Icon(Icons.send),
-                    onPressed: () => _handleSubmitted(_textController.text)),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

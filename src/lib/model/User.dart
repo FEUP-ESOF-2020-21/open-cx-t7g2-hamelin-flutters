@@ -22,6 +22,9 @@ class User {
 
   String getBio() => _bio;
 
+  @override
+  String toString() => _fullname;
+
   List<int> getUserForunsIds() => _userForunsIds;
 
   void setAvatarUrl(String avatarUrl) {

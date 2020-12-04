@@ -1,32 +1,32 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/GoBackButton.dart';
+import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/widgets/MainPage/MainAppBar.dart';
 import 'package:flutter/material.dart';
 
 class UserSectionController {
   static List<Widget> initAppBars(
-      List<Widget> action, Controller controller, Function refreshState) {
+      Controller controller, Function refreshState) {
     return [
-      MainAppBar(controller, action, controller.getDatabase(), refreshState)
+      MainAppBar(controller, controller.getDatabase(), refreshState)
           .getAppBar(),
       AppBar(
         title: Text(
           "Search",
           style: pageTitleTextStyle,
         ),
-        actions: action,
+        actions: [LogoutButton(controller)],
       ),
       AppBar(
         title: Text(
           "Profile",
           style: pageTitleTextStyle,
         ),
-        actions: action,
+        actions: [LogoutButton(controller)],
       ),
       AppBar(
-        title: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
+        title: Expanded(
           child: Text(
             controller.currentForumId == -1
                 ? 'Forums'
@@ -37,7 +37,7 @@ class UserSectionController {
             style: pageTitleTextStyle,
           ),
         ),
-        actions: action,
+        actions: [LogoutButton(controller)],
         leading: controller.getCurrentForumId() == -1
             ? null
             : new GoBackButton(
