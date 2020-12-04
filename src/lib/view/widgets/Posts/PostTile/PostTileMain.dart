@@ -20,7 +20,14 @@ class PostTileMain extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => PostPage(_controller, this._post)),
+            builder: (context) => PostPage(
+                  _controller,
+                  this._post,
+                  host: _controller
+                      .getDatabase()
+                      .getForum(_post.getForumId())
+                      .getSpeaker(),
+                )),
       );
     }
 
