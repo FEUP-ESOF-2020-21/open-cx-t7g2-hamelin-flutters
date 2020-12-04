@@ -65,6 +65,23 @@ class _MeetupInfoState extends State<MeetupInfo> {
             height: 8,
           ),
           Text(widget._meetup.getDescription()),
+          SizedBox(
+            height: 24,
+          ),
+          Text(
+            "Already going (" +
+                widget._meetup.getNumberPeopleGoing().toString() +
+                ")",
+            style: titleTextStyle,
+            textScaleFactor: 0.8,
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text(
+            widget._meetup.getPeopleGoing().join(", "),
+            textScaleFactor: 0.9,
+          ),
         ],
       ),
     );

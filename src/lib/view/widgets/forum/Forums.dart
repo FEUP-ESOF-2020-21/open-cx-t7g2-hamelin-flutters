@@ -4,6 +4,7 @@ import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
 
 import '../../Page.dart';
+import 'AllForumList.dart';
 
 // ignore: must_be_immutable
 class Forums extends StatefulPage {
@@ -45,6 +46,6 @@ class _ForumsState extends State<Forums> {
   Widget build(BuildContext context) {
     if (this._controller.getCurrentForumId() != -1)
       return PostsPage(this._controller, _viewForum, this._refreshState);
-    return ForumList(_controller, _viewForum);
+    return AllForumList(this._controller, _viewForum);
   }
 }

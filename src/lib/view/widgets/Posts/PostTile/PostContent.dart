@@ -1,3 +1,4 @@
+import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:flutter/material.dart';
 
@@ -6,8 +7,10 @@ import 'VoteComment.dart';
 
 class PostContent extends StatefulWidget {
   final Post _post;
-  final bool _showMore;
-  PostContent(this._post, this._showMore);
+  final bool _showMore, showForum;
+  final Controller _controller;
+  PostContent(this._controller, this._post, this._showMore,
+      {this.showForum = false});
   @override
   _PostContentState createState() => _PostContentState();
 }
@@ -40,6 +43,25 @@ class _PostContentState extends State<PostContent> {
               padding: EdgeInsets.all(10.0),
               child: Column(
                 children: [
+                  Row(
+                    children: widget.showForum
+                        ? [
+                            Icon(Icons.arrow_right),
+                            Expanded(
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Text(
+                                  widget._controller
+                                      .getDatabase()
+                                      .getForum(widget._post.getForumId())
+                                      .getTitle(),
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ),
+                          ]
+                        : [],
+                  ),
                   TextSectionPost(widget._post.getTitle(),
                       widget._post.getDescription(), widget._showMore),
                   VoteComment(widget._post),
