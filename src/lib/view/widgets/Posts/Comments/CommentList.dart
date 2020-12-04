@@ -1,4 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/widgets/Posts/Comments/CommentTile.dart';
@@ -30,19 +31,25 @@ class _CommentListState extends State<CommentList> {
         itemBuilder: (BuildContext ctxt, int index) {
           return new CommentTile(
             widget._comments[index],
-            beforeDate: InkWell(
-              child: Icon(
-                Icons.push_pin,
-                size: 15,
-                color: Colors.grey,
-              ),  
-              onTap: () {
-                widget.controller
-                    .getDatabase()
-                    .pinComment(widget.post, widget._comments[index]);
-                widget.refreshState();
-              },
-            ),
+            beforeDate: widget.controller.getLoggedInUser() ==
+                    widget.controller
+                        .getDatabase()
+                        .getForum(widget.post.getForumId())
+                        .getSpeaker()
+                ? InkWell(
+                    child: Icon(
+                      Icons.push_pin,
+                      size: 15,
+                      color: Colors.grey,
+                    ),
+                    onTap: () {
+                      widget.controller
+                          .getDatabase()
+                          .pinComment(widget.post, widget._comments[index]);
+                      widget.refreshState();
+                    },
+                  )
+                : null,
           );
         });
   }
