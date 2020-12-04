@@ -84,7 +84,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Text(
                                 "Edit profile",
                                 style: TextStyle(
-                                    fontSize: 12.5, color: Colors.white),
+                                    fontSize:
+                                        MediaQuery.of(context).size.width /
+                                            30.0,
+                                    color: Colors.white),
                               ),
                               highlightedBorderColor: Colors.green,
                               shape: RoundedRectangleBorder(
