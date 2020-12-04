@@ -121,7 +121,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Column(
                       children: [
                         Icon(
-                          IconData(59828, fontFamily: 'MaterialIcons'),
+                          Icons.search,
                           color: Colors.black,
                           size: 50.0,
                         ),
