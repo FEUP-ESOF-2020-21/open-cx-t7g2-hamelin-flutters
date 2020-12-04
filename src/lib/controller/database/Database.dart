@@ -41,4 +41,6 @@ abstract class Database {
   bool isTagNew(Tag tag);
   Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
       String description, User creator);
+  List<Forum> getUserPopularForums(User user);
+  List<Post> getForumsPopularPosts(List<Forum> forums);
 }
