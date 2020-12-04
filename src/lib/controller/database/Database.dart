@@ -44,5 +44,5 @@ abstract class Database {
       String description, User creator);
   List<Forum> getUserPopularForums(User user);
   List<Post> getForumsPopularPosts(List<Forum> forums);
-  void pinComment(Post post, Comment comment);
+  void changePinnedComment(Post post, Comment comment);
 }

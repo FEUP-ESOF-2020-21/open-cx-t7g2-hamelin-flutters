@@ -43,9 +43,8 @@ class _CommentListState extends State<CommentList> {
                       color: Colors.grey,
                     ),
                     onTap: () {
-                      widget.controller
-                          .getDatabase()
-                          .pinComment(widget.post, widget._comments[index]);
+                      widget.controller.getDatabase().changePinnedComment(
+                          widget.post, widget._comments[index]);
                       widget.refreshState();
                     },
                   )

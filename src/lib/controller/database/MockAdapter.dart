@@ -523,9 +523,12 @@ class MockAdapter implements Database {
   }
 
   @override
-  void pinComment(Post post, Comment comment) {
+  void changePinnedComment(Post post, Comment comment) {
     if (comment != null && post != null) {
-      post.pinComment(comment);
+      if (post.getPinnedComment() == comment)
+        post.pinComment(null);
+      else
+        post.pinComment(comment);
     }
   }
 }
