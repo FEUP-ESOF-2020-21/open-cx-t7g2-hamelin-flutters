@@ -643,6 +643,7 @@ As an administrator, I want to be able to reuse the app with other conferences, 
 
 ### Domain model
 
+<img src="docs/problemDomain.jpg" width="700"/>
 
 ---
 
@@ -682,6 +683,21 @@ For this iteration we implemented:
 - [Answer posts / Questions](#answer-posts--questions)
 
 Release: [v0.2](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.2).
+
+### Product increment #3
+
+For this iteration we implemented:
+- [Profile Page](#profile-page)
+- [Edit talks](#edit-talks)
+- [Host answers posts/questions and has answer pinned](#answer-posts--questions)
+- [Suggest Physical Meeting](#suggest-physical-meeting)
+- [Comment on a Physical Meeting](#comment-on-a-physical-meeting)
+- [Search page](#search-page)
+- [Interest-based Post / Forum Suggestions](#interest-based-post--forum-suggestions)
+- [Main Page](#main-page)
+- [Generate Forums From Talks](#generate-forums-from-talks)
+
+Release: [v0.3](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.3).
 
 ---
 ## Test
