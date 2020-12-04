@@ -141,7 +141,10 @@ Our goal is to connect conference goers, helping them discuss and talk beyond th
 ![User story map](docs/userStoryMap.png)
 
 #### Login Screen
-
+<p>
+<img src="docs/mockups/welcomePage.png" width="300" style="border: 1px solid grey" />
+<img src="docs/mockups/login.png" width="300" style="border: 1px solid grey" />
+</p>
 As someone who is envolved in the conference, I want to be able to register in the app, so that I can use it.
 
     
@@ -176,6 +179,11 @@ Scenario: Registering in app
 
 #### Register Screen
 
+<p>
+<img src="docs/mockups/register1.png" width="300" style="border: 1px solid grey" />
+<img src="docs/mockups/register2.png" width="300" style="border: 1px solid grey" />
+</p>
+
 As someone who is registered in the app, I want to be able to login, so that I can use the app with my permissions.
 
 ##### Value and Effort
@@ -202,6 +210,8 @@ Scenario: Login
 
 #### List Forums
 
+<img src="docs/mockups/listForums.png" width="300" style="border: 1px solid grey" />
+
 As a conference atendee, I want to be able to see a list of interest/talk defined forums so that I can read the other attendees' interventions.
 ##### Value and Effort
     - Value: Must have
@@ -216,6 +226,9 @@ Scenario: Seeing list of forums
 ```
 
 #### List Forums Posts
+
+
+<img src="docs/mockups/forumPage.png" width="300" style="border: 1px solid grey" />
 
 As a conference atendee, I want to be able to see a list of posts in a forum so that I know what is being discussed.
 ##### Value and Effort
@@ -232,6 +245,8 @@ Scenario: Seeing list of discussions
 ```
 
 #### Profile Page
+
+<img src="docs/mockups/profilePage.png" width="300" style="border: 1px solid grey" />
 
 As an app user, I want to be able to see and edit my profile so that I know what info the app has about me, and change it if it's wrong.
 
@@ -263,6 +278,9 @@ Scenario: Seeing my profile
 
 #### Create Posts in Forums
 
+
+<img src="docs/mockups/addPost.png" width="300" style="border: 1px solid grey" />
+
 As a conference atendee, I want to be able to post in a forum, so that I can participate in the discussion and make new acquaintances.
 ##### Value and Effort
     - Value: Must have
@@ -285,6 +303,8 @@ Scenario: Posting a discussion
 
 #### List Talks 
 
+<img src="docs/mockups/listTalks.png" width="300" style="border: 1px solid grey" />
+
 As an administrator, I want to be able to see the list of talks that we have, so that I have a global view of our app.
 ##### Value and Effort
     - Value: Must have
@@ -297,6 +317,8 @@ Scenario: Seeing all talks
 ```
 
 #### Add Talks
+
+<img src="docs/mockups/addTalk.png" width="300" style="border: 1px solid grey" />
 
 As an administrator, I want to be able to add talks to the conference so that the app can have more talks.
 ##### Value and Effort
@@ -318,6 +340,9 @@ Scenario: Adding a talk
 ```
 
 #### Set Talk's Topics / Themes
+
+<p><img src="docs/mockups/addTalk.png" width="300" style="border: 1px solid grey" /><img src="docs/mockups/addTalkTag.png" width="300" style="border: 1px solid grey" />
+<img src="docs/mockups/editTalk.png" width="300" style="border: 1px solid grey" /></p>
 
 As an administrator, I want to be able define a given talk's topics/themes, so that we can have a clear separation of interests.
 ##### Value and Effort
@@ -343,7 +368,9 @@ Scenario: The administrator starts typing on the "tags" and an "add new tag" but
     Then A new tag with the name that the administrator typed exists in the database
 ```
 
-#### See Complete Posts and it's Answers
+#### See Complete Post and it's Answers
+
+<img src="docs/mockups/postPageMeetup.png" width="300" style="border: 1px solid grey" />
 
 As a conference attendee, I want to be able to see a complete post, so that I can see its answers and better participate in the discussion.
 ##### Value and Effort
@@ -360,6 +387,8 @@ Scenario: Viewing a post
 
 #### Edit Talks
 
+<img src="docs/mockups/editTalk.png" width="300" style="border: 1px solid grey" />
+
 As an administrator, I want to be able to edit a talk so that I can fix any mistake or update it.
 ##### Value and Effort
     - Value: Must have
@@ -374,6 +403,8 @@ Scenario: Editing a talk
 ```
 
 #### Remove Talks
+
+<img src="docs/mockups/deleteTalk.png" width="300" style="border: 1px solid grey" />
 
 As an administrator, I want to be able to remove talks to the conference so that I can delete a talk that will not happen.
 ##### Value and Effort
@@ -397,6 +428,8 @@ Scenario: Removing a talk
 
 #### Answer Posts / Questions
 
+<img src="docs/mockups/postPageMeetup.png" width="300" style="border: 1px solid grey" />
+
 As a talk host, I want to be able to answer the posts/questions in the forums/talks so that i can clear up doubts the attendees still have.
 ##### Value and Effort
     - Value: Must have
@@ -404,34 +437,122 @@ As a talk host, I want to be able to answer the posts/questions in the forums/ta
 ##### Acceptance Tests
 ```gherkin
 Scenario: Adding a comment
-  Given Post A has 2 comments
+  Given Post A has 2 comments and I have the 'host' role
   When I tap the "add comment" button
-  And I submit a comment "Great Post!"
+  And I submit a comment "My answer is this"
   Then Post A has 3 comments
-  And Post A contains a comment "Great Post!"
+  And Post A contains a comment "My answer is this"
+  And Post A contains a pinned comment "My answer is this"
 ```
 
 
-#### Suggets Physical Meeting
+#### Suggest Physical Meeting
+<p>
+<img src="docs/mockups/postPageMeetup.png" width="300" style="border: 1px solid grey" />
+<img src="docs/mockups/createMeetup.png" width="300" style="border: 1px solid grey" />
+</p>
 
 As a conference attendee, when a discussion is gettting interesting, I want to be able to suggest a physical meeting with other attendees, so that meet them and expand my network.
     - Value: Must have
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-    TODO
+Scenario: Creating a meetup
+  Given Post A has no meetup in progress
+  When I tap the "Meetup" button
+  And I fill in the form with the meetup location, date, time and description
+  Then Post A has a meetup in progress
+  And The meetup has the details I inserted in the form
+ 
+Scenario: Creating a meetup
+  Given Post A has no meetup in progress
+  When I tap the "Meetup" button
+  And I don't fill in the form correctly
+  Then Post A has no meetup in progress
+  And An error message appears
 ```
 
-#### Search Forums And Posts
+#### Comment on a Physical Meeting
 
-As an app user, I want to search for a specific forum or post, so that I can easily find what I'm looking for
+<img src="docs/mockups/meetupForum.png" width="300" style="border: 1px solid grey" />
+
+As a conference attendee, interested in participating in a meetup, I want to be able to comment on a meetup, so that all the goers can agree on the details.
 
 ##### Value and Effort
     - Value: Must have
-    - Effort: S 
+    - Effort: S
 ##### Acceptance Tests
 ```gherkin
-    TODO
+Scenario: In the Meetup page, adding a comment
+  Given The Meetup has no comments
+  When I tap the "add comment" button
+  And I submit a comment "My answer is this"
+  Then The Meetup has one comment
+  And The Meetup contains a comment "My answer is this"
+```
+
+#### Edit a Physical Meeting
+
+<img src="docs/mockups/editMeetup.png" width="300" style="border: 1px solid grey" />
+
+As a conference attendee, interested in participating in a meetup, I want to be able to edit the meetup I created, so that I can accommodate any request by the other attendees.
+
+##### Value and Effort
+    - Value: Must have
+    - Effort: S
+##### Acceptance Tests
+```gherkin
+Scenario: Editing the meetup
+    Given There is 1 meetup and I am the meetup creator
+    When I click on the "edit meetup" button
+    And Change one or more details 
+    Then The meetup details are changed accordingly
+Scenario: Editing the meetup
+    Given There is 1 meetup and I am the meetup creator
+    When I click on the "edit meetup" button
+    And Fill the form incorrectly
+    Then The meetup details are not changes
+    And An error occurs
+```
+
+#### Cancel a Physical Meeting
+
+<img src="docs/mockups/cancelMeetup.png" width="300" style="border: 1px solid grey" />
+
+As a conference attendee, I want to be able to comment on a meetup that was unsuccessful, so that the post page is consistent.
+
+##### Value and Effort
+    - Value: Must have
+    - Effort: S
+##### Acceptance Tests
+```gherkin
+Scenario: In the Post page
+  Given There is 1 meetup and I am the meetup creator
+  When I tap the "delete meetup" button
+  And I Give confirmation
+  Then There is no meetups
+Scenario: In the Post page
+  Given There is 1 meetup and I am the meetup creator
+  When I tap the "delete meetup" button
+  And I don't Give confirmation
+  Then There is 1 meetup
+```
+
+#### Search Page
+
+<img src="docs/mockups/searchPage.png" width="300" style="border: 1px solid grey" />
+
+As an app user, I want to search for a specific forum, post or user, so that I can easily find what I'm looking for.
+
+##### Value and Effort
+    - Value: Must have
+    - Effort: M 
+##### Acceptance Tests
+```gherkin
+Scenario: In the Search page
+    Given There exists many forums, users and posts
+    When I write something in the "search field"
+    Then The forums, users and posts that resemble what I wrote the most show up
 ```
 
 
@@ -446,11 +567,27 @@ As a conference attendee, I want to easily find topics that interest me, so that
     TODO
 ```
 
-#### Pin Answered Questions
 
-As a talk host, I want to be able to pin answered questions so that the question forum is organized and it is easy to find the answers to answered questions.
+#### Main Page
+
+<img src="docs/mockups/mainPage.png" width="300" style="border: 1px solid grey" />
+
+As an attendee, I want to have a page that shows me the posts and forums that really matter to me, so that I can have a positive experience with the app.
 ##### Value and Effort
-    - Value: Could have
+    - Value: Must have
+    - Effort: M
+##### Acceptance Tests
+
+```gherkin
+    TODO
+```
+
+
+#### Generate Forums From Talks
+*Note: this is made automatically whenever a talk is added, so there is no mockup*<br/>
+As an administrator, I want the forums to be generated based on the talks and the talks' themes so that we can have organized forums, one for each theme/interest and one for each talk (for questions).
+##### Value and Effort
+    - Value: Must have
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
@@ -468,11 +605,11 @@ As a talk host, I want to be able to remove inappropriate questions / wrong answ
     TODO
 ```
 
-#### Generate Forums From Talks
+#### Pin Answered Questions
 
-As an administrator, I want the forums to be generated based on the talks and the talks' themes so that we can have organized forums, one for each theme/interest and one for each talk (for questions).
+As a talk host, I want to be able to pin answered questions so that the question forum is organized and it is easy to find the answers to answered questions.
 ##### Value and Effort
-    - Value: Must have
+    - Value: Could have
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
@@ -490,10 +627,23 @@ As an administrator, I want to be able to generate codes for hosts and attendees
     TODO
 ```
 
+#### Multiple Conference Support
+
+As an administrator, I want to be able to reuse the app with other conferences, so that we take good value from the investment.
+
+##### Value and Effort
+    - Value: Could Have
+    - Effort: M
+##### Acceptance Tests
+```gherkin
+    TODO
+```
+
 
 
 ### Domain model
 
+<img src="docs/problemDomain.jpg" width="700"/>
 
 ---
 
@@ -509,16 +659,6 @@ As an administrator, I want to be able to generate codes for hosts and attendees
 ![Physical Architecture](./docs/PhysicalArchitecture.jpg)
 
 
-### Prototype
-
-
-![Mockups 1](./docs/mockups/Mockups1.png)
-
-
-![Mockups 2](./docs/mockups/Mockups2.png)
-
-
-![Mockups 3](./docs/mockups/Mockups3.png)
 
 
 
@@ -543,6 +683,21 @@ For this iteration we implemented:
 - [Answer posts / Questions](#answer-posts--questions)
 
 Release: [v0.2](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.2).
+
+### Product increment #3
+
+For this iteration we implemented:
+- [Profile Page](#profile-page)
+- [Edit talks](#edit-talks)
+- [Host answers posts/questions and has answer pinned](#answer-posts--questions)
+- [Suggest Physical Meeting](#suggest-physical-meeting)
+- [Comment on a Physical Meeting](#comment-on-a-physical-meeting)
+- [Search page](#search-page)
+- [Interest-based Post / Forum Suggestions](#interest-based-post--forum-suggestions)
+- [Main Page](#main-page)
+- [Generate Forums From Talks](#generate-forums-from-talks)
+
+Release: [v0.3](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.3).
 
 ---
 ## Test
