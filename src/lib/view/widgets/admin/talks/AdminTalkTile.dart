@@ -2,6 +2,7 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Talk.dart';
 import 'package:confnect/view/style/TextStyle.dart';
+import 'package:confnect/view/pages/admin/EditTalk.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Page.dart';
@@ -9,15 +10,18 @@ import '../../../Page.dart';
 class AdminTalkTile extends StatelessPage {
   final Talk _talk;
   final Function _refreshState;
-  AdminTalkTile(Controller controller, this._refreshState, this._talk,
-      {Key key})
-      : super(controller, key: key);
+  final Controller _controller;
+  AdminTalkTile(this._controller, this._refreshState, this._talk, {Key key})
+      : super(_controller, key: key);
 
-  void _editTalk(Talk talk) {
-    print("Edit talk!");
-    _refreshState();
+  void _editTalk(BuildContext context, Talk talk) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => EditTalk(_controller, _refreshState, talk)),
+    );
   }
-
+  
   @override
   Widget build(BuildContext context) {
     Database db = super.getController().getDatabase();
@@ -26,7 +30,10 @@ class AdminTalkTile extends StatelessPage {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: () {
-          _editTalk(_talk); // this will push the forum page on the navigator
+          _editTalk(
+            context,
+            _talk,
+          );
         },
         child: Container(
           padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
@@ -93,7 +100,7 @@ class AdminTalkTile extends StatelessPage {
                         icon: Icon(Icons.edit),
                         color: Colors.white,
                         onPressed: () {
-                          _editTalk(_talk);
+                          _editTalk(context, _talk);
                         },
                       ),
                       IconButton(

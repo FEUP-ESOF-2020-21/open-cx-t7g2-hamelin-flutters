@@ -21,8 +21,15 @@ var titleTextStyle = GoogleFonts.lora(
 var pageTitleTextStyle = GoogleFonts.lora(
   textStyle: TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: EvenLargerTextSize,
+    fontSize: LargerTextSize,
     color: Colors.black,
+  ),
+);
+var mainpageTitleTextStyle = GoogleFonts.lora(
+  textStyle: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: EvenLargerTextSize,
+    color: Colors.white,
   ),
 );
 
@@ -62,6 +69,20 @@ var talkSpeakerTextStyle = GoogleFonts.openSans(
   textStyle: TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: BodyTextSize2,
+    color: Colors.white,
+  ),
+);
+
+var meetupButtonTitleStyle = GoogleFonts.openSans(
+  textStyle: TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: MediumTextSize,
+    color: Colors.white,
+  ),
+);
+var meetupButtonTextStyle = GoogleFonts.openSans(
+  textStyle: TextStyle(
+    fontSize: MediumTextSize,
     color: Colors.white,
   ),
 );

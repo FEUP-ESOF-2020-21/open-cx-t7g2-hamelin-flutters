@@ -1,4 +1,5 @@
 import 'package:confnect/model/Comment.dart';
+import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/User.dart';
 
 import 'Date.dart';
@@ -7,11 +8,13 @@ class Post {
   final User _author;
   final String _title, _description;
   final Date _date;
-  List<Comment> _comments;
+  List<Comment> comments;
+  Comment pinnedComment;
   int _numberLikes = 0, _numberDislikes = 0, _forumId;
+  Meetup meetup;
 
   Post(this._forumId, this._author, this._title, this._description, this._date,
-      [this._comments]);
+      {this.comments, this.meetup, this.pinnedComment});
 
   int getForumId() => _forumId;
 
@@ -32,12 +35,16 @@ class Post {
   }
 
   List<Comment> getComments() {
-    return _comments;
+    return comments;
+  }
+
+  Comment getPinnedComment() {
+    return pinnedComment;
   }
 
   addComment(author, date, description) {
     Comment c = new Comment(author, date, description);
-    _comments.add(c);
+    comments.add(c);
   }
 
   int getNumberLikes() {
@@ -62,5 +69,13 @@ class Post {
 
   decrementDislike() {
     _numberDislikes--;
+  }
+
+  void setMeetup(Meetup meetup) {
+    this.meetup = meetup;
+  }
+
+  Meetup getMeetup() {
+    return this.meetup;
   }
 }
