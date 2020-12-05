@@ -50,62 +50,82 @@ class _EditProfilePageState extends State<EditProfilePage> {
       body: ListView(
         children: [
           Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                FormFieldContainer(
-                  FormTextField('Fullname', fullNameController,
-                      validator: ValidatorFactory.getValidator('fullname',
-                          fieldRequired: false, lowerLimit: 5, upperLimit: 50)),
-                  margin: EdgeInsets.fromLTRB(0, 50, 0, 20),
-                ),
-                FormFieldContainer(
-                  FormTextField('Username', usernameController,
-                      validator: ValidatorFactory.getValidator('username',
-                          fieldRequired: false,
-                          lowerLimit: 5,
-                          upperLimit: 20, extender: (value) {
-                        if (db.existsUser(value) &&
-                            value != _loggedInUser.getUsername()) {
-                          return "User with username " +
-                              value.toString() +
-                              " already exists!";
-                        }
+              key: _formKey,
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Stack(
+                  children: [
+                    //Spacer(flex: 1),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height / 8,
+                        child: FormFieldContainer(
+                          FormTextField('Fullname', fullNameController,
+                              validator: ValidatorFactory.getValidator(
+                                  'fullname',
+                                  fieldRequired: false,
+                                  lowerLimit: 5,
+                                  upperLimit: 50)),
+                          //margin: EdgeInsets.fromLTRB(0, 50, 0, 20),
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 2 / 8,
+                        child: FormFieldContainer(
+                          FormTextField('Username', usernameController,
+                              validator: ValidatorFactory.getValidator(
+                                  'username',
+                                  fieldRequired: false,
+                                  lowerLimit: 5,
+                                  upperLimit: 20, extender: (value) {
+                                if (db.existsUser(value) &&
+                                    value != _loggedInUser.getUsername()) {
+                                  return "User with username " +
+                                      value.toString() +
+                                      " already exists!";
+                                }
+                              })),
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 3 / 8,
+                        child: FormFieldContainer(
+                          FormTextField(
+                            'New profile description',
+                            descriptionController,
+                            validator: ValidatorFactory.getValidator(
+                                'profile description',
+                                fieldRequired: false,
+                                upperLimit: 300),
+                          ),
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 4 / 8,
+                        child: FormFieldContainer(
+                          FormTextField(
+                            'New profile image URL',
+                            profilePicURL,
+                            validator: ValidatorFactory.getValidator(
+                                'image url',
+                                fieldRequired: false,
+                                upperLimit: 300),
+                          ),
+                        )),
+                    Positioned(
+                      top: MediaQuery.of(context).size.height * 5 / 8,
+                      child: FormFieldContainer(
+                          SquareButton('Confirm changes', () {
+                        _controller.updateUser(
+                            _loggedInUser,
+                            fullNameController.text,
+                            usernameController.text,
+                            descriptionController.text,
+                            profilePicURL.text);
+                        _refreshProfileState();
+                        Navigator.pop(context);
                       })),
+                    ),
+                  ],
                 ),
-                FormFieldContainer(
-                  FormTextField(
-                    'New profile description',
-                    descriptionController,
-                    validator: ValidatorFactory.getValidator(
-                        'profile description',
-                        fieldRequired: false,
-                        upperLimit: 300),
-                  ),
-                ),
-                FormFieldContainer(
-                  FormTextField(
-                    'New profile image URL',
-                    profilePicURL,
-                    validator: ValidatorFactory.getValidator('image url',
-                        fieldRequired: false, upperLimit: 300),
-                  ),
-                ),
-                FormFieldContainer(
-                  SquareButton('Confirm changes', () {
-                    _controller.updateUser(
-                        _loggedInUser,
-                        fullNameController.text,
-                        usernameController.text,
-                        descriptionController.text,
-                        profilePicURL.text);
-                    _refreshProfileState();
-                    Navigator.pop(context);
-                  }),
-                ),
-              ],
-            ),
-          )
+              ))
         ],
       ),
     );
