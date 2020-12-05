@@ -25,17 +25,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final Function _refreshProfileState;
   final _formKey = GlobalKey<FormState>();
 
-  final fullNameController = TextEditingController();
-  final usernameController = TextEditingController();
-  final profilePicURL = TextEditingController();
-  final descriptionController = TextEditingController();
-
   _EditProfilePageState(this._controller, this._refreshProfileState);
 
   @override
   Widget build(BuildContext context) {
     User _loggedInUser = _controller.getLoggedInUser();
     Database db = _controller.getDatabase();
+
+    final fullNameController =
+        TextEditingController(text: _loggedInUser.getFullName());
+    final usernameController =
+        TextEditingController(text: _loggedInUser.getUsername());
+    final profilePicURL = TextEditingController();
+    final descriptionController =
+        TextEditingController(text: _loggedInUser.getBio());
 
     return Scaffold(
       appBar: AppBar(
@@ -51,34 +54,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
             child: Column(
               children: [
                 FormFieldContainer(
-                  FormTextField(
-                    'Current fullname: ' + _loggedInUser.getFullName(),
-                    fullNameController,
-                    validator: ValidatorFactory.getValidator(
-                      'fullname',
-                      fieldRequired: false,
-                      lowerLimit: 5,
-                      upperLimit: 50,
-                    ),
-                  ),
+                  FormTextField('Fullname', fullNameController,
+                      validator: ValidatorFactory.getValidator('fullname',
+                          fieldRequired: false, lowerLimit: 5, upperLimit: 50)),
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 20),
                 ),
                 FormFieldContainer(
-                  FormTextField(
-                    'Current username: ' + _loggedInUser.getUsername(),
-                    usernameController,
-                    validator: ValidatorFactory.getValidator('username',
-                        fieldRequired: false,
-                        lowerLimit: 5,
-                        upperLimit: 20, extender: (value) {
-                      if (db.existsUser(value) &&
-                          value != _loggedInUser.getUsername()) {
-                        return "User with username " +
-                            value.toString() +
-                            " already exists!";
-                      }
-                    }),
-                  ),
+                  FormTextField('Username', usernameController,
+                      validator: ValidatorFactory.getValidator('username',
+                          fieldRequired: false,
+                          lowerLimit: 5,
+                          upperLimit: 20, extender: (value) {
+                        if (db.existsUser(value) &&
+                            value != _loggedInUser.getUsername()) {
+                          return "User with username " +
+                              value.toString() +
+                              " already exists!";
+                        }
+                      })),
                 ),
                 FormFieldContainer(
                   FormTextField(
