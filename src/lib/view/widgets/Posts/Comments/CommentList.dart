@@ -49,7 +49,6 @@ class _CommentListState extends State<CommentList> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget._controller.getDatabase().getForums());
     return ListView.builder(
         primary: false,
         shrinkWrap: true,
