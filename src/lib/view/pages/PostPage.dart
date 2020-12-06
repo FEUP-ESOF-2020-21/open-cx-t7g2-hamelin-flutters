@@ -60,7 +60,7 @@ class PostPageState extends State<PostPage> {
                   ),
                   CommentList(
                     widget._post.getComments(),
-                    controller: widget._controller,
+                    widget._controller,
                     refreshState: _refreshState,
                     post: widget._post,
                   ),
