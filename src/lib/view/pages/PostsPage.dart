@@ -70,6 +70,7 @@ class _PostsPageState extends State<PostsPage> {
         .map((post) => PostTile(
               post,
               this._controller,
+              this._refreshState,
               host: host,
             ))
         .toList();

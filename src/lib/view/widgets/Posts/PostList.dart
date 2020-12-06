@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 class PostList extends StatefulWidget {
   Controller _controller;
   final int _forumId;
-  PostList(this._controller, this._forumId);
+  final Function _refreshState;
+  PostList(this._controller, this._forumId, this._refreshState);
   @override
   _PostListState createState() => _PostListState();
 }
@@ -17,7 +18,7 @@ class _PostListState extends State<PostList> {
     Database db = widget._controller.getDatabase();
     return db
         .getForumPosts(widget._forumId)
-        .map((post) => PostTile(post, widget._controller))
+        .map((post) => PostTile(post, widget._controller, widget._refreshState))
         .toList();
   }
 
