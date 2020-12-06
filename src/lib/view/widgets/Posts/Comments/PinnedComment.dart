@@ -66,7 +66,6 @@ class _PinnedCommentState extends State<PinnedComment> {
             ),
             new CommentTile(
               comment,
-              fontSize: 15,
               imageHeight: 30,
               backgroundColor: Colors.yellow[50],
               beforeImage: this._getBeforeImage(),
