@@ -61,102 +61,97 @@ class _MeetupBoxState extends State<MeetupBox> {
 
   @override
   Widget build(BuildContext context) {
-    return widget._meetup != null
-        ? Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            color: (Colors.green),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: InkWell(
-                onTap: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            MeetupPage(widget._controller, widget._meetup)),
-                  ),
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Meetup",
-                              style: meetupButtonTitleStyle,
-                              textScaleFactor: 1.1,
-                            ),
-                            if (widget._meetup != null)
-                              if (widget._controller.getLoggedInUser() ==
-                                  widget._meetup.getAuthor())
-                                InkWell(
-                                  child: Icon(Icons.close),
-                                  onTap: () => {
-                                    cancelMeetup(),
-                                    widget._eliminateMeetup(),
-                                    showAlertDialog(context),
-                                  },
-                                ),
-                          ]),
-                      margin: EdgeInsets.only(bottom: 5),
-                    ),
-                    Container(
-                      child: Text(
-                        //widget._meetup.getDescription() +
-                        "\nClick here for more information.",
-                        style: meetupButtonTextStyle,
-                      ),
-                      margin: EdgeInsets.only(bottom: 20),
-                    ),
-                    Row(
-                      children: [
-                        FlatButton(
-                            onPressed: () => onPressedIn(),
-                            color: widget._meetup.loggedUserIsGoing(
-                                    widget._controller.getLoggedInUser())
-                                ? Colors.green[200]
-                                : Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.white)),
-                            child: Text("I'M IN!")),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        FlatButton(
-                            onPressed: () => onPressedOut(),
-                            color: !widget._meetup.loggedUserIsGoing(
-                                    widget._controller.getLoggedInUser())
-                                ? Colors.green[200]
-                                : Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.white)),
-                            child: Text("I'M OUT!")),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Flexible(
-                          child: Text(
-                            widget._meetup.getNumberPeopleGoing().toString() +
-                                " Going",
-                            style: meetupButtonTextStyle,
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      color: (Colors.green),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: InkWell(
+          onTap: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      MeetupPage(widget._controller, widget._meetup)),
             ),
-          )
-        : SizedBox(
-            height: 1,
-          );
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Meetup",
+                        style: meetupButtonTitleStyle,
+                        textScaleFactor: 1.1,
+                      ),
+                      if (widget._meetup != null)
+                        if (widget._controller.getLoggedInUser() ==
+                            widget._meetup.getAuthor())
+                          InkWell(
+                            child: Icon(Icons.close),
+                            onTap: () => {
+                              cancelMeetup(),
+                              widget._eliminateMeetup(),
+                              showAlertDialog(context),
+                            },
+                          ),
+                    ]),
+                margin: EdgeInsets.only(bottom: 5),
+              ),
+              Container(
+                child: Text(
+                  //widget._meetup.getDescription() +
+                  "\nClick here for more information.",
+                  style: meetupButtonTextStyle,
+                ),
+                margin: EdgeInsets.only(bottom: 20),
+              ),
+              Row(
+                children: [
+                  FlatButton(
+                      onPressed: () => onPressedIn(),
+                      color: widget._meetup.loggedUserIsGoing(
+                              widget._controller.getLoggedInUser())
+                          ? Colors.green[200]
+                          : Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.white)),
+                      child: Text("I'M IN!")),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () => onPressedOut(),
+                      color: !widget._meetup.loggedUserIsGoing(
+                              widget._controller.getLoggedInUser())
+                          ? Colors.green[200]
+                          : Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          side: BorderSide(color: Colors.white)),
+                      child: Text("I'M OUT!")),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Flexible(
+                    child: Text(
+                      widget._meetup.getNumberPeopleGoing().toString() +
+                          " Going",
+                      style: meetupButtonTextStyle,
+                      overflow: TextOverflow.visible,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
