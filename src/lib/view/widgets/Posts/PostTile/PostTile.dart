@@ -10,8 +10,9 @@ class PostTile extends StatelessWidget {
   final Controller _controller;
   final User host;
   final bool showForum;
+  final Function _refreshState;
 
-  const PostTile(this._post, this._controller,
+  const PostTile(this._post, this._controller, this._refreshState,
       {this.host, this.showForum = false});
 
   @override
@@ -23,6 +24,7 @@ class PostTile extends StatelessWidget {
             builder: (context) => PostPage(
                   this._controller,
                   this._post,
+                  this._refreshState,
                   host: this.host,
                 )),
       );

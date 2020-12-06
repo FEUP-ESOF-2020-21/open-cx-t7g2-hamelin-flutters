@@ -1,3 +1,4 @@
+import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/view/widgets/Posts/UserTimeHeader.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +9,14 @@ class CommentTile extends StatefulWidget {
   final double imageHeight;
   final Color backgroundColor;
   final Widget beforeImage;
+  final Widget beforeDate;
 
   CommentTile(this._comment,
       {this.fontSize = 13,
       this.imageHeight = 20,
       this.backgroundColor = Colors.white,
-      this.beforeImage});
+      this.beforeImage,
+      this.beforeDate});
   @override
   _CommentTileState createState() => _CommentTileState();
 }
@@ -35,6 +38,7 @@ class _CommentTileState extends State<CommentTile> {
               widget.imageHeight,
               fontSize: widget.fontSize,
               beforeImage: widget.beforeImage,
+              beforeDate: widget.beforeDate,
             ),
             Container(
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 0),

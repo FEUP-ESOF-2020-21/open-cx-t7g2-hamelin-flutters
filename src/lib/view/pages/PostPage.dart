@@ -18,7 +18,9 @@ class PostPage extends StatefulPage {
   Post _post;
   Controller _controller;
   User host;
-  PostPage(this._controller, this._post, {Key key, this.host})
+  Function _refreshState;
+  PostPage(this._controller, this._post, this._refreshState,
+      {Key key, this.host})
       : super(_controller, key: key);
 
   @override
@@ -36,6 +38,10 @@ class PostPageState extends State<PostPage> {
     setState(() {});
   }
 
+  void _refreshState() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,11 +56,17 @@ class PostPageState extends State<PostPage> {
               child: ListView(
                 children: [
                   PostTextVote(widget._post, widget._controller),
-                  PinnedComment(widget._post, widget.host),
+                  PinnedComment(widget._post, widget.host, widget._controller,
+                      _refreshState),
                   Divider(
                     thickness: 2,
                   ),
-                  CommentList(widget._post.getComments()),
+                  CommentList(
+                    widget._post.getComments(),
+                    widget._controller,
+                    refreshState: _refreshState,
+                    post: widget._post,
+                  ),
                 ],
               )),
           Align(
@@ -64,7 +76,16 @@ class PostPageState extends State<PostPage> {
               widget._post.getComments(),
               onSubmitted: (user, date, text) {
                 setState(() {
-                  widget._post.getComments().add(new Comment(user, date, text));
+                  Comment comment = new Comment(user, date, text);
+                  widget._post.getComments().add(comment);
+                  if (widget._post.getPinnedComment() == null &&
+                      user ==
+                          widget._controller
+                              .getDatabase()
+                              .getForum(widget._post.getForumId())
+                              .getSpeaker()) {
+                    widget._post.pinComment(comment);
+                  }
                 });
               },
             ),
