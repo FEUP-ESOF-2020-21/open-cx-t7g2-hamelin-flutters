@@ -39,6 +39,7 @@ class _PostTextVoteState extends State<PostTextVote> {
   }
 
   cancelMeetup() {
+    setState(() {});
     setState(() {
       widget._post.setMeetup(null);
     });
@@ -65,10 +66,9 @@ class _PostTextVoteState extends State<PostTextVote> {
           ),
           VoteComment(widget._post),
           if (widget._post.getMeetup() != null)
-            MeetupBox(
-              widget._controller,
-              widget._post.getMeetup(),
-            ),
+            MeetupBox(widget._controller, widget._post.getMeetup(), () {
+              cancelMeetup();
+            }),
         ],
       ),
     );

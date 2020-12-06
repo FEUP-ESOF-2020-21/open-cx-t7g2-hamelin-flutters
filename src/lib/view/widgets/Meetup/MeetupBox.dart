@@ -48,9 +48,6 @@ class _MeetupBoxState extends State<MeetupBox> {
     AlertDialog alert = AlertDialog(
       title: Text("Notice"),
       content: Text("The meetup has been successfuly deleted"),
-      actions: [
-        okButton,
-      ],
     );
 
     // show the dialog
