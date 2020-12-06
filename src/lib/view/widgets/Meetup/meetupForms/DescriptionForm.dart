@@ -4,7 +4,7 @@ import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:flutter/material.dart';
 
 class DescriptionForum extends StatefulWidget {
-  final _descriptionController;
+  final TextEditingController _descriptionController;
 
   DescriptionForum(this._descriptionController);
   @override

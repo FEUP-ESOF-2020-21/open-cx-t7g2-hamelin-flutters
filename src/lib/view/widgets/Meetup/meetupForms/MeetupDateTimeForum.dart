@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 class MeetupDateTimeForm extends StatefulWidget {
   DateTime meetDate;
   TimeOfDay meetTime;
+  final _timeKey = GlobalKey<FormState>();
 
   MeetupDateTimeForm(this.meetDate, this.meetTime);
-  final _timeKey = GlobalKey<FormState>();
 
   @override
   _MeetupDateTimeFormState createState() => _MeetupDateTimeFormState();
@@ -27,6 +27,9 @@ class _MeetupDateTimeFormState extends State<MeetupDateTimeForm> {
         selectedTime: new TimeOfDay.now(),
         selectDate: (date) => {widget.meetDate = date},
         selectTime: (time) => {widget.meetTime = time},
+        refresh: () {
+          setState(() {});
+        },
       ),
       margin: EdgeInsets.all(10),
     );

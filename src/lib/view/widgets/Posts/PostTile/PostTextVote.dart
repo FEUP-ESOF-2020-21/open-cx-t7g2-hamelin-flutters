@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/pages/CreateMeetupPage.dart';

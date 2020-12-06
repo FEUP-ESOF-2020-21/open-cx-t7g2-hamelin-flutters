@@ -24,6 +24,10 @@ class Meetup {
     return _description;
   }
 
+  setDescription(String text) {
+    _description = text;
+  }
+
   Date getDate() {
     return _date;
   }

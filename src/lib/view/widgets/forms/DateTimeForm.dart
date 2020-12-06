@@ -10,7 +10,8 @@ class DateTimeForm extends StatelessWidget {
       this.selectedDate,
       this.selectedTime,
       this.selectDate,
-      this.selectTime})
+      this.selectTime,
+      this.refresh})
       : super(key: key);
 
   final String labelText;
@@ -18,6 +19,7 @@ class DateTimeForm extends StatelessWidget {
   final TimeOfDay selectedTime;
   final ValueChanged<DateTime> selectDate;
   final ValueChanged<TimeOfDay> selectTime;
+  final Function refresh;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -48,6 +50,7 @@ class DateTimeForm extends StatelessWidget {
             valueStyle: valueStyle,
             onPressed: () {
               _selectDate(context);
+              refresh();
             },
           ),
         ),
@@ -59,6 +62,7 @@ class DateTimeForm extends StatelessWidget {
             valueStyle: valueStyle,
             onPressed: () {
               _selectTime(context);
+              refresh();
             },
           ),
         ),
