@@ -18,7 +18,9 @@ class PostPage extends StatefulPage {
   Post _post;
   Controller _controller;
   User host;
-  PostPage(this._controller, this._post, {Key key, this.host})
+  Function _refreshState;
+  PostPage(this._controller, this._post, this._refreshState,
+      {Key key, this.host})
       : super(_controller, key: key);
 
   @override
@@ -54,7 +56,8 @@ class PostPageState extends State<PostPage> {
               child: ListView(
                 children: [
                   PostTextVote(widget._post, widget._controller),
-                  PinnedComment(widget._post, widget.host),
+                  PinnedComment(widget._post, widget.host, widget._controller,
+                      _refreshState),
                   Divider(
                     thickness: 2,
                   ),
