@@ -34,8 +34,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     final fullNameController =
         TextEditingController(text: _loggedInUser.getFullName());
-    final usernameController =
-        TextEditingController(text: _loggedInUser.getUsername());
     final profilePicURL = TextEditingController();
     final descriptionController =
         TextEditingController(text: _loggedInUser.getBio());
@@ -78,37 +76,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         left: MediaQuery.of(context).size.width / 10,
                         top: MediaQuery.of(context).size.height * 2 / 8 - 30,
                         child: Text(
-                          'Username',
-                          textAlign: TextAlign.left,
-                          style: pageTitleTextStyle,
-                        )),
-                    Positioned(
-                        top: MediaQuery.of(context).size.height * 2 / 8,
-                        child: FormFieldContainer(
-                          FormTextField('Username', usernameController,
-                              validator: ValidatorFactory.getValidator(
-                                  'username',
-                                  fieldRequired: false,
-                                  lowerLimit: 5,
-                                  upperLimit: 20, extender: (value) {
-                                if (db.existsUser(value) &&
-                                    value != _loggedInUser.getUsername()) {
-                                  return "User with username " +
-                                      value.toString() +
-                                      " already exists!";
-                                }
-                              })),
-                        )),
-                    Positioned(
-                        left: MediaQuery.of(context).size.width / 10,
-                        top: MediaQuery.of(context).size.height * 3 / 8 - 30,
-                        child: Text(
                           'Profile bio',
                           textAlign: TextAlign.left,
                           style: pageTitleTextStyle,
                         )),
                     Positioned(
-                        top: MediaQuery.of(context).size.height * 3 / 8,
+                        top: MediaQuery.of(context).size.height * 2 / 8,
                         child: FormFieldContainer(
                           FormTextField(
                             'New profile description',
@@ -123,14 +96,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         )),
                     Positioned(
                         left: MediaQuery.of(context).size.width / 10,
-                        top: MediaQuery.of(context).size.height * 4.7 / 8 - 30,
+                        top: MediaQuery.of(context).size.height * 3.7 / 8 - 30,
                         child: Text(
                           'Avatar URL',
                           textAlign: TextAlign.left,
                           style: pageTitleTextStyle,
                         )),
                     Positioned(
-                        top: MediaQuery.of(context).size.height * 4.7 / 8,
+                        top: MediaQuery.of(context).size.height * 3.7 / 8,
                         child: FormFieldContainer(
                           FormTextField(
                             'Avatar URL',
@@ -142,13 +115,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ),
                         )),
                     Positioned(
-                      top: MediaQuery.of(context).size.height * 5.5 / 8,
+                      top: MediaQuery.of(context).size.height * 4.5 / 8,
                       child: FormFieldContainer(
                           SquareButton('Confirm changes', () {
                         _controller.updateUser(
                             _loggedInUser,
                             fullNameController.text,
-                            usernameController.text,
                             descriptionController.text,
                             profilePicURL.text);
                         _refreshProfileState();

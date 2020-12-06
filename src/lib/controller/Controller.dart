@@ -69,12 +69,11 @@ class Controller {
         .toList();
   }
 
-  void updateUser(User user, String fullname, String username,
-      String description, String profilePicURL) {
+  void updateUser(
+      User user, String fullname, String description, String profilePicURL) {
     if (fullname.length != 0) user.setFullName(fullname);
-    if (username.length != 0) user.setUserName(username);
     if (description.length != 0) user.setBio(description);
     if (profilePicURL.length != 0) user.setAvatarUrl(profilePicURL);
-    setLoggedInUserName(user.getUsername());
+    //setLoggedInUserName(user.getUsername());
   }
 }
