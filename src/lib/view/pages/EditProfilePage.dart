@@ -6,7 +6,6 @@ import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:flutter/material.dart';
-import 'package:confnect/view/style/TextStyle.dart';
 
 import '../Page.dart';
 import '../../controller/Controller.dart';
