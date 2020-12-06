@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 class MeetupBox extends StatefulWidget {
   Controller _controller;
   Meetup _meetup;
-  MeetupBox(this._controller, this._meetup);
+  final Function _refreshPostPage;
+  MeetupBox(this._controller, this._meetup, this._refreshPostPage);
   @override
   _MeetupBoxState createState() => _MeetupBoxState();
 }
@@ -23,6 +24,12 @@ class _MeetupBoxState extends State<MeetupBox> {
   onPressedOut() {
     setState(() {
       widget._meetup.removeGoingUser(widget._controller.getLoggedInUser());
+    });
+  }
+
+  cancelMeetup() {
+    setState(() {
+      widget._meetup = null;
     });
   }
 
@@ -47,11 +54,24 @@ class _MeetupBoxState extends State<MeetupBox> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                child: Text(
-                  "Meetup",
-                  style: meetupButtonTitleStyle,
-                  textScaleFactor: 1.1,
-                ),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Meetup",
+                        style: meetupButtonTitleStyle,
+                        textScaleFactor: 1.1,
+                      ),
+                      if (widget._controller.getLoggedInUser() ==
+                          widget._meetup.getAuthor())
+                        Row(children: [
+                          InkWell(
+                            child: Icon(Icons.close),
+                            onTap: () =>
+                                {cancelMeetup(), widget._refreshPostPage()},
+                          ),
+                        ]),
+                    ]),
                 margin: EdgeInsets.only(bottom: 5),
               ),
               Container(

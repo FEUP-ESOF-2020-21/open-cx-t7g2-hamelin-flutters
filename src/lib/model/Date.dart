@@ -21,4 +21,9 @@ class Date {
   String getFormmatedDate() {
     return DateFormat('kk:mm - dd/MM/yyyy').format(this._dateTime);
   }
+
+  TimeOfDay getTime() {
+    return new TimeOfDay(
+        hour: this._dateTime.hour, minute: this._dateTime.minute);
+  }
 }

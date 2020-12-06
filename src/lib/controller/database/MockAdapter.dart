@@ -489,7 +489,7 @@ class MockAdapter implements Database {
     return _posts;
   }
 
-  Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
+  void createMeetup(Post post, String location, DateTime date, TimeOfDay time,
       String description, User creator) {
     DateTime newDate =
         new DateTime(date.year, date.month, date.day, time.hour, time.minute);

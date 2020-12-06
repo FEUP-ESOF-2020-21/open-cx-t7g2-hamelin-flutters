@@ -67,4 +67,8 @@ class Meetup {
   void setLocation(String newLocation) {
     _location = newLocation;
   }
+
+  User getAuthor() {
+    return _meetingCreator;
+  }
 }

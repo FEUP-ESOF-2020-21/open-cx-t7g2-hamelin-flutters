@@ -40,6 +40,10 @@ class _PostTextVoteState extends State<PostTextVote> {
     );
   }
 
+  refresh() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +65,13 @@ class _PostTextVoteState extends State<PostTextVote> {
           ),
           VoteComment(widget._post),
           if (widget._post.getMeetup() != null)
-            MeetupBox(widget._controller, widget._post.getMeetup()),
+            MeetupBox(
+              widget._controller,
+              widget._post.getMeetup(),
+              () {
+                setState(() {});
+              },
+            ),
         ],
       ),
     );
