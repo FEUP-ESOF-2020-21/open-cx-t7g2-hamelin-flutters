@@ -6,6 +6,7 @@ import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:flutter/material.dart';
+import 'package:confnect/view/style/TextStyle.dart';
 
 import '../Page.dart';
 import '../../controller/Controller.dart';
@@ -56,7 +57,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
-                    //Spacer(flex: 1),
+                    Positioned(
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height / 8 - 30,
+                        child: Text(
+                          'Fullname',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
+                        )),
                     Positioned(
                         top: MediaQuery.of(context).size.height / 8,
                         child: FormFieldContainer(
@@ -66,7 +74,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   fieldRequired: false,
                                   lowerLimit: 5,
                                   upperLimit: 50)),
-                          //margin: EdgeInsets.fromLTRB(0, 50, 0, 20),
+                        )),
+                    Positioned(
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height * 2 / 8 - 30,
+                        child: Text(
+                          'Username',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
                         )),
                     Positioned(
                         top: MediaQuery.of(context).size.height * 2 / 8,
@@ -86,22 +101,40 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               })),
                         )),
                     Positioned(
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height * 3 / 8 - 30,
+                        child: Text(
+                          'Profile bio',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
+                        )),
+                    Positioned(
                         top: MediaQuery.of(context).size.height * 3 / 8,
                         child: FormFieldContainer(
                           FormTextField(
                             'New profile description',
                             descriptionController,
+                            maxLines: 5,
                             validator: ValidatorFactory.getValidator(
                                 'profile description',
                                 fieldRequired: false,
                                 upperLimit: 300),
                           ),
+                          height: MediaQuery.of(context).size.height / 5,
                         )),
                     Positioned(
-                        top: MediaQuery.of(context).size.height * 4 / 8,
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height * 4.7 / 8 - 30,
+                        child: Text(
+                          'Avatar URL',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 4.7 / 8,
                         child: FormFieldContainer(
                           FormTextField(
-                            'New profile image URL',
+                            'Avatar URL',
                             profilePicURL,
                             validator: ValidatorFactory.getValidator(
                                 'image url',
@@ -110,7 +143,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ),
                         )),
                     Positioned(
-                      top: MediaQuery.of(context).size.height * 5 / 8,
+                      top: MediaQuery.of(context).size.height * 5.5 / 8,
                       child: FormFieldContainer(
                           SquareButton('Confirm changes', () {
                         _controller.updateUser(

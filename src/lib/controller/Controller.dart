@@ -71,12 +71,10 @@ class Controller {
 
   void updateUser(User user, String fullname, String username,
       String description, String profilePicURL) {
+    print(user);
     if (fullname.length != 0) user.setFullName(fullname);
-
     if (username.length != 0) user.setUserName(fullname);
-
     if (description.length != 0) user.setBio(description);
-
     if (profilePicURL.length != 0) user.setAvatarUrl(profilePicURL);
   }
 }
