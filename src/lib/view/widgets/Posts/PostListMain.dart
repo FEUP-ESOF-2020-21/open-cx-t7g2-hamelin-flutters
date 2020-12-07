@@ -25,6 +25,12 @@ class _PostListMainState extends State<PostListMain> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: posts());
+    // return ListView.builder(
+    //     itemCount: posts().length,
+    //     itemBuilder: (BuildContext ctxt, int index) {
+    //       return (posts()[index]);
+    //     });
+    return Column(children: posts());
+    //return ListView(children: posts());
   }
 }

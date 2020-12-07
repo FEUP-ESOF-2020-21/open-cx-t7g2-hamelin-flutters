@@ -29,7 +29,7 @@ class _UserSectionState extends State<UserSection> {
       this._controller.currentForumId == -1
           ? MainPage(_controller, _refreshState)
           : Forums(_controller, _refreshState),
-      Search(this._controller, _viewForum),
+      Search(this._controller, _viewForum, _refreshState),
       ProfilePage(this._controller, _viewForum),
       Forums(this._controller, _refreshState),
     ];

@@ -29,14 +29,14 @@ class _MainPageState extends State<MainPage> {
         widget._controller.getDatabase().getUserPopularForums(loggedInUser);
     List<Post> posts =
         widget._controller.getDatabase().getForumsPopularPosts(forums);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
+    return SingleChildScrollView(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: Text(
-              "Your Most Popular Communities",
+              "Your Communities",
               style: titleTextStyle,
               textAlign: TextAlign.left,
             ),
@@ -45,14 +45,12 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.only(bottom: 10, top: 10),
             child: Text(
-              "Most Popular Posts in Your Communities",
+              "Reccomended Posts",
               style: titleTextStyle,
               textAlign: TextAlign.left,
             ),
           ),
-          Expanded(
-              child: PostListMain(
-                  widget._controller, widget._refreshState, posts)),
+          PostListMain(widget._controller, widget._refreshState, posts),
         ],
       ),
     );
