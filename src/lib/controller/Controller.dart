@@ -2,7 +2,6 @@ import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/model/SearchResult.dart';
 import 'package:confnect/model/forums/Forum.dart';
-import 'package:confnect/view/widgets/User/ProfileForumListTile.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
 import 'SearchController.dart';
@@ -62,14 +61,6 @@ class Controller {
     return true;
   }
 
-  List<Widget> buildProfileForumList(User user, Function refreshState) {
-    return user
-        .getUserForunsIds()
-        .map((e) =>
-            ProfileForumListTile(_database.getForum(e), this, refreshState, 10))
-        .toList();
-  }
-
   List<Forum> getUserForums(User user) {
     return user.getUserForunsIds().map((e) => _database.getForum(e)).toList();
   }
@@ -79,6 +70,5 @@ class Controller {
     if (fullname.length != 0) user.setFullName(fullname);
     if (description.length != 0) user.setBio(description);
     if (profilePicURL.length != 0) user.setAvatarUrl(profilePicURL);
-    //setLoggedInUserName(user.getUsername());
   }
 }
