@@ -5,6 +5,7 @@ import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/User/UserTile.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class HorizontalUserList extends StatefulWidget {
   final Controller _controller;
   final Function _refreshState;
@@ -25,13 +26,14 @@ class _HorizontalUserListState extends State<HorizontalUserList> {
         .widget
         .usersList
         .map((user) => UserTile(user, (userToSee) {
-              Navigator.push(
+              /*Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => ProfilePage(
                         widget._controller, widget._refreshState(),
                         user: userToSee)),
               );
+            */
             }))
         .toList();
   }

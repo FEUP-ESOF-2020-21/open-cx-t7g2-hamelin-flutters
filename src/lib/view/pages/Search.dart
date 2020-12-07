@@ -71,9 +71,9 @@ class _SearchState extends State<Search> {
         ),
         padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
       ),
-      HorizontalUserList(
-          _controller, widget._refresh, result.getUsers().sublist(0, 4)),
-      //getUsers(result),
+      // HorizontalUserList(
+      //     _controller, widget._refresh, result.getUsers().sublist(0, 4)),
+      getUsers(result),
       Container(
         child: Text(
           "Posts",
