@@ -28,8 +28,11 @@ class _HomePageState extends State<HomePage> {
       return WelcomeScreen(this._controller);
     else {
       String username = this._controller.getLoggedInUserName();
-      String userRole =
-          this._controller.getDatabase().getUser(username).getRole();
+      String userRole = this
+          ._controller
+          .getDatabase()
+          .getUser(username)
+          .getRole(_controller.getConference());
       if (userRole != UserRole.ADMIN)
         return UserSection(this._controller);
       else if (userRole == UserRole.ADMIN)

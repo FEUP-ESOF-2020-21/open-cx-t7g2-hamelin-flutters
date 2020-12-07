@@ -34,7 +34,7 @@ class _SearchState extends State<Search> {
   }
 
   List<Widget> getResults() {
-    SearchResult result = _controller.search(_searchTerm);
+    SearchResult result = _controller.search(_controller.getConference(), _searchTerm);
     return [
       Container(
         child: Text(

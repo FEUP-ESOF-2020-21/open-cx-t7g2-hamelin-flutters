@@ -25,8 +25,9 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     User loggedInUser = widget._controller.getLoggedInUser();
-    List<Forum> forums =
-        widget._controller.getDatabase().getUserPopularForums(loggedInUser);
+    List<Forum> forums = widget._controller
+        .getDatabase()
+        .getUserPopularForums(widget._controller.getConference(), loggedInUser);
     List<Post> posts =
         widget._controller.getDatabase().getForumsPopularPosts(forums);
     return Padding(
