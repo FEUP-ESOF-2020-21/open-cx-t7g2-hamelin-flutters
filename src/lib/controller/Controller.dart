@@ -1,6 +1,7 @@
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/model/SearchResult.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/widgets/User/ProfileForumListTile.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
@@ -67,6 +68,10 @@ class Controller {
         .map((e) =>
             ProfileForumListTile(_database.getForum(e), this, refreshState, 10))
         .toList();
+  }
+
+  List<Forum> getUserForums(User user) {
+    return user.getUserForunsIds().map((e) => _database.getForum(e)).toList();
   }
 
   void updateUser(

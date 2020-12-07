@@ -1,5 +1,7 @@
 import 'package:confnect/model/User.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/pages/EditProfilePage.dart';
+import 'package:confnect/view/widgets/forum/HorizontalForumList.dart';
 import 'package:flutter/material.dart';
 
 import '../Page.dart';
@@ -39,6 +41,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
     List<Widget> profileForumList =
         _controller.buildProfileForumList(_viewingUser, viewForumAction);
+
+    List<Forum> _userForums = _controller.getUserForums(_viewingUser);
+
+    Widget profile =
+        HorizontalForumList(_controller, viewForumAction, _userForums);
 
     return Scaffold(
       appBar: widget.user == null ? null : AppBar(),
@@ -113,10 +120,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(fontWeight: FontWeight.bold))
                       ]),
                   SizedBox(height: MediaQuery.of(context).size.height / 30.0),
-                  if (profileForumList.length != 0)
+                  if (_userForums.length != 0)
                     Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: profileForumList)
+                        children: [profile])
                   else
                     Column(
                       children: [
@@ -126,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           size: 50.0,
                         ),
                         Text(
-                          "No foruns found...",
+                          "No forums found...",
                           style: TextStyle(fontSize: 20.0, color: Colors.black),
                         )
                       ],
