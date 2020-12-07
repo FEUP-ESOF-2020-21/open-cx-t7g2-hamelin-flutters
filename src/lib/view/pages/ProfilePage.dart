@@ -3,6 +3,7 @@ import 'package:confnect/model/User.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/pages/EditProfilePage.dart';
+import 'package:confnect/view/style/DescriptionTextWidget.dart';
 import 'package:confnect/view/widgets/forum/HorizontalForumList.dart';
 import 'package:flutter/material.dart';
 
@@ -101,8 +102,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(
                         width: MediaQuery.of(context).size.width / 1.5,
                         child: Center(
-                            child: Text(_viewingUser.getBio(),
-                                style: TextStyle(fontSize: 17.0)))),
+                            child:
+                                /*Text(_viewingUser.getBio(),
+                                style: TextStyle(fontSize: 17.0))*/
+                                DescriptionTextWidget(
+                          text: _viewingUser.getBio(),
+                          fontSize: 15.0,
+                        ))),
                     SizedBox(height: MediaQuery.of(context).size.height / 35.0),
                     _viewingUser == _controller.getLoggedInUser()
                         ? Container(

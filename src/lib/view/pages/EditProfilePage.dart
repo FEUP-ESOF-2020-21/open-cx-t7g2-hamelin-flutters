@@ -90,7 +90,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             validator: ValidatorFactory.getValidator(
                                 'profile description',
                                 fieldRequired: false,
-                                upperLimit: 300),
+                                upperLimit: 100),
                           ),
                           height: MediaQuery.of(context).size.height / 5,
                         )),
@@ -118,13 +118,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       top: MediaQuery.of(context).size.height * 4.5 / 8,
                       child: FormFieldContainer(
                           SquareButton('Confirm changes', () {
-                        _controller.updateUser(
-                            _loggedInUser,
-                            fullNameController.text,
-                            descriptionController.text,
-                            profilePicURL.text);
-                        _refreshProfileState();
-                        Navigator.pop(context);
+                        if (_formKey.currentState.validate()) {
+                          _controller.updateUser(
+                              _loggedInUser,
+                              fullNameController.text,
+                              descriptionController.text,
+                              profilePicURL.text);
+                          _refreshProfileState();
+                          Navigator.pop(context);
+                        }
                       })),
                     ),
                   ],
