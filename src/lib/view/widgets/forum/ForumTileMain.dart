@@ -19,7 +19,7 @@ class ForumTileMain extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 this._controller.setCurrentForumId(_forum.getId());
-                _refreshState();
+                _refreshState(_forum.getId());
               },
               child: Column(
                 children: [
