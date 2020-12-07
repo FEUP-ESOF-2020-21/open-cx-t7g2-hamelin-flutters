@@ -19,13 +19,14 @@ class Controller {
   Controller(this._database) : _searchController = SearchController(_database);
 
   void startApp(StatelessWidget app) {
-    setConference(_database.getConferences()[0]);
     runApp(app);
   }
 
   Conference getConference() => _currentConference;
-  Conference setConference(Conference conference) =>
-      _currentConference = conference;
+  void setConference(Conference conference) {
+    _currentConference = conference;
+    if (_onSessionChange != null) _onSessionChange();
+  }
 
   int getCurrentForumId() => this.currentForumId;
   void setCurrentForumId(forumId) {

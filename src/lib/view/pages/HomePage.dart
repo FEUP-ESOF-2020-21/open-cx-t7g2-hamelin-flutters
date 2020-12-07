@@ -1,4 +1,5 @@
 import 'package:confnect/controller/database/Database.dart';
+import 'package:confnect/view/pages/ConferenceScreen.dart';
 import 'package:confnect/view/pages/admin/AdminSection.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
@@ -24,9 +25,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    if (this._controller.getLoggedInUserName() == null)
+    if (this._controller.getLoggedInUserName() == null) {
       return WelcomeScreen(this._controller);
-    else {
+    } else if (this._controller.getConference() == null) {
+      return ConferenceScreen(this._controller);
+    } else {
       String username = this._controller.getLoggedInUserName();
       String userRole = this
           ._controller
@@ -38,6 +41,5 @@ class _HomePageState extends State<HomePage> {
       else if (userRole == UserRole.ADMIN)
         return AdminSection(this._controller);
     }
-    return WelcomeScreen(this._controller);
   }
 }

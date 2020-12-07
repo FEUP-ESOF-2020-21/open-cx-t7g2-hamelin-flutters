@@ -1,15 +1,16 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/Page.dart';
+import 'package:confnect/view/widgets/TextOnlyButton.dart';
 import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:confnect/view/widgets/PageTitle.dart';
 import '../../controller/database/Database.dart';
 
-import '../AppRouter.dart';
 import 'package:flutter/material.dart';
 
-class WelcomeScreen extends StatelessPage {
-  WelcomeScreen(Controller controller, {Key key}) : super(controller, key: key);
+class ConferenceScreen extends StatelessPage {
+  ConferenceScreen(Controller controller, {Key key})
+      : super(controller, key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -22,13 +23,11 @@ class WelcomeScreen extends StatelessPage {
 
   @override
   Widget build(BuildContext context) {
-    Database db = super.getController().getDatabase();
-
     return Stack(
       children: <Widget>[
         Image(
           image: NetworkImage(
-              "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.unicef.org.uk%2Fbabyfriendly%2Fwp-content%2Fuploads%2Fsites%2F2%2F2018%2F03%2F2000x1000-Conference-2016.jpg&f=1&nofb=1"),
+              "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftech.eu%2Fwp-content%2Fuploads%2F2018%2F04%2Finfoshare-pic.jpg&f=1&nofb=1"),
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           fit: BoxFit.cover,
@@ -42,38 +41,43 @@ class WelcomeScreen extends StatelessPage {
             child: Column(
               children: <Widget>[
                 Spacer(
-                  flex: 5,
+                  flex: 6,
                 ),
                 PageTitle(
-                  db.getAppName(),
+                  "Hi, " +
+                      super.getController().getLoggedInUser().getFullName(),
                   white: true,
-                  scaleFactor: 2.3,
-                  margin: EdgeInsets.only(bottom: 30),
-                  dontAlign: true,
-                ),
-                Expanded(
-                  child: Text(
-                    db.getAppDescription(),
-                    style: TextStyle(color: Colors.white),
-                    textScaleFactor: 1.4,
-                  ),
-                ),
-                Spacer(
-                  flex: 2,
+                  scaleFactor: 1.7,
+                  margin: EdgeInsets.only(bottom: 30, left: 30),
                 ),
                 FormFieldContainer(
-                  SquareButton('Login', () {
-                    Navigator.pushNamed(context, AppRouter.LOGIN);
+                  SquareButton('SELECT CONFERENCE', () {
+                    super.getController().setConference(super
+                        .getController()
+                        .getDatabase()
+                        .getConferences(
+                            super.getController().getLoggedInUser())[0]);
                   }, white: true),
-                ),
-                FormFieldContainer(
-                  SquareButton('Register', () {
-                    Navigator.pushNamed(context, AppRouter.REGISTER);
-                  }, white: true),
-                  margin: EdgeInsets.only(bottom: 30),
                 ),
                 Spacer(
                   flex: 5,
+                ),
+                TextOnlyButton(
+                  () {
+                    print("Add conference");
+                  },
+                  text: 'ADD CONFERENCE',
+                  white: true,
+                ),
+                TextOnlyButton(
+                  () {
+                    print("Create conference");
+                  },
+                  text: 'CREATE CONFERENCE',
+                  white: true,
+                ),
+                Spacer(
+                  flex: 1,
                 ),
               ],
             ),

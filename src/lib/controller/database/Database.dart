@@ -24,7 +24,7 @@ abstract class Database {
   Forum getForum(int id);
   List<Post> getForumPosts(int forumId);
   List<Post> getPosts(Conference conference);
-  List<Conference> getConferences();
+  List<Conference> getConferences(User user);
   bool login(String username, String password);
   void register(
       String fullname, String username, String password, String profilePicURL);

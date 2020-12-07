@@ -406,7 +406,11 @@ class MockAdapter implements Database {
     return "Your conference, at a button’s distance";
   }
 
-  List<Conference> getConferences() => _conferences;
+  List<Conference> getConferences(User user) {
+    return _conferences
+        .where((Conference c) => user.isInConference(c))
+        .toList();
+  }
 
   bool login(String username, String password) {
     List<User> users = this.getUsers();

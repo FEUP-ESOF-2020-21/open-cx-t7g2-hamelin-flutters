@@ -39,6 +39,10 @@ class User {
     return out;
   }
 
+  bool isInConference(Conference conference) {
+    return _roles.containsKey(conference);
+  }
+
   void setAvatarUrl(String avatarUrl) {
     this._avatarUrl = avatarUrl;
   }
