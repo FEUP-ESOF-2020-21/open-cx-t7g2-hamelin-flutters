@@ -35,7 +35,7 @@ Our goal is to connect conference goers, helping them discuss and talk beyond th
 
 ### Use case diagram 
 
-![Use Case Diagram](./docs/UseCaseDiagram.jpg)
+![Use Case Diagram](./docs/UseCaseDiagram.png)
 
 #### Post in questions
 
