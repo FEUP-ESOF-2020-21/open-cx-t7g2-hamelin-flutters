@@ -32,10 +32,11 @@ class _DateTimeFormState extends State<DateTimeForm> {
         initialDate: widget.selectedDate,
         firstDate: new DateTime(1970, 8),
         lastDate: new DateTime(2101));
-    if (picked != null && picked != widget.selectedDate)
+    if (picked != null && picked != widget.selectedDate) {
       widget.selectDate(picked);
-    widget.selectedDate = picked;
-    setState(() {});
+      widget.selectedDate = picked;
+      setState(() {});
+    }
   }
 
   Future<void> _selectTime(BuildContext context) async {

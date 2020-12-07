@@ -27,6 +27,10 @@ class _MeetupDateTimeFormState extends State<MeetupDateTimeForm> {
         selectTime: (time) => {widget.meetTime = time},
         refresh: () {
           setState(() {});
+          setState(() {
+            widget.meetDate = widget.meetDate;
+            widget.meetTime = widget.meetTime;
+          });
         },
       ),
       margin: EdgeInsets.all(10),

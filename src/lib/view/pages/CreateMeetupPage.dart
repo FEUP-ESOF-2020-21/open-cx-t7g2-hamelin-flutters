@@ -70,6 +70,9 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                 String location = _locationController.text;
                 String description = _descriptionController.text;
                 if (_formKey.currentState.validate()) {
+                  setState(() {});
+                  print(meetDate);
+                  print(meetTime);
                   createMeetup(location, meetDate, meetTime, description);
                   Navigator.pushReplacement(
                     context,
