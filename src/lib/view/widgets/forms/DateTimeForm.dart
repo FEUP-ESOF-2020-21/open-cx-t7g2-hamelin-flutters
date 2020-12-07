@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class DateTimeForm extends StatelessWidget {
-  const DateTimeForm(
+// ignore: must_be_immutable
+class DateTimeForm extends StatefulWidget {
+  DateTimeForm(
       {Key key,
       this.labelText,
       this.selectedDate,
@@ -15,25 +16,36 @@ class DateTimeForm extends StatelessWidget {
       : super(key: key);
 
   final String labelText;
-  final DateTime selectedDate;
-  final TimeOfDay selectedTime;
+  DateTime selectedDate;
+  TimeOfDay selectedTime;
   final ValueChanged<DateTime> selectDate;
   final ValueChanged<TimeOfDay> selectTime;
   final Function refresh;
+  @override
+  _DateTimeFormState createState() => _DateTimeFormState();
+}
 
+class _DateTimeFormState extends State<DateTimeForm> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: widget.selectedDate,
         firstDate: new DateTime(1970, 8),
         lastDate: new DateTime(2101));
-    if (picked != null && picked != selectedDate) selectDate(picked);
+    if (picked != null && picked != widget.selectedDate)
+      widget.selectDate(picked);
+    widget.selectedDate = picked;
+    setState(() {});
   }
 
   Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay picked =
-        await showTimePicker(context: context, initialTime: selectedTime);
-    if (picked != null && picked != selectedTime) selectTime(picked);
+    final TimeOfDay picked = await showTimePicker(
+        context: context, initialTime: widget.selectedTime);
+    if (picked != null && picked != widget.selectedTime) {
+      widget.selectTime(picked);
+      widget.selectedTime = picked;
+      setState(() {});
+    }
   }
 
   @override
@@ -45,12 +57,11 @@ class DateTimeForm extends StatelessWidget {
         new Expanded(
           flex: 4,
           child: new _InputDropdown(
-            labelText: labelText,
-            valueText: new DateFormat.yMMMd().format(selectedDate),
+            labelText: widget.labelText,
+            valueText: new DateFormat.yMMMd().format(widget.selectedDate),
             valueStyle: valueStyle,
             onPressed: () {
               _selectDate(context);
-              refresh();
             },
           ),
         ),
@@ -58,11 +69,10 @@ class DateTimeForm extends StatelessWidget {
         new Expanded(
           flex: 3,
           child: new _InputDropdown(
-            valueText: selectedTime.format(context),
+            valueText: widget.selectedTime.format(context),
             valueStyle: valueStyle,
             onPressed: () {
               _selectTime(context);
-              refresh();
             },
           ),
         ),
@@ -71,7 +81,7 @@ class DateTimeForm extends StatelessWidget {
   }
 }
 
-class _InputDropdown extends StatelessWidget {
+class _InputDropdown extends StatefulWidget {
   const _InputDropdown(
       {Key key,
       this.child,
@@ -86,21 +96,26 @@ class _InputDropdown extends StatelessWidget {
   final TextStyle valueStyle;
   final VoidCallback onPressed;
   final Widget child;
+  @override
+  __InputDropdownState createState() => __InputDropdownState();
+}
 
+class __InputDropdownState extends State<_InputDropdown> {
+  @override
   @override
   Widget build(BuildContext context) {
     return new InkWell(
-      onTap: onPressed,
+      onTap: widget.onPressed,
       child: new InputDecorator(
         decoration: new InputDecoration(
-          labelText: labelText,
+          labelText: widget.labelText,
         ),
-        baseStyle: valueStyle,
+        baseStyle: widget.valueStyle,
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            new Text(valueText, style: valueStyle),
+            new Text(widget.valueText, style: widget.valueStyle),
             new Icon(Icons.arrow_drop_down,
                 color: Theme.of(context).brightness == Brightness.light
                     ? Colors.grey.shade700
