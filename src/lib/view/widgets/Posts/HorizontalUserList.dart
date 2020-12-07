@@ -34,6 +34,7 @@ class _HorizontalUserListState extends State<HorizontalUserList> {
                         user: userToSee)),
               );
             */
+              print(userToSee.getUsername());
             }))
         .toList();
   }

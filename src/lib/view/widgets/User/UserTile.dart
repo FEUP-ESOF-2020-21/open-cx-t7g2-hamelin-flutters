@@ -35,11 +35,9 @@ class UserTile extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: Text(
-                      _user.getFullName(),
-                      style: forumTitleStyle,
-                    ),
+                  Text(
+                    _user.getFullName(),
+                    style: forumTitleStyle,
                   ),
                 ],
               ),
