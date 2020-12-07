@@ -29,29 +29,32 @@ class _MainPageState extends State<MainPage> {
         widget._controller.getDatabase().getUserPopularForums(loggedInUser);
     List<Post> posts =
         widget._controller.getDatabase().getForumsPopularPosts(forums);
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Text(
-              "Your Communities",
-              style: titleTextStyle,
-              textAlign: TextAlign.left,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                "Your Communities",
+                style: titleTextStyle,
+                textAlign: TextAlign.left,
+              ),
             ),
-          ),
-          HorizontalForumList(widget._controller, this._refreshState, forums),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10, top: 10),
-            child: Text(
-              "Reccomended Posts",
-              style: titleTextStyle,
-              textAlign: TextAlign.left,
+            HorizontalForumList(widget._controller, this._refreshState, forums),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10, top: 10),
+              child: Text(
+                "Reccomended Posts",
+                style: titleTextStyle,
+                textAlign: TextAlign.left,
+              ),
             ),
-          ),
-          PostListMain(widget._controller, widget._refreshState, posts),
-        ],
+            PostListMain(widget._controller, widget._refreshState, posts),
+          ],
+        ),
       ),
     );
   }

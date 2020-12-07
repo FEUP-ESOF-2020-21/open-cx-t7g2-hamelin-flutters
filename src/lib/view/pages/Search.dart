@@ -58,7 +58,7 @@ class _SearchState extends State<Search> {
           style: pageTitleTextStyle,
           textScaleFactor: 0.8,
         ),
-        padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
+        padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
       ),
       HorizontalForumList(
           _controller, widget._refresh, result.getForums().sublist(0, 4)),
@@ -69,7 +69,7 @@ class _SearchState extends State<Search> {
           style: pageTitleTextStyle,
           textScaleFactor: 0.8,
         ),
-        padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
+        padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
       ),
       HorizontalUserList(
           _controller, widget._refresh, result.getUsers().sublist(0, 4)),
@@ -96,6 +96,7 @@ class _SearchState extends State<Search> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: getResults(),
         ),
       ),

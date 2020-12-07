@@ -2,9 +2,7 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
-import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/User.dart';
-import 'package:confnect/view/pages/PostPage.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
