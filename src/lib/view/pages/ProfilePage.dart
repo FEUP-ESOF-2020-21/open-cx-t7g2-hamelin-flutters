@@ -56,56 +56,86 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: MediaQuery.of(context).size.height / 3.0,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image:
-                                    AssetImage('assets/main_page_app_bar.jpg'),
+                                image: NetworkImage(
+                                    _viewingUser.getBackgroundPicUrl()),
                                 fit: BoxFit.cover)),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 17.5),
-                            Container(
-                                width: MediaQuery.of(context).size.width / 3.0,
-                                height:
-                                    MediaQuery.of(context).size.height / 6.0,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            _viewingUser.getAvatarUrl()),
-                                        fit: BoxFit.cover),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(75.0)),
-                                    border: Border.all(
-                                        color: Colors.white, width: 5))),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 200.0),
-                            Text(_viewingUser.getFullName(),
+                        child: Column(children: [
+                          SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height / 17.5),
+                          Container(
+                              width: MediaQuery.of(context).size.width / 3.0,
+                              height: MediaQuery.of(context).size.height / 6.0,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: NetworkImage(
+                                          _viewingUser.getAvatarUrl()),
+                                      fit: BoxFit.cover),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(75.0)),
+                                  border: Border.all(
+                                      color: Colors.white, width: 5))),
+                          SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height / 200.0),
+                          Stack(
+                            children: <Widget>[
+                              // Stroked text as border.
+                              Text(
+                                _viewingUser.getFullName(),
                                 style: TextStyle(
-                                    fontSize: 30.0,
+                                  fontSize: 30,
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 3
+                                    ..color = Colors.black,
+                                ),
+                              ),
+                              // Solid text as fill.
+                              Text(
+                                _viewingUser.getFullName(),
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height / 400.0),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width / 1.5,
+                              child: Center(
+                                  child: Stack(children: <Widget>[
+                                // Stroked text as border.
+                                Text(
+                                  "@" + _viewingUser.getUsername(),
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    foreground: Paint()
+                                      ..style = PaintingStyle.stroke
+                                      ..strokeWidth = 2
+                                      ..color = Colors.black,
+                                  ),
+                                ),
+                                // Solid text as fill.
+                                Text(
+                                  "@" + _viewingUser.getUsername(),
+                                  style: TextStyle(
+                                    fontSize: 17,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white)),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 400.0),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width / 1.5,
-                                child: Center(
-                                    child: Text(
-                                        "@" + _viewingUser.getUsername(),
-                                        style: TextStyle(
-                                            fontSize: 17.0,
-                                            color: Colors.white)))),
-                          ],
-                        )),
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ])))
+                        ])),
                     SizedBox(height: MediaQuery.of(context).size.height / 50.0),
                     SizedBox(
                         width: MediaQuery.of(context).size.width / 1.5,
                         child: Center(
-                            child:
-                                /*Text(_viewingUser.getBio(),
-                                style: TextStyle(fontSize: 17.0))*/
-                                DescriptionTextWidget(
+                            child: DescriptionTextWidget(
                           text: _viewingUser.getBio(),
                           fontSize: 15.0,
                         ))),

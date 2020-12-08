@@ -65,10 +65,12 @@ class Controller {
     return user.getUserForunsIds().map((e) => _database.getForum(e)).toList();
   }
 
-  void updateUser(
-      User user, String fullname, String description, String profilePicURL) {
+  void updateUser(User user, String fullname, String description,
+      String profilePicUrl, String backgroundPicUrl) {
     if (fullname.length != 0) user.setFullName(fullname);
     if (description.length != 0) user.setBio(description);
-    if (profilePicURL.length != 0) user.setAvatarUrl(profilePicURL);
+    if (profilePicUrl.length != 0) user.setAvatarUrl(profilePicUrl);
+    if (backgroundPicUrl.length != 0)
+      user.setBackgroundPicUrl(backgroundPicUrl);
   }
 }

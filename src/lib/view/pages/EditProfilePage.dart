@@ -30,11 +30,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     User _loggedInUser = _controller.getLoggedInUser();
-    Database db = _controller.getDatabase();
 
     final fullNameController =
         TextEditingController(text: _loggedInUser.getFullName());
-    final profilePicURL = TextEditingController();
+    final profilePicUrl = TextEditingController();
+    final backgroundPicUrl = TextEditingController();
     final descriptionController =
         TextEditingController(text: _loggedInUser.getBio());
 
@@ -56,14 +56,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   children: [
                     Positioned(
                         left: MediaQuery.of(context).size.width / 10,
-                        top: MediaQuery.of(context).size.height / 8 - 30,
+                        top: MediaQuery.of(context).size.height / 10 - 30,
                         child: Text(
                           'Fullname',
                           textAlign: TextAlign.left,
                           style: pageTitleTextStyle,
                         )),
                     Positioned(
-                        top: MediaQuery.of(context).size.height / 8,
+                        top: MediaQuery.of(context).size.height / 10,
                         child: FormFieldContainer(
                           FormTextField('Fullname', fullNameController,
                               validator: ValidatorFactory.getValidator(
@@ -74,14 +74,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         )),
                     Positioned(
                         left: MediaQuery.of(context).size.width / 10,
-                        top: MediaQuery.of(context).size.height * 2 / 8 - 30,
+                        top: MediaQuery.of(context).size.height * 2.4 / 10 - 30,
                         child: Text(
                           'Profile bio',
                           textAlign: TextAlign.left,
                           style: pageTitleTextStyle,
                         )),
                     Positioned(
-                        top: MediaQuery.of(context).size.height * 2 / 8,
+                        top: MediaQuery.of(context).size.height * 2.4 / 10,
                         child: FormFieldContainer(
                           FormTextField(
                             'New profile description',
@@ -96,18 +96,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         )),
                     Positioned(
                         left: MediaQuery.of(context).size.width / 10,
-                        top: MediaQuery.of(context).size.height * 3.7 / 8 - 30,
+                        top: MediaQuery.of(context).size.height * 4.7 / 10 - 30,
                         child: Text(
                           'Avatar URL',
                           textAlign: TextAlign.left,
                           style: pageTitleTextStyle,
                         )),
                     Positioned(
-                        top: MediaQuery.of(context).size.height * 3.7 / 8,
+                        top: MediaQuery.of(context).size.height * 4.7 / 10,
                         child: FormFieldContainer(
                           FormTextField(
                             'Avatar URL',
-                            profilePicURL,
+                            profilePicUrl,
                             validator: ValidatorFactory.getValidator(
                                 'image url',
                                 fieldRequired: false,
@@ -115,7 +115,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           ),
                         )),
                     Positioned(
-                      top: MediaQuery.of(context).size.height * 4.5 / 8,
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height * 6.2 / 10 - 30,
+                        child: Text(
+                          'Background URL',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 6.2 / 10,
+                        child: FormFieldContainer(
+                          FormTextField(
+                            'Background URL',
+                            backgroundPicUrl,
+                            validator: ValidatorFactory.getValidator(
+                                'image url',
+                                fieldRequired: false,
+                                upperLimit: 300),
+                          ),
+                        )),
+                    Positioned(
+                      top: MediaQuery.of(context).size.height * 7.2 / 10,
                       child: FormFieldContainer(
                           SquareButton('Confirm changes', () {
                         if (_formKey.currentState.validate()) {
@@ -123,7 +143,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               _loggedInUser,
                               fullNameController.text,
                               descriptionController.text,
-                              profilePicURL.text);
+                              profilePicUrl.text,
+                              backgroundPicUrl.text);
                           _refreshProfileState();
                           Navigator.pop(context);
                         }

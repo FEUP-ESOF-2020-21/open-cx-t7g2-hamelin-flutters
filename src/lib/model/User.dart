@@ -8,6 +8,7 @@ class User {
   List<int> _userForunsIds;
   List<Forum> _forums = new List();
   List<Tag> _tags = new List();
+  String backgroundPicUrl = "https://imgur.com/F4uRSQV.png";
 
   User(this.id, this._role, this._fullname, this._username, this._password,
       [this._avatarUrl, this._bio = "", this._userForunsIds = const []]);
@@ -22,6 +23,8 @@ class User {
 
   String getBio() => _bio;
 
+  String getBackgroundPicUrl() => backgroundPicUrl;
+
   @override
   String toString() => _fullname;
 
@@ -29,6 +32,10 @@ class User {
 
   void setAvatarUrl(String avatarUrl) {
     this._avatarUrl = avatarUrl;
+  }
+
+  void setBackgroundPicUrl(String backgroundPicUrl) {
+    this.backgroundPicUrl = backgroundPicUrl;
   }
 
   void setFullName(String fullname) {
