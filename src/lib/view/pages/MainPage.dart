@@ -30,30 +30,31 @@ class _MainPageState extends State<MainPage> {
     List<Post> posts =
         widget._controller.getDatabase().getForumsPopularPosts(forums);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Text(
-              "Your Most Popular Communities",
-              style: titleTextStyle,
-              textAlign: TextAlign.left,
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                "Your Communities",
+                style: titleTextStyle,
+                textAlign: TextAlign.left,
+              ),
             ),
-          ),
-          HorizontalForumList(widget._controller, this._refreshState, forums),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10, top: 10),
-            child: Text(
-              "Most Popular Posts in Your Communities",
-              style: titleTextStyle,
-              textAlign: TextAlign.left,
+            HorizontalForumList(widget._controller, this._refreshState, forums),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10, top: 10),
+              child: Text(
+                "Reccomended Posts",
+                style: titleTextStyle,
+                textAlign: TextAlign.left,
+              ),
             ),
-          ),
-          Expanded(
-              child: PostListMain(
-                  widget._controller, widget._refreshState, posts)),
-        ],
+            PostListMain(widget._controller, widget._refreshState, posts),
+          ],
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/forums/Forum.dart';
@@ -43,4 +44,5 @@ abstract class Database {
       String description, User creator);
   List<Forum> getUserPopularForums(User user);
   List<Post> getForumsPopularPosts(List<Forum> forums);
+  void changePinnedComment(Post post, Comment comment);
 }

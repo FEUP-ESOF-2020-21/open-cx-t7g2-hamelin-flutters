@@ -17,6 +17,14 @@ class User {
 
   String getFullName() => _fullname;
 
+  String getFirstName() {
+    return _getFirstWords(_fullname, 1);
+  }
+
+  String _getFirstWords(String sentence, int wordCounts) {
+    return sentence.split(" ").sublist(0, wordCounts).join(" ");
+  }
+
   String getRole() => _role;
 
   String getAvatarUrl() => _avatarUrl;

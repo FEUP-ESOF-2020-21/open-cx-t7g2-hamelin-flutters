@@ -1,5 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/forums/Forum.dart';
+import 'package:confnect/view/pages/ForumPage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,12 @@ class ForumTileMain extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: InkWell(
               onTap: () {
+                /*Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ForumPage(_controller, _forum, () {})),
+                );*/
                 this._controller.setCurrentForumId(_forum.getId());
                 _refreshState(_forum.getId());
               },

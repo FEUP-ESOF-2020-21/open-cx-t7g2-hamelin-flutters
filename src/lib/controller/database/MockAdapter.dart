@@ -130,6 +130,7 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[0], _comments[1], _comments[6], _comments[7]],
+      pinnedComment: _comments[6],
     ),
     Post(
       0,
@@ -506,7 +507,7 @@ class MockAdapter implements Database {
     ret.sort((Forum f1, Forum f2) {
       int f1NPosts = getForumPosts(f1.getId()).length;
       int f2NPosts = getForumPosts(f2.getId()).length;
-      return f1NPosts.compareTo(f2NPosts);
+      return f2NPosts.compareTo(f1NPosts);
     });
     return ret;
   }
@@ -517,8 +518,18 @@ class MockAdapter implements Database {
       ret.addAll(getForumPosts(element.getId()));
     });
     ret.sort((Post p1, Post p2) {
-      return p1.getNumberLikes().compareTo(p2.getNumberLikes());
+      return p2.getNumberLikes().compareTo(p1.getNumberLikes());
     });
     return ret;
+  }
+
+  @override
+  void changePinnedComment(Post post, Comment comment) {
+    if (comment != null && post != null) {
+      if (post.getPinnedComment() == comment)
+        post.pinComment(null);
+      else
+        post.pinComment(comment);
+    }
   }
 }
