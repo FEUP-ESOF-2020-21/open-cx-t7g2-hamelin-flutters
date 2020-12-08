@@ -40,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     List<Forum> _userForums = _controller.getUserForums(_viewingUser);
 
-    Widget profile =
+    Widget profileForums =
         HorizontalForumList(_controller, viewForumAction, _userForums);
 
     return Scaffold(
@@ -188,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [profile]))
+                              children: [profileForums]))
                     else
                       Column(
                         children: [
