@@ -45,7 +45,10 @@ class _ForumsState extends State<Forums> {
   @override
   Widget build(BuildContext context) {
     if (this._controller.getCurrentForumId() != -1)
-      return PostsPage(this._controller, _viewForum, this._refreshState);
+      return Padding(
+        padding: const EdgeInsets.only(top: 20.0),
+        child: PostsPage(this._controller, _viewForum, this._refreshState),
+      );
     return AllForumList(this._controller, _viewForum);
   }
 }
