@@ -19,14 +19,8 @@ class ForumTileMain extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             child: InkWell(
               onTap: () {
-                /*Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          ForumPage(_controller, _forum, () {})),
-                );*/
                 this._controller.setCurrentForumId(_forum.getId());
-                _refreshState();
+                _refreshState(_forum.getId());
               },
               child: Column(
                 children: [

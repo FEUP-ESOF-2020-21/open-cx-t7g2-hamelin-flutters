@@ -3,8 +3,9 @@ import 'package:meta/meta.dart';
 
 class DescriptionTextWidget extends StatefulWidget {
   final String text;
+  final double fontSize;
 
-  DescriptionTextWidget({@required this.text});
+  DescriptionTextWidget({@required this.text, this.fontSize = 14});
 
   @override
   _DescriptionTextWidgetState createState() =>
@@ -18,8 +19,8 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
   bool flag = true;
 
   @override
-  void initState() {
-    super.initState();
+  void setState(fn) {
+    super.setState(fn);
 
     if (widget.text.length > 50) {
       firstHalf = widget.text.substring(0, 50);
@@ -32,13 +33,20 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {});
     return new Container(
       padding: new EdgeInsets.symmetric(horizontal: 0, vertical: 10.0),
       child: secondHalf.isEmpty
-          ? new Text(firstHalf)
+          ? new Text(
+              firstHalf,
+              style: new TextStyle(fontSize: widget.fontSize),
+            )
           : new Column(
               children: <Widget>[
-                new Text(flag ? (firstHalf + "...") : (firstHalf + secondHalf)),
+                new Text(
+                  flag ? (firstHalf + "...") : (firstHalf + secondHalf),
+                  style: new TextStyle(fontSize: widget.fontSize),
+                ),
                 new InkWell(
                   child: new Row(
                     mainAxisAlignment: MainAxisAlignment.end,

@@ -1,7 +1,6 @@
 import 'package:confnect/view/pages/Search.dart';
 import 'package:confnect/controller/UserSectionController.dart';
 import 'package:confnect/view/pages/MainPage.dart';
-import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class _UserSectionState extends State<UserSection> {
   List<Widget> _pageBodies() {
     return [
       this._controller.currentForumId == -1
-          ? MainPage(_controller, _refreshState)
+          ? MainPage(_controller, _viewForum, _refreshState)
           : Forums(_controller, _refreshState),
       Search(this._controller, _viewForum, _refreshState),
       ProfilePage(this._controller, _viewForum),

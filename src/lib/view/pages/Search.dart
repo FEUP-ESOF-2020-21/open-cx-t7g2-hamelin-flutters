@@ -61,8 +61,7 @@ class _SearchState extends State<Search> {
         padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
       ),
       HorizontalForumList(
-          _controller, widget._refresh, result.getForums().sublist(0, 4)),
-      //getForums(result),
+          _controller, _viewForum, result.getForums().sublist(0, 4)),
       Container(
         child: Text(
           "Users",

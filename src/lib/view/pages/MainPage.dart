@@ -11,16 +11,17 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class MainPage extends StatefulPage {
   Controller _controller;
-  Function _refreshState;
-  MainPage(this._controller, this._refreshState) : super(_controller);
+  Function _viewForum, _refreshState;
+  MainPage(this._controller, this._viewForum, this._refreshState)
+      : super(_controller);
 
   @override
-  _MainPageState createState() => _MainPageState(_refreshState);
+  _MainPageState createState() => _MainPageState(_viewForum, _refreshState);
 }
 
 class _MainPageState extends State<MainPage> {
-  Function _refreshState;
-  _MainPageState(this._refreshState);
+  Function _refreshState, _viewForum;
+  _MainPageState(this._viewForum, this._refreshState);
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class _MainPageState extends State<MainPage> {
         widget._controller.getDatabase().getUserPopularForums(loggedInUser);
     List<Post> posts =
         widget._controller.getDatabase().getForumsPopularPosts(forums);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -43,7 +45,7 @@ class _MainPageState extends State<MainPage> {
                 textAlign: TextAlign.left,
               ),
             ),
-            HorizontalForumList(widget._controller, this._refreshState, forums),
+            HorizontalForumList(widget._controller, _viewForum, forums),
             Padding(
               padding: const EdgeInsets.only(bottom: 10, top: 10),
               child: Text(
