@@ -1027,6 +1027,7 @@ For the configuration and change management for this project we followed the [Gi
 We had a master branch that was only updated when each realease was made. All the development was made in the develop branch using feature branches.
 
 Besides these, we had a release/iterationN for each iteration, a report branch for all the work on this report, and a hotfixes branch for small and urgent fixes.
+
 ---
 
 ## Project management
