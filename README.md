@@ -356,7 +356,7 @@ Our goal is to connect conference goers, helping them discuss and talk beyond th
 
 ### User stories
 
-![User story map](docs/userStoryMap.png)
+![User story map](docs/userStoryMap.jpg)
 
 #### Login Screen
 <p>
