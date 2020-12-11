@@ -130,6 +130,7 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[0], _comments[1], _comments[6], _comments[7]],
+      pinnedComment: _comments[6],
     ),
     Post(
       0,
@@ -520,5 +521,15 @@ class MockAdapter implements Database {
       return p1.getUserLikes().length.compareTo(p2.getUserDislikes().length);
     });
     return ret;
+  }
+
+  @override
+  void changePinnedComment(Post post, Comment comment) {
+    if (comment != null && post != null) {
+      if (post.getPinnedComment() == comment)
+        post.pinComment(null);
+      else
+        post.pinComment(comment);
+    }
   }
 }

@@ -31,7 +31,7 @@ class _MeetupPageState extends State<MeetupPage> {
             children: [
               MeetupInfo(widget._meetup),
               Divider(),
-              CommentList(widget._meetup.getComments()),
+              CommentList(widget._meetup.getComments(), widget._controller),
             ],
           ),
         ),

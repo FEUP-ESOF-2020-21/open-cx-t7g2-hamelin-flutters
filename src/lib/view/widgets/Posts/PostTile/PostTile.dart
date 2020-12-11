@@ -10,8 +10,9 @@ class PostTile extends StatefulWidget {
   final Controller _controller;
   final User host;
   final bool showForum;
+  final Function _refreshState;
 
-  const PostTile(this._post, this._controller,
+  const PostTile(this._post, this._controller, this._refreshState,
       {this.host, this.showForum = false});
 
   @override
@@ -19,6 +20,11 @@ class PostTile extends StatefulWidget {
 }
 
 class _PostTileState extends State<PostTile> {
+  refreshBoth() {
+    this.widget._refreshState();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     void _postPage() {
@@ -29,7 +35,7 @@ class _PostTileState extends State<PostTile> {
                   this.widget._controller,
                   this.widget._post,
                   () {
-                    setState(() {});
+                    refreshBoth();
                   },
                   host: this.widget.host,
                 )),

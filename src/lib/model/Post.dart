@@ -47,6 +47,10 @@ class Post {
     return pinnedComment;
   }
 
+  void pinComment(Comment comment) {
+    pinnedComment = comment;
+  }
+
   addComment(author, date, description) {
     Comment c = new Comment(author, date, description);
     comments.add(c);

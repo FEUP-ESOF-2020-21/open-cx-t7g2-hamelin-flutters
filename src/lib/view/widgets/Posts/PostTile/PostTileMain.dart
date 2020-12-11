@@ -19,6 +19,11 @@ class PostTileMain extends StatefulWidget {
 }
 
 class _PostTileMainState extends State<PostTileMain> {
+  refreshBoth() {
+    widget._refreshState();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     void _postPage() {
@@ -29,7 +34,7 @@ class _PostTileMainState extends State<PostTileMain> {
                   widget._controller,
                   this.widget._post,
                   () {
-                    setState(() {});
+                    refreshBoth();
                   },
                   host: widget._controller
                       .getDatabase()
