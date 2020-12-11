@@ -35,26 +35,43 @@ class _MeetupBoxState extends State<MeetupBox> {
     });
   }
 
-  showAlertDialog(BuildContext context) {
-    // set up the button
-    Widget okButton = FlatButton(
-        child: Text("OK"),
-        onPressed: () {
-          Navigator.of(context).pop();
-        } // dismiss dialog
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Attention!'),
+          content: Text('Are you sure you want to delete the meeting?'),
+          actions: <Widget>[
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel')),
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () {
+                cancelMeetup();
+                widget._eliminateMeetup();
+                Navigator.of(context).pop();
+                deletedSuccess();
+              },
+            ),
+          ],
         );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Notice"),
-      content: Text("The meetup has been successfuly deleted"),
+      },
     );
+  }
 
-    // show the dialog
-    showDialog(
+  Future<void> deletedSuccess() async {
+    return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return alert;
+        return AlertDialog(
+          title: Text('Notice!'),
+          content: Text('The meeting has been canceled!'),
+        );
       },
     );
   }
@@ -94,9 +111,7 @@ class _MeetupBoxState extends State<MeetupBox> {
                           InkWell(
                             child: Icon(Icons.close),
                             onTap: () => {
-                              cancelMeetup(),
-                              widget._eliminateMeetup(),
-                              showAlertDialog(context),
+                              _showMyDialog(),
                             },
                           ),
                     ]),
