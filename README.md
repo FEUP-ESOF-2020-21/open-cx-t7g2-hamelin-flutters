@@ -9,6 +9,28 @@
 - Xavier Pisco
 
 
+## Table of Contents
+
+* [Product Vision](#product-vision)
+* [Elevator Pitch](#elevator-pitch)
+* [Requirements](#requirements)
+    + [Use case diagram](#use-case-diagram)
+    + [User stories](#user-stories)
+    + [Domain model](#domain-model)
+* [Architecture and Design](#architecture-and-design)
+    + [Logical architecture](#logical-architecture)
+    + [Physical architecture](#physical-architecture)
+    + [Prototype](#prototype)
+* [Implementation](#implementation)
+    + [Product increment #1](#product-increment--1)
+    + [Product increment #2](#product-increment--2)
+    + [Product increment #3](#product-increment--3)
+* [Test](#test)
+* [Configuration and change management](#configuration-and-change-management)
+* [Project management](#project-management)
+* [Evolution - contributions to open-cx](#evolution---contributions-to-open-cx)
+
+
 ## Product Vision
 
 Helping people burst their bubble by connecting them through ideas, beyond the conference.
