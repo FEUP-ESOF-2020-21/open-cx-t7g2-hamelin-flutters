@@ -899,7 +899,7 @@ As an administrator, I want to be able to reuse the app with other conferences, 
 ![Physical Architecture](./docs/PhysicalArchitecture.jpg)
 
 
-
+For the physical architecture of our app, we choose to use a local database because of its simplicity and easiness to use. Initially we had planned to move the database to 'Firebase' because it is well integrated with flutter and is simple to use and that way the app could be used by multiple people, but due to time constraints that wasn't possible.
 
 
 ---
