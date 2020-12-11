@@ -864,7 +864,12 @@ As an administrator, I want to be able to generate codes for hosts and attendees
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-    TODO
+    Scenario: In the Admin Page
+    Given There is at least 1 talk
+    When The administrator clicks on "generate register code" button
+    And Submits the list of forums the user belongs to
+    Then User can register with the code
+    And Have a personal workspace
 ```
 
 #### Multiple Conference Support
@@ -876,7 +881,11 @@ As an administrator, I want to be able to reuse the app with other conferences, 
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-    TODO
+    Scenario: After user login
+    Given There are 2 conferences
+    When The user clicks on "select conference" button
+    And Selects one of the two conferences
+    Then User can access the selected conference
 ```
 
 
