@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 class VoteComment extends StatefulWidget {
   final Post _post;
   final Controller _controller;
+  final Function _refreshParent;
 
-  VoteComment(this._post, this._controller);
+  VoteComment(this._post, this._controller, this._refreshParent);
   @override
   _VoteCommentState createState() => _VoteCommentState();
 }
@@ -21,6 +22,7 @@ class _VoteCommentState extends State<VoteComment> {
       else
         widget._post.incrementLike(user);
     });
+    widget._refreshParent();
   }
 
   _pressedDisLike(User user) {
@@ -30,6 +32,7 @@ class _VoteCommentState extends State<VoteComment> {
       else
         widget._post.incrementDislike(user);
     });
+    widget._refreshParent();
   }
 
   @override

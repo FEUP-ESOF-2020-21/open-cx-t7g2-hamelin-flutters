@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'VoteComment.dart';
 
-class PostTileMain extends StatelessWidget {
+class PostTileMain extends StatefulWidget {
   final Post _post; // = new Post("Ademar", "Ensinando flutter", "lorem ipsum");
   final Controller _controller;
   final Function _refreshState;
@@ -15,17 +15,25 @@ class PostTileMain extends StatelessWidget {
   const PostTileMain(this._post, this._controller, this._refreshState);
 
   @override
+  _PostTileMainState createState() => _PostTileMainState();
+}
+
+class _PostTileMainState extends State<PostTileMain> {
+  @override
   Widget build(BuildContext context) {
     void _postPage() {
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => PostPage(
-                  _controller,
-                  this._post,
-                  host: _controller
+                  widget._controller,
+                  this.widget._post,
+                  () {
+                    setState(() {});
+                  },
+                  host: widget._controller
                       .getDatabase()
-                      .getForum(_post.getForumId())
+                      .getForum(widget._post.getForumId())
                       .getSpeaker(),
                 )),
       );
@@ -41,17 +49,21 @@ class PostTileMain extends StatelessWidget {
             child: Column(
               children: [
                 UserTimeHeaderForum(
-                    _post.getAuthor(),
-                    _post.getDate(),
+                    widget._post.getAuthor(),
+                    widget._post.getDate(),
                     20,
-                    _controller.getDatabase().getForum(_post.getForumId()),
-                    _controller,
-                    _refreshState),
+                    widget._controller
+                        .getDatabase()
+                        .getForum(widget._post.getForumId()),
+                    widget._controller,
+                    widget._refreshState),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
-                  child: Text(_post.getDescription()),
+                  child: Text(widget._post.getDescription()),
                 ),
-                VoteComment(_post, _controller),
+                VoteComment(widget._post, widget._controller, () {
+                  setState(() {});
+                }),
               ],
             )),
       ),

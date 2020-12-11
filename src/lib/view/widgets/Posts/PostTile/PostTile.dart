@@ -5,7 +5,7 @@ import 'package:confnect/view/pages/PostPage.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostContent.dart';
 import 'package:flutter/material.dart';
 
-class PostTile extends StatelessWidget {
+class PostTile extends StatefulWidget {
   final Post _post; // = new Post("Ademar", "Ensinando flutter", "lorem ipsum");
   final Controller _controller;
   final User host;
@@ -15,15 +15,23 @@ class PostTile extends StatelessWidget {
       {this.host, this.showForum = false});
 
   @override
+  _PostTileState createState() => _PostTileState();
+}
+
+class _PostTileState extends State<PostTile> {
+  @override
   Widget build(BuildContext context) {
     void _postPage() {
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => PostPage(
-                  this._controller,
-                  this._post,
-                  host: this.host,
+                  this.widget._controller,
+                  this.widget._post,
+                  () {
+                    setState(() {});
+                  },
+                  host: this.widget.host,
                 )),
       );
     }
@@ -33,7 +41,9 @@ class PostTile extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
           onTap: _postPage,
-          child: PostContent(_controller, _post, true, showForum: showForum)),
+          child: PostContent(widget._controller, widget._post, true, () {
+            setState(() {});
+          }, showForum: widget.showForum)),
     );
   }
 }

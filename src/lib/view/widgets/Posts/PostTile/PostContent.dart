@@ -9,7 +9,8 @@ class PostContent extends StatefulWidget {
   final Post _post;
   final bool _showMore, showForum;
   final Controller _controller;
-  PostContent(this._controller, this._post, this._showMore,
+  final Function _refreshParent;
+  PostContent(this._controller, this._post, this._showMore, this._refreshParent,
       {this.showForum = false});
   @override
   _PostContentState createState() => _PostContentState();
@@ -64,7 +65,8 @@ class _PostContentState extends State<PostContent> {
                   ),
                   TextSectionPost(widget._post.getTitle(),
                       widget._post.getDescription(), widget._showMore),
-                  VoteComment(widget._post, widget._controller),
+                  VoteComment(
+                      widget._post, widget._controller, widget._refreshParent),
                 ],
               ),
             ),

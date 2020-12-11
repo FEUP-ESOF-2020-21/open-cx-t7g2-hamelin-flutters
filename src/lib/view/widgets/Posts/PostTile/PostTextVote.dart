@@ -14,7 +14,8 @@ import 'VoteComment.dart';
 class PostTextVote extends StatefulWidget {
   Controller _controller;
   Post _post;
-  PostTextVote(this._post, this._controller);
+  final Function _refreshParent;
+  PostTextVote(this._post, this._controller, this._refreshParent);
   @override
   _PostTextVoteState createState() => _PostTextVoteState();
 }
@@ -77,7 +78,7 @@ class _PostTextVoteState extends State<PostTextVote> {
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
             child: Text(widget._post.getDescription()),
           ),
-          VoteComment(widget._post, widget._controller),
+          VoteComment(widget._post, widget._controller, widget._refreshParent),
           if (widget._post.getMeetup() != null)
             MeetupBox(widget._controller, widget._post.getMeetup(), () {
               cancelMeetup();
