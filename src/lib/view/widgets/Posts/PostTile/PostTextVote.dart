@@ -1,5 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/User.dart';
 import 'package:confnect/view/pages/CreateMeetupPage.dart';
 import 'package:confnect/view/pages/MeetupPage.dart';
 import 'package:confnect/view/widgets/Meetup/MeetupBox.dart';
@@ -38,6 +40,14 @@ class _PostTextVoteState extends State<PostTextVote> {
     );
   }
 
+  bool userInDiscussion() {
+    for (Comment comment in widget._post.getComments()) {
+      if (widget._controller.getLoggedInUser() == comment.getAuthor())
+        return true;
+    }
+    return false;
+  }
+
   cancelMeetup() {
     setState(() {});
     setState(() {
@@ -55,7 +65,10 @@ class _PostTextVoteState extends State<PostTextVote> {
               widget._post.getAuthor(), widget._post.getDate(), 20,
               onMeetupSelected: () {
             if (widget._post.getMeetup() == null) {
-              this.openCreateMeetupPage();
+              if (userInDiscussion())
+                this.openCreateMeetupPage();
+              else
+                _showMyDialog();
             } else {
               openMeetupPage();
             }
@@ -71,6 +84,28 @@ class _PostTextVoteState extends State<PostTextVote> {
             }),
         ],
       ),
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      //barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Attention!'),
+          content: Text(
+              "You have to participate in the discussion to create the meeting!"),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
