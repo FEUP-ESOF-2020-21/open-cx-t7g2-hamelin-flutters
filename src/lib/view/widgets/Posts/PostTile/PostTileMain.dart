@@ -40,6 +40,7 @@ class PostTileMain extends StatelessWidget {
         child: InkWell(
             onTap: _postPage,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 UserTimeHeaderForum(
                     _post.getAuthor(),
