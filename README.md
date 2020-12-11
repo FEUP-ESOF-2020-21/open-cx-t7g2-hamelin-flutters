@@ -20,7 +20,6 @@
 * [Architecture and Design](#architecture-and-design)
     + [Logical architecture](#logical-architecture)
     + [Physical architecture](#physical-architecture)
-    + [Prototype](#prototype)
 * [Implementation](#implementation)
     + [Product increment #1](#product-increment--1)
     + [Product increment #2](#product-increment--2)
@@ -33,7 +32,7 @@
 
 ## Product Vision
 
-Helping people burst their bubble by connecting them through ideas, beyond the conference.
+Making conferences meaningful by connecting people, through interests and discussions, in order to create lifetime relations.
 
 ## Elevator Pitch
 
@@ -666,23 +665,30 @@ Scenario: Removing a talk
 ```
 
 
-#### Answer Posts / Questions
+#### Answer Posts
 
 <img src="docs/mockups/postPageMeetup.png" width="300" style="border: 1px solid grey" />
 
-As a talk host, I want to be able to answer the posts/questions in the forums/talks so that i can clear up doubts the attendees still have.
+As an attendee / talk host, I want to be able to answer the posts in the forums/talks so that i can clear other people's doubts / give my opinion.
 ##### Value and Effort
     - Value: Must have
-    - Effort: M
+    - Effort: S
 ##### Acceptance Tests
 ```gherkin
-Scenario: Adding a comment
+Scenario: In a Post Page
   Given Post A has 2 comments and I have the 'host' role
   When I tap the "add comment" button
   And I submit a comment "My answer is this"
   Then Post A has 3 comments
   And Post A contains a comment "My answer is this"
   And Post A contains a pinned comment "My answer is this"
+ 
+Scenario: In a Post Page
+  Given Post A has 2 comments and I have the 'attendee' role
+  When I tap the "add comment" button
+  And I submit a comment "My answer is this"
+  Then Post A has 3 comments
+  And Post A contains a comment "My answer is this"
 ```
 
 
@@ -804,7 +810,10 @@ As a conference attendee, I want to easily find topics that interest me, so that
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-    TODO
+Scenario: After logging in
+    Given There exists many forums and posts
+    Then My Main Page shows me forums I'm in
+    And Shows me those forums posts
 ```
 
 
@@ -819,7 +828,10 @@ As an attendee, I want to have a page that shows me the posts and forums that re
 ##### Acceptance Tests
 
 ```gherkin
-    TODO
+Scenario: In the Main Page
+    Given There exists many forums, users and posts
+    Then A page with the top communities and trending posts appear
+    And The page is directed to me
 ```
 
 
@@ -831,7 +843,11 @@ As an administrator, I want the forums to be generated based on the talks and th
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
-    TODO
+Scenario: In the Talks Page
+    Given There are 0 talk and 2 Forums
+    When I add another talk
+    Then There are 1 talks and 3 Forums
+    And the new Forum has the info from the corresponding talk
 ```
 
 #### Remove Questions / Answers
@@ -842,7 +858,17 @@ As a talk host, I want to be able to remove inappropriate questions / wrong answ
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
-    TODO
+Scenario: In a Post Page from a Talk
+    Given There are 3 answers to the post
+    When The host click to remove 1 answer and confirms it 
+    Then There are 2 answers
+    
+Scenario: In a Post Page from a Talk
+    Given There are 3 answers to the post
+    And One of them is pinned
+    When The host removes the pinned answer
+    Then There are 2 answers
+    And There is no pinned answer
 ```
 
 #### Pin Answered Questions
@@ -853,7 +879,19 @@ As a talk host, I want to be able to pin answered questions so that the question
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
-    TODO
+Scenario: In a Post Page from a Talk
+    Given There are 3 ansers to the post
+    When The host pins 1 of those answers
+    Then The answer is on top 
+    And there are still 3 answers
+    
+Scenario: In a Post Page from a Talk
+    Given There are 3 ansers to the post
+    And 1 of them is pinned
+    When The host pins another of those answers
+    Then The pinned answer is no longer pinned
+    And The selected answer is now pinned
+    And There are 3 answers
 ```
 
 #### Generate Register Codes
@@ -864,12 +902,17 @@ As an administrator, I want to be able to generate codes for hosts and attendees
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-    Scenario: In the Admin Page
+Scenario: In the Admin Page
     Given There is at least 1 talk
     When The administrator clicks on "generate register code" button
-    And Submits the list of forums the user belongs to
-    Then User can register with the code
-    And Have a personal workspace
+    And Submits the list of forums the user belongs t
+    Then A register code is given
+    
+Scenario: After user login
+    Given The user is not registered in the conference "x"
+    When The user clicks on "add conference" button
+    And Inserts a valid "x" conference code
+    Then The user is registered in the conference "x"
 ```
 
 #### Multiple Conference Support
@@ -881,11 +924,25 @@ As an administrator, I want to be able to reuse the app with other conferences, 
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-    Scenario: After user login
-    Given There are 2 conferences
+Scenario: After user login
+    Given The user is registered in 2 conferences
     When The user clicks on "select conference" button
     And Selects one of the two conferences
-    Then User can access the selected conference
+    Then The User can access the selected conference
+    
+Scenario: After user login
+    Given The user is registered in 2 conferences
+    When The user clicks on "add conference" button
+    And Inserts a valid conference code
+    Then The user is registered in 3 conferences
+    
+Scenario: After user login
+    Given There exists 2 conferences
+    When The user clicks on "create conference" button
+    And Fills the form correctly
+    Then There exists 3 conferences
+    And The user is registered in the new conference
+    And The user is the administrator of the conference he created
 ```
 
 
@@ -902,6 +959,14 @@ As an administrator, I want to be able to reuse the app with other conferences, 
 ### Logical architecture
 
 ![Logical Architecture](./docs/LogicalArchitecture.jpg)
+
+For our high-level structure we chose the MVC Architectural Pattern, because it is a good pattern for keeping the logic, data classes and visual of the app separated, making the development easier.
+
+The Model is the place where the data that as fetched from the database is saved, in a data class format, for the view to render.
+
+The Controller takes care of all the logic that isn't part of how something is visualized, like accessing the database. The controller manipulates the data in the model.
+
+The View is responsible for the visual aspect of the app, as it renders the contents of the model, according to the current context, which is given by the controller.
 
 ### Physical architecture
 
@@ -957,14 +1022,16 @@ Release: [v0.3](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutte
 ---
 ## Configuration and change management
 
-[GitHub flow](https://guides.github.com/introduction/flow/).
+For the configuration and change management for this project we followed the [GitHub flow](https://guides.github.com/introduction/flow/).
 
+We had a master branch that was only updated when each realease was made. All the development was made in the develop branch using feature branches.
 
+Besides these, we had a release/iterationN for each iteration, a report branch for all the work on this report, and a hotfixes branch for small and urgent fixes.
 ---
 
 ## Project management
 
-
+During the development of the project we used a [Github Project](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/projects/1) in order to track the user stories' progress, and to assign members of the group and add estimates to them.
 
 ---
 
