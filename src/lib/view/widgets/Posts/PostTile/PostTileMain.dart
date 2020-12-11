@@ -51,7 +51,7 @@ class PostTileMain extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                   child: Text(_post.getDescription()),
                 ),
-                VoteComment(_post),
+                VoteComment(_post, _controller),
               ],
             )),
       ),

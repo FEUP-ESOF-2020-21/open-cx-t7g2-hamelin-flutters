@@ -517,7 +517,7 @@ class MockAdapter implements Database {
       ret.addAll(getForumPosts(element.getId()));
     });
     ret.sort((Post p1, Post p2) {
-      return p1.getNumberLikes().compareTo(p2.getNumberLikes());
+      return p1.getUserLikes().length.compareTo(p2.getUserDislikes().length);
     });
     return ret;
   }

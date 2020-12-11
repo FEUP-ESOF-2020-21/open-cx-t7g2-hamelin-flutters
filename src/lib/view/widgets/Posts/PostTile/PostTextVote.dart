@@ -77,7 +77,7 @@ class _PostTextVoteState extends State<PostTextVote> {
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
             child: Text(widget._post.getDescription()),
           ),
-          VoteComment(widget._post),
+          VoteComment(widget._post, widget._controller),
           if (widget._post.getMeetup() != null)
             MeetupBox(widget._controller, widget._post.getMeetup(), () {
               cancelMeetup();
