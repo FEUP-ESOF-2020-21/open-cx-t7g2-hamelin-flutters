@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SquareButton extends StatelessWidget {
   final String text;
   final Function fn;
-  SquareButton(this.text, this.fn);
+  SquareButton(this.text, this.fn, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

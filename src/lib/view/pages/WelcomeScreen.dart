@@ -31,9 +31,13 @@ class WelcomeScreen extends StatelessPage {
             PageTitle(db.getAppName()),
             Spacer(),
             FormFieldContainer(
-              SquareButton('Login', () {
-                Navigator.pushNamed(context, AppRouter.LOGIN);
-              }),
+              SquareButton(
+                'Login',
+                () {
+                  Navigator.pushNamed(context, AppRouter.LOGIN);
+                },
+                key: Key("loginWelcome"),
+              ),
             ),
             FormFieldContainer(
               SquareButton('Register', () {

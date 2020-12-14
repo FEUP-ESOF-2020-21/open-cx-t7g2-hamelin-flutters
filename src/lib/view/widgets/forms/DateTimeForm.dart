@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 
 class DateTimeForm extends StatelessWidget {
   const DateTimeForm(
@@ -44,7 +44,7 @@ class DateTimeForm extends StatelessWidget {
           flex: 4,
           child: new _InputDropdown(
             labelText: labelText,
-            valueText: new DateFormat.yMMMd().format(selectedDate),
+            valueText: "", // TODO new DateFormat.yMMMd().format(selectedDate),
             valueStyle: valueStyle,
             onPressed: () {
               _selectDate(context);

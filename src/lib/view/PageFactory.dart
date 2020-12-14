@@ -10,7 +10,10 @@ class PageFactory {
   PageFactory(this.controller);
 
   Widget createLoginPage() {
-    return Login(controller);
+    return Login(
+      controller,
+      key: Key("LoginPage"),
+    );
   }
 
   Widget createRegisterPage() {
