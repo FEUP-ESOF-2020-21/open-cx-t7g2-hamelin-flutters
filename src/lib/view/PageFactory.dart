@@ -25,6 +25,9 @@ class PageFactory {
   }
 
   Widget createUserPage() {
-    return UserSection(controller);
+    return UserSection(
+      controller,
+      key: Key("HomePage"),
+    );
   }
 }

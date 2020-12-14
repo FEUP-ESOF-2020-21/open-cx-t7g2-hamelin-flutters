@@ -53,47 +53,53 @@ class _LoginState extends State<Login> {
                     FormTextField('Username', usernameController,
                         validator: ValidatorFactory.getValidator('Username',
                             fieldRequired: true)),
+                    key: Key("usernameField"),
                   ),
                   FormFieldContainer(
                     FormTextField('Password', passwordController,
                         obscureText: true,
                         validator: ValidatorFactory.getValidator('Password',
                             fieldRequired: true)),
+                    key: Key("passfield"),
                   ),
                   FormFieldContainer(
-                      SquareButton('Login', () {
-                        String username = usernameController.text,
-                            password = passwordController.text;
-                        if (_formKey.currentState.validate()) {
-                          if (db.login(username, password)) {
-                            _controller.setLoggedInUserName(username);
-                            Navigator.popUntil(
-                                context,
-                                ModalRoute.withName(
-                                    Navigator.defaultRouteName));
-                          } else {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                // return object of type Dialog
-                                return AlertDialog(
-                                  title: new Text("Wrong credentials"),
-                                  content: new Text("Feels bad man"),
-                                  actions: <Widget>[
-                                    // usually buttons at the bottom of the dialog
-                                    new FlatButton(
-                                      child: new Text("Close"),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                      SquareButton(
+                        'Login',
+                        () {
+                          String username = usernameController.text,
+                              password = passwordController.text;
+                          if (_formKey.currentState.validate()) {
+                            if (db.login(username, password)) {
+                              _controller.setLoggedInUserName(username);
+                              Navigator.popUntil(
+                                  context,
+                                  ModalRoute.withName(
+                                      Navigator.defaultRouteName));
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  // return object of type Dialog
+                                  return AlertDialog(
+                                    title: new Text("Wrong credentials"),
+                                    content: new Text("Feels bad man"),
+                                    actions: <Widget>[
+                                      // usually buttons at the bottom of the dialog
+                                      new FlatButton(
+                                        child: new Text("Close"),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
                           }
-                        }
-                      }),
+                        },
+                        key: Key("LoginButton"),
+                      ),
                       margin: EdgeInsets.only(bottom: 30))
                 ])),
             StandardDivider(),
