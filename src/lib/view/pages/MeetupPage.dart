@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 class MeetupPage extends StatefulPage {
   Meetup _meetup;
   Controller _controller;
-  MeetupPage(this._controller, this._meetup) : super(_controller);
+  MeetupPage(this._controller, this._meetup)
+      : super(_controller, key: Key("MeetupPage"));
 
   @override
   _MeetupPageState createState() => _MeetupPageState();

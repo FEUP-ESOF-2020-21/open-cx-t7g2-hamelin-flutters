@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class MeetupBox extends StatefulWidget {
   Controller _controller;
   Meetup _meetup;
-  MeetupBox(this._controller, this._meetup);
+  MeetupBox(this._controller, this._meetup) : super(key: Key("MeetupBox"));
   @override
   _MeetupBoxState createState() => _MeetupBoxState();
 }

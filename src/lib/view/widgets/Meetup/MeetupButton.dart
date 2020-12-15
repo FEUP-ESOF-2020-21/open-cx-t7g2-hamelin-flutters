@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class MeetupButton extends StatefulWidget {
   final VoidCallback onButtonSelected;
 
-  MeetupButton({this.onButtonSelected});
+  MeetupButton({this.onButtonSelected}) : super(key: Key("MeetupButton"));
   @override
   _MeetupButtonState createState() => _MeetupButtonState();
 }
