@@ -13,7 +13,7 @@ class ExitConferenceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
         icon: Icon(
-          Icons.logout,
+          Icons.close_rounded,
           color: _color == null ? Colors.black : _color,
         ),
         onPressed: () {
