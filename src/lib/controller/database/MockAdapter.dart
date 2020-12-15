@@ -16,15 +16,17 @@ import '../../model/User.dart';
 class MockAdapter implements Database {
   static List<Conference> _conferences = [
     Conference(
-        "Web Summit",
-        "Web Summit brings together the people and companies redefining the global tech industry.",
-        "Lisbon",
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.analyticsboosters.com%2Fwp-content%2Fuploads%2Fsites%2F2%2F2017%2F11%2F38234335176_01c0411980_o.jpg&f=1&nofb=1"),
+      "Web Summit",
+      "Web Summit brings together the people and companies redefining the global tech industry.",
+      "Lisbon",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.analyticsboosters.com%2Fwp-content%2Fuploads%2Fsites%2F2%2F2017%2F11%2F38234335176_01c0411980_o.jpg&f=1&nofb=1",
+    ),
     Conference(
-        "SINF",
-        "A Semana de Informática (SINF), organizada pelo Núcleo de Informática da Associação de Estudantes da Faculdade de Engenharia da Universidade do Porto (NIAEFEUP), foi criada com o intuito de permitir aos estudantes, independentemente do curso, desenvolver as suas capacidades nas diversas áreas da Informática, promovendo a sua interação com o mundo empresarial através de eventos sociais.",
-        "FEUP",
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fempresashoje.pt%2Fwp-content%2Fuploads%2F2015%2F04%2Ffeup.jpg&f=1&nofb=1"),
+      "SINF",
+      "A Semana de Informática (SINF), organizada pelo Núcleo de Informática da Associação de Estudantes da Faculdade de Engenharia da Universidade do Porto (NIAEFEUP), foi criada com o intuito de permitir aos estudantes, independentemente do curso, desenvolver as suas capacidades nas diversas áreas da Informática, promovendo a sua interação com o mundo empresarial através de eventos sociais.",
+      "FEUP",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fempresashoje.pt%2Fwp-content%2Fuploads%2F2015%2F04%2Ffeup.jpg&f=1&nofb=1",
+    ),
   ];
   static List<User> _users = [
     User(
@@ -410,6 +412,12 @@ class MockAdapter implements Database {
     return _conferences
         .where((Conference c) => user.isInConference(c))
         .toList();
+  }
+
+  void addConference(String conferenceName, String conferenceLocation,
+      String conferenceDescription, String conferenceImageURL) {
+    _conferences.add(Conference(conferenceName, conferenceLocation,
+        conferenceDescription, conferenceImageURL));
   }
 
   bool login(String username, String password) {
