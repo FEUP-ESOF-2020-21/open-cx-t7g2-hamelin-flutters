@@ -2,6 +2,7 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/pages/admin/AddTalk.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
+import 'package:confnect/view/widgets/admin/talks/AdminTalkCodes.dart';
 import 'package:flutter/material.dart';
 import '../../Page.dart';
 import '../../widgets/admin/talks/AdminTalks.dart';
@@ -21,10 +22,7 @@ class _AdminSectionState extends State<AdminSection> {
   List<Widget> _pageBodies() {
     return [
       AdminTalks(this._controller, _refreshState),
-      Container(
-        child: Text("Coming soon..."),
-        margin: EdgeInsets.all(10),
-      ),
+      AdminTalkCodes(this._controller, _refreshState),
     ];
   }
 
@@ -81,11 +79,7 @@ class _AdminSectionState extends State<AdminSection> {
     return Scaffold(
       appBar: _pageAppBars[this._selectedIndex],
       body: _pageBodies()[this._selectedIndex],
-      floatingActionButton: FloatingActionButton(
-        onPressed: _floatingActionButtonActions[this._selectedIndex],
-        child: Icon(Icons.add),
-        backgroundColor: Colors.blue[800],
-      ),
+      floatingActionButton: AdminFloatingActionButton(this._controller, _refreshState, _floatingActionButtonActions, this._selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -102,6 +96,27 @@ class _AdminSectionState extends State<AdminSection> {
         selectedItemColor: Colors.blue[800],
         onTap: this._onItemTapped,
       ),
+    );
+  }
+}
+
+class AdminFloatingActionButton extends StatelessPage {
+  Function _refreshState;
+  var _floatingActionButtonActions;
+  var _selectedIndex;
+
+  AdminFloatingActionButton(Controller controller, this._refreshState, this._floatingActionButtonActions, this._selectedIndex, {Key key})
+      : super(controller, key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      child: FloatingActionButton(
+        onPressed: _floatingActionButtonActions[this._selectedIndex],
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue[800],
+      ),
+      visible: this._selectedIndex == 0 ? true : false,
     );
   }
 }
