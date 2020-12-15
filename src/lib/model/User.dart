@@ -59,6 +59,10 @@ class User {
     this._bio = bio;
   }
 
+  void addRole(Conference conference, String role) {
+    _roles[conference] = role;
+  }
+
   List<Forum> getForums() {
     return _forums;
   }

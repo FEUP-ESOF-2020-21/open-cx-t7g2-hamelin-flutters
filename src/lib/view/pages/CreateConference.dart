@@ -22,7 +22,8 @@ class CreateConference extends StatelessPage {
 
   @override
   Widget build(BuildContext context) {
-    Database db = super.getController().getDatabase();
+    Controller controller = super.getController();
+    Database db = controller.getDatabase();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -96,8 +97,12 @@ class CreateConference extends StatelessPage {
                             conferenceImageURL =
                                 conferenceImageURLController.text;
 
-                        db.addConference(conferenceName, conferenceLocation,
-                            conferenceDescription, conferenceImageURL);
+                        db.addConference(
+                            controller.getLoggedInUser(),
+                            conferenceName,
+                            conferenceLocation,
+                            conferenceDescription,
+                            conferenceImageURL);
                         Navigator.pop(context);
                       }
                     },

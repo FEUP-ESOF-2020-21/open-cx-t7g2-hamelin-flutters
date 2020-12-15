@@ -414,10 +414,16 @@ class MockAdapter implements Database {
         .toList();
   }
 
-  void addConference(String conferenceName, String conferenceLocation,
-      String conferenceDescription, String conferenceImageURL) {
-    _conferences.add(Conference(conferenceName, conferenceLocation,
-        conferenceDescription, conferenceImageURL));
+  void addConference(
+      User creator,
+      String conferenceName,
+      String conferenceLocation,
+      String conferenceDescription,
+      String conferenceImageURL) {
+    Conference conf = Conference(conferenceName, conferenceDescription,
+        conferenceLocation, conferenceImageURL);
+    _conferences.add(conf);
+    creator.addRole(conf, UserRole.ADMIN);
   }
 
   bool login(String username, String password) {
