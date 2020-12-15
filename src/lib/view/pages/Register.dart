@@ -59,25 +59,29 @@ class _RegisterState extends State<Register> {
                               fieldRequired: true,
                               lowerLimit: 5,
                               upperLimit: 50)),
+                      key: Key("fullNameRegister"),
                     ),
-                    FormFieldContainer(FormTextField(
-                        'Username', usernameController,
-                        validator: ValidatorFactory.getValidator('Username',
-                            lowerLimit: 5,
-                            upperLimit: 20,
-                            fieldRequired: true, extender: (value) {
-                          if (db.existsUser(value)) {
-                            return "User with username " +
-                                value.toString() +
-                                " already exists!";
-                          }
-                        }))),
+                    FormFieldContainer(
+                      FormTextField('Username', usernameController,
+                          validator: ValidatorFactory.getValidator('Username',
+                              lowerLimit: 5,
+                              upperLimit: 20,
+                              fieldRequired: true, extender: (value) {
+                            if (db.existsUser(value)) {
+                              return "User with username " +
+                                  value.toString() +
+                                  " already exists!";
+                            }
+                          })),
+                      key: Key("usernameFieldRegister"),
+                    ),
                     FormFieldContainer(
                       FormTextField('Profile picture URL', profilePicController,
                           validator: ValidatorFactory.getValidator(
                               'Profile picture URL',
                               fieldRequired: false,
                               upperLimit: 300)),
+                      key: Key("profileRegister"),
                     ),
                     FormFieldContainer(
                       FormTextField('Password', passwordController,
@@ -87,21 +91,26 @@ class _RegisterState extends State<Register> {
                       margin: EdgeInsets.only(
                         bottom: 30,
                       ),
+                      key: Key("passfield"),
                     ),
-                    FormFieldContainer(SquareButton('Register', () {
-                      if (_formKey.currentState.validate()) {
-                        String fullname = fullNameController.text,
-                            username = usernameController.text,
-                            profilePicURL = profilePicController.text,
-                            password = passwordController.text;
-                        //userImageURL = talkImageURLController.text;
-                        db.register(
-                            fullname, username, password, profilePicURL);
-                        _controller.setLoggedInUserName(username);
-                        Navigator.popUntil(context,
-                            ModalRoute.withName(Navigator.defaultRouteName));
-                      }
-                    })),
+                    FormFieldContainer(SquareButton(
+                      'Register',
+                      () {
+                        if (_formKey.currentState.validate()) {
+                          String fullname = fullNameController.text,
+                              username = usernameController.text,
+                              profilePicURL = profilePicController.text,
+                              password = passwordController.text;
+                          //userImageURL = talkImageURLController.text;
+                          db.register(
+                              fullname, username, password, profilePicURL);
+                          _controller.setLoggedInUserName(username);
+                          Navigator.popUntil(context,
+                              ModalRoute.withName(Navigator.defaultRouteName));
+                        }
+                      },
+                      key: Key("registerButton"),
+                    )),
                   ],
                 ),
               ),

@@ -17,7 +17,10 @@ class PageFactory {
   }
 
   Widget createRegisterPage() {
-    return Register(controller);
+    return Register(
+      controller,
+      key: Key("RegisterPage"),
+    );
   }
 
   Widget createHomePage() {

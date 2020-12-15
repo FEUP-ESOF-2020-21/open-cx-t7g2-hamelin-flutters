@@ -81,6 +81,7 @@ class _LoginState extends State<Login> {
                                 builder: (BuildContext context) {
                                   // return object of type Dialog
                                   return AlertDialog(
+                                    key: Key("BadLogin"),
                                     title: new Text("Wrong credentials"),
                                     content: new Text("Feels bad man"),
                                     actions: <Widget>[
