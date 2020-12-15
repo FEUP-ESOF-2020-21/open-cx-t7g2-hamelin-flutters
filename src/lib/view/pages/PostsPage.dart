@@ -13,7 +13,7 @@ class PostsPage extends StatefulPage {
   final Function _refreshState;
   PostsPage(Controller controller, this._viewForum, this._refreshState,
       {Key key})
-      : super(controller, key: key);
+      : super(controller, key: Key("PostPage"));
   @override
   _PostsPageState createState() =>
       _PostsPageState(super.getController(), this._refreshState);
