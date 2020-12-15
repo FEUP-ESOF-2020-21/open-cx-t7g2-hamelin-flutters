@@ -3,12 +3,34 @@ import 'package:confnect/model/forums/TalkForum.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
-class ForumTile extends StatelessWidget {
+class ForumTile extends StatefulWidget {
   final Forum _forum;
-  final Function _viewForum;
+  final Function _onTapAction;
   final bool showDescription, showTags;
-  const ForumTile(this._forum, this._viewForum,
-      {this.showDescription = true, this.showTags = true});
+  final bool admin;
+  ForumTile(this._forum, this._onTapAction,
+      {this.showDescription = true,
+      this.showTags = true,
+      this.admin = false,
+      Key key})
+      : super(key: key);
+
+  @override
+  State<ForumTile> createState() {
+    return _ForumTileState(_forum, _onTapAction,
+        showDescription: showDescription, showTags: showTags, admin: admin);
+  }
+}
+
+class _ForumTileState extends State<ForumTile> {
+  final Forum _forum;
+  final Function _onTapAction;
+  final bool showDescription, showTags;
+  final bool admin;
+  bool selected = false;
+
+  _ForumTileState(this._forum, this._onTapAction,
+      {this.showDescription = true, this.showTags = true, this.admin = false});
 
   @override
   Widget build(BuildContext context) {
@@ -18,22 +40,19 @@ class ForumTile extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: () {
-          _viewForum(
-              _forum.getId()); // this will push the forum page on the navigator
+          print(admin);
+          if (!this.admin)
+            _onTapAction(_forum
+                .getId()); // this will push the forum page on the navigator
+          else {
+            print("Changed selection");
+            selected = !selected;
+            setState(() {});
+          }
         },
         child: Container(
           padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(_forum.getImageURL()),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.6),
-                BlendMode.srcOver,
-              ),
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
+          decoration: getDecoration(selected, _forum),
           child: Column(
             //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -111,6 +130,36 @@ class ForumTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+BoxDecoration getDecoration(bool selected, Forum _forum) {
+  if (selected) {
+    print("This one");
+    return BoxDecoration(
+      border: Border.all(color: Colors.green, width: 10),
+      image: DecorationImage(
+        image: NetworkImage(_forum.getImageURL()),
+        fit: BoxFit.cover,
+        colorFilter: ColorFilter.mode(
+          Colors.black.withOpacity(0.6),
+          BlendMode.srcOver,
+        ),
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+    );
+  } else {
+    return BoxDecoration(
+      image: DecorationImage(
+        image: NetworkImage(_forum.getImageURL()),
+        fit: BoxFit.cover,
+        colorFilter: ColorFilter.mode(
+          Colors.black.withOpacity(0.6),
+          BlendMode.srcOver,
+        ),
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(20)),
     );
   }
 }

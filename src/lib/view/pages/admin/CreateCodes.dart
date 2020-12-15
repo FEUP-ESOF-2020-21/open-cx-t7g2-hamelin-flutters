@@ -1,67 +1,55 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/controller/database/Database.dart';
-import 'package:confnect/model/Tag.dart';
 import 'package:confnect/view/Page.dart';
-import 'package:confnect/view/pages/admin/TagManager.dart';
 import 'package:confnect/view/style/TextStyle.dart';
-import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
-import 'package:confnect/view/widgets/forms/FormTextField.dart';
-import 'package:confnect/view/widgets/SquareButton.dart';
+import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class CreateCodes extends StatefulPage {
-  final Function _onTalkAdded;
-  CreateCodes(Controller controller, this._onTalkAdded, {Key key})
+  final Function _onCodeCreated;
+  CreateCodes(Controller controller, this._onCodeCreated, {Key key})
       : super(controller, key: key);
 
   @override
   State<CreateCodes> createState() {
-    return _CreateCodesState(super.getController(), _onTalkAdded);
+    return _CreateCodesState(super.getController(), _onCodeCreated);
   }
 }
 
 class _CreateCodesState extends State<CreateCodes> {
   final Controller _controller;
-  final Function _onTalkAdded;
+  final Function _onCodeCreated;
 
-  final talkTitleController = TextEditingController();
-  final talkDescriptionController = TextEditingController();
-  final speakerUsernameController = TextEditingController();
-  final talkImageURLController = TextEditingController();
-  final tagNameController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
-  List<Tag> _selectedTags;
-
-  @override
-  void initState() {
-    _selectedTags = [];
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _selectedTags.clear();
-    super.dispose();
-  }
-
-  _CreateCodesState(this._controller, this._onTalkAdded);
+  _CreateCodesState(this._controller, this._onCodeCreated);
 
   @override
   Widget build(BuildContext context) {
     Database db = _controller.getDatabase();
+    String _code = generateCode();
+    List<ForumTile> tiles = db
+        .getForums()
+        .map((forum) => ForumTile(forum, () {}, admin: true))
+        .toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Registry Code: " + generateCode(),
+          "Registry Code: " + _code,
           style: pageTitleTextStyle,
         ),
       ),
-      body: ListView(),
+      body: ListView(children: tiles),
     );
   }
+
+  // () {
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //             builder: (context) => AddTalk(_controller, _refreshState)),
+  //       );
+  //     }
 
   String generateCode() {
     var code;
