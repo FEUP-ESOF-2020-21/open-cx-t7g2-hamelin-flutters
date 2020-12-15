@@ -37,8 +37,8 @@ class _ProfilePageState extends State<ProfilePage> {
       this._viewForum(forumId);
     };
 
-    List<Widget> profileForumList =
-        _controller.buildProfileForumList(_viewingUser, viewForumAction);
+    List<Widget> profileForumList = _controller.buildProfileForumList(
+        _controller.getConference(), _viewingUser, viewForumAction);
 
     return Scaffold(
       appBar: widget.user == null ? null : AppBar(),
