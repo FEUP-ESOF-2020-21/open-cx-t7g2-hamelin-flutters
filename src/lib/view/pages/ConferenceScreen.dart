@@ -8,6 +8,8 @@ import '../../controller/database/Database.dart';
 
 import 'package:flutter/material.dart';
 
+import 'ConferenceSelection.dart';
+
 class ConferenceScreen extends StatelessPage {
   ConferenceScreen(Controller controller, {Key key})
       : super(controller, key: key);
@@ -52,11 +54,18 @@ class ConferenceScreen extends StatelessPage {
                 ),
                 FormFieldContainer(
                   SquareButton('SELECT CONFERENCE', () {
-                    super.getController().setConference(super
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ConferenceSelection(
+                                super.getController(),
+                              )),
+                    );
+                    /*super.getController().setConference(super
                         .getController()
                         .getDatabase()
                         .getConferences(
-                            super.getController().getLoggedInUser())[0]);
+                            super.getController().getLoggedInUser())[0]);*/
                   }, white: true),
                 ),
                 Spacer(

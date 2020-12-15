@@ -1,7 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/pages/admin/AddTalk.dart';
 import 'package:confnect/view/style/TextStyle.dart';
-import 'package:confnect/view/widgets/LogoutButton.dart';
+import 'package:confnect/view/widgets/ExitConferenceButton.dart';
 import 'package:flutter/material.dart';
 import '../../Page.dart';
 import '../../widgets/admin/talks/AdminTalks.dart';
@@ -77,7 +77,8 @@ class _AdminSectionState extends State<AdminSection> {
   @override
   Widget build(BuildContext context) {
     var _floatingActionButtonActions = _initFABActions(context);
-    var _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
+    var _pageAppBars =
+        _initAppBars(<Widget>[ExitConferenceButton(_controller)]);
     return Scaffold(
       appBar: _pageAppBars[this._selectedIndex],
       body: _pageBodies()[this._selectedIndex],

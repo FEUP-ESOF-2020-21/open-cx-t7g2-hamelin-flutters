@@ -1,8 +1,9 @@
 class Conference {
-  String _name, _description, _location;
-  Conference(this._name, this._description, this._location);
+  String _name, _description, _location, _imageUrl;
+  Conference(this._name, this._description, this._location, this._imageUrl);
 
   String getName() => _name;
-  String detDescription() => _description;
+  String getDescription() => _description;
   String getLocation() => _location;
+  String getImageUrl() => _imageUrl;
 }
