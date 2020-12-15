@@ -1,4 +1,5 @@
 import 'package:confnect/controller/database/Database.dart';
+import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/SearchResult.dart';
 import 'package:confnect/model/User.dart';
@@ -13,8 +14,8 @@ class SearchController {
     return value.similarityTo(key);
   }
 
-  List<Forum> searchForums(String key) {
-    List<Forum> forums = _database.getForums();
+  List<Forum> searchForums(Conference conference, String key) {
+    List<Forum> forums = _database.getForums(conference);
     Map<Forum, double> forumMap = {};
     for (final forum in forums) {
       forumMap[forum] = calculateResemblance(key, forum.getTitle()) +
@@ -30,13 +31,13 @@ class SearchController {
     return forums;
   }
 
-  List<User> searchUsers(String key) {
+  List<User> searchUsers(Conference conference, String key) {
     List<User> users = _database.getUsers();
     Map<User, double> usersMap = {};
     final invalidUsers = [];
     for (final user in users) {
-      if (user.getRole() != UserRole.ATTENDEE &&
-          user.getRole() != UserRole.HOST) {
+      if (user.getRole(conference) != UserRole.ATTENDEE &&
+          user.getRole(conference) != UserRole.HOST) {
         invalidUsers.add(user);
         continue;
       }
@@ -54,8 +55,8 @@ class SearchController {
     return users;
   }
 
-  List<Post> searchPosts(String key) {
-    List<Post> posts = _database.getPosts();
+  List<Post> searchPosts(Conference conference, String key) {
+    List<Post> posts = _database.getPosts(conference);
     Map<Post, double> postsMap = {};
     for (final post in posts) {
       postsMap[post] = calculateResemblance(key, post.getTitle()) +
@@ -69,10 +70,10 @@ class SearchController {
     return posts;
   }
 
-  SearchResult search(String key) {
-    List<Forum> forums = searchForums(key);
-    List<User> users = searchUsers(key);
-    List<Post> posts = searchPosts(key);
+  SearchResult search(Conference conference, String key) {
+    List<Forum> forums = searchForums(conference, key);
+    List<User> users = searchUsers(conference, key);
+    List<Post> posts = searchPosts(conference, key);
 
     return SearchResult(forums, users, posts);
   }

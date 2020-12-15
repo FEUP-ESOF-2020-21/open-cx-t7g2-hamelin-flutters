@@ -57,8 +57,11 @@ class AllForumList extends StatelessPage {
   List<dynamic> otherforums() {
     Database db = super.getController().getDatabase();
 
-    List<Forum> difference =
-        db.getForums().toSet().difference(_suggestedForums.toSet()).toList();
+    List<Forum> difference = db
+        .getForums(super.getController().getConference())
+        .toSet()
+        .difference(_suggestedForums.toSet())
+        .toList();
 
     return difference.map((forum) => ForumTile(forum, _viewForum)).toList();
   }
@@ -68,8 +71,10 @@ class AllForumList extends StatelessPage {
     String username = super.getController().getLoggedInUserName();
     User u = db.getUser(username);
 
-    List<Forum> _userForums =
-        u.getUserForunsIds().map((id) => db.getForum(id)).toList();
+    List<Forum> _userForums = u
+        .getUserForunsIds(super.getController().getConference())
+        .map((id) => db.getForum(id))
+        .toList();
     if (_userForums.length == 0) _userForums = u.getForums();
 
     List<Tag> _userTags = u.getTags();
@@ -84,7 +89,7 @@ class AllForumList extends StatelessPage {
 
     _suggestedForums = new List();
 
-    db.getForums().forEach((forum) {
+    db.getForums(super.getController().getConference()).forEach((forum) {
       for (int i = 0; i < _userTags.length; i++) {
         if (forum.getTags() == null) continue;
         print('FORUM TAGS : ' + forum.getTags().toString());

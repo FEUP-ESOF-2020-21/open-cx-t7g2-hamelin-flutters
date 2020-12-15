@@ -28,7 +28,7 @@ class _CreateCodesState extends State<CreateCodes> {
     Database db = _controller.getDatabase();
     String _code = generateCode();
     List<ForumTile> tiles = db
-        .getForums()
+        .getForums(_controller.getConference())
         .map((forum) => ForumTile(forum, () {}, admin: true))
         .toList();
 

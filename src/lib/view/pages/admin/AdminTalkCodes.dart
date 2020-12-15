@@ -1,9 +1,8 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/view/Page.dart';
+import 'package:confnect/view/widgets/admin/talks/AdminTalkCodeTile.dart';
 import 'package:flutter/material.dart';
-
-import 'AdminTalkCodeTile.dart';
 
 // ignore: must_be_immutable
 class AdminTalkCodes extends StatelessPage {
@@ -19,7 +18,7 @@ class AdminTalkCodes extends StatelessPage {
   List<Widget> talks() {
     Database db = super.getController().getDatabase();
     return db
-        .getTalks()
+        .getTalks(super.getController().getConference())
         .map((e) => AdminTalkCodeTile(super.getController(), _refreshState, e))
         .toList();
   }

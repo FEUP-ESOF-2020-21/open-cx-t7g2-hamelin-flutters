@@ -1,7 +1,6 @@
 import 'package:confnect/view/pages/Search.dart';
 import 'package:confnect/controller/UserSectionController.dart';
 import 'package:confnect/view/pages/MainPage.dart';
-import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/widgets/forum/Forums.dart';
 import 'package:flutter/material.dart';
