@@ -1,5 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/Page.dart';
+import 'package:confnect/view/pages/CreateConference.dart';
 import 'package:confnect/view/widgets/TextOnlyButton.dart';
 import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
@@ -61,11 +62,6 @@ class ConferenceScreen extends StatelessPage {
                                 super.getController(),
                               )),
                     );
-                    /*super.getController().setConference(super
-                        .getController()
-                        .getDatabase()
-                        .getConferences(
-                            super.getController().getLoggedInUser())[0]);*/
                   }, white: true),
                 ),
                 Spacer(
@@ -80,7 +76,13 @@ class ConferenceScreen extends StatelessPage {
                 ),
                 TextOnlyButton(
                   () {
-                    print("Create conference");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CreateConference(
+                                super.getController(),
+                              )),
+                    );
                   },
                   text: 'CREATE CONFERENCE',
                   white: true,
