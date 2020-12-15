@@ -62,19 +62,6 @@ class AdminTalkCodeTile extends StatelessPage {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                              child: Text(
-                                'Code: ' + _talk.getCode(),
-                                style: talkCodeTextStyle,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ],
                   ),
                 ),

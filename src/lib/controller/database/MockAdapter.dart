@@ -418,20 +418,8 @@ class MockAdapter implements Database {
     Talk talk =
         Talk(_talks.length, title, description, getUser(speaker), image, tags);
     _talks.add(talk);
-    
-    while(!isCodeNew(talk.getCode())) {
-      talk.generateCode();
-    }
 
     createTalkForum(talk);
-  }
-  
-  bool isCodeNew(String code) {
-    _talks.forEach((talk) {
-      if (talk.getCode() == code)
-        return false;
-    });
-    return true;
   }
 
   bool isTagNew(Tag tag) {
