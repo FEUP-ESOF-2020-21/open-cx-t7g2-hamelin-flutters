@@ -9,6 +9,7 @@ import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CreateMeetupPage extends StatefulPage {
   Post _post;
   Controller _controller;

@@ -1,4 +1,3 @@
-import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +6,10 @@ import '../SquareButton.dart';
 
 class ProfileForumListTile extends StatelessWidget {
   final Forum _forum;
-  final Controller _controller;
   final Function _refreshState;
   final double margin;
 
-  ProfileForumListTile(
-      this._forum, this._controller, this._refreshState, this.margin);
+  ProfileForumListTile(this._forum, this._refreshState, this.margin);
 
   @override
   Widget build(BuildContext context) {

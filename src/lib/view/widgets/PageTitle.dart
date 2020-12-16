@@ -5,11 +5,18 @@ class PageTitle extends StatelessWidget {
   final String text;
   final EdgeInsets margin;
   final double scaleFactor;
-  PageTitle(this.text, {this.margin, this.scaleFactor});
+  final bool dontAlign, white;
+
+  PageTitle(this.text,
+      {this.margin,
+      this.scaleFactor,
+      this.white = false,
+      this.dontAlign = false});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.topLeft,
+      alignment: dontAlign ? null : Alignment.topLeft,
       margin: this.margin == null
           ? EdgeInsets.only(
               top: 60,
@@ -19,7 +26,9 @@ class PageTitle extends StatelessWidget {
       child: Text(
         this.text,
         textScaleFactor: scaleFactor != null ? scaleFactor : 1.5,
-        style: pageTitleTextStyle,
+        style: this.white
+            ? pageTitleTextStyle.copyWith(color: Colors.white)
+            : pageTitleTextStyle,
       ),
     );
   }

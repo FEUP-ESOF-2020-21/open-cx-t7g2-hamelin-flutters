@@ -102,7 +102,8 @@ class _AddTalkState extends State<AddTalk> {
                           return "User with username " +
                               value.toString() +
                               " doesn't exist";
-                        } else if (!db.hasRole(value, UserRole.HOST)) {
+                        } else if (!db.hasRole(_controller.getConference(),
+                            value, UserRole.HOST)) {
                           return "User with username " +
                               value.toString() +
                               " doesn't have HOST role";
@@ -153,7 +154,7 @@ class _AddTalkState extends State<AddTalk> {
                             talkImageURL = talkImageURLController.text;
 
                         Function onComplete = (newTags) {
-                          db.addTalk(talkTitle, talkDescription,
+                          db.addTalk(_controller.getConference(), talkTitle, talkDescription,
                               talkSpeakerUsername, talkImageURL, newTags);
                           _onTalkAdded();
                           Navigator.pop(context);

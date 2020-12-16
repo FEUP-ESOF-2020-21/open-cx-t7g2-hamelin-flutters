@@ -40,7 +40,6 @@ class _MeetupPageState extends State<MeetupPage> {
           alignment: Alignment.bottomCenter,
           child: AddComment(
             widget._controller,
-            widget._meetup.getComments(),
             onSubmitted: (user, date, text) {
               setState(() {
                 widget._meetup.getComments().add(new Comment(user, date, text));

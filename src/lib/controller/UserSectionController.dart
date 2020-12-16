@@ -1,7 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/style/TextStyle.dart';
+import 'package:confnect/view/widgets/ExitConferenceButton.dart';
 import 'package:confnect/view/widgets/GoBackButton.dart';
-import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/widgets/MainPage/MainAppBar.dart';
 import 'package:flutter/material.dart';
 
@@ -16,14 +16,14 @@ class UserSectionController {
           "Search",
           style: pageTitleTextStyle,
         ),
-        actions: [LogoutButton(controller)],
+        actions: [ExitConferenceButton(controller)],
       ),
       AppBar(
         title: Text(
           "Profile",
           style: pageTitleTextStyle,
         ),
-        actions: [LogoutButton(controller)],
+        actions: [ExitConferenceButton(controller)],
       ),
       AppBar(
         title: Text(
@@ -35,7 +35,7 @@ class UserSectionController {
                   .getTitle(),
           style: pageTitleTextStyle,
         ),
-        actions: [LogoutButton(controller)],
+        actions: [ExitConferenceButton(controller)],
         leading: controller.getCurrentForumId() == -1
             ? null
             : new GoBackButton(

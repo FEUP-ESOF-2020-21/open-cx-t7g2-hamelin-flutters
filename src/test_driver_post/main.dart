@@ -11,6 +11,7 @@ void main() {
   controller.startApp(ConfnectTest(controller));
 }
 
+// ignore: must_be_immutable
 class ConfnectTest extends StatelessWidget {
   Controller controller;
   ConfnectTest(this.controller);
@@ -26,7 +27,12 @@ class ConfnectTest extends StatelessWidget {
             bodyText1: bodyTextStyle1,
             bodyText2: bodyTextStyle2,
           )),
-      home: PostPage(controller, controller.getDatabase().getPosts()[0], () {}),
+      home: PostPage(
+        controller,
+        controller.getDatabase().getPosts(controller
+            .getDatabase()
+            .getConferences(this.controller.getLoggedInUser())[0])[0],
+      ),
       //home: pageFactory.createUserPage(),
     );
   }

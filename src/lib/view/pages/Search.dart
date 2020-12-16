@@ -6,9 +6,7 @@ import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
 import 'package:confnect/view/widgets/User/UserTile.dart';
 import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:flutter/material.dart';
-
 import '../Page.dart';
-import 'PostsPage.dart';
 
 class Search extends StatefulPage {
   final Function _viewForum;
@@ -34,7 +32,8 @@ class _SearchState extends State<Search> {
   }
 
   List<Widget> getResults() {
-    SearchResult result = _controller.search(_searchTerm);
+    SearchResult result =
+        _controller.search(_controller.getConference(), _searchTerm);
     return [
       Container(
         child: Text(

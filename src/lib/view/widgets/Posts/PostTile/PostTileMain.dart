@@ -23,7 +23,6 @@ class PostTileMain extends StatelessWidget {
             builder: (context) => PostPage(
                   _controller,
                   this._post,
-                  this._refreshState,
                   host: _controller
                       .getDatabase()
                       .getForum(_post.getForumId())

@@ -1,5 +1,5 @@
 Feature: As someone who is envolved in the conference, I want to be able to register in the app, so that I can use it.
-  Scenario: When the user fills everything correctly
+  Scenario: When the user fills the form with an existing user
     Given I have "registerWelcome"
     When I tap the "registerWelcome" button
     Then I should have "RegisterPage" on screen

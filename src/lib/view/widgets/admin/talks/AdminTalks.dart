@@ -19,7 +19,7 @@ class AdminTalks extends StatelessPage {
   List<Widget> talks() {
     Database db = super.getController().getDatabase();
     return db
-        .getTalks()
+        .getTalks(super.getController().getConference())
         .map((e) => AdminTalkTile(super.getController(), _refreshState, e))
         .toList();
   }

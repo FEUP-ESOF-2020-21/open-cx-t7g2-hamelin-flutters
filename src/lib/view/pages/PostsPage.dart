@@ -9,10 +9,8 @@ import 'package:confnect/view/widgets/Posts/CreatePost.dart';
 import '../Page.dart';
 
 class PostsPage extends StatefulPage {
-  final Function _viewForum;
   final Function _refreshState;
-  PostsPage(Controller controller, this._viewForum, this._refreshState,
-      {Key key})
+  PostsPage(Controller controller, this._refreshState, {Key key})
       : super(controller, key: Key("PostPage"));
   @override
   _PostsPageState createState() =>
@@ -61,7 +59,7 @@ class _PostsPageState extends State<PostsPage> {
 
   List<PostTile> posts() {
     Database db = this._controller.getDatabase();
-    User host = null;
+    User host;
     if (db.getForum(this._controller.getCurrentForumId()) is TalkForum) {
       host = db.getForum(this._controller.getCurrentForumId()).getSpeaker();
     }
