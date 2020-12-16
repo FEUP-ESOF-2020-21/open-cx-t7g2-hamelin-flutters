@@ -1,8 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/pages/PostsPage.dart';
-import 'package:confnect/view/widgets/forum/ForumList.dart';
 import 'package:flutter/material.dart';
-
 import '../../Page.dart';
 import 'AllForumList.dart';
 
@@ -47,7 +45,7 @@ class _ForumsState extends State<Forums> {
     if (this._controller.getCurrentForumId() != -1)
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
-        child: PostsPage(this._controller, _viewForum, this._refreshState),
+        child: PostsPage(this._controller, this._refreshState),
       );
     return AllForumList(this._controller, _viewForum);
   }

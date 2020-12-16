@@ -16,7 +16,9 @@ class PostListMain extends StatefulWidget {
 class _PostListMainState extends State<PostListMain> {
   List<PostTileMain> posts() {
     if (widget.posts.isEmpty)
-      widget.posts = widget._controller.getDatabase().getPosts();
+      widget.posts = widget._controller
+          .getDatabase()
+          .getPosts(widget._controller.getConference());
     return widget.posts
         .map((post) =>
             PostTileMain(post, widget._controller, widget._refreshState))

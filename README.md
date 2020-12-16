@@ -8,114 +8,330 @@
 - Tiago Alves
 - Xavier Pisco
 
-<!--* TODO Adicionar o Why vision is important-->
+
 ## Product Vision
 
-Connecting people through ideas, beyond the conference.
+Helping people burst their bubble by connecting them through ideas, beyond the conference.
 
 ## Elevator Pitch
 
-Our goal is to connect conference goers, helping them discuss and talk beyond the conference. By using our app, Confnect, the users will be added to different forums, depending on their interests and on the attended talks, encouraging them to ask questions, discuss and meet people with similar interests. The app includes many types of forums, including a sub-forum for each talk, in which the speaker can answer all the questions the attendees may have after the talk, and some main forums, separated by theme, where users can create their own discussions. Our product features an innovative functionality which will motivate attendees with similar interests to physically meet up, creating a more united conference.
-
-
-<!--* Recomendar discussões baseadas nas palestras a que pessoa vai/foi, associando as discussões a interesses (tópicos genéricos) e depois recomendando as discussões sobre esses interesses. Podem ser também recomendados à pessoa outros participantes, que participem nas mesmas discussões ou tenham os mesmos interesses (vão à mesma palestra).
-* Threads de dúvidas com o palestrante apenas com pessoas que foram à palestra
-* O objetivo é causar uma conexão física, logo ao fim de algum tempo de discussão é sugerido um 'meet up'. E a discussão teria lá um botão de 'meet up' que quando fosse clicado criava tipo uma prompt para as pessoas que estão interessadas.
-* Poderia fazer-se os dois, criar uma thread para cada palestra, de modo ao palestrante reponder, mas essa palestra tambem ser associada a um tema/interesse, onde as pessoas poderiam crias as suas proprias duvidas.
-
-> Não podia estar organizado assim? (+rep)
-    > |-aplicação
-        > Sugestões
-        > |- Tema da thread (AI, data science...)
-            > |- Thread global
-            > |- Diferentes palestras-->
+Our goal is to connect conference goers, helping them discuss and talk beyond the conference. By using our app, Confnect, the users will be added to different forums, depending on their interests and on the attended talks, encouraging them to ask questions, discuss and meet people with similar interests. The app includes many types of forums, including a sub-forum for each talk, in which the speaker can answer all the questions the attendees may have after the talk, and some main forums, separated by theme, where users can create their own discussions. Sure, other services like 'Reddit' allow users to discuss about various topics. But our product features an innovative functionality, which will motivate and help attendees with similar interests to physically meet up, creating a more united conference.
 
 
 ## Requirements
 
 ### Use case diagram 
 
-![Use Case Diagram](./docs/UseCaseDiagram.jpg)
+![Use Case Diagram](./docs/UseCaseDiagram.png)
 
-#### Post in questions
+#### Register
+
+- **Actor**: Conference Attendee
+- **Description**: In order to use the app, the user must create an account. To do so, he inserts his required personal information and chooses an username and password in the register screen.
+- **Preconditions and Postconditions**: In order to be able to register, the user must have the app installed in his device.
+- **Normal flow**
+    - The user goes to the register screen
+    - The user fills the form with valid information
+    - The user is then registered and automatically logged in by the system
+- **Alternative Flows and Exceptions**
+    - The user goes to the register
+    - The user fills the form with invalid information
+    - The user is not registered by the system
+
+#### Login
+
+- **Actor**: Conference Attendee
+- **Description**: In order to use the app, the user must be autheticated. To do so, he inserts his valid credentials (username and password) in the login screen.
+- **Preconditions and Postconditions**: In order to be able to login, the user must have previously registered.
+- **Normal flow**
+    - The user goes to the login screen
+    - The user inserts his valid credentials
+    - After validating the credentials, the user is logged in by the system
+- **Alternative Flows and Exceptions**
+    - The user goes to the login screen
+    - The user inserts invalid credentials
+    - The user is not logged in by the system
+
+
+#### Join Conference
+
+- **Actor**: Conference Attendee
+- **Description**: The user must join a conference, in order to have the full app experience. To do so, he needs the conference code he obtained after signing up to the physical conference.
+- **Preconditions and Postconditions**: The user must be logged in. After joining a conference, the user can enter the conference space.
+- **Normal flow**
+    - The user clicks on the add conference button
+    - The user inserts his valid conference code
+    - After validating the conference code, the user is registered in the conference and the talks he's attending by the system
+- **Alternative Flows and Exceptions**
+    - The user clicks on the add conference button
+    - The user inserts an invalid conference code
+    - The conference code is not validated by the system, therefore the user is not registered in a conference
+
+
+#### Post in the forums
 
 - **Actor**: Conference Atendee
-- **Description**: This use case exists so that the atendees can upload their questions into the database to later be answered by the host of the talk
-- Preconditions and Postconditions: In order to post a question the user must be enlisted in the respective talk and be logged in. The questions will be uploaded on the respective forum.
+- **Description**: In order to be an active member, the user must be able to post in the forums. 'Post in questions' and 'post in a discussion' are special cases of this use case, because the forums are subdivided in talk (questions) and topic (discussion) forums. 
+- **Preconditions and Postconditions**: In order to post the user must be logged in and registered in the conference. For posting in questions, the user must be registered in the talk. The user must also select a forum to post in. Then the post is added to the forum.
 - **Normal Flow**:
-    - The ateendee goes to the talk forum
-    - The atendee presses the button to add a question to a forum
-    - The atendee types his question
-    - If it's within the allowed length, the system saves the question to the database, and displays it on the forum.
-- **Alternative Flows and Exceptions**
-    - The ateendee goes to the talk forum
-    - The atendee presses the button to add a question to a forum
-    - The atendee types his question
-    - If the question is too long, the system does not allow to post the question
-
-
-#### Post in discussion
-
-- **Actor**: Conference Atendee
-- **Description**: This use case exists so that the atendees can post discussions in different forums, so people are able to talk and discuss different themes.
-- Preconditions and Postconditions: In order to like and dislike, the user must be a member of the current forum and be logged in. The vote cout will be updated 
-- **Normal Flow**:
-    - The ateendee goes to the talk forum
-    - The atendee presses the button to add a new post to the forum
+    - The ateendee goes to the forum
+    - The atendee presses the button to add a post
     - The atendee types his post
-    - If it's within the allowed length, the system saves the post to the database, and displays it on the forum.
+    - If it's within the allowed length, the system saves the question, and displays it on the forum
 - **Alternative Flows and Exceptions**
-    - The ateendee goes to the talk forum
-    - The atendee presses the button to add a new post to the forum
-    - The atendee types his post
-    - If the post is too long, the system does not allow to post the question
+    - The ateendee goes to the forum
+    - The atendee presses the button to add a post
+    - The atendee types his question
+    - If the post is too long, the system does not allow to publish the post
+
 
 
 
 #### Up/Downvote Questions
 
 - **Actor**: Conference Atendee
-- **Description**: This use case exists so that the questions are ordered by number of likes and to show the most relevant questions
-- Preconditions and Postconditions: In order to post a question the user must be enlisted in the respective talk. The questions will be uploaded on the respective forum.
+- **Description**: The users are able to participate in which posts are considered 'good' or 'bad' by clicking either the upvote or downvote button in a post or forum.
+- **Preconditions and Postconditions**: The user must have logged in and selected a forum or post. Then he can press the upvote or downvote button.
 - **Normal Flow**:
-- 
     - The atendee finds the post
     - The atendee presses the up/downvote question
     - The vote count is updated
 
-#### Set up a meeting in real life
+
+#### Create a meetup
+
 - **Actor**: Conference Atendee
-- **Description**: This use case exists so that the atendees can meet other ateendes with similiar interests, if a discussion is particulary interesting the user can propose to meet up in real life, and the other users can either accept or deny the request.
-- Preconditions and Postconditions: An ateendee must have participated in the discussion to propose a meeting. All the other member will recieve a notfication to meet up.
+- **Description**: This use case exists so that the attendees can meet other attendees with similiar interests. If a discussion is particularly interesting the user can create a meetup. He can also cancel it afterwards.
+- **Preconditions and Postconditions**: The user must be logged in. He must also have selected a post. The user must have participated in the discussion to propose a meeting.
 - **Normal Flow**:
     - The ateendee goes to the post
-    - The atendee presses the button to add meetup in real life
-    - The atendee answers the form on where and when the meeting will occur
-    - The other members of the discussion will recieve a notification to go to the meetup
-    - If the user participated in the discussion the other members will be notified of the meetup.
+    - The atendee presses the button to create meetup
+    - The atendee fills in some details, like the location and date and time of the meetup
+    - The meetup is created.
+
 - **Alternative Flows and Exceptions**
     - The ateendee goes to the post
-    - The atendee presses the button to add meetup in real life
-    - If the atendee did not participate in the discussion, an error message appears.
+    - The atendee presses the button to create meetup
+    - If the attendee didn't participate in the discussion, a warning message appears
 
+#### Cancel a meetup
 
-#### Add, Edit and Delete a talk
-- **Actor**: Administrator
-- **Description**: This use case exists so that the Administrator is able to add the talks that the conference will have, and edit and deleted them if there is some alteration.
-- Preconditions and Postconditions: The host has to be logged in and have admin privileges. The talk will be added, eddited or deleted from the database.
+- **Actor**: Conference Atendee
+- **Description**: The user that created the meetup can also cancel it, in case no one was interesting or it won't be possible to gather.
+- **Preconditions and Postconditions**: The user must be logged in. He must also have selected a post. To cancel the meeting, the user must have created it.
 - **Normal Flow**:
-    - The Admin chooses a talk
-    - If the admin is logged in and has admin status, they can signall the system to add/remove/edit.
-    - The system updates the database.
+    - The ateendee goes to the post
+    - The atendee presses the button to cancel
+    - The meetup is canceled
+
+- **Alternative Flows and Exceptions**
+    - The ateendee goes to the post
+    - The cancel button doesn't appear because the user didn't create the meetup
+
+
+#### Comment on a meetup
+
+- **Actor**: Conference Atendee
+- **Description**: This use case exists so that attendees that participate in the given discussion can comment on its meetup so they can plan the meeting.
+- **Preconditions and Postconditions**: The user must be logged in. The user must have participated in the discussion to comment on the meetup. The meetup must have already been created.
+- **Normal Flow**:
+    - The atendee opens the meetup
+    - The attendee writes his message
+    - His comment is created and appears
+
+- **Alternative Flows and Exceptions**
+    - The attendee opens the meetup
+    - The attendee didn't participate in the discussion
+    - The attendee can't comment on the meetup
+
+    - The ateendee opens the meetup
+    - The attendee writes an invalid message (excess characters)
+    - An error message appears and the comment is not created
+
+
+#### Edit a meetup
+
+- **Actor**: Conference Atendee
+- **Description**: This use case exists so that if from the meetup's comments there is a need for a change, like the meetup place or date and time, the creator can alter them to the desired ones.
+- **Preconditions and Postconditions**: The user must be logged in. The meetup must have already been created. The user be the creator of the meetup. 
+- **Normal Flow**:
+    - The user opens the meetup
+    - The user clicks in the edit button
+    - He fills in the form with the new details
+    - The meetup is changed
+
+- **Alternative Flows and Exceptions**
+    - The attendee opens the meetup
+    - The attendee isn't the meetup creator
+    - The attendee can't edit the meetup
+
+    - The ateendee opens the meetup
+    - The attendee writes an invalid message (example: excess characters)
+    - An error message appears and the comment is not created
+
+
+#### Join a meetup
+
+- **Actor**: Conference Atendee
+- **Description**: The attendee can join a meetup, if he feels interested in meeting the people he has discussed it. 
+- **Preconditions and Postconditions**: The user must be logged in. The meetup must have already been created. The user must have participated in the discussion.
+- **Normal Flow**:
+    - The user opens the post
+    - The user clicks in the join meetup button
+    - The user joined the meetup
+
+- **Alternative Flows and Exceptions**
+    - The attendee opens the meetup
+    - The attendee didn't participate in the discussion
+    - The attendee can't join the meetup
+
+
+#### Exit a meetup
+
+- **Actor**: Conference Atendee
+- **Description**: The attendee can exit a meetup, if he no longer feels like going or something showed up.
+- **Preconditions and Postconditions**: The user must be logged in. The meetup must have already been created. The user must have have joined the meetup.
+- **Normal Flow**:
+    - The user opens the post
+    - The user clicks in the exit meetup button
+    - The user exited the meetup
+
+- **Alternative Flows and Exceptions**
+    - The attendee opens the meetup
+    - The attendee didn't join the meetup
+    - The attendee can't press the exit meetup button
+
+
+#### Create a conference
+
+- **Actor**: Administrator
+- **Description**: The administrator should be able to create a new conference, because without conferences, there is no functionality.
+- **Preconditions and Postconditions**: The user must be logged in. After the user creates the conference, he automatically becomes its administrator.
+- **Normal Flow**:
+    - The user is in the conference selection page and clicks the create conference button
+    - The user fills the form that appears with valid conference info
+    - The conference is created by the system
+
+- **Alternative Flows and Exceptions**
+    - The user is in the conference selection page and clicks the create conference button
+    - The user fills the form that appears with invalid conference info
+    - The conference is not created
+
+
+#### Edit Conference
+
+- **Actor**: Administrator
+- **Description**: The administrator must be able to edit the conference details, if he needs to. For that, he opens the conference selection menu and clicks on the edit conference button. 
+- **Preconditions and Postconditions**: The user must be logged in. The conference must already been created. The user must have created the conference.
+- **Normal Flow**:
+    - The user is in the conference selection page and clicks the edit conference button
+    - The user fills the form that appears with valid conference info
+    - The conference is edited by the system
+
+- **Alternative Flows and Exceptions**
+    - The user is in the conference selection page and clicks the edit conference button
+    - The user fills the form that appears with invalid conference info
+    - The conference is not edited
+
+
+#### Remove Conference
+
+- **Actor**: Administrator
+- **Description**: The administrator must be able to delete the conference.
+- **Preconditions and Postconditions**: The user must be logged in. The conference must already been created. The user must have created the conference.
+- **Normal Flow**:
+    - The user is in the conference selection page and clicks the delete conference button
+    - A confirmation popup appears
+    - The user confirms
+    - The conference is edited by the system
+
+- **Alternative Flows and Exceptions**
+    - The user is in the conference selection page and clicks the delete conference button
+    - A confirmation popup appears
+    - The user cancels
+    - The conference is not edited by the system
+
+
+#### Add talk
+
+- **Actor**: Administrator
+- **Description**: This use case exists so that the Administrator is able to add the talks that the conference will have. He must have already selected the conference.
+- **Preconditions and Postconditions**: The user has to be logged in and have admin privileges. He must have already selected the conference.
+- **Normal Flow**:
+    - The user is in the conference's talk administration page
+    - The user clicks the add talk button
+    - A form shows up and the user fills it with valid data
+    - The talk is created
     
 - **Alternative Flows and Exceptions**
-    - The Admin chooses a talk
-    - If they do not have the admin status, they wont be presented with the option to add/edit/delete the talk.
+    - The user is in the conference's talk administration page
+    - The user clicks the add talk button
+    - A form shows up and the user fills it with invalid data
+    - The talk is not created
+
+
+
+#### Edit talk
+
+- **Actor**: Administrator
+- **Description**: The conference admin must be able to edit a given talk.
+- **Preconditions and Postconditions**: The user has to be logged in and have admin privileges. He must have already selected the conference and the talk to edit.
+- **Normal Flow**:
+    - The user is in the conference's talk administration page
+    - The user clicks the edit talk button
+    - A form shows up and the user fills it with valid data
+    - The talk is edited
+    
+- **Alternative Flows and Exceptions**
+    - The user is in the conference's talk administration page
+    - The user clicks the edit talk button
+    - A form shows up and the user fills it with invalid data
+    - The talk is not edited
+
+
+#### Remove talk
+
+- **Actor**: Administrator
+- **Description**: The conference admin must be able to remove a given talk.
+- **Preconditions and Postconditions**: The user has to be logged in and have admin privileges. He must have already selected the conference and the talk to remove.
+- **Normal Flow**:
+    - The user is in the conference's talk administration page
+    - The user clicks the remove talk button
+    - A confirmation popup shows up and the user confirms
+    - The talk is removed
+    
+- **Alternative Flows and Exceptions**
+    - The user is in the conference's talk administration page
+    - The user clicks the remove talk button
+    - A confirmation popup shows up and the user cancels
+    - The talk is not removed
+
+
+#### Generate conference register codes
+
+- **Actor**: Administrator
+- **Description**: The conference admin must be able to generate a conference code, that will be used by other users to join the conference and the talks they are registered in.
+- **Preconditions and Postconditions**: The user has to be logged in and have admin privileges. He must have already selected the conference.
+- **Normal Flow**:
+    - The user is in the conference's code administration page
+    - The user clicks the add code button
+    - A new page shows up that lets the user select the talks that the code will give access to
+    - The user selects talks
+    - The code is created
+    
+- **Alternative Flows and Exceptions**
+    - The user is in the conference's code administration page
+    - The user clicks the add code button
+    - A new page shows up that lets the user select the talks that the code will give access to
+    - The user cancels
+    - The code is not created
+
+
 
 #### Pin answered questions
 - **Actor**: Talk Host
-- **Description**: This use case exists so talk hosts can flag questions as having received a satisfactory answer.
-- Preconditions and Postconditions: The host has to be logged in, and if he pins the question, the question will be marked as answered. (E movida para outra pagina?)
+- **Description**: This use case exists so talk hosts can flag good answers to questions.
+- **Preconditions and Postconditions**: The host has to be logged in. The answer must already exist and if he pins the answer, it will be the only pinned answer in the post.
 - **Normal Flow**:
     - The host chooses a question
     - The host answers the question
@@ -123,22 +339,24 @@ Our goal is to connect conference goers, helping them discuss and talk beyond th
     - The response will be the first to appear and highlited
     
 
-#### Delete a Question
+#### Remove messages / questions
 - **Actor**: Host
-- **Description**: This use case exists so that the Host of the talk is able to delete questions that are not relevant or inaproprite from their talk
-- Preconditions and Postconditions: The user has to be the host of the respective talk. The question will then be removed from the database.
+- **Description**: This use case exists so that the Host of the talk is able to delete messages that are not relevant or inaproprite from their talk forum.
+- **Preconditions and Postconditions**: The user has to be the host of the respective talk. The question will then be removed from the database.
 - **Normal Flow**:
-    - If the Host is logged in and is the host of the talk, they can signall the system to delete it.
-    - The system updates the database.
+    - The user goes to a post in the talk forum
+    - The user has the host role
+    - The user clicks delete
+    - The system deletes the talk
     
 - **Alternative Flows and Exceptions**
-    - The Host goes to the talk forum
-    - If they do not have the host status in the talk, they wont be presented with the option to elete the question.
+    - The user goes to a post in the talk forum
+    - If they do not have the host status in the talk, they wont be presented with the option to delete the post
 
 
 ### User stories
 
-![User story map](docs/userStoryMap.png)
+![User story map](docs/userStoryMap.jpg)
 
 #### Login Screen
 <p>

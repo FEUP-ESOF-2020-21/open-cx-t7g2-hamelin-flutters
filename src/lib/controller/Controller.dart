@@ -1,7 +1,9 @@
+import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/model/SearchResult.dart';
 import 'package:confnect/model/forums/Forum.dart';
+import 'package:confnect/view/widgets/User/ProfileForumListTile.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
 import 'SearchController.dart';
@@ -13,11 +15,18 @@ class Controller {
   Function _onSessionChange;
   bool _addingPost = false;
   int currentForumId = -1;
+  Conference _currentConference;
 
   Controller(this._database) : _searchController = SearchController(_database);
 
   void startApp(StatelessWidget app) {
     runApp(app);
+  }
+
+  Conference getConference() => _currentConference;
+  void setConference(Conference conference) {
+    _currentConference = conference;
+    if (_onSessionChange != null) _onSessionChange();
   }
 
   int getCurrentForumId() => this.currentForumId;
@@ -30,8 +39,8 @@ class Controller {
     if (_onSessionChange != null) _onSessionChange();
   }
 
-  SearchResult search(String key) {
-    return _searchController.search(key);
+  SearchResult search(Conference conference, String key) {
+    return _searchController.search(conference, key);
   }
 
   User getLoggedInUser() {
@@ -62,7 +71,19 @@ class Controller {
   }
 
   List<Forum> getUserForums(User user) {
-    return user.getUserForunsIds().map((e) => _database.getForum(e)).toList();
+    return user
+        .getUserForunsIds(_currentConference)
+        .map((e) => _database.getForum(e))
+        .toList();
+  }
+
+  List<Widget> buildProfileForumList(
+      Conference conference, User user, Function refreshState) {
+    return user
+        .getUserForunsIds(conference)
+        .map((e) =>
+            ProfileForumListTile(_database.getForum(e), refreshState, 10))
+        .toList();
   }
 
   void updateUser(User user, String fullname, String description,

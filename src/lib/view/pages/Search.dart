@@ -8,7 +8,6 @@ import 'package:confnect/view/widgets/User/UserTile.dart';
 import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:confnect/view/widgets/forum/HorizontalForumList.dart';
 import 'package:flutter/material.dart';
-
 import '../Page.dart';
 
 class Search extends StatefulPage {
@@ -50,7 +49,8 @@ class _SearchState extends State<Search> {
   }
 
   List<Widget> getResults() {
-    SearchResult result = _controller.search(_searchTerm);
+    SearchResult result =
+        _controller.search(_controller.getConference(), _searchTerm);
     return [
       Container(
         child: Text(
@@ -89,8 +89,10 @@ class _SearchState extends State<Search> {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
+          decoration: InputDecoration(
+            hintText: 'Search...',
+          ),
           onChanged: _onSearchTermChange,
-          autofocus: true,
         ),
       ),
       body: SingleChildScrollView(

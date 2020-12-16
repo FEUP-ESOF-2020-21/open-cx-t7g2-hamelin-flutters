@@ -4,6 +4,7 @@ import 'package:confnect/view/pages/ForumPage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ForumTileMain extends StatelessWidget {
   final Forum _forum;
   Controller _controller;

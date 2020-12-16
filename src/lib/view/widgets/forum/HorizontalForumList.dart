@@ -12,7 +12,8 @@ class HorizontalForumList extends StatelessWidget {
   HorizontalForumList(this._controller, this._refreshState, this.forumsList);
   List<dynamic> forums() {
     if (this.forumsList.isEmpty) {
-      this.forumsList = _controller.getDatabase().getForums();
+      this.forumsList =
+          _controller.getDatabase().getForums(_controller.getConference());
     }
     return this
         .forumsList

@@ -4,7 +4,8 @@ class TextOnlyButton extends StatelessWidget {
   final String text;
   final Widget child;
   final Function _fn;
-  TextOnlyButton(this._fn, {this.text, this.child});
+  final bool white;
+  TextOnlyButton(this._fn, {this.text, this.child, this.white = false});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +16,7 @@ class TextOnlyButton extends StatelessWidget {
                 this.text,
                 style: TextStyle(
                   //fontFamily: for another font,
-                  color: Colors.black,
+                  color: white ? Colors.white : Colors.black,
                 ),
               )
             : this.child,

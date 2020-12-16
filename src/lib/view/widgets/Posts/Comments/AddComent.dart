@@ -1,6 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/ValidatorFactory.dart';
-import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +7,9 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class AddComment extends StatefulWidget {
   Controller _controller;
-  List<Comment> _comments;
   final void Function(User user, Date date, String text) onSubmitted;
 
-  AddComment(this._controller, this._comments, {this.onSubmitted});
+  AddComment(this._controller, {this.onSubmitted});
   @override
   _AddCommentState createState() => _AddCommentState();
 }
