@@ -51,6 +51,10 @@ class Post {
     comments.add(c);
   }
 
+  void removeComment(comment) {
+    comments.remove(comment);
+  }
+
   int getNumberLikes() {
     return _numberLikes;
   }
