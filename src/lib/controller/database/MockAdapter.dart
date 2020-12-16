@@ -48,7 +48,7 @@ class MockAdapter implements Database {
       {
         _conferences[0]: [1, 0]
       },
-      [1, 6, 3],
+      [6, 3],
     ),
     User(
       2,
@@ -583,7 +583,8 @@ class MockAdapter implements Database {
     ret.sort((Forum f1, Forum f2) {
       int f1NPosts = getForumPosts(f1.getId()).length;
       int f2NPosts = getForumPosts(f2.getId()).length;
-      return f1NPosts.compareTo(f2NPosts);
+      return f2NPosts.compareTo(
+          f1NPosts); // Para ser ordem decrsente tem de ser 2 compareTo 1
     });
     return ret;
   }
@@ -594,7 +595,8 @@ class MockAdapter implements Database {
       ret.addAll(getForumPosts(element.getId()));
     });
     ret.sort((Post p1, Post p2) {
-      return p1.getUserLikes().length.compareTo(p2.getUserDislikes().length);
+      return (p2.getUserLikes().length - p2.getUserDislikes().length)
+          .compareTo((p1.getUserLikes().length - p1.getUserDislikes().length));
     });
     return ret;
   }
