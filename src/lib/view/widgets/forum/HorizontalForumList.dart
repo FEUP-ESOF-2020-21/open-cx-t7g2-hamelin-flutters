@@ -1,9 +1,9 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/widgets/forum/ForumTileMain.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class HorizontalForumList extends StatelessWidget {
   final Controller _controller;
   final Function _refreshState;

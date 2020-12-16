@@ -9,12 +9,13 @@ import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CreateMeetupPage extends StatefulPage {
   Post _post;
   Controller _controller;
   final Function _refreshPostPage;
   CreateMeetupPage(this._controller, this._post, this._refreshPostPage)
-      : super(_controller);
+      : super(_controller, key: Key("CreateMeetupPage"));
 
   @override
   _CreateMeetupPageState createState() => _CreateMeetupPageState();
@@ -66,6 +67,7 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                         fieldRequired: true, upperLimit: 50),
                   ),
                   margin: EdgeInsets.all(10),
+                  key: Key("LocationMeetupForm"),
                 ),
                 FormFieldContainer(
                   DateTimeForm(
@@ -87,6 +89,7 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                     maxLines: 5,
                   ),
                   margin: EdgeInsets.all(10),
+                  key: Key("DescriptionMeetupForm"),
                 ),
               ],
             ),
@@ -105,6 +108,7 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                   widget._refreshPostPage();
                 }
               }),
+              key: Key("SubmitCreateMeetup"),
             ),
           ],
         ),

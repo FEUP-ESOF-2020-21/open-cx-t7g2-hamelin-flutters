@@ -6,7 +6,6 @@ import 'package:confnect/view/widgets/TextOnlyButton.dart';
 import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
 import 'package:confnect/view/widgets/PageTitle.dart';
-import '../../controller/database/Database.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,7 +13,7 @@ import 'ConferenceSelection.dart';
 
 class ConferenceScreen extends StatelessPage {
   ConferenceScreen(Controller controller, {Key key})
-      : super(controller, key: key);
+      : super(controller, key: Key("ConferenceScreen"));
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect

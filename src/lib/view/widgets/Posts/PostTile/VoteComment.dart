@@ -55,6 +55,7 @@ class _VoteCommentState extends State<VoteComment> {
         children: <Widget>[
           FittedBox(
             child: IconButton(
+                key: Key("LikeButton"),
                 icon: Icon(Icons.thumb_up),
                 color: liked ? Colors.blue : Colors.grey,
                 onPressed: () => _pressedLike()),
@@ -62,9 +63,11 @@ class _VoteCommentState extends State<VoteComment> {
           Text(
             widget.post.getNumberLikes().toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
+            key: Key("NumberLikes"),
           ),
           FittedBox(
             child: IconButton(
+                key: Key("DislikeButton"),
                 icon: Icon(Icons.thumb_down),
                 color: disliked ? Colors.blue : Colors.grey,
                 onPressed: () => _pressedDisLike()),
@@ -72,6 +75,7 @@ class _VoteCommentState extends State<VoteComment> {
           Text(
             widget.post.getNumberDislikes().toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
+            key: Key("NumberDislikes"),
           ),
           FittedBox(
             child: IconButton(

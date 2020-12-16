@@ -24,7 +24,6 @@ class PostTile extends StatelessWidget {
             builder: (context) => PostPage(
                   this._controller,
                   this._post,
-                  this._refreshState,
                   host: this.host,
                 )),
       );

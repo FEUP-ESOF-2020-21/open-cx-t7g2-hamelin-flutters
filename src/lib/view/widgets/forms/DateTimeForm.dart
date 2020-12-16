@@ -44,7 +44,7 @@ class DateTimeForm extends StatelessWidget {
           flex: 4,
           child: new _InputDropdown(
             labelText: labelText,
-            valueText: new DateFormat.yMMMd().format(selectedDate),
+            valueText: DateFormat.yMMMd().format(selectedDate),
             valueStyle: valueStyle,
             onPressed: () {
               _selectDate(context);

@@ -18,9 +18,8 @@ class PostPage extends StatefulPage {
   Post _post;
   Controller _controller;
   User host;
-  Function _refreshState;
-  PostPage(this._controller, this._post, this._refreshState,
-      {Key key, this.host})
+
+  PostPage(this._controller, this._post, {Key key, this.host})
       : super(_controller, key: key);
 
   @override
@@ -73,7 +72,6 @@ class PostPageState extends State<PostPage> {
             alignment: Alignment.bottomCenter,
             child: AddComment(
               widget._controller,
-              widget._post.getComments(),
               onSubmitted: (user, date, text) {
                 setState(() {
                   Comment comment = new Comment(user, date, text);
