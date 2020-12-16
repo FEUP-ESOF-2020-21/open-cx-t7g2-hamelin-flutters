@@ -8,7 +8,10 @@ import 'package:flutter/material.dart';
 class MeetupBox extends StatefulWidget {
   Controller _controller;
   Meetup _meetup;
-  MeetupBox(this._controller, this._meetup) : super(key: Key("MeetupBox"));
+
+  Function _eliminateMeetup;
+
+  MeetupBox(this._controller, this._meetup, this._eliminateMeetup);
   @override
   _MeetupBoxState createState() => _MeetupBoxState();
 }
@@ -24,6 +27,53 @@ class _MeetupBoxState extends State<MeetupBox> {
     setState(() {
       widget._meetup.removeGoingUser(widget._controller.getLoggedInUser());
     });
+  }
+
+  cancelMeetup() {
+    setState(() {
+      widget._meetup = null;
+    });
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Attention!'),
+          content: Text('Are you sure you want to delete the meeting?'),
+          actions: <Widget>[
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Cancel')),
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () {
+                cancelMeetup();
+                widget._eliminateMeetup();
+                Navigator.of(context).pop();
+                deletedSuccess();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> deletedSuccess() async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Notice!'),
+          content: Text('The meeting has been canceled!'),
+        );
+      },
+    );
   }
 
   @override
@@ -47,17 +97,30 @@ class _MeetupBoxState extends State<MeetupBox> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                child: Text(
-                  "Meetup",
-                  style: meetupButtonTitleStyle,
-                  textScaleFactor: 1.1,
-                ),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Meetup",
+                        style: meetupButtonTitleStyle,
+                        textScaleFactor: 1.1,
+                      ),
+                      if (widget._meetup != null)
+                        if (widget._controller.getLoggedInUser() ==
+                            widget._meetup.getAuthor())
+                          InkWell(
+                            child: Icon(Icons.close),
+                            onTap: () => {
+                              _showMyDialog(),
+                            },
+                          ),
+                    ]),
                 margin: EdgeInsets.only(bottom: 5),
               ),
               Container(
                 child: Text(
-                  widget._meetup.getDescription() +
-                      "\nClick here for more information.",
+                  //widget._meetup.getDescription() +
+                  "\nClick here for more information.",
                   style: meetupButtonTextStyle,
                 ),
                 margin: EdgeInsets.only(bottom: 20),

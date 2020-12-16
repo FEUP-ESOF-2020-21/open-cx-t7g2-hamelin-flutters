@@ -1,5 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
+import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/User.dart';
 import 'package:confnect/view/pages/CreateMeetupPage.dart';
 import 'package:confnect/view/pages/MeetupPage.dart';
 import 'package:confnect/view/widgets/Meetup/MeetupBox.dart';
@@ -12,7 +14,8 @@ import 'VoteComment.dart';
 class PostTextVote extends StatefulWidget {
   Controller _controller;
   Post _post;
-  PostTextVote(this._post, this._controller);
+  final Function _refreshParent;
+  PostTextVote(this._post, this._controller, this._refreshParent);
   @override
   _PostTextVoteState createState() => _PostTextVoteState();
 }
@@ -38,6 +41,21 @@ class _PostTextVoteState extends State<PostTextVote> {
     );
   }
 
+  bool userInDiscussion() {
+    for (Comment comment in widget._post.getComments()) {
+      if (widget._controller.getLoggedInUser() == comment.getAuthor())
+        return true;
+    }
+    return false;
+  }
+
+  cancelMeetup() {
+    setState(() {});
+    setState(() {
+      widget._post.setMeetup(null);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,7 +66,10 @@ class _PostTextVoteState extends State<PostTextVote> {
               widget._post.getAuthor(), widget._post.getDate(), 20,
               onMeetupSelected: () {
             if (widget._post.getMeetup() == null) {
-              this.openCreateMeetupPage();
+              if (userInDiscussion())
+                this.openCreateMeetupPage();
+              else
+                _showMyDialog();
             } else {
               openMeetupPage();
             }
@@ -57,11 +78,35 @@ class _PostTextVoteState extends State<PostTextVote> {
             padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
             child: Text(widget._post.getDescription()),
           ),
-          VoteComment(widget._post),
+          VoteComment(widget._post, widget._controller, widget._refreshParent),
           if (widget._post.getMeetup() != null)
-            MeetupBox(widget._controller, widget._post.getMeetup()),
+            MeetupBox(widget._controller, widget._post.getMeetup(), () {
+              cancelMeetup();
+            }),
         ],
       ),
+    );
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      //barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Attention!'),
+          content: Text(
+              "You have to participate in the discussion to create the meeting!"),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

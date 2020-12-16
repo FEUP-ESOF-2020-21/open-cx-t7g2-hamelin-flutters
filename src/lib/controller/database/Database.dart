@@ -49,7 +49,7 @@ abstract class Database {
   void addTag(Tag tag);
   void deleteTalk(Talk talk);
   bool isTagNew(Tag tag);
-  Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
+  void createMeetup(Post post, String location, DateTime date, TimeOfDay time,
       String description, User creator);
   List<Forum> getUserPopularForums(Conference conference, User user);
   List<Post> getForumsPopularPosts(List<Forum> forums);

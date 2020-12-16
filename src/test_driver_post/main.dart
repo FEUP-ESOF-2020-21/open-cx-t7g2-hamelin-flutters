@@ -32,6 +32,7 @@ class ConfnectTest extends StatelessWidget {
         controller.getDatabase().getPosts(controller
             .getDatabase()
             .getConferences(this.controller.getLoggedInUser())[0])[0],
+        null,
       ),
       //home: pageFactory.createUserPage(),
     );

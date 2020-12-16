@@ -23,6 +23,10 @@ class Meetup {
     return _description;
   }
 
+  setDescription(String text) {
+    _description = text;
+  }
+
   Date getDate() {
     return _date;
   }
@@ -65,5 +69,9 @@ class Meetup {
 
   void setLocation(String newLocation) {
     _location = newLocation;
+  }
+
+  User getAuthor() {
+    return _meetingCreator;
   }
 }
