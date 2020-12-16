@@ -6,6 +6,7 @@ import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/forums/TalkForum.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/style/TextStyle.dart';
+import 'package:confnect/view/widgets/admin/codes/RoleSelection.dart';
 import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
@@ -32,6 +33,7 @@ class _CreateCodesState extends State<CreateCodes> {
     Database db = _controller.getDatabase();
     List<Code> codes = db.getConferenceCodes(_controller.getConference());
     String _code = generateCode(codes);
+    bool attendee = true;
     List<Widget> tiles = [
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -41,6 +43,7 @@ class _CreateCodesState extends State<CreateCodes> {
           textAlign: TextAlign.center,
         ),
       ),
+      RoleSelection(attendee)
     ];
     List<Forum> forums = db
         .getForums(_controller.getConference())
@@ -100,6 +103,9 @@ class _CreateCodesState extends State<CreateCodes> {
         forumTiles.where((forumTile) => forumTile.isSelected()).toList();
 
     _controller.getDatabase().addCode(Code(
-        code, tiles.map((tile) => tile.getTileForum()).toList(), conference));
+        code,
+        tiles.map((tile) => tile.getTileForum()).toList(),
+        conference,
+        UserRole.ATTENDEE));
   }
 }
