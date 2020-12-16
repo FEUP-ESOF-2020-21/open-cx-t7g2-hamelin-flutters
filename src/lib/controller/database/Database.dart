@@ -54,4 +54,5 @@ abstract class Database {
   List<Forum> getUserPopularForums(Conference conference, User user);
   List<Post> getForumsPopularPosts(List<Forum> forums);
   void changePinnedComment(Post post, Comment comment);
+  void deleteComment(Comment comment, Post post);
 }

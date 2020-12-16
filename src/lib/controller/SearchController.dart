@@ -8,7 +8,7 @@ import 'package:string_similarity/string_similarity.dart';
 
 class SearchController {
   final Database _database;
-  SearchController(Database this._database);
+  SearchController(this._database);
 
   double calculateResemblance(String key, String value) {
     return value.similarityTo(key);

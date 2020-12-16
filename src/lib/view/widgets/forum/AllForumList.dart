@@ -8,6 +8,7 @@ import './ForumTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AllForumList extends StatelessPage {
   final Function _viewForum;
   List<Forum> _suggestedForums = new List();

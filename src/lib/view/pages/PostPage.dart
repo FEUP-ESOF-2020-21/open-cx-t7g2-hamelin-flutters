@@ -74,7 +74,6 @@ class PostPageState extends State<PostPage> {
             alignment: Alignment.bottomCenter,
             child: AddComment(
               widget._controller,
-              widget._post.getComments(),
               onSubmitted: (user, date, text) {
                 setState(() {
                   Comment comment = new Comment(user, date, text);

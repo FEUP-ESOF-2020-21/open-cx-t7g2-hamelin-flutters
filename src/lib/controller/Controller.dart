@@ -74,7 +74,7 @@ class Controller {
     return user
         .getUserForunsIds(conference)
         .map((e) =>
-            ProfileForumListTile(_database.getForum(e), this, refreshState, 10))
+            ProfileForumListTile(_database.getForum(e), refreshState, 10))
         .toList();
   }
 

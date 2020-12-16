@@ -1,5 +1,4 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/widgets/Posts/Comments/CommentTile.dart';
@@ -23,13 +22,54 @@ class _CommentListState extends State<CommentList> {
   }
 
   Widget _getBeforeDate(index) {
-    return widget.post != null
-        ? widget._controller.getLoggedInUser() ==
+    return widget.post != null &&
+            widget._controller.getLoggedInUser() ==
                 widget._controller
                     .getDatabase()
                     .getForum(widget.post.getForumId())
                     .getSpeaker()
-            ? InkWell(
+        ? Row(
+            children: [
+              InkWell(
+                child: Icon(
+                  Icons.delete_rounded,
+                  size: 15,
+                  color: Colors.grey,
+                ),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: new Text(
+                          "Delete comment",
+                          textScaleFactor: 1.3,
+                        ),
+                        content: new Text(
+                            "Are you sure you want to delete this comment?"),
+                        actions: <Widget>[
+                          new FlatButton(
+                            child: new Text("Yes"),
+                            onPressed: () {
+                              widget._controller.getDatabase().deleteComment(
+                                  widget._comments[index], widget.post);
+                              widget.refreshState();
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          new FlatButton(
+                            child: new Text("No!"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+              InkWell(
                 child: Icon(
                   widget.post.getPinnedComment() == widget._comments[index]
                       ? Icons.push_pin_outlined
@@ -42,8 +82,9 @@ class _CommentListState extends State<CommentList> {
                       widget.post, widget._comments[index]);
                   widget.refreshState();
                 },
-              )
-            : null
+              ),
+            ],
+          )
         : null;
   }
 

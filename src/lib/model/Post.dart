@@ -60,6 +60,10 @@ class Post {
     return _likes;
   }
 
+  void removeComment(comment) {
+    comments.remove(comment);
+  }
+
   List<User> getUserDislikes() {
     return _dislikes;
   }

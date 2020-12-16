@@ -1,11 +1,9 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
-import 'package:confnect/model/Talk.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/view/widgets/Posts/Comments/CommentTile.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:flutter/material.dart';
 
 class PinnedComment extends StatefulWidget {

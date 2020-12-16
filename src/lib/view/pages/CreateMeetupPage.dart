@@ -17,7 +17,7 @@ class CreateMeetupPage extends StatefulPage {
   DateTime _meetDate = new DateTime.now();
   TimeOfDay _meetTime = new TimeOfDay.now();
   CreateMeetupPage(this._controller, this._post, this._refreshPostPage)
-      : super(_controller);
+      : super(_controller, key: Key("CreateMeetupPage"));
 
   @override
   _CreateMeetupPageState createState() => _CreateMeetupPageState();
@@ -93,6 +93,7 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                   widget._refreshPostPage();
                 }
               }),
+              key: Key("SubmitCreateMeetup"),
             ),
           ],
         ),

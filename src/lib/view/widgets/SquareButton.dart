@@ -4,7 +4,8 @@ class SquareButton extends StatelessWidget {
   final String text;
   final Function fn;
   final bool white;
-  SquareButton(this.text, this.fn, {this.white = false});
+  SquareButton(this.text, this.fn, {this.white = false, Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

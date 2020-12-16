@@ -608,4 +608,12 @@ class MockAdapter implements Database {
         post.pinComment(comment);
     }
   }
+
+  @override
+  void deleteComment(Comment comment, Post post) {
+    if (post.getPinnedComment() == comment) {
+      post.pinComment(null);
+    }
+    post.removeComment(comment);
+  }
 }
