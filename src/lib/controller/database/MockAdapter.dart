@@ -565,7 +565,7 @@ class MockAdapter implements Database {
     }).toList();
   }
 
-  void createMeetup(Post post, String location, DateTime date, TimeOfDay time,
+  Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
       String description, User creator) {
     DateTime newDate =
         new DateTime(date.year, date.month, date.day, time.hour, time.minute);
