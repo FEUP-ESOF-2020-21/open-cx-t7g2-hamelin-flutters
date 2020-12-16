@@ -91,6 +91,6 @@ var talkCodeTextStyle = GoogleFonts.lora(
   textStyle: TextStyle(
     fontWeight: FontWeight.normal,
     fontSize: LargeTextSize,
-    color: Colors.white,
+    color: Colors.black,
   ),
 );

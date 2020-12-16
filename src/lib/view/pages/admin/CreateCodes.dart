@@ -30,10 +30,20 @@ class _CreateCodesState extends State<CreateCodes> {
     Database db = _controller.getDatabase();
     List<Code> codes = db.getConferenceCodes(_controller.getConference());
     String _code = generateCode(codes);
-    List<ForumTile> tiles = db
+    List<Widget> tiles = [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "Select the forums to be associated with access code:",
+          style: talkCodeTextStyle,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    ];
+    tiles.addAll(db
         .getForums(_controller.getConference())
         .map((forum) => ForumTile(forum, () {}, admin: true))
-        .toList();
+        .toList());
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -54,7 +64,7 @@ class _CreateCodesState extends State<CreateCodes> {
           )),
       appBar: AppBar(
         title: Text(
-          "Registry Code: " + _code,
+          "Access Code: " + _code,
           style: pageTitleTextStyle,
         ),
       ),

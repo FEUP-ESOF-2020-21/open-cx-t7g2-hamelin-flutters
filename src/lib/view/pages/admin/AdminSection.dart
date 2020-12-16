@@ -69,7 +69,7 @@ class _AdminSectionState extends State<AdminSection> {
       ),
       AppBar(
         title: Text(
-          "Registry Codes",
+          "Access Codes",
           style: pageTitleTextStyle,
         ),
         actions: action,
@@ -99,7 +99,7 @@ class _AdminSectionState extends State<AdminSection> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.code),
-            label: 'Registry Codes',
+            label: 'Access Codes',
           ),
         ],
         currentIndex: this._selectedIndex,
