@@ -28,7 +28,8 @@ class _CreateCodesState extends State<CreateCodes> {
   @override
   Widget build(BuildContext context) {
     Database db = _controller.getDatabase();
-    String _code = generateCode();
+    List<Code> codes = db.getConferenceCodes(_controller.getConference());
+    String _code = generateCode(codes);
     List<ForumTile> tiles = db
         .getForums(_controller.getConference())
         .map((forum) => ForumTile(forum, () {}, admin: true))
@@ -61,19 +62,19 @@ class _CreateCodesState extends State<CreateCodes> {
     );
   }
 
-  String generateCode() {
+  String generateCode(List<Code> codes) {
     var code;
     do {
       var uuid = Uuid();
       code = uuid.v4().substring(0, 8);
-    } while (!isCodeNew(code));
+    } while (!isCodeNew(code, codes));
     return code;
   }
 
-  bool isCodeNew(String code) {
-    // _talks.forEach((talk) {
-    //   if (talk.getCode() == code) return false;
-    // });
+  bool isCodeNew(String code, List<Code> codes) {
+    codes.forEach((c) {
+      if (c.getCode() == code) return false;
+    });
     return true;
   }
 
