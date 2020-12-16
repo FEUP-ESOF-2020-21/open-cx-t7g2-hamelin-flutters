@@ -1,5 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
+import 'package:confnect/model/Code.dart';
+import 'package:confnect/model/Conference.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/forum/ForumTile.dart';
@@ -33,6 +35,22 @@ class _CreateCodesState extends State<CreateCodes> {
         .toList();
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            addCode(_code, _controller.getConference(), tiles);
+            setState(() {
+              Navigator.pop(context);
+              _onCodeCreated();
+            });
+          },
+          elevation: 10,
+          backgroundColor: Colors.white,
+          focusColor: Colors.pink,
+          child: Icon(
+            Icons.check,
+            size: 30,
+            color: Colors.green,
+          )),
       appBar: AppBar(
         title: Text(
           "Registry Code: " + _code,
@@ -42,14 +60,6 @@ class _CreateCodesState extends State<CreateCodes> {
       body: ListView(children: tiles),
     );
   }
-
-  // () {
-  //       Navigator.push(
-  //         context,
-  //         MaterialPageRoute(
-  //             builder: (context) => AddTalk(_controller, _refreshState)),
-  //       );
-  //     }
 
   String generateCode() {
     var code;
@@ -65,5 +75,13 @@ class _CreateCodesState extends State<CreateCodes> {
     //   if (talk.getCode() == code) return false;
     // });
     return true;
+  }
+
+  void addCode(String code, Conference conference, List<ForumTile> forumTiles) {
+    List<ForumTile> tiles =
+        forumTiles.where((forumTile) => forumTile.isSelected()).toList();
+
+    _controller.getDatabase().addCode(Code(
+        code, tiles.map((tile) => tile.getTileForum()).toList(), conference));
   }
 }

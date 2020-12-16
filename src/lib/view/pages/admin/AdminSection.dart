@@ -85,8 +85,11 @@ class _AdminSectionState extends State<AdminSection> {
     return Scaffold(
       appBar: _pageAppBars[this._selectedIndex],
       body: _pageBodies()[this._selectedIndex],
-      floatingActionButton: AdminFloatingActionButton(this._controller,
-          _refreshState, _floatingActionButtonActions, this._selectedIndex),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _floatingActionButtonActions[this._selectedIndex],
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue[800],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
@@ -103,26 +106,6 @@ class _AdminSectionState extends State<AdminSection> {
         selectedItemColor: Colors.blue[800],
         onTap: this._onItemTapped,
       ),
-    );
-  }
-}
-
-class AdminFloatingActionButton extends StatelessPage {
-  Function _refreshState;
-  var _floatingActionButtonActions;
-  var _selectedIndex;
-
-  AdminFloatingActionButton(Controller controller, this._refreshState,
-      this._floatingActionButtonActions, this._selectedIndex,
-      {Key key})
-      : super(controller, key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: _floatingActionButtonActions[this._selectedIndex],
-      child: Icon(Icons.add),
-      backgroundColor: Colors.blue[800],
     );
   }
 }

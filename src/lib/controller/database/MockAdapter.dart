@@ -9,6 +9,7 @@ import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
 import 'package:confnect/model/forums/TagForum.dart';
 import 'package:confnect/model/forums/TalkForum.dart';
+import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:flutter/material.dart';
 
 import './Database.dart';
@@ -551,6 +552,11 @@ class MockAdapter implements Database {
     return _codes
         .where((code) => code.getConference().getName() == conference.getName())
         .toList();
+  }
+
+  void addCode(Code _code) {
+    _codes.add(_code);
+    print(_codes.length);
   }
 
   List<Forum> getForums(Conference conference) {

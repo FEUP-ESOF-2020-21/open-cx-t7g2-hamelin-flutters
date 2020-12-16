@@ -8,6 +8,7 @@ class ForumTile extends StatefulWidget {
   final Function _onTapAction;
   final bool showDescription, showTags;
   final bool admin;
+  bool selected = false;
   ForumTile(this._forum, this._onTapAction,
       {this.showDescription = true,
       this.showTags = true,
@@ -20,6 +21,9 @@ class ForumTile extends StatefulWidget {
     return _ForumTileState(_forum, _onTapAction,
         showDescription: showDescription, showTags: showTags, admin: admin);
   }
+
+  Forum getTileForum() => _forum;
+  bool isSelected() => selected;
 }
 
 class _ForumTileState extends State<ForumTile> {
@@ -27,7 +31,6 @@ class _ForumTileState extends State<ForumTile> {
   final Function _onTapAction;
   final bool showDescription, showTags;
   final bool admin;
-  bool selected = false;
 
   _ForumTileState(this._forum, this._onTapAction,
       {this.showDescription = true, this.showTags = true, this.admin = false});
@@ -44,13 +47,13 @@ class _ForumTileState extends State<ForumTile> {
             _onTapAction(_forum
                 .getId()); // this will push the forum page on the navigator
           else {
-            selected = !selected;
+            widget.selected = !widget.selected;
             setState(() {});
           }
         },
         child: Container(
           padding: EdgeInsets.all(20),
-          decoration: getDecoration(selected, _forum),
+          decoration: getDecoration(widget.selected, _forum),
           child: Column(
             //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

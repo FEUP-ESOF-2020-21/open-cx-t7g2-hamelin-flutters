@@ -1,5 +1,4 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Code.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/pages/admin/CodeForumList.dart';
@@ -17,7 +16,6 @@ class AdminCodeTile extends StatelessPage {
 
   @override
   Widget build(BuildContext context) {
-    Database db = super.getController().getDatabase();
     return Card(
       margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

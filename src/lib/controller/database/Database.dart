@@ -7,6 +7,7 @@ import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
+import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/User.dart';
@@ -57,4 +58,5 @@ abstract class Database {
   void changePinnedComment(Post post, Comment comment);
   List<Code> getCodes();
   List<Code> getConferenceCodes(Conference conference);
+  void addCode(Code _code);
 }
