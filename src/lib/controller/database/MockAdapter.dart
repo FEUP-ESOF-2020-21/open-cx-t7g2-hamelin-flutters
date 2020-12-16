@@ -70,7 +70,7 @@ class MockAdapter implements Database {
       "QUIM",
       "quim",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE},
+      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.HOST},
       "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U=",
       "Call me QUIM",
       {
@@ -134,6 +134,8 @@ class MockAdapter implements Database {
   static List<Code> _codes = [
     Code("34a571fa", [_forums[1], _forums[2], _forums[3]], _conferences[0]),
     Code("0f98c413", [_forums[4], _forums[5], _forums[6]], _conferences[0]),
+    Code("024c4ac3", [_forums[4], _forums[5], _forums[6]],
+        _conferences[1]), //TODO: change
   ];
 
   static List<Comment> _comments = [
