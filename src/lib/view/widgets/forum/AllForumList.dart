@@ -20,7 +20,7 @@ class AllForumList extends StatelessPage {
     //final Users users = Provider.of(context);
     return ListView(
       children: [
-        Container(
+        /*Container(
           margin: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
           child: Text(
             'Suggested Forums',
@@ -45,7 +45,7 @@ class AllForumList extends StatelessPage {
                 fontWeight: FontWeight.normal,
                 fontFamily: 'Montserrat'),
           ),
-        ),
+        ),*/
         ListView(
             children: otherforums(),
             shrinkWrap: true,
@@ -57,10 +57,13 @@ class AllForumList extends StatelessPage {
   List<dynamic> otherforums() {
     Database db = super.getController().getDatabase();
 
-    List<Forum> difference =
-        db.getForums().toSet().difference(_suggestedForums.toSet()).toList();
+    return db
+        .getForums()
+        .toList()
+        .map((forum) => ForumTile(forum, _viewForum))
+        .toList();
 
-    return difference.map((forum) => ForumTile(forum, _viewForum)).toList();
+    //return difference.map((forum) => ForumTile(forum, _viewForum)).toList();
   }
 
   List<dynamic> suggestedForums() {
