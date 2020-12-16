@@ -26,15 +26,13 @@ class _HorizontalUserListState extends State<HorizontalUserList> {
         .widget
         .usersList
         .map((user) => UserTile(user, (userToSee) {
-              /*Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => ProfilePage(
-                        widget._controller, widget._refreshState(),
+                        widget._controller, widget._refreshState,
                         user: userToSee)),
               );
-            */
-              print(userToSee.getUsername());
             }))
         .toList();
   }

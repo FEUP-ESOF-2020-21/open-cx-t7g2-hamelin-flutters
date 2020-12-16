@@ -72,7 +72,7 @@ class _SearchState extends State<Search> {
         padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
       ),
       HorizontalUserList(
-          _controller, widget._refresh, result.getUsers().sublist(0, 4)),
+          _controller, _viewForum, result.getUsers().sublist(0, 4)),
       Container(
         child: Text(
           "Posts",
@@ -101,57 +101,6 @@ class _SearchState extends State<Search> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: getResults(),
         ),
-      ),
-    );
-  }
-
-  //TODO APAGAR FUNÇOES ANTIGAS
-
-  Widget getForums(SearchResult result) {
-    return Container(
-      child: GridView.count(
-        primary: true,
-        crossAxisSpacing: 0,
-        mainAxisSpacing: 0,
-        crossAxisCount: 2,
-        childAspectRatio: 0.8,
-        physics:
-            NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-        shrinkWrap: true, // You won't see infinite size error
-        children: result
-            .getForums()
-            .sublist(0, 4)
-            .map((forum) => ForumTile(forum, _viewForum,
-                showTags: false, showDescription: false))
-            .toList(),
-      ),
-    );
-  }
-
-  Widget getUsers(SearchResult result) {
-    return Container(
-      child: GridView.count(
-        primary: true,
-        crossAxisSpacing: 0,
-        mainAxisSpacing: 0,
-        crossAxisCount: 2,
-        childAspectRatio: 0.8,
-        physics:
-            NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-        shrinkWrap: true, // You won't see infinite size error
-        children: result
-            .getUsers()
-            .sublist(0, 4)
-            .map((user) => UserTile(user, (userToSee) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfilePage(
-                            _controller, _viewForum,
-                            user: userToSee)),
-                  );
-                })) /* TO FINISH WITH THE NEW POST PAGE */
-            .toList(),
       ),
     );
   }
