@@ -61,11 +61,16 @@ class AddAccessCode extends StatelessPage {
                       if (_formKey.currentState.validate()) {
                         String code = accessCodeController.text;
 
-                        print(codes.length);
-                        codes.removeWhere((c) => c.getCode() == code);
-                        print(codes.length);
+                        List<Code> c = codes
+                            .where((element) => element.getCode() == code)
+                            .toList();
 
-                        //TODO: adicionar ao fórums do utiizador
+                        codes.removeWhere((c) => c.getCode() == code);
+
+                        controller
+                                .getLoggedInUser()
+                                .getRoles()[c[0].getConference()] =
+                            UserRole.ATTENDEE;
 
                         Navigator.pop(context);
                       }

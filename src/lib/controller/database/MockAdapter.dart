@@ -132,10 +132,9 @@ class MockAdapter implements Database {
   ];
 
   static List<Code> _codes = [
-    Code("34a571fa", [_forums[1], _forums[2], _forums[3]], _conferences[0]),
-    Code("0f98c413", [_forums[4], _forums[5], _forums[6]], _conferences[0]),
-    Code("024c4ac3", [_forums[4], _forums[5], _forums[6]],
-        _conferences[1]), //TODO: change
+    Code("34a571fa", [_forums[0]], _conferences[0]),
+    Code("0f98c413", [_forums[0], _forums[1]], _conferences[0]),
+    Code("024c4ac3", [_forums[0]], _conferences[1]), //TODO: fix forums
   ];
 
   static List<Comment> _comments = [

@@ -25,6 +25,8 @@ class User {
 
   String getRole(Conference conference) => _roles[conference];
 
+  Map<Conference, String> getRoles() => _roles;
+
   String getAvatarUrl() => _avatarUrl;
 
   String getBio() => _bio;
