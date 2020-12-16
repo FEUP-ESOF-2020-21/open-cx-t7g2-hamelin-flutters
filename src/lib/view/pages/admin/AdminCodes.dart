@@ -12,14 +12,15 @@ class AdminCodes extends StatelessPage {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: talks());
+    return ListView(children: codes());
   }
 
-  List<Widget> talks() {
+  List<Widget> codes() {
     Database db = super.getController().getDatabase();
     return db
-        .getTalks(super.getController().getConference())
-        .map((e) => AdminCodeTile(super.getController(), _refreshState, e))
+        .getConferenceCodes(super.getController().getConference())
+        .map(
+            (code) => AdminCodeTile(super.getController(), _refreshState, code))
         .toList();
   }
 }

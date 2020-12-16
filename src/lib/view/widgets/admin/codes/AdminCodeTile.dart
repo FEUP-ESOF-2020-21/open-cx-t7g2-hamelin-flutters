@@ -1,17 +1,18 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
-import 'package:confnect/model/Talk.dart';
+import 'package:confnect/model/Code.dart';
 import 'package:confnect/view/style/TextStyle.dart';
+import 'package:confnect/view/pages/admin/CodeForumList.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Page.dart';
 import '../../../style/TextStyle.dart';
 
 class AdminCodeTile extends StatelessPage {
-  final Talk _talk;
+  final Code _code;
   final Function _refreshState;
   final Controller _controller;
-  AdminCodeTile(this._controller, this._refreshState, this._talk, {Key key})
+  AdminCodeTile(this._controller, this._refreshState, this._code, {Key key})
       : super(_controller, key: key);
 
   @override
@@ -21,11 +22,19 @@ class AdminCodeTile extends StatelessPage {
       margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    CodeForumList(_controller, _code.getForums())),
+          );
+        },
         child: Container(
           padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(_talk.getImageURL()),
+              image: NetworkImage(_code.getConference().getImageUrl()),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.6),
@@ -46,7 +55,7 @@ class AdminCodeTile extends StatelessPage {
                         children: [
                           Expanded(
                             child: Text(
-                              _talk.getTitle(),
+                              _code.getCode(),
                               style: forumTitleStyle,
                             ),
                           ),
@@ -56,7 +65,7 @@ class AdminCodeTile extends StatelessPage {
                         children: [
                           Expanded(
                             child: Text(
-                              "by " + _talk.getSpeaker().getFullName(),
+                              _code.getConference().getName(),
                               style: talkSpeakerTextStyle,
                             ),
                           ),

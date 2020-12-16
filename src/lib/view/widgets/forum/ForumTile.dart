@@ -40,12 +40,10 @@ class _ForumTileState extends State<ForumTile> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: () {
-          print(admin);
           if (!this.admin)
             _onTapAction(_forum
                 .getId()); // this will push the forum page on the navigator
           else {
-            print("Changed selection");
             selected = !selected;
             setState(() {});
           }

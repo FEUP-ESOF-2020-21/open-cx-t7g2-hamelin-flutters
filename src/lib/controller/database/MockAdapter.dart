@@ -545,6 +545,14 @@ class MockAdapter implements Database {
     return _users;
   }
 
+  List<Code> getCodes() => _codes;
+
+  List<Code> getConferenceCodes(Conference conference) {
+    return _codes
+        .where((code) => code.getConference().getName() == conference.getName())
+        .toList();
+  }
+
   List<Forum> getForums(Conference conference) {
     return _forums.where((Forum f) {
       if (f is TalkForum && f.getConference() != conference) {
