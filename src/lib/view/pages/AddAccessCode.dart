@@ -2,6 +2,8 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Code.dart';
+import 'package:confnect/model/Conference.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
@@ -71,6 +73,17 @@ class AddAccessCode extends StatelessPage {
                                 .getLoggedInUser()
                                 .getRoles()[c[0].getConference()] =
                             UserRole.ATTENDEE;
+
+                        List<int> talksIds = new List();
+                        for (Forum forum in c[0].getForums()) {
+                          print(forum.getDescription());
+                          talksIds.add(forum.getId());
+                        }
+
+                        controller
+                            .getLoggedInUser()
+                            .getUserTalkForumIds()
+                            .addAll({c[0].getConference(): talksIds});
 
                         Navigator.pop(context);
                       }

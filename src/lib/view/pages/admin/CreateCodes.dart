@@ -2,6 +2,8 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Code.dart';
 import 'package:confnect/model/Conference.dart';
+import 'package:confnect/model/forums/Forum.dart';
+import 'package:confnect/model/forums/TalkForum.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/forum/ForumTile.dart';
@@ -40,15 +42,20 @@ class _CreateCodesState extends State<CreateCodes> {
         ),
       ),
     ];
-    tiles.addAll(db
+    List<Forum> forums = db
         .getForums(_controller.getConference())
-        .map((forum) => ForumTile(forum, () {}, admin: true))
-        .toList());
+        .where((forum) => forum is TalkForum)
+        .toList();
+
+    List<ForumTile> forumTiles =
+        forums.map((forum) => ForumTile(forum, () {}, admin: true)).toList();
+
+    tiles.addAll(forumTiles);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            addCode(_code, _controller.getConference(), tiles);
+            addCode(_code, _controller.getConference(), forumTiles);
             setState(() {
               Navigator.pop(context);
               _onCodeCreated();

@@ -36,6 +36,7 @@ class MockAdapter implements Database {
       "Test User",
       "test",
       "123",
+      {},
       {_conferences[0]: UserRole.ADMIN},
       "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081",
     ),
@@ -44,12 +45,12 @@ class MockAdapter implements Database {
       "Donald Trump",
       "trump",
       "1",
+      {
+        _conferences[0]: [0, 8]
+      },
       {_conferences[0]: UserRole.ATTENDEE},
       "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
       "Hello world!",
-      {
-        _conferences[0]: [1, 0]
-      },
       [1, 6, 3],
     ),
     User(
@@ -57,12 +58,12 @@ class MockAdapter implements Database {
       "Obama",
       "obama",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.ADMIN},
-      "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg",
-      "Obama bio baby!",
       {
         _conferences[0]: [0]
       },
+      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.ADMIN},
+      "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg",
+      "Obama bio baby!",
       [7, 1, 2],
     ),
     User(
@@ -70,13 +71,13 @@ class MockAdapter implements Database {
       "QUIM",
       "quim",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.HOST},
-      "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U=",
-      "Call me QUIM",
       {
         _conferences[0]: [8],
         _conferences[1]: [9, 10]
       },
+      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.HOST},
+      "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U=",
+      "Call me QUIM",
       [1, 5],
     ),
     User(
@@ -84,12 +85,12 @@ class MockAdapter implements Database {
       "Souto",
       "souto",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE},
-      "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172",
-      "Souto, Souto Souto",
       {
         _conferences[0]: [0, 8]
       },
+      {_conferences[0]: UserRole.ATTENDEE},
+      "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172",
+      "Souto, Souto Souto",
       [5, 7, 1, 3],
     ),
     User(
@@ -97,12 +98,12 @@ class MockAdapter implements Database {
       "Augusto Sousa",
       "aas",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE},
-      "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg",
-      "AAS",
       {
         _conferences[0]: [0]
       },
+      {_conferences[0]: UserRole.ATTENDEE},
+      "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg",
+      "AAS",
       [7, 6, 2],
     ),
     User(
@@ -110,21 +111,18 @@ class MockAdapter implements Database {
       "Lew Lee",
       "fanatic",
       "1",
-      {_conferences[0]: UserRole.HOST},
-      "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg",
-      "Call me QUIM",
       {
         _conferences[0]: [0, 8]
       },
+      {_conferences[0]: UserRole.HOST},
+      "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg",
+      "Call me QUIM",
       [1, 2, 4],
     ),
   ];
 
   static List<Forum> _forums = [
     TalkForum(0, _talks[0]),
-    TalkForum(8, _talks[1]),
-    TalkForum(9, _talks[2]),
-    TalkForum(10, _talks[3]),
     TagForum(1, _tags[0]),
     TagForum(2, _tags[1]),
     TagForum(3, _tags[2]),
@@ -132,6 +130,9 @@ class MockAdapter implements Database {
     TagForum(5, _tags[4]),
     TagForum(6, _tags[5]),
     TagForum(7, _tags[6]),
+    TalkForum(8, _talks[1]),
+    TalkForum(9, _talks[2]),
+    TalkForum(10, _talks[3]),
   ];
 
   static List<Code> _codes = [
@@ -471,7 +472,8 @@ class MockAdapter implements Database {
           "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
 
-    User user = new User(id, fullname, username, password, {}, profilePicUrl);
+    User user =
+        new User(id, fullname, username, password, {}, {}, profilePicUrl);
     //user.addForum(_forums[0]);
 
     _users.add(user);
