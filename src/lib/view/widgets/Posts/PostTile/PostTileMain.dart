@@ -52,6 +52,7 @@ class _PostTileMainState extends State<PostTileMain> {
         child: InkWell(
             onTap: _postPage,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 UserTimeHeaderForum(
                     widget._post.getAuthor(),

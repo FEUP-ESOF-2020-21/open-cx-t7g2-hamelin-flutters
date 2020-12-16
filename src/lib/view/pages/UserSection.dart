@@ -26,9 +26,9 @@ class _UserSectionState extends State<UserSection> {
   List<Widget> _pageBodies() {
     return [
       this._controller.currentForumId == -1
-          ? MainPage(_controller, _refreshState)
+          ? MainPage(_controller, _viewForum, _refreshState)
           : Forums(_controller, _refreshState),
-      Search(this._controller, _viewForum),
+      Search(this._controller, _viewForum, _refreshState),
       ProfilePage(this._controller, _viewForum),
       Forums(this._controller, _refreshState),
     ];

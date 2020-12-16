@@ -2,6 +2,7 @@ import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/model/SearchResult.dart';
+import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/widgets/User/ProfileForumListTile.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
@@ -69,6 +70,13 @@ class Controller {
     return true;
   }
 
+  List<Forum> getUserForums(User user) {
+    return user
+        .getUserForunsIds(_currentConference)
+        .map((e) => _database.getForum(e))
+        .toList();
+  }
+
   List<Widget> buildProfileForumList(
       Conference conference, User user, Function refreshState) {
     return user
@@ -78,14 +86,12 @@ class Controller {
         .toList();
   }
 
-  void updateUser(User user, String fullname, String username,
-      String description, String profilePicURL) {
+  void updateUser(User user, String fullname, String description,
+      String profilePicUrl, String backgroundPicUrl) {
     if (fullname.length != 0) user.setFullName(fullname);
-
-    if (username.length != 0) user.setUserName(fullname);
-
     if (description.length != 0) user.setBio(description);
-
-    if (profilePicURL.length != 0) user.setAvatarUrl(profilePicURL);
+    if (profilePicUrl.length != 0) user.setAvatarUrl(profilePicUrl);
+    if (backgroundPicUrl.length != 0)
+      user.setBackgroundPicUrl(backgroundPicUrl);
   }
 }
