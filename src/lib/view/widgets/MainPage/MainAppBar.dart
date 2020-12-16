@@ -54,11 +54,9 @@ class MainAppBar {
       );
     } else {
       return AppBar(
-        title: Expanded(
-          child: Text(
-            db.getForum(this._controller.getCurrentForumId()).getTitle(),
-            style: pageTitleTextStyle,
-          ),
+        title: Text(
+          db.getForum(this._controller.getCurrentForumId()).getTitle(),
+          style: pageTitleTextStyle,
         ),
         actions: [ExitConferenceButton(_controller)],
         leading: new GoBackButton(
