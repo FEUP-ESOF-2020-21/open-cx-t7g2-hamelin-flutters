@@ -40,8 +40,9 @@ class _SearchState extends State<Search> {
         children: result
             .getPosts()
             .sublist(0, 5)
-            .map((post) =>
-                PostTile(post, _controller, _viewForum, showForum: true))
+            .map((post) => PostTile(post, _controller, () {
+                  setState(() {});
+                }, showForum: true))
             .toList(),
       ),
       padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
