@@ -1,4 +1,5 @@
 import 'package:confnect/model/Comment.dart';
+import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/forums/Forum.dart';
@@ -17,11 +18,19 @@ class UserRole {
 
 abstract class Database {
   String getAppName();
+  String getAppDescription();
   List<User> getUsers();
-  List<Forum> getForums();
+  List<Forum> getForums(Conference conference);
   Forum getForum(int id);
   List<Post> getForumPosts(int forumId);
-  List<Post> getPosts();
+  List<Post> getPosts(Conference conference);
+  List<Conference> getConferences(User user);
+  void addConference(
+      User creator,
+      String conferenceName,
+      String conferenceLocation,
+      String conferenceDescription,
+      String conferenceImageURL);
   bool login(String username, String password);
   void register(
       String fullname, String username, String password, String profilePicURL);
@@ -29,11 +38,11 @@ abstract class Database {
       int forumId, String username, String title, String text, Date date);
   User getUser(String username);
   List<Tag> getTags();
-  List<Talk> getTalks();
+  List<Talk> getTalks(Conference conference);
   bool existsUser(String username);
-  bool hasRole(String username, String role);
-  void addTalk(String title, String description, String speaker, String image,
-      List<Tag> tags);
+  bool hasRole(Conference conference, String username, String role);
+  void addTalk(Conference conference, String title, String description,
+      String speaker, String image, List<Tag> tags);
   void editTalk(int talkId, String title, String description, String speaker,
       String image, List<Tag> tags);
   Tag createTag(String name);
@@ -42,7 +51,7 @@ abstract class Database {
   bool isTagNew(Tag tag);
   void createMeetup(Post post, String location, DateTime date, TimeOfDay time,
       String description, User creator);
-  List<Forum> getUserPopularForums(User user);
+  List<Forum> getUserPopularForums(Conference conference, User user);
   List<Post> getForumsPopularPosts(List<Forum> forums);
   void changePinnedComment(Post post, Comment comment);
 }

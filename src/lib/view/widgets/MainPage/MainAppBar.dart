@@ -4,7 +4,7 @@ import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/GoBackButton.dart';
 import 'package:flutter/material.dart';
 
-import '../LogoutButton.dart';
+import '../ExitConferenceButton.dart';
 
 class MainAppBar {
   final Controller _controller;
@@ -48,7 +48,7 @@ class MainAppBar {
           child: AppBar(
             title: _getCurrentUser(),
             backgroundColor: Colors.transparent,
-            actions: [LogoutButton(_controller, Colors.white)],
+            actions: [ExitConferenceButton(_controller, Colors.white)],
           ),
         ),
       );
@@ -60,7 +60,7 @@ class MainAppBar {
             style: pageTitleTextStyle,
           ),
         ),
-        actions: [LogoutButton(_controller)],
+        actions: [ExitConferenceButton(_controller)],
         leading: new GoBackButton(
             fn: _refresh, margin: EdgeInsets.only(top: 5.0, left: 10.0)),
       );

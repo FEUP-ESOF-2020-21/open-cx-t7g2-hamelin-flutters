@@ -151,7 +151,8 @@ class _EditTalkState extends State<EditTalk> {
                             return "User with username " +
                                 value.toString() +
                                 " doesn't exist";
-                          } else if (!db.hasRole(value, UserRole.HOST)) {
+                          } else if (!db.hasRole(_controller.getConference(),
+                              value, UserRole.HOST)) {
                             return "User with username " +
                                 value.toString() +
                                 " doesn't have HOST role";
