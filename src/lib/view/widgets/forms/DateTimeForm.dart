@@ -5,22 +5,20 @@ import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class DateTimeForm extends StatefulWidget {
-  DateTimeForm(
-      {Key key,
-      this.labelText,
-      this.selectedDate,
-      this.selectedTime,
-      this.selectDate,
-      this.selectTime,
-      this.refresh})
-      : super(key: key);
+  DateTimeForm({
+    Key key,
+    this.labelText,
+    this.selectedDate,
+    this.selectedTime,
+    this.selectDate,
+    this.selectTime,
+  }) : super(key: key);
 
   final String labelText;
   DateTime selectedDate;
   TimeOfDay selectedTime;
   final ValueChanged<DateTime> selectDate;
   final ValueChanged<TimeOfDay> selectTime;
-  final Function refresh;
   @override
   _DateTimeFormState createState() => _DateTimeFormState();
 }
@@ -34,8 +32,6 @@ class _DateTimeFormState extends State<DateTimeForm> {
         lastDate: new DateTime(2101));
     if (picked != null && picked != widget.selectedDate) {
       widget.selectDate(picked);
-      widget.selectedDate = picked;
-      setState(() {});
     }
   }
 
@@ -44,8 +40,6 @@ class _DateTimeFormState extends State<DateTimeForm> {
         context: context, initialTime: widget.selectedTime);
     if (picked != null && picked != widget.selectedTime) {
       widget.selectTime(picked);
-      widget.selectedTime = picked;
-      setState(() {});
     }
   }
 
@@ -92,8 +86,7 @@ class _InputDropdown extends StatefulWidget {
       this.onPressed})
       : super(key: key);
 
-  final String labelText;
-  final String valueText;
+  final String labelText, valueText;
   final TextStyle valueStyle;
   final VoidCallback onPressed;
   final Widget child;
@@ -102,7 +95,6 @@ class _InputDropdown extends StatefulWidget {
 }
 
 class __InputDropdownState extends State<_InputDropdown> {
-  @override
   @override
   Widget build(BuildContext context) {
     return new InkWell(

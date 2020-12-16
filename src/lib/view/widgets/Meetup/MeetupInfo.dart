@@ -1,3 +1,4 @@
+import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/Meetup/meetupForms/DescriptionForm.dart';
@@ -9,13 +10,18 @@ import 'meetupForms/MeetupDateTimeForum.dart';
 // ignore: must_be_immutable
 class MeetupInfo extends StatefulWidget {
   Meetup _meetup;
+  DateTime _meetDate;
+  TimeOfDay _meetTime;
   bool _editingLocation = false;
   bool _editingDescription = false;
-  bool _edtitingTime = false;
+  bool _editingTime = false;
   TextEditingController _locationController = new TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
 
-  MeetupInfo(this._meetup);
+  MeetupInfo(this._meetup) {
+    _meetDate = _meetup.getDate().getDateTime();
+    _meetTime = _meetup.getDate().getTime();
+  }
   @override
   _MeetupInfoState createState() => _MeetupInfoState();
 }
@@ -158,12 +164,20 @@ class _MeetupInfoState extends State<MeetupInfo> {
   }
 
   Widget showTime() {
-    TimeOfDay meetTime = new TimeOfDay.now();
-
-    return widget._edtitingTime
+    return widget._editingTime
         ? MeetupDateTimeForm(
-            widget._meetup.getDate().getDateTime(),
-            meetTime,
+            widget._meetDate,
+            widget._meetTime,
+            (date) {
+              setState(() {
+                widget._meetDate = date;
+              });
+            },
+            (time) {
+              setState(() {
+                widget._meetTime = time;
+              });
+            },
           )
         : Row(
             children: [
@@ -187,14 +201,21 @@ class _MeetupInfoState extends State<MeetupInfo> {
         child: InkWell(
           onTap: () {
             setState(() {
-              widget._edtitingTime = true;
+              widget._editingTime = true;
             });
           },
-          child: widget._edtitingTime
+          child: widget._editingTime
               ? InkWell(
                   onTap: () {
                     setState(() {
-                      widget._edtitingTime = false;
+                      widget._editingTime = false;
+                      DateTime newDate = new DateTime(
+                          widget._meetDate.year,
+                          widget._meetDate.month,
+                          widget._meetDate.day,
+                          widget._meetTime.hour,
+                          widget._meetTime.minute);
+                      widget._meetup.setDate(Date(newDate));
                     });
                   },
                   child: Icon(Icons.done))

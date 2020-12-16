@@ -1,15 +1,12 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/pages/MeetupPage.dart';
 import 'package:confnect/view/widgets/Meetup/meetupForms/DescriptionForm.dart';
 import 'package:confnect/view/widgets/Meetup/meetupForms/MeetupDateTimeForum.dart';
-import 'package:confnect/view/widgets/Meetup/meetupForms/locationForm.dart';
+import 'package:confnect/view/widgets/Meetup/meetupForms/LocationForm.dart';
 import 'package:confnect/view/widgets/SquareButton.dart';
-import 'package:confnect/view/widgets/forms/DateTimeForm.dart';
 import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
-import 'package:confnect/view/widgets/forms/FormTextField.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -17,6 +14,8 @@ class CreateMeetupPage extends StatefulPage {
   Post _post;
   Controller _controller;
   final Function _refreshPostPage;
+  DateTime _meetDate = new DateTime.now();
+  TimeOfDay _meetTime = new TimeOfDay.now();
   CreateMeetupPage(this._controller, this._post, this._refreshPostPage)
       : super(_controller);
 
@@ -44,8 +43,6 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime meetDate = new DateTime.now();
-    TimeOfDay meetTime = new TimeOfDay.now();
     return Scaffold(
       appBar: AppBar(
         title: Text("Create Meetup"),
@@ -61,7 +58,20 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                   height: 20,
                 ),
                 LocationForm(_locationController),
-                MeetupDateTimeForm(meetDate, meetTime),
+                MeetupDateTimeForm(
+                  widget._meetDate,
+                  widget._meetTime,
+                  (date) {
+                    setState(() {
+                      widget._meetDate = date;
+                    });
+                  },
+                  (time) {
+                    setState(() {
+                      widget._meetTime = time;
+                    });
+                  },
+                ),
                 DescriptionForum(_descriptionController),
               ],
             ),
@@ -70,10 +80,8 @@ class _CreateMeetupPageState extends State<CreateMeetupPage> {
                 String location = _locationController.text;
                 String description = _descriptionController.text;
                 if (_formKey.currentState.validate()) {
-                  setState(() {});
-                  print(meetDate);
-                  print(meetTime);
-                  createMeetup(location, meetDate, meetTime, description);
+                  createMeetup(location, widget._meetDate, widget._meetTime,
+                      description);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
