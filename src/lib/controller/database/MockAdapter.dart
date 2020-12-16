@@ -74,7 +74,8 @@ class MockAdapter implements Database {
       "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U=",
       "Call me QUIM",
       {
-        _conferences[0]: [8]
+        _conferences[0]: [8],
+        _conferences[1]: [9, 10]
       },
       [1, 5],
     ),
@@ -122,6 +123,8 @@ class MockAdapter implements Database {
   static List<Forum> _forums = [
     TalkForum(0, _talks[0]),
     TalkForum(8, _talks[1]),
+    TalkForum(9, _talks[2]),
+    TalkForum(10, _talks[3]),
     TagForum(1, _tags[0]),
     TagForum(2, _tags[1]),
     TagForum(3, _tags[2]),
@@ -134,7 +137,7 @@ class MockAdapter implements Database {
   static List<Code> _codes = [
     Code("34a571fa", [_forums[0]], _conferences[0]),
     Code("0f98c413", [_forums[0], _forums[1]], _conferences[0]),
-    Code("024c4ac3", [_forums[0]], _conferences[1]), //TODO: fix forums
+    Code("024c4ac3", [_forums[9]], _conferences[1]), //TODO: fix forums
   ];
 
   static List<Comment> _comments = [
@@ -406,6 +409,24 @@ class MockAdapter implements Database {
       "https://i0.wp.com/indusdictum.com/wp-content/uploads/2020/03/Indian-scientists-from-RRI-scientists-devise-test-for-fairness-of-qubits-in-quantum-computers.png",
       [_tags[3]],
     ),
+    Talk(
+      _conferences[1],
+      2,
+      "Software development",
+      "In this talk, we'll discuss the rise of robots and what it means for our survival as a species.",
+      _users[3],
+      "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
+      [_tags[0], _tags[1], _tags[2]],
+    ),
+    Talk(
+      _conferences[1],
+      3,
+      "Qubits: Quantum bits",
+      "A talk about quantum computers, their origin, their current state, and predicitons for the future.",
+      _users[3],
+      "https://i0.wp.com/indusdictum.com/wp-content/uploads/2020/03/Indian-scientists-from-RRI-scientists-devise-test-for-fairness-of-qubits-in-quantum-computers.png",
+      [_tags[3]],
+    ),
   ];
 
   String getAppName() {
@@ -597,7 +618,7 @@ class MockAdapter implements Database {
   }
 
   List<Forum> getUserPopularForums(Conference conference, User user) {
-    List<int> forumIds = user.getUserForunsIds(conference);
+    List<int> forumIds = user.getUserForumsIds(conference);
     List<Forum> ret = [];
     forumIds.forEach((element) {
       ret.add(getForum(element));

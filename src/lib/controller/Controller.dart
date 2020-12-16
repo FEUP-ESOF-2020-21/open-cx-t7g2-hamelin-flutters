@@ -72,7 +72,7 @@ class Controller {
   List<Widget> buildProfileForumList(
       Conference conference, User user, Function refreshState) {
     return user
-        .getUserForunsIds(conference)
+        .getUserForumsIds(conference)
         .map((e) =>
             ProfileForumListTile(_database.getForum(e), this, refreshState, 10))
         .toList();

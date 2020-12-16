@@ -34,7 +34,10 @@ class _SearchState extends State<Search> {
   }
 
   List<Widget> getResults() {
-    SearchResult result = _controller.search(_controller.getConference(), _searchTerm);
+    SearchResult result =
+        _controller.search(_controller.getConference(), _searchTerm);
+    int userLength =
+        result.getUsers().length > 4 ? 4 : result.getUsers().length;
     return [
       Container(
         child: Text(
@@ -82,7 +85,7 @@ class _SearchState extends State<Search> {
           shrinkWrap: true, // You won't see infinite size error
           children: result
               .getUsers()
-              .sublist(0, 4)
+              .sublist(0, userLength)
               .map((user) => UserTile(user, (userToSee) {
                     Navigator.push(
                       context,

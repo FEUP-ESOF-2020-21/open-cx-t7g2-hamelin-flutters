@@ -27,6 +27,8 @@ class User {
 
   Map<Conference, String> getRoles() => _roles;
 
+  Map<Conference, List<int>> getUserTalkForumIds() => _userTalkForumIds;
+
   String getAvatarUrl() => _avatarUrl;
 
   String getBio() => _bio;
@@ -34,7 +36,7 @@ class User {
   @override
   String toString() => _fullname;
 
-  List<int> getUserForunsIds(Conference conference) {
+  List<int> getUserForumsIds(Conference conference) {
     List<int> out = [];
     out.addAll(_userTagForumIds);
     out.addAll(_userTalkForumIds[conference]);

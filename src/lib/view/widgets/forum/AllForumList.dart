@@ -72,7 +72,7 @@ class AllForumList extends StatelessPage {
     User u = db.getUser(username);
 
     List<Forum> _userForums = u
-        .getUserForunsIds(super.getController().getConference())
+        .getUserForumsIds(super.getController().getConference())
         .map((id) => db.getForum(id))
         .toList();
     if (_userForums.length == 0) _userForums = u.getForums();
