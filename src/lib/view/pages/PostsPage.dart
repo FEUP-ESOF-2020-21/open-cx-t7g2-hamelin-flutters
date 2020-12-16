@@ -36,7 +36,7 @@ class _PostsPageState extends State<PostsPage> {
     List<Widget> ret = posts();
     //ret.addAll(posts());
     if (this._controller.isAddingPost()) {
-      return ListView(
+      return Column(
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 2 / 7,
@@ -53,7 +53,7 @@ class _PostsPageState extends State<PostsPage> {
         ],
       );
     } else {
-      return ListView(children: ret);
+      return Column(children: ret);
     }
   }
 
