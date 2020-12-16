@@ -34,6 +34,7 @@ class _CreateCodesState extends State<CreateCodes> {
     List<Code> codes = db.getConferenceCodes(_controller.getConference());
     String _code = generateCode(codes);
     bool attendee = true;
+    RoleSelection roleSelection = RoleSelection();
     List<Widget> tiles = [
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -43,7 +44,7 @@ class _CreateCodesState extends State<CreateCodes> {
           textAlign: TextAlign.center,
         ),
       ),
-      RoleSelection(attendee)
+      roleSelection
     ];
     List<Forum> forums = db
         .getForums(_controller.getConference())
@@ -58,7 +59,8 @@ class _CreateCodesState extends State<CreateCodes> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            addCode(_code, _controller.getConference(), forumTiles);
+            addCode(_code, _controller.getConference(), forumTiles,
+                roleSelection.getRole());
             setState(() {
               Navigator.pop(context);
               _onCodeCreated();
@@ -98,14 +100,14 @@ class _CreateCodesState extends State<CreateCodes> {
     return true;
   }
 
-  void addCode(String code, Conference conference, List<ForumTile> forumTiles) {
+  void addCode(String code, Conference conference, List<ForumTile> forumTiles,
+      bool attendee) {
     List<ForumTile> tiles =
         forumTiles.where((forumTile) => forumTile.isSelected()).toList();
 
-    _controller.getDatabase().addCode(Code(
-        code,
-        tiles.map((tile) => tile.getTileForum()).toList(),
-        conference,
-        UserRole.ATTENDEE));
+    String role = attendee ? UserRole.ATTENDEE : UserRole.HOST;
+
+    _controller.getDatabase().addCode(Code(code,
+        tiles.map((tile) => tile.getTileForum()).toList(), conference, role));
   }
 }

@@ -2,8 +2,10 @@ import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
 class RoleSelection extends StatefulWidget {
-  bool attendee;
-  RoleSelection(this.attendee, {Key key}) : super(key: key);
+  bool attendee = true;
+  RoleSelection({Key key}) : super(key: key);
+
+  bool getRole() => attendee;
 
   @override
   _RoleSelectionState createState() => _RoleSelectionState();
