@@ -1,6 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/pages/admin/AddTalk.dart';
-import 'package:confnect/view/pages/admin/AdminTalkCodes.dart';
+import 'package:confnect/view/pages/admin/AdminCodes.dart';
 import 'package:confnect/view/pages/admin/CreateCodes.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/ExitConferenceButton.dart';
@@ -23,7 +23,7 @@ class _AdminSectionState extends State<AdminSection> {
   List<Widget> _pageBodies() {
     return [
       AdminTalks(this._controller, _refreshState),
-      AdminTalkCodes(this._controller, _refreshState),
+      AdminCodes(this._controller, _refreshState),
     ];
   }
 

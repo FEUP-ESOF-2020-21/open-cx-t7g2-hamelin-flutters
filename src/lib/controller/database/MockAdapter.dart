@@ -1,3 +1,4 @@
+import 'package:confnect/model/Code.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
@@ -127,6 +128,11 @@ class MockAdapter implements Database {
     TagForum(5, _tags[4]),
     TagForum(6, _tags[5]),
     TagForum(7, _tags[6]),
+  ];
+
+  static List<Code> _codes = [
+    Code("34a571fa", [_forums[1], _forums[2], _forums[3]], _conferences[0]),
+    Code("0f98c413", [_forums[4], _forums[5], _forums[6]], _conferences[0]),
   ];
 
   static List<Comment> _comments = [

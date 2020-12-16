@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 import '../../../Page.dart';
 import '../../../style/TextStyle.dart';
 
-class AdminTalkCodeTile extends StatelessPage {
+class AdminCodeTile extends StatelessPage {
   final Talk _talk;
   final Function _refreshState;
   final Controller _controller;
-  AdminTalkCodeTile(this._controller, this._refreshState, this._talk, {Key key})
+  AdminCodeTile(this._controller, this._refreshState, this._talk, {Key key})
       : super(_controller, key: key);
 
   @override
