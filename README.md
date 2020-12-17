@@ -883,6 +883,8 @@ Scenario: In the Talks Page
 
 #### Remove Questions / Answers
 
+<img src="docs/mockups/removeComment.png" width="300" style="border: 1px solid grey" />
+
 As a talk host, I want to be able to remove inappropriate questions / wrong answers so that we can have an healthy forum.
 ##### Value and Effort
     - Value: Must have.
