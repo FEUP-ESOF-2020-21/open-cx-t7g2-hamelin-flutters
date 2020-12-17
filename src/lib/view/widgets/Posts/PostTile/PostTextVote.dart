@@ -1,7 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
-import 'package:confnect/model/User.dart';
 import 'package:confnect/view/pages/CreateMeetupPage.dart';
 import 'package:confnect/view/pages/MeetupPage.dart';
 import 'package:confnect/view/widgets/Meetup/MeetupBox.dart';
@@ -62,9 +61,8 @@ class _PostTextVoteState extends State<PostTextVote> {
       //padding: EdgeInsets.all(10.0),
       child: Column(
         children: [
-          UserTimeMeetHeader(
-              widget._post.getAuthor(), widget._post.getDate(), 20,
-              onMeetupSelected: () {
+          UserTimeMeetHeader(widget._post.getAuthor(), widget._post.getDate(),
+              20, widget._post, widget._controller, onMeetupSelected: () {
             if (widget._post.getMeetup() == null) {
               if (userInDiscussion())
                 this.openCreateMeetupPage();
