@@ -1,7 +1,9 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/pages/admin/AddTalk.dart';
+import 'package:confnect/view/pages/admin/AdminCodes.dart';
+import 'package:confnect/view/pages/admin/CreateCodes.dart';
 import 'package:confnect/view/style/TextStyle.dart';
-import 'package:confnect/view/widgets/LogoutButton.dart';
+import 'package:confnect/view/widgets/ExitConferenceButton.dart';
 import 'package:flutter/material.dart';
 import '../../Page.dart';
 import '../../widgets/admin/talks/AdminTalks.dart';
@@ -21,10 +23,7 @@ class _AdminSectionState extends State<AdminSection> {
   List<Widget> _pageBodies() {
     return [
       AdminTalks(this._controller, _refreshState),
-      Container(
-        child: Text("Coming soon..."),
-        margin: EdgeInsets.all(10),
-      ),
+      AdminCodes(this._controller, _refreshState),
     ];
   }
 
@@ -44,7 +43,11 @@ class _AdminSectionState extends State<AdminSection> {
         );
       },
       () {
-        print("CREATE_REGISTRY_CODE!");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CreateCodes(_controller, _refreshState)),
+        );
       },
     ];
   }
@@ -66,7 +69,7 @@ class _AdminSectionState extends State<AdminSection> {
       ),
       AppBar(
         title: Text(
-          "Registry Codes",
+          "Access Codes",
           style: pageTitleTextStyle,
         ),
         actions: action,
@@ -77,7 +80,8 @@ class _AdminSectionState extends State<AdminSection> {
   @override
   Widget build(BuildContext context) {
     var _floatingActionButtonActions = _initFABActions(context);
-    var _pageAppBars = _initAppBars(<Widget>[LogoutButton(_controller)]);
+    var _pageAppBars =
+        _initAppBars(<Widget>[ExitConferenceButton(_controller)]);
     return Scaffold(
       appBar: _pageAppBars[this._selectedIndex],
       body: _pageBodies()[this._selectedIndex],
@@ -95,7 +99,7 @@ class _AdminSectionState extends State<AdminSection> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.code),
-            label: 'Registry Codes',
+            label: 'Access Codes',
           ),
         ],
         currentIndex: this._selectedIndex,

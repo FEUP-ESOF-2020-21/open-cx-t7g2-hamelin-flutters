@@ -4,7 +4,9 @@ class FormFieldContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsets margin;
   final double height;
-  FormFieldContainer(this.child, {this.margin, this.height});
+  final Key key;
+  FormFieldContainer(this.child, {this.margin, this.height, this.key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

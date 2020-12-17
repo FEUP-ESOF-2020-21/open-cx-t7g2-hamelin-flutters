@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../controller/Controller.dart';
 
+// ignore: must_be_immutable
 class LogoutButton extends StatelessWidget {
   final Controller _controller;
   Color _color;
@@ -11,16 +12,20 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-        icon: Icon(
-          Icons.logout,
-          color: _color == null ? Colors.black : _color,
-        ),
-        onPressed: () {
-          _controller.setLoggedInUserName(null);
-          _controller.setCurrentForumId(-1);
-          Navigator.popUntil(
-              context, ModalRoute.withName(Navigator.defaultRouteName));
-        });
+    return Container(
+      alignment: Alignment.topLeft,
+      padding: EdgeInsets.only(left: 20),
+      child: IconButton(
+          icon: Icon(
+            Icons.logout,
+            color: _color == null ? Colors.black : _color,
+          ),
+          onPressed: () {
+            _controller.setLoggedInUserName(null);
+            _controller.setCurrentForumId(-1);
+            Navigator.popUntil(
+                context, ModalRoute.withName(Navigator.defaultRouteName));
+          }),
+    );
   }
 }

@@ -1,7 +1,9 @@
+import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/model/SearchResult.dart';
-import 'package:confnect/view/widgets/User/ProfileForumListTile.dart';
+import 'package:confnect/model/forums/Forum.dart';
+import 'package:confnect/view/widgets/user/ProfileForumListTile.dart';
 import 'package:flutter/material.dart';
 import './database/Database.dart';
 import 'SearchController.dart';
@@ -13,11 +15,18 @@ class Controller {
   Function _onSessionChange;
   bool _addingPost = false;
   int currentForumId = -1;
+  Conference _currentConference;
 
   Controller(this._database) : _searchController = SearchController(_database);
 
   void startApp(StatelessWidget app) {
     runApp(app);
+  }
+
+  Conference getConference() => _currentConference;
+  void setConference(Conference conference) {
+    _currentConference = conference;
+    if (_onSessionChange != null) _onSessionChange();
   }
 
   int getCurrentForumId() => this.currentForumId;
@@ -30,8 +39,8 @@ class Controller {
     if (_onSessionChange != null) _onSessionChange();
   }
 
-  SearchResult search(String key) {
-    return _searchController.search(key);
+  SearchResult search(Conference conference, String key) {
+    return _searchController.search(conference, key);
   }
 
   User getLoggedInUser() {
@@ -52,7 +61,6 @@ class Controller {
   Database getDatabase() => _database;
 
   bool createPost(int forumId, String title, String text, Date date) {
-    //TODO add notification messages
     if (title == "")
       return false;
     else if (text == "") return false;
@@ -61,22 +69,28 @@ class Controller {
     return true;
   }
 
-  List<Widget> buildProfileForumList(User user, Function refreshState) {
+  List<Forum> getUserForums(User user) {
     return user
-        .getUserForunsIds()
-        .map((e) =>
-            ProfileForumListTile(_database.getForum(e), this, refreshState, 10))
+        .getUserForumsIds(_currentConference)
+        .map((e) => _database.getForum(e))
         .toList();
   }
 
-  void updateUser(User user, String fullname, String username,
-      String description, String profilePicURL) {
+  List<Widget> buildProfileForumList(
+      Conference conference, User user, Function refreshState) {
+    return user
+        .getUserForumsIds(conference)
+        .map((e) =>
+            ProfileForumListTile(_database.getForum(e), refreshState, 10))
+        .toList();
+  }
+
+  void updateUser(User user, String fullname, String description,
+      String profilePicUrl, String backgroundPicUrl) {
     if (fullname.length != 0) user.setFullName(fullname);
-
-    if (username.length != 0) user.setUserName(fullname);
-
     if (description.length != 0) user.setBio(description);
-
-    if (profilePicURL.length != 0) user.setAvatarUrl(profilePicURL);
+    if (profilePicUrl.length != 0) user.setAvatarUrl(profilePicUrl);
+    if (backgroundPicUrl.length != 0)
+      user.setBackgroundPicUrl(backgroundPicUrl);
   }
 }

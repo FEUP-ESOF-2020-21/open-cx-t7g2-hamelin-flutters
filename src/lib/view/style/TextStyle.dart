@@ -86,3 +86,11 @@ var meetupButtonTextStyle = GoogleFonts.openSans(
     color: Colors.white,
   ),
 );
+
+var talkCodeTextStyle = GoogleFonts.lora(
+  textStyle: TextStyle(
+    fontWeight: FontWeight.normal,
+    fontSize: LargeTextSize,
+    color: Colors.black,
+  ),
+);

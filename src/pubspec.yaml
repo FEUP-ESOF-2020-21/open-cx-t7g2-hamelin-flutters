@@ -21,11 +21,15 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  rxdart: ^0.24.1
+  intl: ^0.16.1
   google_fonts: ^1.1.1
   flappy_search_bar: 1.4.1
   flutter_tagging: ^2.2.0+3 
   string_similarity: ^1.1.0
-  timeago: ^2.0.28 
+  timeago: ^2.0.28
+  uuid: ^2.2.0
+  flutter_gherkin: ^1.1.8+9
   flutter:
     sdk: flutter
 
@@ -36,8 +40,12 @@ dependencies:
   validators: ^2.0.0+1
 
 dev_dependencies:
+  
   flutter_test:
     sdk: flutter
+
+  
+ 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

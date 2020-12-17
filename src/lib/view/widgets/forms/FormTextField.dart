@@ -5,13 +5,18 @@ class FormTextField extends StatelessWidget {
   final bool obscureText;
   final Function validator;
   final int maxLines;
+  final String initialValue;
   final TextEditingController _controller;
   FormTextField(this._fieldText, this._controller,
-      {this.obscureText = false, this.validator, this.maxLines = 1});
+      {this.obscureText = false,
+      this.validator,
+      this.maxLines = 1,
+      this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: this.initialValue,
       obscureText: this.obscureText,
       controller: this._controller,
       validator: this.validator,
