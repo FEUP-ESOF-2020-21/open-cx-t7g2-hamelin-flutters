@@ -931,6 +931,8 @@ Scenario: In a Post Page from a Talk
 
 #### Generate Register Codes
 
+<img src="docs/mockups/oquetiveramao.png" width="300" style="border: 1px solid grey" />
+
 As an administrator, I want to be able to generate codes for hosts and attendees to insert when they register, so that we can control who we let in (only people who participate in the conference) and what permissions they have (attendee or host).
 ##### Value and Effort
     - Value: Could have
