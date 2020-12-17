@@ -89,7 +89,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             validator: ValidatorFactory.getValidator(
                                 'profile description',
                                 fieldRequired: false,
-                                upperLimit: 100),
+                                upperLimit: 50),
                           ),
                           height: MediaQuery.of(context).size.height / 5,
                         )),
