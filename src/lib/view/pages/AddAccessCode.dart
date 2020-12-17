@@ -2,7 +2,6 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/ValidatorFactory.dart';
 import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/Code.dart';
-import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/style/TextStyle.dart';

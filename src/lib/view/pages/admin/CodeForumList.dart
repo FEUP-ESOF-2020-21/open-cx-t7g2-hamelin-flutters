@@ -17,6 +17,7 @@ class CodeForumList extends StatefulPage {
 }
 
 class _CodeForumListState extends State<CodeForumList> {
+  // ignore: unused_field
   final Controller _controller;
   final List<Forum> _codes;
 

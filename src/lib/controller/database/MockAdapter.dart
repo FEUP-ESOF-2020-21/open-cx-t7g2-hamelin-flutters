@@ -9,7 +9,6 @@ import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
 import 'package:confnect/model/forums/TagForum.dart';
 import 'package:confnect/model/forums/TalkForum.dart';
-import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:flutter/material.dart';
 
 import './Database.dart';
@@ -41,18 +40,17 @@ class MockAdapter implements Database {
       "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081",
     ),
     User(
-      1,
-      "Donald Trump",
-      "trump",
-      "1",
-      {
-        _conferences[0]: [0, 8]
-      },
-      {_conferences[0]: UserRole.ATTENDEE},
-      "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
-      "Hello world!",
-      [1, 6, 3],
-    ),
+        1,
+        "Donald Trump",
+        "trump",
+        "1",
+        {
+          _conferences[0]: [0, 8]
+        },
+        {_conferences[0]: UserRole.ATTENDEE},
+        "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
+        "Hello world!",
+        [1, 6, 3]),
     User(
       2,
       "Obama",
@@ -175,6 +173,44 @@ class MockAdapter implements Database {
         "Comentário depois do comentário do host"),
   ];
 
+  static List<Meetup> _meetups = [
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Cozinha",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[0]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Entrada",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[1]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Queijos",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[2]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Bar de minas",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[3]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Entrada",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[4]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Queijos",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[5]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Bar de minas",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[6]),
+  ];
+
   static List<Post> _posts = [
     Post(
       0,
@@ -183,6 +219,7 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[0], _comments[1], _comments[6], _comments[7]],
+      meetup: _meetups[3],
       pinnedComment: _comments[6],
     ),
     Post(
@@ -192,6 +229,7 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[2], _comments[3]],
+      meetup: _meetups[1],
       pinnedComment: _comments[3],
     ),
     Post(
@@ -201,6 +239,7 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[3], _comments[4]],
+      meetup: _meetups[2],
     ),
     Post(
       0,
@@ -209,126 +248,136 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[5]],
+      meetup: _meetups[3],
     ),
     Post(
-        0,
-        _users[4],
-        "Confnect is the greatest!",
-        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+      0,
+      _users[4],
+      "Confnect is the greatest!",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      comments: [_comments[0], _comments[1]],
+      meetup: _meetups[4],
+    ),
     Post(
-        0,
-        _users[5],
-        "Moustache Competition",
-        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+      0,
+      _users[5],
+      "Moustache Competition",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      comments: [_comments[2]],
+      meetup: _meetups[5],
+    ),
     Post(
         1,
         _users[1],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[1],
+        comments: [_comments[3]]),
     Post(
         1,
         _users[2],
         "It deserves a 21!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[2],
+        comments: [_comments[4]]),
     Post(
         1,
         _users[3],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[3],
+        comments: [_comments[5]]),
     Post(
         1,
         _users[4],
         "Make America Great Again!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[4],
+        comments: [_comments[5]]),
     Post(
         1,
         _users[5],
         "Confnect is the greatest!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[1],
+        comments: [_comments[0]]),
     Post(
         1,
         _users[1],
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[1]]),
     Post(
         2,
         _users[2],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[1]]),
     Post(
         2,
         _users[3],
         "It deserves a 22!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[2]]),
     Post(
         2,
         _users[4],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[3]]),
     Post(
         3,
         _users[5],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[4]]),
     Post(
         3,
         _users[1],
         "It deserves a 23!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[5]]),
     Post(
         3,
         _users[2],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[5]]),
     Post(
         3,
         _users[3],
         "Make America Great Again!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[6]]),
     Post(
         4,
         _users[4],
         "Confnect is the greatest!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[6]]),
     Post(
         4,
         _users[5],
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[0]]),
     Post(
       8,
       _users[2],
@@ -629,7 +678,8 @@ class MockAdapter implements Database {
     ret.sort((Forum f1, Forum f2) {
       int f1NPosts = getForumPosts(f1.getId()).length;
       int f2NPosts = getForumPosts(f2.getId()).length;
-      return f1NPosts.compareTo(f2NPosts);
+      return f2NPosts.compareTo(
+          f1NPosts); // Para ser ordem decrsente tem de ser 2 compareTo 1
     });
     return ret;
   }
@@ -640,7 +690,8 @@ class MockAdapter implements Database {
       ret.addAll(getForumPosts(element.getId()));
     });
     ret.sort((Post p1, Post p2) {
-      return p1.getNumberLikes().compareTo(p2.getNumberLikes());
+      return (p2.getUserLikes().length - p2.getUserDislikes().length)
+          .compareTo((p1.getUserLikes().length - p1.getUserDislikes().length));
     });
     return ret;
   }
@@ -653,5 +704,13 @@ class MockAdapter implements Database {
       else
         post.pinComment(comment);
     }
+  }
+
+  @override
+  void deleteComment(Comment comment, Post post) {
+    if (post.getPinnedComment() == comment) {
+      post.pinComment(null);
+    }
+    post.removeComment(comment);
   }
 }

@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 class MeetupPage extends StatefulPage {
   Meetup _meetup;
   Controller _controller;
-  MeetupPage(this._controller, this._meetup) : super(_controller);
+  MeetupPage(this._controller, this._meetup)
+      : super(_controller, key: Key("MeetupPage"));
 
   @override
   _MeetupPageState createState() => _MeetupPageState();
@@ -39,7 +40,6 @@ class _MeetupPageState extends State<MeetupPage> {
           alignment: Alignment.bottomCenter,
           child: AddComment(
             widget._controller,
-            widget._meetup.getComments(),
             onSubmitted: (user, date, text) {
               setState(() {
                 widget._meetup.getComments().add(new Comment(user, date, text));

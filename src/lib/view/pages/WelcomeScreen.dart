@@ -65,12 +65,14 @@ class WelcomeScreen extends StatelessPage {
                   SquareButton('Login', () {
                     Navigator.pushNamed(context, AppRouter.LOGIN);
                   }, white: true),
+                  key: Key("loginWelcome"),
                 ),
                 FormFieldContainer(
                   SquareButton('Register', () {
                     Navigator.pushNamed(context, AppRouter.REGISTER);
                   }, white: true),
                   margin: EdgeInsets.only(bottom: 30),
+                  key: Key("registerWelcome"),
                 ),
                 Spacer(
                   flex: 5,

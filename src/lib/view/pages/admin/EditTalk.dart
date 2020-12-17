@@ -74,7 +74,6 @@ class _EditTalkState extends State<EditTalk> {
         },
       );
     } else if (_formKey.currentState.validate()) {
-      // TODO: set minimum requirements
       String talkTitle = (talkTitleController.text == "")
               ? _talk.getTitle()
               : talkTitleController.text,

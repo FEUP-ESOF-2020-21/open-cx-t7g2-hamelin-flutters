@@ -9,6 +9,7 @@ import '../../../style/TextStyle.dart';
 
 class AdminCodeTile extends StatelessPage {
   final Code _code;
+  // ignore: unused_field
   final Function _refreshState;
   final Controller _controller;
   AdminCodeTile(this._controller, this._refreshState, this._code, {Key key})

@@ -2,12 +2,10 @@ import 'package:confnect/model/Code.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
-import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
 import 'package:confnect/model/Talk.dart';
-import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/User.dart';
@@ -51,7 +49,7 @@ abstract class Database {
   void addTag(Tag tag);
   void deleteTalk(Talk talk);
   bool isTagNew(Tag tag);
-  Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
+  void createMeetup(Post post, String location, DateTime date, TimeOfDay time,
       String description, User creator);
   List<Forum> getUserPopularForums(Conference conference, User user);
   List<Post> getForumsPopularPosts(List<Forum> forums);
@@ -59,4 +57,5 @@ abstract class Database {
   List<Code> getCodes();
   List<Code> getConferenceCodes(Conference conference);
   void addCode(Code _code);
+  void deleteComment(Comment comment, Post post);
 }

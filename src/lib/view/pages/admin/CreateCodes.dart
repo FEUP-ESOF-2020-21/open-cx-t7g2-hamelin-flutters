@@ -33,7 +33,6 @@ class _CreateCodesState extends State<CreateCodes> {
     Database db = _controller.getDatabase();
     List<Code> codes = db.getConferenceCodes(_controller.getConference());
     String _code = generateCode(codes);
-    bool attendee = true;
     RoleSelection roleSelection = RoleSelection();
     List<Widget> tiles = [
       Padding(

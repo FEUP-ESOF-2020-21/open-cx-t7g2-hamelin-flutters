@@ -11,6 +11,7 @@ class User {
   List<int> _userTagForumIds;
   List<Forum> _forums = new List();
   List<Tag> _tags = new List();
+  String backgroundPicUrl = "https://imgur.com/F4uRSQV.png";
 
   User(this.id, this._fullname, this._username, this._password,
       this._userTalkForumIds,
@@ -22,6 +23,14 @@ class User {
   String getUsername() => _username;
 
   String getFullName() => _fullname;
+
+  String getFirstName() {
+    return _getFirstWords(_fullname, 1);
+  }
+
+  String _getFirstWords(String sentence, int wordCounts) {
+    return sentence.split(" ").sublist(0, wordCounts).join(" ");
+  }
 
   String getRole(Conference conference) => _roles[conference];
 
@@ -36,6 +45,8 @@ class User {
   void setTalkForumsIds(List<int> forums) {
     _userTagForumIds = forums;
   }
+
+  String getBackgroundPicUrl() => backgroundPicUrl;
 
   @override
   String toString() => _fullname;
@@ -53,6 +64,10 @@ class User {
 
   void setAvatarUrl(String avatarUrl) {
     this._avatarUrl = avatarUrl;
+  }
+
+  void setBackgroundPicUrl(String backgroundPicUrl) {
+    this.backgroundPicUrl = backgroundPicUrl;
   }
 
   void setFullName(String fullname) {

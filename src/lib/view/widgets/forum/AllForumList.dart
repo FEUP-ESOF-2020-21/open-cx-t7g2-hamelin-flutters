@@ -8,6 +8,7 @@ import './ForumTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class AllForumList extends StatelessPage {
   final Function _viewForum;
   List<Forum> _suggestedForums = new List();
@@ -20,7 +21,7 @@ class AllForumList extends StatelessPage {
     //final Users users = Provider.of(context);
     return ListView(
       children: [
-        Container(
+        /*Container(
           margin: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
           child: Text(
             'Suggested Forums',
@@ -45,7 +46,7 @@ class AllForumList extends StatelessPage {
                 fontWeight: FontWeight.normal,
                 fontFamily: 'Montserrat'),
           ),
-        ),
+        ),*/
         ListView(
             children: otherforums(),
             shrinkWrap: true,
@@ -57,13 +58,13 @@ class AllForumList extends StatelessPage {
   List<dynamic> otherforums() {
     Database db = super.getController().getDatabase();
 
-    List<Forum> difference = db
+    return db
         .getForums(super.getController().getConference())
-        .toSet()
-        .difference(_suggestedForums.toSet())
+        .toList()
+        .map((forum) => ForumTile(forum, _viewForum))
         .toList();
 
-    return difference.map((forum) => ForumTile(forum, _viewForum)).toList();
+    //return difference.map((forum) => ForumTile(forum, _viewForum)).toList();
   }
 
   List<dynamic> suggestedForums() {

@@ -1,5 +1,4 @@
 import 'package:confnect/controller/ValidatorFactory.dart';
-import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';
@@ -25,17 +24,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final Function _refreshProfileState;
   final _formKey = GlobalKey<FormState>();
 
-  final fullNameController = TextEditingController();
-  final usernameController = TextEditingController();
-  final profilePicURL = TextEditingController();
-  final descriptionController = TextEditingController();
-
   _EditProfilePageState(this._controller, this._refreshProfileState);
 
   @override
   Widget build(BuildContext context) {
     User _loggedInUser = _controller.getLoggedInUser();
-    Database db = _controller.getDatabase();
+
+    final fullNameController =
+        TextEditingController(text: _loggedInUser.getFullName());
+    final profilePicUrl = TextEditingController();
+    final backgroundPicUrl = TextEditingController();
+    final descriptionController =
+        TextEditingController(text: _loggedInUser.getBio());
 
     return Scaffold(
       appBar: AppBar(
@@ -47,72 +47,111 @@ class _EditProfilePageState extends State<EditProfilePage> {
       body: ListView(
         children: [
           Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                FormFieldContainer(
-                  FormTextField(
-                    'Current fullname: ' + _loggedInUser.getFullName(),
-                    fullNameController,
-                    validator: ValidatorFactory.getValidator(
-                      'fullname',
-                      fieldRequired: false,
-                      lowerLimit: 5,
-                      upperLimit: 50,
+              key: _formKey,
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: Stack(
+                  children: [
+                    Positioned(
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height / 10 - 30,
+                        child: Text(
+                          'Fullname',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height / 10,
+                        child: FormFieldContainer(
+                          FormTextField('Fullname', fullNameController,
+                              validator: ValidatorFactory.getValidator(
+                                  'fullname',
+                                  fieldRequired: false,
+                                  lowerLimit: 5,
+                                  upperLimit: 50)),
+                        )),
+                    Positioned(
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height * 2.4 / 10 - 30,
+                        child: Text(
+                          'Profile bio',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 2.4 / 10,
+                        child: FormFieldContainer(
+                          FormTextField(
+                            'New profile description',
+                            descriptionController,
+                            maxLines: 5,
+                            validator: ValidatorFactory.getValidator(
+                                'profile description',
+                                fieldRequired: false,
+                                upperLimit: 100),
+                          ),
+                          height: MediaQuery.of(context).size.height / 5,
+                        )),
+                    Positioned(
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height * 4.7 / 10 - 30,
+                        child: Text(
+                          'Avatar URL',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 4.7 / 10,
+                        child: FormFieldContainer(
+                          FormTextField(
+                            'Avatar URL',
+                            profilePicUrl,
+                            validator: ValidatorFactory.getValidator(
+                                'image url',
+                                fieldRequired: false,
+                                upperLimit: 300),
+                          ),
+                        )),
+                    Positioned(
+                        left: MediaQuery.of(context).size.width / 10,
+                        top: MediaQuery.of(context).size.height * 6.2 / 10 - 30,
+                        child: Text(
+                          'Background URL',
+                          textAlign: TextAlign.left,
+                          style: pageTitleTextStyle,
+                        )),
+                    Positioned(
+                        top: MediaQuery.of(context).size.height * 6.2 / 10,
+                        child: FormFieldContainer(
+                          FormTextField(
+                            'Background URL',
+                            backgroundPicUrl,
+                            validator: ValidatorFactory.getValidator(
+                                'image url',
+                                fieldRequired: false,
+                                upperLimit: 300),
+                          ),
+                        )),
+                    Positioned(
+                      top: MediaQuery.of(context).size.height * 7.2 / 10,
+                      child: FormFieldContainer(
+                          SquareButton('Confirm changes', () {
+                        if (_formKey.currentState.validate()) {
+                          _controller.updateUser(
+                              _loggedInUser,
+                              fullNameController.text,
+                              descriptionController.text,
+                              profilePicUrl.text,
+                              backgroundPicUrl.text);
+                          _refreshProfileState();
+                          Navigator.pop(context);
+                        }
+                      })),
                     ),
-                  ),
-                  margin: EdgeInsets.fromLTRB(0, 50, 0, 20),
+                  ],
                 ),
-                FormFieldContainer(
-                  FormTextField(
-                    'Current username: ' + _loggedInUser.getUsername(),
-                    usernameController,
-                    validator: ValidatorFactory.getValidator('username',
-                        fieldRequired: false,
-                        lowerLimit: 5,
-                        upperLimit: 20, extender: (value) {
-                      if (db.existsUser(value) &&
-                          value != _loggedInUser.getUsername()) {
-                        return "User with username " +
-                            value.toString() +
-                            " already exists!";
-                      }
-                    }),
-                  ),
-                ),
-                FormFieldContainer(
-                  FormTextField(
-                    'New profile description',
-                    descriptionController,
-                    validator: ValidatorFactory.getValidator(
-                        'profile description',
-                        fieldRequired: false,
-                        upperLimit: 300),
-                  ),
-                ),
-                FormFieldContainer(
-                  FormTextField(
-                    'New profile image URL',
-                    profilePicURL,
-                    validator: ValidatorFactory.getValidator('image url',
-                        fieldRequired: false, upperLimit: 300),
-                  ),
-                ),
-                FormFieldContainer(
-                  SquareButton('Confirm changes', () {
-                    _controller.updateUser(
-                        _loggedInUser,
-                        fullNameController.text,
-                        usernameController.text,
-                        descriptionController.text,
-                        profilePicURL.text);
-                    _refreshProfileState();
-                    Navigator.pop(context);
-                  }),
-                ),
-              ],
-            ),
-          )
+              ))
         ],
       ),
     );

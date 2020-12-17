@@ -1,4 +1,3 @@
-import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
@@ -22,6 +21,10 @@ class Meetup {
 
   String getDescription() {
     return _description;
+  }
+
+  setDescription(String text) {
+    _description = text;
   }
 
   Date getDate() {
@@ -66,5 +69,9 @@ class Meetup {
 
   void setLocation(String newLocation) {
     _location = newLocation;
+  }
+
+  User getAuthor() {
+    return _meetingCreator;
   }
 }

@@ -10,11 +10,16 @@ class Post {
   final Date _date;
   List<Comment> comments;
   Comment pinnedComment;
-  int _numberLikes = 0, _numberDislikes = 0, _forumId;
+  List<User> _likes;
+  List<User> _dislikes;
+  int _forumId;
   Meetup meetup;
 
   Post(this._forumId, this._author, this._title, this._description, this._date,
-      {this.comments, this.meetup, this.pinnedComment});
+      {this.comments, this.meetup, this.pinnedComment}) {
+    this._likes = new List<User>();
+    this._dislikes = new List<User>();
+  }
 
   int getForumId() => _forumId;
 
@@ -51,28 +56,42 @@ class Post {
     comments.add(c);
   }
 
-  int getNumberLikes() {
-    return _numberLikes;
+  List<User> getUserLikes() {
+    return _likes;
   }
 
-  int getNumberDislikes() {
-    return _numberDislikes;
+  void removeComment(comment) {
+    comments.remove(comment);
   }
 
-  incrementLike() {
-    _numberLikes++;
+  List<User> getUserDislikes() {
+    return _dislikes;
   }
 
-  decrementLike() {
-    _numberLikes--;
+  incrementLike(User user) {
+    if (!_likes.contains(user)) {
+      _likes.add(user);
+      if (_dislikes.contains(user)) {
+        _dislikes.remove(user);
+      }
+    }
   }
 
-  incrementDislike() {
-    _numberDislikes++;
+  decrementLike(User user) {
+    if (_likes.contains(user)) _likes.remove(user);
   }
 
-  decrementDislike() {
-    _numberDislikes--;
+  incrementDislike(User user) {
+    if (!_dislikes.contains(user)) {
+      _dislikes.add(user);
+      if (_likes.contains(user)) {
+        _likes.remove(user);
+      }
+    }
+  }
+
+  decrementDislike(User user) {
+    if (_dislikes.contains(user)) _dislikes.remove(user);
   }
 
   void setMeetup(Meetup meetup) {
@@ -81,5 +100,13 @@ class Post {
 
   Meetup getMeetup() {
     return this.meetup;
+  }
+
+  bool userLiked(User user) {
+    return _likes.contains(user);
+  }
+
+  bool userDisLiked(User user) {
+    return _dislikes.contains(user);
   }
 }

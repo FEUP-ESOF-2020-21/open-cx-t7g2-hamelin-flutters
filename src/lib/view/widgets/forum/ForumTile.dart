@@ -3,6 +3,7 @@ import 'package:confnect/model/forums/TalkForum.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 
+//ignore: must_be_immutable
 class ForumTile extends StatefulWidget {
   final Forum _forum;
   final Function _onTapAction;

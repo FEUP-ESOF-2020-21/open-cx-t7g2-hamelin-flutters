@@ -17,9 +17,9 @@ import 'package:flutter/material.dart';
 class PostPage extends StatefulPage {
   Post _post;
   Controller _controller;
+  final Function _refreshParent;
   User host;
-  Function _refreshState;
-  PostPage(this._controller, this._post, this._refreshState,
+  PostPage(this._controller, this._post, this._refreshParent,
       {Key key, this.host})
       : super(_controller, key: key);
 
@@ -55,7 +55,8 @@ class PostPageState extends State<PostPage> {
               padding: EdgeInsets.fromLTRB(20, 20, 20, 70),
               child: ListView(
                 children: [
-                  PostTextVote(widget._post, widget._controller),
+                  PostTextVote(
+                      widget._post, widget._controller, widget._refreshParent),
                   PinnedComment(widget._post, widget.host, widget._controller,
                       _refreshState),
                   Divider(
@@ -73,7 +74,6 @@ class PostPageState extends State<PostPage> {
             alignment: Alignment.bottomCenter,
             child: AddComment(
               widget._controller,
-              widget._post.getComments(),
               onSubmitted: (user, date, text) {
                 setState(() {
                   Comment comment = new Comment(user, date, text);

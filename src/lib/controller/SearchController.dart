@@ -8,7 +8,7 @@ import 'package:string_similarity/string_similarity.dart';
 
 class SearchController {
   final Database _database;
-  SearchController(Database this._database);
+  SearchController(this._database);
 
   double calculateResemblance(String key, String value) {
     return value.similarityTo(key);
@@ -59,7 +59,7 @@ class SearchController {
     List<Post> posts = _database.getPosts(conference);
     Map<Post, double> postsMap = {};
     for (final post in posts) {
-      postsMap[post] = calculateResemblance(key, post.getTitle()) +
+      postsMap[post] = calculateResemblance(key, _database.getForum(post.getForumId()).getTitle()) + calculateResemblance(key, post.getTitle()) +
           0.7 * calculateResemblance(key, post.getDescription()) +
           calculateResemblance(key, post.getAuthor().getFullName());
     }

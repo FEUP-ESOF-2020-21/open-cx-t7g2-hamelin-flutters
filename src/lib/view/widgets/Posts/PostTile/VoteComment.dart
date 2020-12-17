@@ -1,53 +1,43 @@
+import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Post.dart';
+import 'package:confnect/model/User.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class VoteComment extends StatefulWidget {
-  final Post post;
+  final Post _post;
+  final Controller _controller;
+  final Function _refreshParent;
 
-  VoteComment(this.post);
+  VoteComment(this._post, this._controller, this._refreshParent);
   @override
   _VoteCommentState createState() => _VoteCommentState();
 }
 
 class _VoteCommentState extends State<VoteComment> {
-  bool liked = false;
-  bool disliked = false;
-
-  _pressedLike() {
+  _pressedLike(User user) {
     setState(() {
-      if (liked) {
-        liked = false;
-        widget.post.decrementLike();
-      } else {
-        liked = true;
-        widget.post.incrementLike();
-        if (disliked) {
-          disliked = false;
-          widget.post.decrementDislike();
-        }
-      }
+      if (widget._post.userLiked(user))
+        widget._post.decrementLike(user);
+      else
+        widget._post.incrementLike(user);
     });
+    widget._refreshParent();
   }
 
-  _pressedDisLike() {
+  _pressedDisLike(User user) {
     setState(() {
-      if (disliked) {
-        disliked = false;
-        widget.post.decrementDislike();
-      } else {
-        disliked = true;
-        widget.post.incrementDislike();
-        if (liked) {
-          liked = false;
-          widget.post.decrementLike();
-        }
-      }
+      if (widget._post.userDisLiked(user))
+        widget._post.decrementDislike(user);
+      else
+        widget._post.incrementDislike(user);
     });
+    widget._refreshParent();
   }
 
   @override
   Widget build(BuildContext context) {
+    User user = widget._controller.getLoggedInUser();
     return Container(
       height: 30,
       child: Row(
@@ -55,23 +45,28 @@ class _VoteCommentState extends State<VoteComment> {
         children: <Widget>[
           FittedBox(
             child: IconButton(
+                key: Key("LikeButton"),
                 icon: Icon(Icons.thumb_up),
-                color: liked ? Colors.blue : Colors.grey,
-                onPressed: () => _pressedLike()),
+                color: widget._post.userLiked(user) ? Colors.blue : Colors.grey,
+                onPressed: () => _pressedLike(user)),
           ),
           Text(
-            widget.post.getNumberLikes().toString(),
+            widget._post.getUserLikes().length.toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
+            key: Key("NumberLikes"),
           ),
           FittedBox(
             child: IconButton(
+                key: Key("DislikeButton"),
                 icon: Icon(Icons.thumb_down),
-                color: disliked ? Colors.blue : Colors.grey,
-                onPressed: () => _pressedDisLike()),
+                color:
+                    widget._post.userDisLiked(user) ? Colors.blue : Colors.grey,
+                onPressed: () => _pressedDisLike(user)),
           ),
           Text(
-            widget.post.getNumberDislikes().toString(),
+            widget._post.getUserDislikes().length.toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
+            key: Key("NumberDislikes"),
           ),
           FittedBox(
             child: IconButton(
@@ -81,7 +76,7 @@ class _VoteCommentState extends State<VoteComment> {
             ),
           ),
           Text(
-            widget.post.getComments().length.toString(),
+            widget._post.getComments().length.toString(),
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ],
