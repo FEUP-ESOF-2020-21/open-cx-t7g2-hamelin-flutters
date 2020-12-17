@@ -14,10 +14,10 @@ class User {
   String backgroundPicUrl = "https://imgur.com/F4uRSQV.png";
 
   User(this.id, this._fullname, this._username, this._password,
+      this._userTalkForumIds,
       [this._roles,
       this._avatarUrl,
       this._bio = "",
-      this._userTalkForumIds = const {},
       this._userTagForumIds = const []]);
 
   String getUsername() => _username;
@@ -34,16 +34,24 @@ class User {
 
   String getRole(Conference conference) => _roles[conference];
 
+  Map<Conference, String> getRoles() => _roles;
+
+  Map<Conference, List<int>> getUserTalkForumIds() => _userTalkForumIds;
+
   String getAvatarUrl() => _avatarUrl;
 
   String getBio() => _bio;
+
+  void setTalkForumsIds(List<int> forums) {
+    _userTagForumIds = forums;
+  }
 
   String getBackgroundPicUrl() => backgroundPicUrl;
 
   @override
   String toString() => _fullname;
 
-  List<int> getUserForunsIds(Conference conference) {
+  List<int> getUserForumsIds(Conference conference) {
     List<int> out = [];
     out.addAll(_userTagForumIds);
     out.addAll(_userTalkForumIds[conference]);
@@ -85,9 +93,6 @@ class User {
   void addForum(Forum forum) {
     if (!this._forums.contains(forum)) {
       this._forums.add(forum);
-      /*forum.getTags().forEach((tag) {
-        !this._tags.contains(tag) ?? this._tags.add(tag);
-      });*/
       print("User Tags: " + forum.getTags().toString());
       this._tags.addAll(forum.getTags());
     }

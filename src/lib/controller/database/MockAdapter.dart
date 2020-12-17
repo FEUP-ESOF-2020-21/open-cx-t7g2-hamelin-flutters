@@ -1,3 +1,4 @@
+import 'package:confnect/model/Code.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
@@ -34,33 +35,33 @@ class MockAdapter implements Database {
       "Test User",
       "test",
       "123",
+      {},
       {_conferences[0]: UserRole.ADMIN},
       "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081",
     ),
     User(
-      1,
-      "Donald Trump",
-      "trump",
-      "1",
-      {_conferences[0]: UserRole.ATTENDEE},
-      "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
-      "Hello world!",
-      {
-        _conferences[0]: [1, 0]
-      },
-      [6, 3],
-    ),
+        1,
+        "Donald Trump",
+        "trump",
+        "1",
+        {
+          _conferences[0]: [0, 8]
+        },
+        {_conferences[0]: UserRole.ATTENDEE},
+        "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
+        "Hello world!",
+        [1, 6, 3]),
     User(
       2,
       "Obama",
       "obama",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.ADMIN},
-      "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg",
-      "Obama bio baby!",
       {
         _conferences[0]: [0]
       },
+      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.ADMIN},
+      "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg",
+      "Obama bio baby!",
       [7, 1, 2],
     ),
     User(
@@ -68,12 +69,13 @@ class MockAdapter implements Database {
       "QUIM",
       "quim",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE},
+      {
+        _conferences[0]: [8],
+        _conferences[1]: [9, 10]
+      },
+      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.HOST},
       "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U=",
       "Call me QUIM",
-      {
-        _conferences[0]: [8]
-      },
       [1, 5],
     ),
     User(
@@ -81,12 +83,12 @@ class MockAdapter implements Database {
       "Souto",
       "souto",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE},
-      "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172",
-      "Souto, Souto Souto",
       {
         _conferences[0]: [0, 8]
       },
+      {_conferences[0]: UserRole.ATTENDEE},
+      "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172",
+      "Souto, Souto Souto",
       [5, 7, 1, 3],
     ),
     User(
@@ -94,12 +96,12 @@ class MockAdapter implements Database {
       "Augusto Sousa",
       "aas",
       "1",
-      {_conferences[0]: UserRole.ATTENDEE},
-      "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg",
-      "AAS",
       {
         _conferences[0]: [0]
       },
+      {_conferences[0]: UserRole.ATTENDEE},
+      "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg",
+      "AAS",
       [7, 6, 2],
     ),
     User(
@@ -107,19 +109,18 @@ class MockAdapter implements Database {
       "Lew Lee",
       "fanatic",
       "1",
-      {_conferences[0]: UserRole.HOST},
-      "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg",
-      "Call me QUIM",
       {
         _conferences[0]: [0, 8]
       },
+      {_conferences[0]: UserRole.HOST},
+      "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg",
+      "Call me QUIM",
       [1, 2, 4],
     ),
   ];
 
   static List<Forum> _forums = [
     TalkForum(0, _talks[0]),
-    TalkForum(8, _talks[1]),
     TagForum(1, _tags[0]),
     TagForum(2, _tags[1]),
     TagForum(3, _tags[2]),
@@ -127,6 +128,16 @@ class MockAdapter implements Database {
     TagForum(5, _tags[4]),
     TagForum(6, _tags[5]),
     TagForum(7, _tags[6]),
+    TalkForum(8, _talks[1]),
+    TalkForum(9, _talks[2]),
+    TalkForum(10, _talks[3]),
+  ];
+
+  static List<Code> _codes = [
+    Code("34a571fa", [_forums[0]], _conferences[0], UserRole.ATTENDEE),
+    Code("0f98c413", [_forums[0], _forums[1]], _conferences[0],
+        UserRole.ATTENDEE),
+    Code("024c4ac3", [_forums[9]], _conferences[1], UserRole.ATTENDEE),
   ];
 
   static List<Comment> _comments = [
@@ -449,6 +460,24 @@ class MockAdapter implements Database {
       "https://i0.wp.com/indusdictum.com/wp-content/uploads/2020/03/Indian-scientists-from-RRI-scientists-devise-test-for-fairness-of-qubits-in-quantum-computers.png",
       [_tags[3]],
     ),
+    Talk(
+      _conferences[1],
+      2,
+      "Software development",
+      "In this talk, we'll discuss the rise of robots and what it means for our survival as a species.",
+      _users[3],
+      "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
+      [_tags[0], _tags[1], _tags[2]],
+    ),
+    Talk(
+      _conferences[1],
+      3,
+      "Qubits: Quantum bits",
+      "A talk about quantum computers, their origin, their current state, and predicitons for the future.",
+      _users[3],
+      "https://i0.wp.com/indusdictum.com/wp-content/uploads/2020/03/Indian-scientists-from-RRI-scientists-devise-test-for-fairness-of-qubits-in-quantum-computers.png",
+      [_tags[3]],
+    ),
   ];
 
   String getAppName() {
@@ -493,7 +522,8 @@ class MockAdapter implements Database {
           "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
 
-    User user = new User(id, fullname, username, password, {}, profilePicUrl);
+    User user =
+        new User(id, fullname, username, password, {}, {}, profilePicUrl);
     //user.addForum(_forums[0]);
 
     _users.add(user);
@@ -531,6 +561,7 @@ class MockAdapter implements Database {
     Talk talk = Talk(conference, _talks.length, title, description,
         getUser(speaker), image, tags);
     _talks.add(talk);
+
     createTalkForum(talk);
   }
 
@@ -589,6 +620,19 @@ class MockAdapter implements Database {
     return _users;
   }
 
+  List<Code> getCodes() => _codes;
+
+  List<Code> getConferenceCodes(Conference conference) {
+    return _codes
+        .where((code) => code.getConference().getName() == conference.getName())
+        .toList();
+  }
+
+  void addCode(Code _code) {
+    _codes.add(_code);
+    print(_codes.length);
+  }
+
   List<Forum> getForums(Conference conference) {
     return _forums.where((Forum f) {
       if (f is TalkForum && f.getConference() != conference) {
@@ -626,7 +670,7 @@ class MockAdapter implements Database {
   }
 
   List<Forum> getUserPopularForums(Conference conference, User user) {
-    List<int> forumIds = user.getUserForunsIds(conference);
+    List<int> forumIds = user.getUserForumsIds(conference);
     List<Forum> ret = [];
     forumIds.forEach((element) {
       ret.add(getForum(element));

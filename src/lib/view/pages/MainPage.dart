@@ -20,6 +20,7 @@ class MainPage extends StatefulPage {
 }
 
 class _MainPageState extends State<MainPage> {
+  // ignore: unused_field
   Function _refreshState, _viewForum;
   _MainPageState(this._viewForum, this._refreshState);
 

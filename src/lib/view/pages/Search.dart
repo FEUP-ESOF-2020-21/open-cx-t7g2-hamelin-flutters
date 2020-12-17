@@ -1,17 +1,15 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/SearchResult.dart';
-import 'package:confnect/view/pages/ProfilePage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/Posts/HorizontalUserList.dart';
 import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
-import 'package:confnect/view/widgets/User/UserTile.dart';
-import 'package:confnect/view/widgets/forum/ForumTile.dart';
 import 'package:confnect/view/widgets/forum/HorizontalForumList.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
 
 class Search extends StatefulPage {
   final Function _viewForum;
+  // ignore: unused_field
   final Function _refresh;
   Search(Controller controller, this._viewForum, this._refresh, {Key key})
       : super(controller, key: key);
@@ -52,6 +50,10 @@ class _SearchState extends State<Search> {
   List<Widget> getResults() {
     SearchResult result =
         _controller.search(_controller.getConference(), _searchTerm);
+    int forumLength =
+        result.getForums().length > 4 ? 4 : result.getForums().length;
+    int userLength =
+        result.getUsers().length > 4 ? 4 : result.getUsers().length;
     return [
       Container(
         child: Text(
@@ -62,7 +64,7 @@ class _SearchState extends State<Search> {
         padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
       ),
       HorizontalForumList(
-          _controller, _viewForum, result.getForums().sublist(0, 4)),
+          _controller, _viewForum, result.getForums().sublist(0, forumLength)),
       Container(
         child: Text(
           "Users",
@@ -72,7 +74,7 @@ class _SearchState extends State<Search> {
         padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
       ),
       HorizontalUserList(
-          _controller, _viewForum, result.getUsers().sublist(0, 4)),
+          _controller, _viewForum, result.getUsers().sublist(0, userLength)),
       Container(
         child: Text(
           "Posts",

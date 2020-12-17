@@ -1,7 +1,7 @@
+import 'package:confnect/model/Code.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
-import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/Tag.dart';
@@ -54,5 +54,8 @@ abstract class Database {
   List<Forum> getUserPopularForums(Conference conference, User user);
   List<Post> getForumsPopularPosts(List<Forum> forums);
   void changePinnedComment(Post post, Comment comment);
+  List<Code> getCodes();
+  List<Code> getConferenceCodes(Conference conference);
+  void addCode(Code _code);
   void deleteComment(Comment comment, Post post);
 }

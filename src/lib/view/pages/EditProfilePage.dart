@@ -1,5 +1,4 @@
 import 'package:confnect/controller/ValidatorFactory.dart';
-import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/forms/FormFieldContainer.dart';

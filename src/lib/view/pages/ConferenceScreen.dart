@@ -1,5 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/Page.dart';
+import 'package:confnect/view/pages/AddAccessCode.dart';
 import 'package:confnect/view/pages/CreateConference.dart';
 import 'package:confnect/view/widgets/LogoutButton.dart';
 import 'package:confnect/view/widgets/TextOnlyButton.dart';
@@ -73,7 +74,13 @@ class ConferenceScreen extends StatelessPage {
                 ),
                 TextOnlyButton(
                   () {
-                    print("Add conference");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddAccessCode(
+                                super.getController(),
+                              )),
+                    );
                   },
                   text: 'ADD CONFERENCE',
                   white: true,

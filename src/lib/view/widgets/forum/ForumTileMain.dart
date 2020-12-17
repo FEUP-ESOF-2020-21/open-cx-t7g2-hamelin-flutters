@@ -1,6 +1,5 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/forums/Forum.dart';
-import 'package:confnect/view/pages/ForumPage.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:flutter/material.dart';
 

@@ -61,7 +61,6 @@ class Controller {
   Database getDatabase() => _database;
 
   bool createPost(int forumId, String title, String text, Date date) {
-    //TODO add notification messages
     if (title == "")
       return false;
     else if (text == "") return false;
@@ -72,7 +71,7 @@ class Controller {
 
   List<Forum> getUserForums(User user) {
     return user
-        .getUserForunsIds(_currentConference)
+        .getUserForumsIds(_currentConference)
         .map((e) => _database.getForum(e))
         .toList();
   }
@@ -80,7 +79,7 @@ class Controller {
   List<Widget> buildProfileForumList(
       Conference conference, User user, Function refreshState) {
     return user
-        .getUserForunsIds(conference)
+        .getUserForumsIds(conference)
         .map((e) =>
             ProfileForumListTile(_database.getForum(e), refreshState, 10))
         .toList();

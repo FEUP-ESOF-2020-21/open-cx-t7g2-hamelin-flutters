@@ -27,8 +27,9 @@ dependencies:
   flappy_search_bar: 1.4.1
   flutter_tagging: ^2.2.0+3 
   string_similarity: ^1.1.0
+  timeago: ^2.0.28
+  uuid: ^2.2.0
   flutter_gherkin: ^1.1.8+9
-  timeago: ^2.0.28 
   flutter:
     sdk: flutter
 

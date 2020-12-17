@@ -1,7 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
-import 'package:confnect/model/User.dart';
 import 'package:confnect/view/pages/CreateMeetupPage.dart';
 import 'package:confnect/view/pages/MeetupPage.dart';
 import 'package:confnect/view/widgets/Meetup/MeetupBox.dart';
