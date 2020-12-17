@@ -47,6 +47,7 @@ class _PostContentState extends State<PostContent> {
                   Row(
                     children: widget.showForum
                         ? [
+                            Text(widget._post.getAuthor().getFullName()),
                             Icon(Icons.arrow_right),
                             Expanded(
                               child: SingleChildScrollView(
