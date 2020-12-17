@@ -74,7 +74,6 @@ class _EditTalkState extends State<EditTalk> {
         },
       );
     } else if (_formKey.currentState.validate()) {
-      // TODO: set minimum requirements
       String talkTitle = (talkTitleController.text == "")
               ? _talk.getTitle()
               : talkTitleController.text,
@@ -151,7 +150,8 @@ class _EditTalkState extends State<EditTalk> {
                             return "User with username " +
                                 value.toString() +
                                 " doesn't exist";
-                          } else if (!db.hasRole(value, UserRole.HOST)) {
+                          } else if (!db.hasRole(_controller.getConference(),
+                              value, UserRole.HOST)) {
                             return "User with username " +
                                 value.toString() +
                                 " doesn't have HOST role";

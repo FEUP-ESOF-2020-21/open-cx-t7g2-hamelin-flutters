@@ -1,9 +1,9 @@
 import 'package:confnect/controller/Controller.dart';
-import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/widgets/forum/ForumTileMain.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class HorizontalForumList extends StatelessWidget {
   final Controller _controller;
   final Function _refreshState;
@@ -12,7 +12,8 @@ class HorizontalForumList extends StatelessWidget {
   HorizontalForumList(this._controller, this._refreshState, this.forumsList);
   List<dynamic> forums() {
     if (this.forumsList.isEmpty) {
-      this.forumsList = _controller.getDatabase().getForums();
+      this.forumsList =
+          _controller.getDatabase().getForums(_controller.getConference());
     }
     return this
         .forumsList

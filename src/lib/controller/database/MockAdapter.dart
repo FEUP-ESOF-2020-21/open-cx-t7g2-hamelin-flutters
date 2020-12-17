@@ -1,4 +1,6 @@
+import 'package:confnect/model/Code.dart';
 import 'package:confnect/model/Comment.dart';
+import 'package:confnect/model/Conference.dart';
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/model/forums/Forum.dart';
@@ -13,73 +15,112 @@ import './Database.dart';
 import '../../model/User.dart';
 
 class MockAdapter implements Database {
+  static List<Conference> _conferences = [
+    Conference(
+      "Web Summit",
+      "Web Summit brings together the people and companies redefining the global tech industry.",
+      "Lisbon",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.analyticsboosters.com%2Fwp-content%2Fuploads%2Fsites%2F2%2F2017%2F11%2F38234335176_01c0411980_o.jpg&f=1&nofb=1",
+    ),
+    Conference(
+      "SINF",
+      "A Semana de Informática (SINF), organizada pelo Núcleo de Informática da Associação de Estudantes da Faculdade de Engenharia da Universidade do Porto (NIAEFEUP), foi criada com o intuito de permitir aos estudantes, independentemente do curso, desenvolver as suas capacidades nas diversas áreas da Informática, promovendo a sua interação com o mundo empresarial através de eventos sociais.",
+      "FEUP",
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fempresashoje.pt%2Fwp-content%2Fuploads%2F2015%2F04%2Ffeup.jpg&f=1&nofb=1",
+    ),
+  ];
   static List<User> _users = [
-    User(0, UserRole.ADMIN, "Test User", "test", "123",
-        "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081"),
     User(
-      1,
-      UserRole.ATTENDEE,
-      "Donald Trump",
-      "trump",
-      "1",
-      "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
-      "Hello world!",
-      [1, 7, 2],
+      0,
+      "Test User",
+      "test",
+      "123",
+      {},
+      {_conferences[0]: UserRole.ADMIN},
+      "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=231081",
     ),
     User(
-        2,
-        UserRole.ATTENDEE,
-        "Obama",
-        "obama",
+        1,
+        "Donald Trump",
+        "trump",
         "1",
-        "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg",
-        "Obama bio baby!",
-        [0, 1, 3]),
+        {
+          _conferences[0]: [0, 8]
+        },
+        {_conferences[0]: UserRole.ATTENDEE},
+        "https://upload.wikimedia.org/wikipedia/commons/5/56/Donald_Trump_official_portrait.jpg",
+        "Hello world!",
+        [1, 6, 3]),
+    User(
+      2,
+      "Obama",
+      "obama",
+      "1",
+      {
+        _conferences[0]: [0]
+      },
+      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.ADMIN},
+      "https://i.kym-cdn.com/entries/icons/facebook/000/030/329/cover1.jpg",
+      "Obama bio baby!",
+      [7, 1, 2],
+    ),
     User(
       3,
-      UserRole.ATTENDEE,
       "QUIM",
       "quim",
       "1",
+      {
+        _conferences[0]: [8],
+        _conferences[1]: [9, 10]
+      },
+      {_conferences[0]: UserRole.ATTENDEE, _conferences[1]: UserRole.HOST},
       "https://thumbs.web.sapo.io/?W=1630&H=0&crop=center&delay_optim=1&epic=Y2JkMZRgjDe+oe0kRpgdEAigzldn9mL/x79Ak4FayV8oDSPK+OknuH6kbzY+lV16HvfdDjiG832j1TBGUosBMJYVapZOCXrImloUP1vTeiBTp+U=",
       "Call me QUIM",
-      [2, 5, 6],
+      [1, 5],
     ),
     User(
       4,
-      UserRole.ATTENDEE,
       "Souto",
       "souto",
       "1",
+      {
+        _conferences[0]: [0, 8]
+      },
+      {_conferences[0]: UserRole.ATTENDEE},
       "https://sigarra.up.pt/feup/pt/FOTOGRAFIAS_SERVICE.foto?pct_cod=238172",
       "Souto, Souto Souto",
-      [6, 4, 7],
+      [5, 7, 1, 3],
     ),
     User(
       5,
-      UserRole.ATTENDEE,
       "Augusto Sousa",
       "aas",
       "1",
+      {
+        _conferences[0]: [0]
+      },
+      {_conferences[0]: UserRole.ATTENDEE},
       "https://i.ytimg.com/vi/exEdW9vo1SM/maxresdefault.jpg",
       "AAS",
-      [6, 1, 0],
+      [7, 6, 2],
     ),
     User(
       6,
-      UserRole.HOST,
       "Lew Lee",
       "fanatic",
       "1",
+      {
+        _conferences[0]: [0, 8]
+      },
+      {_conferences[0]: UserRole.HOST},
       "http://031c074.netsolhost.com/WordPress/wp-content/uploads/2014/12/conspiracy-theory.jpg",
       "Call me QUIM",
-      [1, 4, 8],
+      [1, 2, 4],
     ),
   ];
 
   static List<Forum> _forums = [
     TalkForum(0, _talks[0]),
-    TalkForum(8, _talks[1]),
     TagForum(1, _tags[0]),
     TagForum(2, _tags[1]),
     TagForum(3, _tags[2]),
@@ -87,6 +128,16 @@ class MockAdapter implements Database {
     TagForum(5, _tags[4]),
     TagForum(6, _tags[5]),
     TagForum(7, _tags[6]),
+    TalkForum(8, _talks[1]),
+    TalkForum(9, _talks[2]),
+    TalkForum(10, _talks[3]),
+  ];
+
+  static List<Code> _codes = [
+    Code("34a571fa", [_forums[0]], _conferences[0], UserRole.ATTENDEE),
+    Code("0f98c413", [_forums[0], _forums[1]], _conferences[0],
+        UserRole.ATTENDEE),
+    Code("024c4ac3", [_forums[9]], _conferences[1], UserRole.ATTENDEE),
   ];
 
   static List<Comment> _comments = [
@@ -122,6 +173,44 @@ class MockAdapter implements Database {
         "Comentário depois do comentário do host"),
   ];
 
+  static List<Meetup> _meetups = [
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Cozinha",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[0]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Entrada",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[1]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Queijos",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[2]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Bar de minas",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[3]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Entrada",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[4]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Queijos",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[5]),
+    Meetup(
+        Date(new DateTime.now().subtract(Duration(minutes: 25))),
+        "Bar de minas",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque augue diam.",
+        _users[6]),
+  ];
+
   static List<Post> _posts = [
     Post(
       0,
@@ -130,6 +219,8 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[0], _comments[1], _comments[6], _comments[7]],
+      meetup: _meetups[3],
+      pinnedComment: _comments[6],
     ),
     Post(
       0,
@@ -138,6 +229,7 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[2], _comments[3]],
+      meetup: _meetups[1],
       pinnedComment: _comments[3],
     ),
     Post(
@@ -147,6 +239,7 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[3], _comments[4]],
+      meetup: _meetups[2],
     ),
     Post(
       0,
@@ -155,126 +248,136 @@ class MockAdapter implements Database {
       "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
       new Date(new DateTime.now().subtract(Duration(minutes: 30))),
       comments: [_comments[5]],
+      meetup: _meetups[3],
     ),
     Post(
-        0,
-        _users[4],
-        "Confnect is the greatest!",
-        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+      0,
+      _users[4],
+      "Confnect is the greatest!",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      comments: [_comments[0], _comments[1]],
+      meetup: _meetups[4],
+    ),
     Post(
-        0,
-        _users[5],
-        "Moustache Competition",
-        "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
-        new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+      0,
+      _users[5],
+      "Moustache Competition",
+      "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
+      new Date(new DateTime.now().subtract(Duration(minutes: 30))),
+      comments: [_comments[2]],
+      meetup: _meetups[5],
+    ),
     Post(
         1,
         _users[1],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[1],
+        comments: [_comments[3]]),
     Post(
         1,
         _users[2],
         "It deserves a 21!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[2],
+        comments: [_comments[4]]),
     Post(
         1,
         _users[3],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[3],
+        comments: [_comments[5]]),
     Post(
         1,
         _users[4],
         "Make America Great Again!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[4],
+        comments: [_comments[5]]),
     Post(
         1,
         _users[5],
         "Confnect is the greatest!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        meetup: _meetups[1],
+        comments: [_comments[0]]),
     Post(
         1,
         _users[1],
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[1]]),
     Post(
         2,
         _users[2],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[1]]),
     Post(
         2,
         _users[3],
         "It deserves a 22!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[2]]),
     Post(
         2,
         _users[4],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[3]]),
     Post(
         3,
         _users[5],
         "Flutter master",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer viverra leo eget magna convallis, vitae lacinia tortor congue. Aenean condimentum odio ac pretium sollicitudin. In commodo porttitor ante eu luctus. Nam at massa eu dolor suscipit fermentum. Nunc at ipsum a lorem vehicula rutrum. Etiam tincidunt urna vitae mollis pharetra",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[4]]),
     Post(
         3,
         _users[1],
         "It deserves a 23!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[5]]),
     Post(
         3,
         _users[2],
         "Welcome!",
         "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[5]]),
     Post(
         3,
         _users[3],
         "Make America Great Again!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[6]]),
     Post(
         4,
         _users[4],
         "Confnect is the greatest!",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[6]]),
     Post(
         4,
         _users[5],
         "Moustache Competition",
         "Lorem ipsum dolor sit amet, coni ahcdihfpiqhw coiqhwo chrc iysectetur adipiscing elit. Integer viverra le",
         new Date(new DateTime.now().subtract(Duration(minutes: 30))),
-        comments: []),
+        comments: [_comments[0]]),
     Post(
       8,
       _users[2],
@@ -340,6 +443,7 @@ class MockAdapter implements Database {
 
   static List<Talk> _talks = [
     Talk(
+      _conferences[0],
       0,
       "The rise of robots",
       "In this talk, we'll discuss the rise of robots and what it means for our survival as a species.",
@@ -348,6 +452,7 @@ class MockAdapter implements Database {
       [_tags[0], _tags[1], _tags[2]],
     ),
     Talk(
+      _conferences[0],
       1,
       "Qubits: Quantum bits",
       "A talk about quantum computers, their origin, their current state, and predicitons for the future.",
@@ -355,10 +460,50 @@ class MockAdapter implements Database {
       "https://i0.wp.com/indusdictum.com/wp-content/uploads/2020/03/Indian-scientists-from-RRI-scientists-devise-test-for-fairness-of-qubits-in-quantum-computers.png",
       [_tags[3]],
     ),
+    Talk(
+      _conferences[1],
+      2,
+      "Software development",
+      "In this talk, we'll discuss the rise of robots and what it means for our survival as a species.",
+      _users[3],
+      "https://s3.amazonaws.com/media.eremedia.com/wp-content/uploads/2018/02/12141454/AI-robot-future-tech-trends.jpg",
+      [_tags[0], _tags[1], _tags[2]],
+    ),
+    Talk(
+      _conferences[1],
+      3,
+      "Qubits: Quantum bits",
+      "A talk about quantum computers, their origin, their current state, and predicitons for the future.",
+      _users[3],
+      "https://i0.wp.com/indusdictum.com/wp-content/uploads/2020/03/Indian-scientists-from-RRI-scientists-devise-test-for-fairness-of-qubits-in-quantum-computers.png",
+      [_tags[3]],
+    ),
   ];
 
   String getAppName() {
     return "Confnect";
+  }
+
+  String getAppDescription() {
+    return "Your conference, at a button’s distance";
+  }
+
+  List<Conference> getConferences(User user) {
+    return _conferences
+        .where((Conference c) => user.isInConference(c))
+        .toList();
+  }
+
+  void addConference(
+      User creator,
+      String conferenceName,
+      String conferenceLocation,
+      String conferenceDescription,
+      String conferenceImageURL) {
+    Conference conf = Conference(conferenceName, conferenceDescription,
+        conferenceLocation, conferenceImageURL);
+    _conferences.add(conf);
+    creator.addRole(conf, UserRole.ADMIN);
   }
 
   bool login(String username, String password) {
@@ -377,8 +522,8 @@ class MockAdapter implements Database {
           "http://cdn.patch.com/assets/layout/contribute/user-default.png";
     int id = _users.length;
 
-    User user = new User(
-        id, UserRole.ATTENDEE, fullname, username, password, profilePicUrl);
+    User user =
+        new User(id, fullname, username, password, {}, {}, profilePicUrl);
     //user.addForum(_forums[0]);
 
     _users.add(user);
@@ -406,16 +551,17 @@ class MockAdapter implements Database {
     print('''Added tag "${tag.getName()}" in db''');
   }
 
-  void addTalk(String title, String description, String speaker, String image,
-      List<Tag> tags) {
+  void addTalk(Conference conference, String title, String description,
+      String speaker, String image, List<Tag> tags) {
     tags.forEach((tag) {
       if (!_tags.contains(tag)) {
         addTag(tag);
       }
     });
-    Talk talk =
-        Talk(_talks.length, title, description, getUser(speaker), image, tags);
+    Talk talk = Talk(conference, _talks.length, title, description,
+        getUser(speaker), image, tags);
     _talks.add(talk);
+
     createTalkForum(talk);
   }
 
@@ -458,23 +604,42 @@ class MockAdapter implements Database {
     return getUser(username) != null;
   }
 
-  bool hasRole(String username, String role) {
+  bool hasRole(Conference conference, String username, String role) {
     User user = getUser(username);
     if (user == null) return false;
-    if (user.getRole() == role) return true;
+    if (user.getRole(conference) == role) return true;
     return false;
   }
 
   List<Tag> getTags() => _tags;
 
-  List<Talk> getTalks() => _talks;
+  List<Talk> getTalks(Conference conference) =>
+      _talks.where((Talk t) => t.getConference() == conference).toList();
 
   List<User> getUsers() {
     return _users;
   }
 
-  List<Forum> getForums() {
-    return _forums;
+  List<Code> getCodes() => _codes;
+
+  List<Code> getConferenceCodes(Conference conference) {
+    return _codes
+        .where((code) => code.getConference().getName() == conference.getName())
+        .toList();
+  }
+
+  void addCode(Code _code) {
+    _codes.add(_code);
+    print(_codes.length);
+  }
+
+  List<Forum> getForums(Conference conference) {
+    return _forums.where((Forum f) {
+      if (f is TalkForum && f.getConference() != conference) {
+        return false;
+      }
+      return true;
+    }).toList();
   }
 
   Forum getForum(int id) {
@@ -485,8 +650,14 @@ class MockAdapter implements Database {
     return _posts.where((element) => element.getForumId() == forumId).toList();
   }
 
-  List<Post> getPosts() {
-    return _posts;
+  List<Post> getPosts(Conference conference) {
+    return _posts.where((element) {
+      Forum f = getForum(element.getForumId());
+      if (f is TalkForum && f.getConference() != conference) {
+        return false;
+      }
+      return true;
+    }).toList();
   }
 
   Meetup createMeetup(Post post, String location, DateTime date, TimeOfDay time,
@@ -495,10 +666,11 @@ class MockAdapter implements Database {
         new DateTime(date.year, date.month, date.day, time.hour, time.minute);
     Meetup meetup = new Meetup(Date(newDate), location, description, creator);
     post.setMeetup(meetup);
+    return meetup;
   }
 
-  List<Forum> getUserPopularForums(User user) {
-    List<int> forumIds = user.getUserForunsIds();
+  List<Forum> getUserPopularForums(Conference conference, User user) {
+    List<int> forumIds = user.getUserForumsIds(conference);
     List<Forum> ret = [];
     forumIds.forEach((element) {
       ret.add(getForum(element));
@@ -506,7 +678,8 @@ class MockAdapter implements Database {
     ret.sort((Forum f1, Forum f2) {
       int f1NPosts = getForumPosts(f1.getId()).length;
       int f2NPosts = getForumPosts(f2.getId()).length;
-      return f1NPosts.compareTo(f2NPosts);
+      return f2NPosts.compareTo(
+          f1NPosts); // Para ser ordem decrsente tem de ser 2 compareTo 1
     });
     return ret;
   }
@@ -517,8 +690,27 @@ class MockAdapter implements Database {
       ret.addAll(getForumPosts(element.getId()));
     });
     ret.sort((Post p1, Post p2) {
-      return p1.getNumberLikes().compareTo(p2.getNumberLikes());
+      return (p2.getUserLikes().length - p2.getUserDislikes().length)
+          .compareTo((p1.getUserLikes().length - p1.getUserDislikes().length));
     });
     return ret;
+  }
+
+  @override
+  void changePinnedComment(Post post, Comment comment) {
+    if (comment != null && post != null) {
+      if (post.getPinnedComment() == comment)
+        post.pinComment(null);
+      else
+        post.pinComment(comment);
+    }
+  }
+
+  @override
+  void deleteComment(Comment comment, Post post) {
+    if (post.getPinnedComment() == comment) {
+      post.pinComment(null);
+    }
+    post.removeComment(comment);
   }
 }

@@ -2,6 +2,7 @@ import 'package:confnect/model/Talk.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/model/forums/Forum.dart';
 
+import '../Conference.dart';
 import '../Tag.dart';
 
 class TalkForum extends Forum {
@@ -19,6 +20,8 @@ class TalkForum extends Forum {
   String getDescription() {
     return this._talk.getDescription();
   }
+
+  Conference getConference() => _talk.getConference();
 
   @override
   User getSpeaker() {

@@ -5,10 +5,10 @@ import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/view/Page.dart';
-import 'package:confnect/view/widgets/Posts/Comments/AddComent.dart';
-import 'package:confnect/view/widgets/Posts/Comments/CommentList.dart';
-import 'package:confnect/view/widgets/Posts/Comments/PinnedComment.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostTextVote.dart';
+import 'package:confnect/view/widgets/posts/comments/AddComent.dart';
+import 'package:confnect/view/widgets/posts/comments/CommentList.dart';
+import 'package:confnect/view/widgets/posts/comments/PinnedComment.dart';
+import 'package:confnect/view/widgets/posts/posttile/PostTextVote.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +17,10 @@ import 'package:flutter/material.dart';
 class PostPage extends StatefulPage {
   Post _post;
   Controller _controller;
+  final Function _refreshParent;
   User host;
-  PostPage(this._controller, this._post, {Key key, this.host})
+  PostPage(this._controller, this._post, this._refreshParent,
+      {Key key, this.host})
       : super(_controller, key: key);
 
   @override
@@ -36,6 +38,10 @@ class PostPageState extends State<PostPage> {
     setState(() {});
   }
 
+  void _refreshState() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,22 +55,37 @@ class PostPageState extends State<PostPage> {
               padding: EdgeInsets.fromLTRB(20, 20, 20, 70),
               child: ListView(
                 children: [
-                  PostTextVote(widget._post, widget._controller),
-                  PinnedComment(widget._post, widget.host),
+                  PostTextVote(
+                      widget._post, widget._controller, widget._refreshParent),
+                  PinnedComment(widget._post, widget.host, widget._controller,
+                      _refreshState),
                   Divider(
                     thickness: 2,
                   ),
-                  CommentList(widget._post.getComments()),
+                  CommentList(
+                    widget._post.getComments(),
+                    widget._controller,
+                    refreshState: _refreshState,
+                    post: widget._post,
+                  ),
                 ],
               )),
           Align(
             alignment: Alignment.bottomCenter,
             child: AddComment(
               widget._controller,
-              widget._post.getComments(),
               onSubmitted: (user, date, text) {
                 setState(() {
-                  widget._post.getComments().add(new Comment(user, date, text));
+                  Comment comment = new Comment(user, date, text);
+                  widget._post.getComments().add(comment);
+                  if (widget._post.getPinnedComment() == null &&
+                      user ==
+                          widget._controller
+                              .getDatabase()
+                              .getForum(widget._post.getForumId())
+                              .getSpeaker()) {
+                    widget._post.pinComment(comment);
+                  }
                 });
               },
             ),

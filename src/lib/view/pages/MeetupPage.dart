@@ -2,16 +2,17 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/view/Page.dart';
-import 'package:confnect/view/widgets/Meetup/MeetupInfo.dart';
-import 'package:confnect/view/widgets/Posts/Comments/AddComent.dart';
-import 'package:confnect/view/widgets/Posts/Comments/CommentList.dart';
+import 'package:confnect/view/widgets/meetup/MeetupInfo.dart';
+import 'package:confnect/view/widgets/posts/comments/AddComent.dart';
+import 'package:confnect/view/widgets/posts/comments/CommentList.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class MeetupPage extends StatefulPage {
   Meetup _meetup;
   Controller _controller;
-  MeetupPage(this._controller, this._meetup) : super(_controller);
+  MeetupPage(this._controller, this._meetup)
+      : super(_controller, key: Key("MeetupPage"));
 
   @override
   _MeetupPageState createState() => _MeetupPageState();
@@ -31,7 +32,7 @@ class _MeetupPageState extends State<MeetupPage> {
             children: [
               MeetupInfo(widget._meetup),
               Divider(),
-              CommentList(widget._meetup.getComments()),
+              CommentList(widget._meetup.getComments(), widget._controller),
             ],
           ),
         ),
@@ -39,7 +40,6 @@ class _MeetupPageState extends State<MeetupPage> {
           alignment: Alignment.bottomCenter,
           child: AddComment(
             widget._controller,
-            widget._meetup.getComments(),
             onSubmitted: (user, date, text) {
               setState(() {
                 widget._meetup.getComments().add(new Comment(user, date, text));
