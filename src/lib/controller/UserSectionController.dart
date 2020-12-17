@@ -2,7 +2,7 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/view/style/TextStyle.dart';
 import 'package:confnect/view/widgets/ExitConferenceButton.dart';
 import 'package:confnect/view/widgets/GoBackButton.dart';
-import 'package:confnect/view/widgets/MainPage/MainAppBar.dart';
+import 'package:confnect/view/widgets/mainpage/MainAppBar.dart';
 import 'package:flutter/material.dart';
 
 class UserSectionController {

@@ -1,11 +1,11 @@
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/view/style/TextStyle.dart';
-import 'package:confnect/view/widgets/Meetup/meetupForms/DescriptionForm.dart';
+import 'package:confnect/view/widgets/meetup/meetupforms/DescriptionForm.dart';
 import 'package:flutter/material.dart';
 
-import 'meetupForms/LocationFormSubmit.dart';
-import 'meetupForms/MeetupDateTimeForum.dart';
+import 'meetupforms/LocationFormSubmit.dart';
+import 'meetupforms/MeetupDateTimeForum.dart';
 
 // ignore: must_be_immutable
 class MeetupInfo extends StatefulWidget {

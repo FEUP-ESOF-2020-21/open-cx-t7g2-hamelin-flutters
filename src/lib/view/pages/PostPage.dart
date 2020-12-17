@@ -5,10 +5,10 @@ import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/view/Page.dart';
-import 'package:confnect/view/widgets/Posts/Comments/AddComent.dart';
-import 'package:confnect/view/widgets/Posts/Comments/CommentList.dart';
-import 'package:confnect/view/widgets/Posts/Comments/PinnedComment.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostTextVote.dart';
+import 'package:confnect/view/widgets/posts/comments/AddComent.dart';
+import 'package:confnect/view/widgets/posts/comments/CommentList.dart';
+import 'package:confnect/view/widgets/posts/comments/PinnedComment.dart';
+import 'package:confnect/view/widgets/posts/posttile/PostTextVote.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

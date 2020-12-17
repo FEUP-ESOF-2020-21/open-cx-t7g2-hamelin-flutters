@@ -2,7 +2,7 @@ import 'package:confnect/controller/Controller.dart';
 
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/Page.dart';
-import 'package:confnect/view/widgets/Posts/PostList.dart';
+import 'package:confnect/view/widgets/posts/PostList.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

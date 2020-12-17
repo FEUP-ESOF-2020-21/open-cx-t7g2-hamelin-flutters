@@ -2,7 +2,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/view/pages/ProfilePage.dart';
-import 'package:confnect/view/widgets/User/UserTile.dart';
+import 'package:confnect/view/widgets/user/UserTile.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

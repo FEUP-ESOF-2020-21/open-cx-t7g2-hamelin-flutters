@@ -1,6 +1,6 @@
 import 'package:confnect/model/Date.dart';
 import 'package:confnect/model/User.dart';
-import 'package:confnect/view/widgets/User/AvatarImg.dart';
+import 'package:confnect/view/widgets/user/AvatarImg.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

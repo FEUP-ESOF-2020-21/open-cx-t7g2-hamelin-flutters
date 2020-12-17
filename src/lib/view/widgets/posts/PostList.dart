@@ -1,6 +1,6 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
+import 'package:confnect/view/widgets/posts/posttile/PostTile.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

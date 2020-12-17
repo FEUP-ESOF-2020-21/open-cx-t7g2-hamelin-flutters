@@ -1,5 +1,5 @@
 import 'package:confnect/model/Comment.dart';
-import 'package:confnect/view/widgets/Posts/UserTimeHeader.dart';
+import 'package:confnect/view/widgets/posts/UserTimeHeader.dart';
 import 'package:flutter/material.dart';
 
 class CommentTile extends StatefulWidget {

@@ -2,10 +2,10 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/controller/database/Database.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/model/forums/TalkForum.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
+import 'package:confnect/view/widgets/posts/posttile/PostTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:confnect/view/widgets/Posts/CreatePost.dart';
+import 'package:confnect/view/widgets/posts/CreatePost.dart';
 import '../Page.dart';
 
 class PostsPage extends StatefulPage {

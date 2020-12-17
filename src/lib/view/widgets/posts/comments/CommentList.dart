@@ -1,7 +1,7 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Post.dart';
-import 'package:confnect/view/widgets/Posts/Comments/CommentTile.dart';
+import 'package:confnect/view/widgets/posts/comments/CommentTile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

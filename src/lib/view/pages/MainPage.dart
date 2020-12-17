@@ -4,7 +4,7 @@ import 'package:confnect/model/User.dart';
 import 'package:confnect/model/forums/Forum.dart';
 import 'package:confnect/view/Page.dart';
 import 'package:confnect/view/style/TextStyle.dart';
-import 'package:confnect/view/widgets/Posts/PostListMain.dart';
+import 'package:confnect/view/widgets/posts/PostListMain.dart';
 import 'package:confnect/view/widgets/forum/HorizontalForumList.dart';
 import 'package:flutter/material.dart';
 

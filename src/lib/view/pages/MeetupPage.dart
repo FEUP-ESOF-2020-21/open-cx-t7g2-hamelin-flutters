@@ -2,9 +2,9 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Comment.dart';
 import 'package:confnect/model/Meetup.dart';
 import 'package:confnect/view/Page.dart';
-import 'package:confnect/view/widgets/Meetup/MeetupInfo.dart';
-import 'package:confnect/view/widgets/Posts/Comments/AddComent.dart';
-import 'package:confnect/view/widgets/Posts/Comments/CommentList.dart';
+import 'package:confnect/view/widgets/meetup/MeetupInfo.dart';
+import 'package:confnect/view/widgets/posts/comments/AddComent.dart';
+import 'package:confnect/view/widgets/posts/comments/CommentList.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

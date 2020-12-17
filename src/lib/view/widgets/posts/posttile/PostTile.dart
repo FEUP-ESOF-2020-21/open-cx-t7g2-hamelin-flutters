@@ -2,7 +2,7 @@ import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/Post.dart';
 import 'package:confnect/model/User.dart';
 import 'package:confnect/view/pages/PostPage.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostContent.dart';
+import 'package:confnect/view/widgets/posts/posttile/PostContent.dart';
 import 'package:flutter/material.dart';
 
 class PostTile extends StatefulWidget {

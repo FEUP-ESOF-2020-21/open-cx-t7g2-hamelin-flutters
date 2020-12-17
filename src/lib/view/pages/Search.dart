@@ -1,8 +1,8 @@
 import 'package:confnect/controller/Controller.dart';
 import 'package:confnect/model/SearchResult.dart';
 import 'package:confnect/view/style/TextStyle.dart';
-import 'package:confnect/view/widgets/Posts/HorizontalUserList.dart';
-import 'package:confnect/view/widgets/Posts/PostTile/PostTile.dart';
+import 'package:confnect/view/widgets/posts/HorizontalUserList.dart';
+import 'package:confnect/view/widgets/posts/posttile/PostTile.dart';
 import 'package:confnect/view/widgets/forum/HorizontalForumList.dart';
 import 'package:flutter/material.dart';
 import '../Page.dart';
