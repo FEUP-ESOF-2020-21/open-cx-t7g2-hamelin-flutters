@@ -23,6 +23,36 @@ class _PinnedCommentState extends State<PinnedComment> {
         : widget._post.getPinnedComment();
   }
 
+  Widget _getBeforeDate() {
+    return widget._post.getPinnedComment().getAuthor().getUsername() ==
+            widget._controller
+                .getDatabase()
+                .getForum(widget._post.getForumId())
+                .getSpeaker()
+                .getUsername()
+        ? Container(
+            width: 45,
+            padding: EdgeInsets.only(
+              right: 2,
+              left: 2,
+            ),
+            margin: EdgeInsets.only(right: 5),
+            child: Text(
+              'Host',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            decoration: BoxDecoration(
+              color: Colors.blue[300],
+              borderRadius: BorderRadius.circular(10),
+            ),
+          )
+        : Container();
+  }
+
   Widget _getBeforeImage() {
     if (widget._controller
             .getDatabase()
@@ -67,6 +97,7 @@ class _PinnedCommentState extends State<PinnedComment> {
               imageHeight: 30,
               backgroundColor: Colors.yellow[50],
               beforeImage: this._getBeforeImage(),
+              beforeDate: this._getBeforeDate(),
             ),
           ],
         );
