@@ -9,28 +9,9 @@
 - Xavier Pisco
 
 
-## Table of Contents
-
-* [Product Vision](#product-vision)
-* [Elevator Pitch](#elevator-pitch)
-* [Requirements](#requirements)
-    + [Use case diagram](#use-case-diagram)
-    + [User stories](#user-stories)
-    + [Domain model](#domain-model)
-* [Architecture and Design](#architecture-and-design)
-    + [Logical architecture](#logical-architecture)
-    + [Physical architecture](#physical-architecture)
-* [Implementation](#implementation)
-    + [Product increment #1](#product-increment--1)
-    + [Product increment #2](#product-increment--2)
-    + [Product increment #3](#product-increment--3)
-* [Test](#test)
-* [Configuration and change management](#configuration-and-change-management)
-* [Project management](#project-management)
-* [Evolution - contributions to open-cx](#evolution---contributions-to-open-cx)
-
-
 ## Product Vision
+
+<!--Helping people burst their bubble by connecting them through ideas, beyond the conference.-->
 
 Making conferences meaningful by connecting people, through interests and discussions, in order to create lifetime relations.
 
@@ -39,11 +20,12 @@ Making conferences meaningful by connecting people, through interests and discus
 Our goal is to connect conference goers, helping them discuss and talk beyond the conference. By using our app, Confnect, the users will be added to different forums, depending on their interests and on the attended talks, encouraging them to ask questions, discuss and meet people with similar interests. The app includes many types of forums, including a sub-forum for each talk, in which the speaker can answer all the questions the attendees may have after the talk, and some main forums, separated by theme, where users can create their own discussions. Sure, other services like 'Reddit' allow users to discuss about various topics. But our product features an innovative functionality, which will motivate and help attendees with similar interests to physically meet up, creating a more united conference.
 
 
+
 ## Requirements
 
 ### Use case diagram 
 
-![Use Case Diagram](./docs/UseCaseDiagram.png)
+![Use Case Diagram](./docs/UseCaseDiagram.jpg)
 
 #### Register
 
@@ -377,14 +359,14 @@ Our goal is to connect conference goers, helping them discuss and talk beyond th
 
 ### User stories
 
-![User story map](docs/userStoryMap.jpg)
+![User story map](docs/userStoryMap.png)
 
 #### Login Screen
 <p>
 <img src="docs/mockups/welcomePage.png" width="300" style="border: 1px solid grey" />
 <img src="docs/mockups/login.png" width="300" style="border: 1px solid grey" />
 </p>
-As someone who is envolved in the conference, I want to be able to register in the app, so that I can use it.
+As someone who is envolved in a conference, I want to be able to register in the app, so that I can use it.
 
     
 ##### Value and Effort
@@ -394,26 +376,25 @@ As someone who is envolved in the conference, I want to be able to register in t
 ##### Acceptance Tests
 
 ```gherkin
-Scenario: Registering in app
-  Given There are 2 Users registered
-  When I tap the "Register" button
-  Then A form appears
-  When the user fills the form correctly with a new username
-  Then the user becomes registered and is redirected to the home page
+  Scenario: When the user Logs in correctly
+    Given I have "loginWelcome"
+    When I tap the "loginWelcome" button
+    Then I should have "LoginPage" on screen
+    When I fill the "usernameField" field with "trump"
+    And I fill the "passfield" field with "1"
+    Then I tap the "LoginButton" button
+    Then I should have "ConferenceScreen" on screen
   
-Scenario: Registering in app
-  Given There are 2 Users registered
-  When I tap the "Register" button
-  Then A form appears
-  When the user fills the form correctly with an existin username
-  Then an error message appears
   
-Scenario: Registering in app
-  Given There are 2 Users registered
-  When I tap the "Register" button
-  Then A form appears
-  When the user fills the form incorrectly
-  Then an error message appears
+  Scenario: When the user does not exist and tries to loggin
+    Given I have "loginWelcome"
+    When I tap the "loginWelcome" button
+    Then I should have "LoginPage" on screen
+    When I fill the "usernameField" field with "doesNotExist"
+    And I fill the "passfield" field with "1"
+    Then I tap the "LoginButton" button
+    Then I should have "LoginPage" on screen
+    Then I should have "BadLogin" on screen
 ```
 
 #### Register Screen
@@ -431,20 +412,38 @@ As someone who is registered in the app, I want to be able to login, so that I c
 ##### Acceptance Tests
 
 ```gherkin
-Scenario: Login
-  Given There are 2 Users registered
-  When I tap the "Login" button
-  Then A form appears
-  When the user fills the form correctly
-  Then the user becomes Logged in and is redirected to the home page
+ Scenario: When the user is in the Register page and fills everything correctly
+    Given I have "registerWelcome"
+    When I tap the "registerWelcome" button
+    Then I should have "RegisterPage" on screen
+    When I fill the "fullNameRegister" field with "Success Register"
+    And I fill the "usernameFieldRegister" field with "success"
+    And I fill the "profileRegister" field with "Link to image"
+    And I fill the "passfield" field with "bigSecurePass123"
+    Then I tap the "registerButton" button
+    Then I should have "ConferenceScreen" on screen
+
   
+ Scenario: When the user fills the form with an existing user
+    Given I have "registerWelcome"
+    When I tap the "registerWelcome" button
+    Then I should have "RegisterPage" on screen
+    When I fill the "fullNameRegister" field with "Taken username test"
+    And I fill the "usernameFieldRegister" field with "trump"
+    And I fill the "profileRegister" field with "Link To Image"
+    And I fill the "passfield" field with "bigSecurePass123"
+    Then I tap the "registerButton" button
+    Then I should have "RegisterPage" on screen
   
-Scenario: Login
-  Given There are 2 Users registered
-  When I tap the "Login" button
-  Then A form appears
-  When the user fills the form incorrectly
-  Then a Error message appears
+Scenario: When the user forgets username form
+    Given I have "registerWelcome"
+    When I tap the "registerWelcome" button
+    Then I should have "RegisterPage" on screen
+    And I fill the "usernameFieldRegister" field with "forgot_username"
+    And I fill the "profileRegister" field with "Link To Image"
+    And I fill the "passfield" field with "bigSecurePass123"
+    Then I tap the "registerButton" button
+    Then I should have "RegisterPage" on screen
 ```
 
 #### List Forums
@@ -458,7 +457,7 @@ As a conference atendee, I want to be able to see a list of interest/talk define
 ##### Acceptance Tests
 
 ```gherkin
-Scenario: Seeing list of forums
+Scenario: In the Forums Page
   Given the user is in the home page
   When I tap the "Forums" button
   Then a List of forums appears
@@ -494,19 +493,19 @@ As an app user, I want to be able to see and edit my profile so that I know what
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-Scenario: Seeing my profile
+Scenario: In the Profile Page
   Given the user is in the home page
   When I tap the "Profile" button
   Then my profile appears
   
-Scenario: Seeing my profile
+Scenario: In the Profile Page
   Given the user is his profile page
   When I tap the "Edit" button
   Then the user can change his personal info
   When the user updates his personal info correctly
   Then his profile is updated and he is redirected to his profile
   
-Scenario: Seeing my profile
+Scenario: In the Profile Page
   Given the user is his profile page
   When I tap the "Edit" button
   Then the user can change his personal info
@@ -527,13 +526,13 @@ As a conference atendee, I want to be able to post in a forum, so that I can par
 ##### Acceptance Tests
 
 ```gherkin
-Scenario: Posting a discussion
+Scenario: In a Forum Page
   Given There are 3 posts in a forum
   When I tap the "add post" button
   And I submit the post with title and text
   Then There are 4 posts in the forum asked
   
-Scenario: Posting a discussion
+Scenario: In a Forum Page
   Given There are 3 posts in a forum
   When I tap the "add post" button
   And I submit the post without title and/or text
@@ -550,7 +549,7 @@ As an administrator, I want to be able to see the list of talks that we have, so
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-Scenario: Seeing all talks
+Scenario: In the Admin Page
   Given the user is in the Talks page
   Then I can see all the talks and related buttons
 ```
@@ -565,13 +564,13 @@ As an administrator, I want to be able to add talks to the conference so that th
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-Scenario: Adding a talk
+Scenario: In the Admin Page
     Given There is 1 talk
     When An administrator clicks on "add talk" button
     And Submits a talk with title, tags, description, sepaker and image
     Then There are 2 talks
     
-Scenario: Adding a talk
+Scenario: In the Admin Page
     Given There is 1 talk
     When An administrator clicks on "add talk" button
     And Submits a talk with an error
@@ -589,19 +588,19 @@ As an administrator, I want to be able define a given talk's topics/themes, so t
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-Scenario: The add talk page is opened
+Scenario: In the Add Talk
     Given There exists the tag "AI" in the database
     When An administrator clicks on "tags" field
     And Selects the tag "AI"
     Then That tag is added to the talk
     
-Scenario: The add talk page is opened
+Scenario: In the Add Talk
     Given There are no tags in the database
     When An administrator clicks on the "tags" field
     And Starts typing a new tag name
     Then a "Add new tag" button appears
     
-Scenario: The administrator starts typing on the "tags" and an "add new tag" button shows up on the screen
+Scenario: In the Add Talk
     Given There are not tags in the database
     When An administrator clicks on the "add new tag button"
     Then A new tag with the name that the administrator typed exists in the database
@@ -617,7 +616,7 @@ As a conference attendee, I want to be able to see a complete post, so that I ca
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-Scenario: Viewing a post
+Scenario: In a Post Page
     Given There are 3 posts on a talk
     When I click on 1 post
     Then I am redirected to the post page which has its answers
@@ -634,7 +633,7 @@ As an administrator, I want to be able to edit a talk so that I can fix any mist
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-Scenario: Editing a talk
+Scenario: In the Admin Page
     Given There is 1 talk
     When An administrator clicks on "edit talk" button from 1 talk
     And Changes one or more parts 
@@ -651,7 +650,7 @@ As an administrator, I want to be able to remove talks to the conference so that
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
-Scenario: Removing a talk
+Scenario: In the Admin Page
     Given There are 2 talk
     When An administrator clicks on "remove talk" button from 1 talk
     And Confirms the deletion
@@ -691,6 +690,41 @@ Scenario: In a Post Page
   And Post A contains a comment "My answer is this"
 ```
 
+#### Like and Dislike Posts
+
+<img src="docs/mockups/likeAndDislikeMockup.png" width="300" style="border: 1px solid grey" />
+
+As an attendee, I want to like or dislike posts so I can show my opinion without commenting.
+
+##### Value and Effort
+    - Value: Must have
+    - Effort: S
+##### Acceptance Tests
+```gherkin
+Scenario: Like a post
+    Given I have "PostPage"
+    Then I expect the "NumberLikes" to be "0"
+    When I tap the "LikeButton" button
+    Then I expect the "NumberLikes" to be "1"
+
+Scenario: Dislike a post
+    Then I expect the "NumberDislikes" to be "0"
+    When I tap the "DislikeButton" button
+    Then I expect the "NumberDislikes" to be "1"
+    
+Scenario: Like and dislike a post
+    Given I have "PostPage"
+    Then I expect the "NumberLikes" to be "0"
+    Then I expect the "NumberDislikes" to be "0"
+    When I tap the "LikeButton" button
+    Then I expect the "NumberLikes" to be "1"
+    Then I expect the "NumberDislikes" to be "0"
+    When I tap the "DislikeButton" button
+    Then I expect the "NumberLikes" to be "0"
+    Then I expect the "NumberDislikes" to be "1"
+    
+```
+
 
 #### Suggest Physical Meeting
 <p>
@@ -703,19 +737,15 @@ As a conference attendee, when a discussion is gettting interesting, I want to b
     - Effort: M
 ##### Acceptance Tests
 ```gherkin
-Scenario: Creating a meetup
-  Given Post A has no meetup in progress
-  When I tap the "Meetup" button
-  And I fill in the form with the meetup location, date, time and description
-  Then Post A has a meetup in progress
-  And The meetup has the details I inserted in the form
- 
-Scenario: Creating a meetup
-  Given Post A has no meetup in progress
-  When I tap the "Meetup" button
-  And I don't fill in the form correctly
-  Then Post A has no meetup in progress
-  And An error message appears
+Scenario: When the user does not exist and tries to loggin
+    Given I have "loginWelcome"
+    When I tap the "loginWelcome" button
+    Then I should have "LoginPage" on screen
+    When I fill the "usernameField" field with "doesNotExist"
+    And I fill the "passfield" field with "1"
+    Then I tap the "LoginButton" button
+    Then I should have "LoginPage" on screen
+    Then I should have "BadLogin" on screen
 ```
 
 #### Comment on a Physical Meeting
@@ -729,7 +759,7 @@ As a conference attendee, interested in participating in a meetup, I want to be 
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
-Scenario: In the Meetup page, adding a comment
+Scenario: In the Meetup Page
   Given The Meetup has no comments
   When I tap the "add comment" button
   And I submit a comment "My answer is this"
@@ -739,8 +769,6 @@ Scenario: In the Meetup page, adding a comment
 
 #### Edit a Physical Meeting
 
-<img src="docs/mockups/editMeetup.png" width="300" style="border: 1px solid grey" />
-
 As a conference attendee, interested in participating in a meetup, I want to be able to edit the meetup I created, so that I can accommodate any request by the other attendees.
 
 ##### Value and Effort
@@ -748,12 +776,12 @@ As a conference attendee, interested in participating in a meetup, I want to be 
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
-Scenario: Editing the meetup
+Scenario: In the Meetup Page
     Given There is 1 meetup and I am the meetup creator
     When I click on the "edit meetup" button
     And Change one or more details 
     Then The meetup details are changed accordingly
-Scenario: Editing the meetup
+Scenario: In the Meetup Page
     Given There is 1 meetup and I am the meetup creator
     When I click on the "edit meetup" button
     And Fill the form incorrectly
@@ -763,8 +791,6 @@ Scenario: Editing the meetup
 
 #### Cancel a Physical Meeting
 
-<img src="docs/mockups/cancelMeetup.png" width="300" style="border: 1px solid grey" />
-
 As a conference attendee, I want to be able to comment on a meetup that was unsuccessful, so that the post page is consistent.
 
 ##### Value and Effort
@@ -772,12 +798,12 @@ As a conference attendee, I want to be able to comment on a meetup that was unsu
     - Effort: S
 ##### Acceptance Tests
 ```gherkin
-Scenario: In the Post page
+Scenario: In the Post Page
   Given There is 1 meetup and I am the meetup creator
   When I tap the "delete meetup" button
   And I Give confirmation
   Then There is no meetups
-Scenario: In the Post page
+Scenario: In the Post Page
   Given There is 1 meetup and I am the meetup creator
   When I tap the "delete meetup" button
   And I don't Give confirmation
@@ -786,8 +812,6 @@ Scenario: In the Post page
 
 #### Search Page
 
-<img src="docs/mockups/searchPage.png" width="300" style="border: 1px solid grey" />
-
 As an app user, I want to search for a specific forum, post or user, so that I can easily find what I'm looking for.
 
 ##### Value and Effort
@@ -795,7 +819,7 @@ As an app user, I want to search for a specific forum, post or user, so that I c
     - Effort: M 
 ##### Acceptance Tests
 ```gherkin
-Scenario: In the Search page
+Scenario: In the Search Page
     Given There exists many forums, users and posts
     When I write something in the "search field"
     Then The forums, users and posts that resemble what I wrote the most show up
@@ -818,9 +842,6 @@ Scenario: After logging in
 
 
 #### Main Page
-
-<img src="docs/mockups/mainPage.png" width="300" style="border: 1px solid grey" />
-
 As an attendee, I want to have a page that shows me the posts and forums that really matter to me, so that I can have a positive experience with the app.
 ##### Value and Effort
     - Value: Must have
@@ -915,9 +936,10 @@ Scenario: After user login
     Then The user is registered in the conference "x"
 ```
 
+
 #### Multiple Conference Support
 
-As an administrator, I want to be able to reuse the app with other conferences, so that we take good value from the investment.
+As an app user, I want to be able to reuse the app with other conferences, so that I can have them all in one place.
 
 ##### Value and Effort
     - Value: Could Have
@@ -947,9 +969,11 @@ Scenario: After user login
 
 
 
+
 ### Domain model
 
 <img src="docs/problemDomain.jpg" width="700"/>
+
 
 ---
 
@@ -968,6 +992,7 @@ The Controller takes care of all the logic that isn't part of how something is v
 
 The View is responsible for the visual aspect of the app, as it renders the contents of the model, according to the current context, which is given by the controller.
 
+
 ### Physical architecture
 
 ![Physical Architecture](./docs/PhysicalArchitecture.jpg)
@@ -982,7 +1007,7 @@ For the physical architecture of our app, we choose to use a local database beca
 
 ### Product increment #1
 
-For this iteration we implemented the [login](#login-screen), [register](#register-screen) and [forum list](#list-forums) pages. <br/>Release: [v0.1](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.1).
+For this iteration we implemented the [login](#Story-2), [register](#Story-1) and [forum list](#Story-3) pages. Release [v0.1](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.1).
 
 ### Product increment #2
 
@@ -1013,11 +1038,44 @@ For this iteration we implemented:
 
 Release: [v0.3](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v0.3).
 
+
+### Product increment #4
+
+For this iteration we implemented: 
+- [Pin Answered Questions](#Pin-Answered-Questions)
+- [Remove Questions / Answers](#Remove-Questions--Answers)
+- [Multiple Conference Support](#Multiple-Conference-Support)
+- [Cancel a Physical Meeting](#Cancel-a-Physical-Meeting)
+- [Edit a Physical Meeting](#Edit-a-Physical-Meeting)
+- [Generate Register Codes](#Generate-Register-Codes)
+
+We also automated some tests as described in the [Test Plan](#Test-Plan).
+
+Release: [v1.0](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/releases/tag/v1.0).
+
 ---
-## Test
+## Test Plan
 
- 
+All our user stories have acceptance tests that have been used manually to ensure that all the features are working during the whole development of the app. In addition to that we implemented automated tests for this user stories:
+- [Suggest Physical Meeting](#Suggest-Physical-Meeting) 
+- [Like and Dislike Posts](#Like-and-Dislike-Posts)
+- [Login Screen](#Login-Screen)
+- [Register Screen](#Register-Screen)
 
+Firstly, we decided to implement test for the like and dislike feature, as it is a core component of our app, which users use very often. We implemented these tests first as we they thought had the simplest tests.
+
+Secondly, we decided to implement tests for the one thing that differentiates our app from our competition, so we chose the suggest physical meeting story.
+
+
+The login and register screens were both chosen because every single user has to go through this steps in order to use our app.
+
+
+
+All these tests were implemented using the package [flutter_gherkin](https://pub.dev/packages/flutter_gherkin).
+
+Example of the Likes and Dislikes tests running:
+
+<img src="docs/likeAndDislikeTest.jpg" width="1000"/>
 
 ---
 ## Configuration and change management
@@ -1027,6 +1085,8 @@ For the configuration and change management for this project we followed the [Gi
 We had a master branch that was only updated when each realease was made. All the development was made in the develop branch using feature branches.
 
 Besides these, we had a release/iterationN for each iteration, a report branch for all the work on this report, and a hotfixes branch for small and urgent fixes.
+
+
 ---
 
 ## Project management
