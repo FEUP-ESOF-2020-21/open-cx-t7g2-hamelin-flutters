@@ -793,6 +793,8 @@ Scenario: In the Meetup Page
 
 #### Cancel a Physical Meeting
 
+<img src="docs/mockups/cancelMeetup.png" width="300" style="border: 1px solid grey" />
+
 As a conference attendee, I want to be able to comment on a meetup that was unsuccessful, so that the post page is consistent.
 
 ##### Value and Effort
