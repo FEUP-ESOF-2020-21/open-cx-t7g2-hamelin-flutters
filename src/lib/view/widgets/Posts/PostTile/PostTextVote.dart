@@ -60,6 +60,7 @@ class _PostTextVoteState extends State<PostTextVote> {
     return Container(
       //padding: EdgeInsets.all(10.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           UserTimeMeetHeader(widget._post.getAuthor(), widget._post.getDate(),
               20, widget._post, widget._controller, onMeetupSelected: () {
