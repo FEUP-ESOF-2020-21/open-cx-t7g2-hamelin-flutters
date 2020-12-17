@@ -35,36 +35,43 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
   Widget build(BuildContext context) {
     setState(() {});
     return new Container(
-      padding: new EdgeInsets.symmetric(horizontal: 0, vertical: 10.0),
-      child: secondHalf.isEmpty
-          ? new Text(
-              firstHalf,
-              style: new TextStyle(fontSize: widget.fontSize),
-            )
-          : new Column(
-              children: <Widget>[
-                new Text(
-                  flag ? (firstHalf + "...") : (firstHalf + secondHalf),
-                  style: new TextStyle(fontSize: widget.fontSize),
-                ),
-                new InkWell(
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+      height: 80,
+      child: ListView(
+        children: [
+          Container(
+            padding: new EdgeInsets.symmetric(horizontal: 0, vertical: 10.0),
+            child: secondHalf.isEmpty
+                ? new Text(
+                    firstHalf,
+                    style: new TextStyle(fontSize: widget.fontSize),
+                  )
+                : new Column(
                     children: <Widget>[
                       new Text(
-                        flag ? "show more" : "show less",
-                        style: new TextStyle(color: Colors.blue),
+                        flag ? (firstHalf + "...") : (firstHalf + secondHalf),
+                        style: new TextStyle(fontSize: widget.fontSize),
+                      ),
+                      new InkWell(
+                        child: new Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            new Text(
+                              flag ? "show more" : "show less",
+                              style: new TextStyle(color: Colors.blue),
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          setState(() {
+                            flag = !flag;
+                          });
+                        },
                       ),
                     ],
                   ),
-                  onTap: () {
-                    setState(() {
-                      flag = !flag;
-                    });
-                  },
-                ),
-              ],
-            ),
+          ),
+        ],
+      ),
     );
   }
 }
