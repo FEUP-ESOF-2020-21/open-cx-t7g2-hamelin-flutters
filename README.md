@@ -848,7 +848,11 @@ Scenario: After logging in
 
 
 #### Main Page
+
+<img src="docs/mockups/mainPage.png" width="300" style="border: 1px solid grey" />
+
 As an attendee, I want to have a page that shows me the posts and forums that really matter to me, so that I can have a positive experience with the app.
+
 ##### Value and Effort
     - Value: Must have
     - Effort: M
@@ -899,6 +903,8 @@ Scenario: In a Post Page from a Talk
 ```
 
 #### Pin Answered Questions
+
+<img src="docs/mockups/pinPost.png" width="300" style="border: 1px solid grey" />
 
 As a talk host, I want to be able to pin answered questions so that the question forum is organized and it is easy to find the answers to answered questions.
 ##### Value and Effort
