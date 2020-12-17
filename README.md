@@ -769,6 +769,8 @@ Scenario: In the Meetup Page
 
 #### Edit a Physical Meeting
 
+<img src="docs/mockups/editMeetupMockup.png" width="300" style="border: 1px solid grey" />
+
 As a conference attendee, interested in participating in a meetup, I want to be able to edit the meetup I created, so that I can accommodate any request by the other attendees.
 
 ##### Value and Effort
@@ -791,6 +793,8 @@ Scenario: In the Meetup Page
 
 #### Cancel a Physical Meeting
 
+<img src="docs/mockups/cancelMeetup.png" width="300" style="border: 1px solid grey" />
+
 As a conference attendee, I want to be able to comment on a meetup that was unsuccessful, so that the post page is consistent.
 
 ##### Value and Effort
@@ -811,6 +815,8 @@ Scenario: In the Post Page
 ```
 
 #### Search Page
+
+<img src="docs/mockups/searchPage.png" width="300" style="border: 1px solid grey" />
 
 As an app user, I want to search for a specific forum, post or user, so that I can easily find what I'm looking for.
 
@@ -842,7 +848,11 @@ Scenario: After logging in
 
 
 #### Main Page
+
+<img src="docs/mockups/mainPage.png" width="300" style="border: 1px solid grey" />
+
 As an attendee, I want to have a page that shows me the posts and forums that really matter to me, so that I can have a positive experience with the app.
+
 ##### Value and Effort
     - Value: Must have
     - Effort: M
@@ -873,6 +883,8 @@ Scenario: In the Talks Page
 
 #### Remove Questions / Answers
 
+<img src="docs/mockups/removeComment.png" width="300" style="border: 1px solid grey" />
+
 As a talk host, I want to be able to remove inappropriate questions / wrong answers so that we can have an healthy forum.
 ##### Value and Effort
     - Value: Must have.
@@ -893,6 +905,8 @@ Scenario: In a Post Page from a Talk
 ```
 
 #### Pin Answered Questions
+
+<img src="docs/mockups/pinPost.png" width="300" style="border: 1px solid grey" />
 
 As a talk host, I want to be able to pin answered questions so that the question forum is organized and it is easy to find the answers to answered questions.
 ##### Value and Effort
@@ -917,6 +931,8 @@ Scenario: In a Post Page from a Talk
 
 #### Generate Register Codes
 
+<img src="docs/mockups/oquetiveramao.png" width="300" style="border: 1px solid grey" />
+
 As an administrator, I want to be able to generate codes for hosts and attendees to insert when they register, so that we can control who we let in (only people who participate in the conference) and what permissions they have (attendee or host).
 ##### Value and Effort
     - Value: Could have
@@ -938,6 +954,8 @@ Scenario: After user login
 
 
 #### Multiple Conference Support
+
+<img src="docs/mockups/conferenceSelection.png" width="300" style="border: 1px solid grey" />
 
 As an app user, I want to be able to reuse the app with other conferences, so that I can have them all in one place.
 
