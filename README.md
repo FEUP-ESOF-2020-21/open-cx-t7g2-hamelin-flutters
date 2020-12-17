@@ -769,6 +769,8 @@ Scenario: In the Meetup Page
 
 #### Edit a Physical Meeting
 
+<img src="docs/mockups/editMeetupMockup.png" width="300" style="border: 1px solid grey" />
+
 As a conference attendee, interested in participating in a meetup, I want to be able to edit the meetup I created, so that I can accommodate any request by the other attendees.
 
 ##### Value and Effort
@@ -791,6 +793,8 @@ Scenario: In the Meetup Page
 
 #### Cancel a Physical Meeting
 
+<img src="docs/mockups/cancelMeetup.png" width="300" style="border: 1px solid grey" />
+
 As a conference attendee, I want to be able to comment on a meetup that was unsuccessful, so that the post page is consistent.
 
 ##### Value and Effort
@@ -811,6 +815,8 @@ Scenario: In the Post Page
 ```
 
 #### Search Page
+
+<img src="docs/mockups/searchPage.png" width="300" style="border: 1px solid grey" />
 
 As an app user, I want to search for a specific forum, post or user, so that I can easily find what I'm looking for.
 
