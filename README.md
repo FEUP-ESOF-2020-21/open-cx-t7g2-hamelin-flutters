@@ -816,6 +816,8 @@ Scenario: In the Post Page
 
 #### Search Page
 
+<img src="docs/mockups/searchPage.png" width="300" style="border: 1px solid grey" />
+
 As an app user, I want to search for a specific forum, post or user, so that I can easily find what I'm looking for.
 
 ##### Value and Effort
