@@ -25,7 +25,7 @@ Our goal is to connect conference goers, helping them discuss and talk beyond th
 
 ### Use case diagram 
 
-![Use Case Diagram](./docs/UseCaseDiagram.jpg)
+![Use Case Diagram](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/blob/master/docs/UseCaseDiagram.png)
 
 #### Register
 
@@ -357,9 +357,9 @@ Our goal is to connect conference goers, helping them discuss and talk beyond th
     - If they do not have the host status in the talk, they wont be presented with the option to delete the post
 
 
-### User stories
+### User Stories
 
-![User story map](docs/userStoryMap.png)
+![User story map](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/blob/master/docs/userStoryMap.jpg)
 
 #### Login Screen
 <p>
@@ -1075,7 +1075,7 @@ All these tests were implemented using the package [flutter_gherkin](https://pub
 
 Example of the Likes and Dislikes tests running:
 
-<img src="docs/likeAndDislikeTest.jpg" width="1000"/>
+<img src="docs/likeAndDislikeTests.jpg" width="1000"/>
 
 ---
 ## Configuration and change management
