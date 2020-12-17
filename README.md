@@ -769,6 +769,8 @@ Scenario: In the Meetup Page
 
 #### Edit a Physical Meeting
 
+<img src="docs/mockups/editMeetupMockup.png" width="300" style="border: 1px solid grey" />
+
 As a conference attendee, interested in participating in a meetup, I want to be able to edit the meetup I created, so that I can accommodate any request by the other attendees.
 
 ##### Value and Effort
