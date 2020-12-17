@@ -953,6 +953,8 @@ Scenario: After user login
 
 #### Multiple Conference Support
 
+<img src="docs/mockups/conferenceSelection.png" width="300" style="border: 1px solid grey" />
+
 As an app user, I want to be able to reuse the app with other conferences, so that I can have them all in one place.
 
 ##### Value and Effort
