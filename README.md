@@ -974,7 +974,6 @@ Scenario: After user login
 
 <img src="docs/problemDomain.jpg" width="700"/>
 
-
 ---
 
 ## Architecture and Design
