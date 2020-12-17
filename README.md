@@ -1093,7 +1093,3 @@ Besides these, we had a release/iterationN for each iteration, a report branch f
 
 During the development of the project we used a [Github Project](https://github.com/FEUP-ESOF-2020-21/open-cx-t7g2-hamelin-flutters/projects/1) in order to track the user stories' progress, and to assign members of the group and add estimates to them.
 
----
-
-## Evolution - contributions to open-cx
-
