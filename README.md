@@ -21,14 +21,13 @@
     + [Logical architecture](#logical-architecture)
     + [Physical architecture](#physical-architecture)
 * [Implementation](#implementation)
-    + [Product increment #1](#product-increment--1)
-    + [Product increment #2](#product-increment--2)
-    + [Product increment #3](#product-increment--3)
-    + [Product increment #4](#product-increment--4)
-* [Test](#test)
+    + [Product increment #1](#product-increment-1)
+    + [Product increment #2](#product-increment-2)
+    + [Product increment #3](#product-increment-3)
+    + [Product increment #4](#product-increment-4)
+* [Test Plan](#test-plan)
 * [Configuration and change management](#configuration-and-change-management)
 * [Project management](#project-management)
-* [Evolution - contributions to open-cx](#evolution---contributions-to-open-cx)
 
 
 
