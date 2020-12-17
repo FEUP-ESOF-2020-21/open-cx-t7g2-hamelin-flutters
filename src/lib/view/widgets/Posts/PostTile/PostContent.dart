@@ -63,8 +63,12 @@ class _PostContentState extends State<PostContent> {
                           ]
                         : [],
                   ),
-                  TextSectionPost(widget._post.getTitle(),
-                      widget._post.getDescription(), widget._showMore),
+                  TextSectionPost(
+                      widget._post.getTitle(),
+                      widget._post.getDescription(),
+                      widget._showMore,
+                      widget._controller,
+                      widget._post),
                   VoteComment(
                       widget._post, widget._controller, widget._refreshParent),
                 ],
