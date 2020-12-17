@@ -1031,7 +1031,10 @@ The Controller takes care of all the logic that isn't part of how something is v
 
 The View is responsible for the visual aspect of the app, as it renders the contents of the model, according to the current context, which is given by the controller.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8255f66962410a88e04630138ce479c4982179a2
 ### Physical architecture
 
 ![Physical Architecture](./docs/PhysicalArchitecture.jpg)
