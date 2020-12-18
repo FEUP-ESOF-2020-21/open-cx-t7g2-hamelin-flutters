@@ -86,7 +86,10 @@ class _MeetupInfoState extends State<MeetupInfo> {
                 Icon(Icons.location_on),
                 Padding(
                   padding: const EdgeInsets.only(left: 2.0),
-                  child: Text(widget._meetup.getLocation()),
+                  child: Text(
+                    widget._meetup.getLocation(),
+                    key: Key('MeetupLocation'),
+                  ),
                 ),
               ],
             ),
@@ -128,7 +131,10 @@ class _MeetupInfoState extends State<MeetupInfo> {
   Widget showDescription() {
     return widget._editingDescription
         ? DescriptionForum(widget._descriptionController)
-        : Text(widget._meetup.getDescription());
+        : Text(
+            widget._meetup.getDescription(),
+            key: Key('MeetupDescription'),
+          );
   }
 
   Widget showDescriptionHeader() {
