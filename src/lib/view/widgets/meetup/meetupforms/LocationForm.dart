@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class LocationForm extends StatefulWidget {
   final _locationController;
 
-  LocationForm(this._locationController);
+  LocationForm(this._locationController)
+      : super(key: Key('LocationMeetupForm'));
   @override
   _LocationFormState createState() => _LocationFormState();
 }

@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 class DescriptionForum extends StatefulWidget {
   final TextEditingController _descriptionController;
 
-  DescriptionForum(this._descriptionController);
+  DescriptionForum(this._descriptionController)
+      : super(key: Key('DescriptionMeetupForm'));
   @override
   _DescriptionForumState createState() => _DescriptionForumState();
 }
